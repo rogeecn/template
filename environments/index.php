@@ -32,6 +32,7 @@ return [
     'dev' => [
         'path' => 'dev',
         'setWritable' => [
+            'runtime',
             'application/runtime',
             'application/web/assets',
         ],
@@ -46,6 +47,7 @@ return [
     'prod' => [
         'path' => 'prod',
         'setWritable' => [
+            'runtime',
             'application/runtime',
             'application/web/assets',
         ],
