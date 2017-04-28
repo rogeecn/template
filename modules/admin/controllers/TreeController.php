@@ -21,15 +21,15 @@ class TreeController extends RestController
          */
         return [
             [
+                'text'=>'Dashboard',
+                'attributes'=>[
+                    'url'=>'/admin/dashboard',
+                ],
+            ],
+            [
                 'text'=>'DocumentRoot',
                 'state'=>'open',
                 'children'=>[
-                        [
-                            'text'=>'Friend',
-                            'attributes'=>[
-                                'url'=>'http://baidu.com',
-                            ],
-                        ],
                         [
                             'text'=>'Uploader',
                             'attributes'=>[

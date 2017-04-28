@@ -7,6 +7,7 @@ use common\extend\UserInfo;
 
 class AuthController extends WebController
 {
+    public $layout = "main";
     public function beforeAction($action)
     {
         if (UserInfo::isGuest()){
