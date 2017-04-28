@@ -16,7 +16,7 @@ EasyUIAssets::register($this);
     <title>后台管理</title>
     <?php $this->head() ?>
     <style>
-        a{
+        a {
             text-decoration: none;
             color: #000000;
         }
@@ -25,7 +25,7 @@ EasyUIAssets::register($this);
 <body class="easyui-layout">
 <?php $this->beginBody() ?>
 <div data-options="region:'north',border:false" style="height:50px;">
-    <?=Html::a("logout",['/admin/logout'])?>
+    <?= Html::a("logout", ['/admin/logout']) ?>
 </div>
 <div data-options="region:'west',split:true,title:'West'" style="width:200px;">
     <ul id="menu-tree"></ul>
@@ -36,25 +36,25 @@ EasyUIAssets::register($this);
         <iframe id="content" name="content" src="/admin/dashboard" frameborder="0" width="100%" height="100%"></iframe>
     </div>
 </div>
-<?=$content?>
+<?= $content ?>
 <?php $this->endBody() ?>
 
 <script>
-    function setCenterData(title, url){
-        $("#main").panel("setTitle",title);
-        if (url){
-            $("#content").attr("src",url)
+    function setCenterData(title, url) {
+        $("#main").panel("setTitle", title);
+        if (url) {
+            $("#content").attr("src", url)
         }
     }
 
-    $(function(){
+    $(function () {
         //class="easyui-tree" data-options="lines:true,method:'get',url:'/dashboard/tree'"
         $('#menu-tree').tree({
-            url:"/admin/tree",
-            lines:true,
-            onClick: function(node){
-                if (node.attributes && node.attributes.url){
-                    setCenterData(node.text,node.attributes.url)
+            url: "/admin/tree",
+            lines: true,
+            onClick: function (node) {
+                if (node.attributes && node.attributes.url) {
+                    setCenterData(node.text, node.attributes.url)
                 }
             }
         });

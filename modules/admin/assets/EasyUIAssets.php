@@ -9,7 +9,7 @@ class EasyUIAssets extends AssetBundle
     public $basePath = '@webroot/libraries/jeasyui';
     public $baseUrl = '@web/libraries/jeasyui';
     public $js = [
-    'jquery.easyui.min.js'
+        'jquery.easyui.min.js'
     ];
     public $css = [
         'themes/gray/easyui.css'

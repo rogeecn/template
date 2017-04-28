@@ -8,9 +8,10 @@ use common\extend\UserInfo;
 class AuthController extends WebController
 {
     public $layout = "main";
+
     public function beforeAction($action)
     {
-        if (UserInfo::isGuest()){
+        if (UserInfo::isGuest()) {
             $this->redirect(['/admin/login']);
             return false;
         }

@@ -1,5 +1,5 @@
 <?php
-$cmd = 'php yii gii/module --interactive=0 --moduleClass="application\modules\%s\Module" --moduleID=%s';
+$cmd = 'php yii gii/module --interactive=0 --moduleClass="modules\%s\Module" --moduleID=%s';
 
 if ($argc == 1) {
     echo "CMD FORMAT: php module.php xxxx";
@@ -13,7 +13,7 @@ echo implode("\n", $return);
 echo "\n==========[ config code ]========\n";
 echo <<<_CODE
         '$argv[1]' => [
-            'class' => 'application\modules\\$argv[1]\Module',
+            'class' => 'modules\\$argv[1]\Module',
         ],
 _CODE;
 

@@ -16,6 +16,9 @@ return [
         'admin' => [
             'class' => 'modules\admin\Module',
         ],
+        'ueditor' => [
+            'class' => 'modules\ueditor\Module',
+        ],
     ],
     'components' => [
         'user' => [

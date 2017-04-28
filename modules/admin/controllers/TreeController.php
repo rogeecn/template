@@ -11,31 +11,31 @@ class TreeController extends RestController
     {
 
         /**
-        {
-        "text":"Books",
-        "state":"open",
-        "attributes":{
-        "url":"/demo/book/abc",
-        "price":100
-        }
+         * {
+         * "text":"Books",
+         * "state":"open",
+         * "attributes":{
+         * "url":"/demo/book/abc",
+         * "price":100
+         * }
          */
         return [
             [
-                'text'=>'Dashboard',
-                'attributes'=>[
-                    'url'=>'/admin/dashboard',
+                'text' => 'Dashboard',
+                'attributes' => [
+                    'url' => '/admin/dashboard',
                 ],
             ],
             [
-                'text'=>'DocumentRoot',
-                'state'=>'open',
-                'children'=>[
-                        [
-                            'text'=>'Uploader',
-                            'attributes'=>[
-                                'url'=>Url::to(['/admin/uploader/show'])
-                            ],
-                        ]
+                'text' => 'DocumentRoot',
+                'state' => 'open',
+                'children' => [
+                    [
+                        'text' => 'Uploader',
+                        'attributes' => [
+                            'url' => Url::to(['/admin/uploader/show'])
+                        ],
+                    ]
                 ],
             ]
         ];

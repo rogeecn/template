@@ -1,13 +1,7 @@
 <?php
+namespace modules\ueditor\components;
 
-/**
- * Created by JetBrains PhpStorm.
- * User: taoqili
- * Date: 12-7-18
- * Time: 上午11: 32
- * UEditor编辑器通用上传类
- */
-class Uploader
+class UEditorUploader
 {
     private $fileField; //文件域名
     private $file; //文件上传对象
@@ -57,7 +51,7 @@ class Uploader
         $this->type = $type;
         if ($type == "remote") {
             $this->saveRemote();
-        } else if($type == "base64") {
+        } else if ($type == "base64") {
             $this->upBase64();
         } else {
             $this->upFile();
@@ -196,7 +190,7 @@ class Uploader
         // 此时提取出来的可能是 ip 也有可能是域名，先获取 ip
         $ip = gethostbyname($host_without_protocol);
         // 判断是否是私有 ip
-        if(!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
+        if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
             $this->stateInfo = $this->getStateInfo("INVALID_IP");
             return;
         }
@@ -224,9 +218,9 @@ class Uploader
         readfile($imgUrl, false, $context);
         $img = ob_get_contents();
         ob_end_clean();
-        preg_match("/[\/]([^\/]*)[\.]?[^\.\/]*$/", $imgUrl, $m);
+        preg_match('/[\/]([^\/]*)[\.]?[^\.\/]*$/', $imgUrl, $m);
 
-        $this->oriName = $m ? $m[1]:"";
+        $this->oriName = $m ? $m[1] : "";
         $this->fileSize = strlen($img);
         $this->fileType = $this->getFileExt();
         $this->fullName = $this->getFullName();
@@ -283,6 +277,7 @@ class Uploader
      */
     private function getFullName()
     {
+
         //替换日期事件
         $t = time();
         $d = explode('-', date("Y-y-m-d-H-i-s"));
@@ -295,17 +290,12 @@ class Uploader
         $format = str_replace("{ii}", $d[5], $format);
         $format = str_replace("{ss}", $d[6], $format);
         $format = str_replace("{time}", $t, $format);
+        $format = str_replace("{rand}", mt_rand(100000,999999), $format);
 
         //过滤文件名的非法自负,并替换文件名
         $oriName = substr($this->oriName, 0, strrpos($this->oriName, '.'));
-        $oriName = preg_replace("/[\|\?\"\<\>\/\*\\\\]+/", '', $oriName);
+        $oriName = preg_replace('/[\|\?"\<\>\/\*\\\\]+/', '', $oriName);
         $format = str_replace("{filename}", $oriName, $format);
-
-        //替换随机字符串
-        $randNum = rand(1, 10000000000) . rand(1, 10000000000);
-        if (preg_match("/\{rand\:([\d]*)\}/i", $format, $matches)) {
-            $format = preg_replace("/\{rand\:[\d]*\}/i", substr($randNum, 0, $matches[1]), $format);
-        }
 
         $ext = $this->getFileExt();
         return $format . $ext;
@@ -315,7 +305,8 @@ class Uploader
      * 获取文件名
      * @return string
      */
-    private function getFileName () {
+    private function getFileName()
+    {
         return substr($this->filePath, strrpos($this->filePath, '/') + 1);
     }
 
@@ -333,6 +324,7 @@ class Uploader
         }
 
         return $rootPath . $fullname;
+
     }
 
     /**
@@ -348,7 +340,7 @@ class Uploader
      * 文件大小检测
      * @return bool
      */
-    private function  checkSize()
+    private function checkSize()
     {
         return $this->fileSize <= ($this->config["maxSize"]);
     }

@@ -5,5 +5,6 @@
 /* @var $model \common\models\LoginForm */
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
 ?>
 <h1>Dashboard</h1>
