@@ -1,5 +1,5 @@
 <?php
-namespace application\controllers;
+namespace modules\admin\controllers;
 
 
 use application\base\WebController;
@@ -14,12 +14,12 @@ class LoginController extends WebController
     public function actionIndex()
     {
         if (!UserInfo::isGuest()) {
-            return $this->goHome();
+            return $this->redirect('/admin/login');
         }
 
         $model = new LoginForm();
         if ($model->load(Request::post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect('/admin');
         }
         return $this->render('index', [
             'model' => $model,

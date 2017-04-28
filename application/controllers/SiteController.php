@@ -8,14 +8,6 @@ class SiteController extends  WebController
 {
     public function actionIndex()
     {
-        if (UserInfo::isGuest()){
-            return $this->redirect("/login");
-        }
-        return $this->redirect("/dashboard");
-    }
-
-    public function actionHello()
-    {
-        return $this->renderAjax("hello");
+        return $this->render("index");
     }
 }

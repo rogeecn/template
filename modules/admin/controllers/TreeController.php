@@ -1,9 +1,9 @@
 <?php
 
-namespace application\modules\dashboard\controllers;
+namespace modules\admin\controllers;
 
-use application\base\AuthController;
 use application\base\RestController;
+use yii\helpers\Url;
 
 class TreeController extends RestController
 {
@@ -25,9 +25,15 @@ class TreeController extends RestController
                 'state'=>'open',
                 'children'=>[
                         [
-                            'text'=>'friend',
+                            'text'=>'Friend',
                             'attributes'=>[
                                 'url'=>'http://baidu.com',
+                            ],
+                        ],
+                        [
+                            'text'=>'Uploader',
+                            'attributes'=>[
+                                'url'=>Url::to(['/admin/uploader/show'])
                             ],
                         ]
                 ],

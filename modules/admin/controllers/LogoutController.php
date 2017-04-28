@@ -1,11 +1,11 @@
 <?php
-namespace application\controllers;
+namespace modules\admin\controllers;
 
 
-use application\base\WebController;
 use common\extend\UserInfo;
+use modules\admin\base\AuthController;
 
-class LogoutController extends WebController
+class LogoutController extends AuthController
 {
     public function actionIndex()
     {

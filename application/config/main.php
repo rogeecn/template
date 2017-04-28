@@ -13,8 +13,8 @@ return [
     'controllerNamespace' => 'application\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        'dashboard' => [
-            'class' => 'application\modules\dashboard\Module',
+        'admin' => [
+            'class' => 'modules\admin\Module',
         ],
     ],
     'components' => [

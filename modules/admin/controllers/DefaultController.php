@@ -1,14 +1,14 @@
 <?php
 
-namespace application\modules\dashboard\controllers;
+namespace modules\admin\controllers;
 
-use application\base\AuthController;
+use modules\admin\base\AuthController;
 
 class DefaultController extends AuthController
 {
     public function actionIndex()
     {
-        $this->layout = "main";
+        $this->layout = "dashboard";
         return $this->render('index');
     }
 }

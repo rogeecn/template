@@ -1,7 +1,8 @@
 <?php
-namespace application\base;
+namespace modules\admin\base;
 
 
+use application\base\WebController;
 use common\extend\UserInfo;
 
 class AuthController extends WebController
@@ -9,7 +10,7 @@ class AuthController extends WebController
     public function beforeAction($action)
     {
         if (UserInfo::isGuest()){
-            $this->goHome();
+            $this->redirect(['/admin/login']);
             return false;
         }
 
