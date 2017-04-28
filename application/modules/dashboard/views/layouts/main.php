@@ -23,7 +23,7 @@ EasyUIAssets::register($this);
 </head>
 <body class="easyui-layout">
 <?php $this->beginBody() ?>
-<div data-options="region:'north',border:false" style="height:60px"></div>
+<div data-options="region:'north',border:false" style="height:5px;background: #F44336;"></div>
 <div data-options="region:'west',split:true,title:'West'" style="width:200px;padding:10px;">
     <ul id="menu-tree"></ul>
 </div>
