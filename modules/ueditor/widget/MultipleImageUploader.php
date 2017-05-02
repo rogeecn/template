@@ -8,7 +8,16 @@ use yii\widgets\InputWidget;
 
 class MultipleImageUploader extends InputWidget
 {
+    public $limit = 1;
     public static $autoIdPrefix = "insert_image_";
+
+    public function init()
+    {
+        if ($this->limit < 1){
+            $this->limit = 1;
+        }
+    }
+
     public function run()
     {
         UEditorAssets::register($this->getView());
@@ -48,7 +57,9 @@ var $editor_id = UE.getEditor("$editor_id", {
 
     function _beforeInsertImage(t, result) {
         var imageHtml = '';
+        var cnt = 1;
         for(var i in result){
+            if (cnt++ > $this->limit){break;}
             imageHtml += '<li><img src="'+result[i].src+'" alt="'+result[i].alt+'" height="150"></li>';
         }
         document.getElementById('$img_list_wrapper_id').innerHTML = imageHtml;
