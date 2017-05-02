@@ -6,8 +6,7 @@ use yii\web\AssetBundle;
 
 class EasyUIAssets extends AssetBundle
 {
-    public $basePath = '@webroot/libraries/jeasyui';
-    public $baseUrl = '@web/libraries/jeasyui';
+    public $sourcePath = '@modules/admin/static';
     public $js = [
         'jquery.easyui.min.js'
     ];
