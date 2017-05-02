@@ -6,4 +6,14 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
     ],
+    'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationNamespaces' => [
+                'migrations',
+                'modules\tag\migrations',
+                'modules\article\migrations',
+            ],
+        ],
+    ],
 ];

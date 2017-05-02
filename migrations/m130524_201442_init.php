@@ -1,4 +1,5 @@
 <?php
+namespace migrations;
 
 use yii\db\Migration;
 
@@ -28,7 +29,7 @@ class m130524_201442_init extends Migration
         $this->insert('{{%user}}',[
             'username' => 'admin',
             'auth_key' => "123",
-            'password_hash' => Yii::$app->security->generatePasswordHash('admin'),
+            'password_hash' => \Yii::$app->security->generatePasswordHash('admin'),
             'password_reset_token' => "",
             'email' => '123@qq.com',
             'status' => \common\models\User::STATUS_ACTIVE,

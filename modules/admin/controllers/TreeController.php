@@ -31,9 +31,15 @@ class TreeController extends RestController
                 'state' => 'open',
                 'children' => [
                     [
-                        'text' => 'Uploader',
+                        'text' => 'UEditor',
                         'attributes' => [
                             'url' => Url::to(['/admin/uploader/show'])
+                        ],
+                    ],
+                    [
+                        'text' => 'Tag',
+                        'attributes' => [
+                            'url' => Url::to(['/tag'])
                         ],
                     ]
                 ],

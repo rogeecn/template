@@ -7,15 +7,8 @@ use common\extend\UserInfo;
 
 class AuthController extends WebController
 {
-    public $layout = "main";
+    use TraitAuthAction;
 
-    public function beforeAction($action)
-    {
-        if (UserInfo::isGuest()) {
-            $this->redirect(['/admin/login']);
-            return false;
-        }
+    public $layout = '@modules/admin/views/layouts/main';
 
-        return parent::beforeAction($action);
-    }
 }

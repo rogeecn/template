@@ -19,6 +19,12 @@ return [
         'ueditor' => [
             'class' => 'modules\ueditor\Module',
         ],
+        'tag' => [
+            'class' => 'modules\tag\Module',
+        ],
+        'article' => [
+            'class' => 'modules\article\Module',
+        ],
     ],
     'components' => [
         'user' => [

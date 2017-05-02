@@ -50,7 +50,7 @@ EasyUIAssets::register($this);
     $(function () {
         //class="easyui-tree" data-options="lines:true,method:'get',url:'/dashboard/tree'"
         $('#menu-tree').tree({
-            url: "/admin/tree",
+            url: "/admin/tree?v="+Math.random(),
             lines: true,
             onClick: function (node) {
                 if (node.attributes && node.attributes.url) {
