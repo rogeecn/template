@@ -57,19 +57,26 @@ var $editor_id = UE.getEditor("$editor_id", {
 
     function _beforeInsertImage(t, result) {
         var imageHtml = '';
-        var cnt = 1;
+        if ($this->limit == 1 && result.length > 0){
+            
+            imageHtml += '<img src="'+result[0].src+'" width="100%" height="100%">';
+            document.getElementById('$btn_id').innerHTML = imageHtml;
+            return ;
+        }
+        
         for(var i in result){
-            if (cnt++ > $this->limit){break;}
-            imageHtml += '<li><img src="'+result[i].src+'" alt="'+result[i].alt+'" height="150"></li>';
+            imageHtml += '<li><img src="'+result[i].src+'" width="100%" height="100%"></li>';
         }
         document.getElementById('$img_list_wrapper_id').innerHTML = imageHtml;
     }
 _UEDITOR_;
         $this->getView()->registerJs($js);
 
-        echo Html::button("Upload",['id'=>$btn_id]);
+        echo Html::button("Upload",['id'=>$btn_id,'class'=>'insert-image-btn']);
 
-        echo Html::textarea("","",['id'=>$editor_id]);
-        echo Html::tag("ul","",['id'=>$img_list_wrapper_id]);
+        echo Html::textarea("","",['id'=>$editor_id,'style'=>'display:none']);
+        if ($this->limit > 1){
+            echo Html::tag("ul","",['id'=>$img_list_wrapper_id,'class'=>'upload-image-list-wrapper']);
+        }
     }
 }
