@@ -4,6 +4,7 @@ namespace modules\tag\models;
 
 use common\base\ActiveRecord;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "tag".
@@ -64,13 +65,13 @@ class Tag extends \common\base\ActiveRecord
      */
     public static function getByTagName($tagName)
     {
-        return self::find()->where(['name'=>$tagName])->one();
+        return self::find()->where(['name'=>trim($tagName)])->one();
     }
 
     public static function createTag($tagName)
     {
         $model = new Tag();
-        $model->name = $tagName;
+        $model->name = trim($tagName);
         $model->reference_count = 1;
         $model->save();
         return $model;
@@ -141,5 +142,14 @@ class Tag extends \common\base\ActiveRecord
         }
 
         return $this->save();
+    }
+
+    public static function getByKeyword($tagKeyword)
+    {
+        $model = Tag::find()->limit(10);
+        $model->andFilterWhere(['like','name',$tagKeyword]);
+        $items  = $model->all();
+
+        return ArrayHelper::getColumn($items,"name");
     }
 }
