@@ -14,6 +14,7 @@ return [
                 'modules\tag\migrations',
                 'modules\article\migrations',
                 'modules\setting\migrations',
+                'modules\category\migrations'
             ],
         ],
     ],
