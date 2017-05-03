@@ -28,6 +28,9 @@ return [
         'setting' => [
             'class' => 'modules\setting\Module',
         ],
+        'category' => [
+            'class' => 'modules\category\Module',
+        ],
     ],
     'components'          => [
         'user'         => [
