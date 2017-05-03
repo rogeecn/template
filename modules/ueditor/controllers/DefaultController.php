@@ -8,8 +8,7 @@ use modules\ueditor\components\Loader;
 
 class DefaultController extends RestController
 {
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $action = Request::input("action");
         switch ($action) {
             case 'config':
@@ -48,7 +47,7 @@ class DefaultController extends RestController
 
             default:
                 $result = [
-                    'state' => '请求地址出错'
+                    'state' => '请求地址出错',
                 ];
                 break;
         }
@@ -61,7 +60,7 @@ class DefaultController extends RestController
                 exit;
             }
             return [
-                'state' => 'callback参数不合法'
+                'state' => 'callback参数不合法',
             ];
         }
         return $result;

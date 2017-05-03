@@ -38,7 +38,7 @@ switch ($action) {
 
     default:
         $result = json_encode(array(
-            'state' => '请求地址出错'
+            'state' => '请求地址出错',
         ));
         break;
 }
@@ -49,7 +49,7 @@ if (isset($_GET["callback"])) {
         echo htmlspecialchars($_GET["callback"]) . '(' . $result . ')';
     } else {
         echo json_encode(array(
-            'state' => 'callback参数不合法'
+            'state' => 'callback参数不合法',
         ));
     }
 } else {

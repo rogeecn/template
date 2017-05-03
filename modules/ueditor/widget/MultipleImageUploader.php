@@ -8,25 +8,23 @@ use yii\widgets\InputWidget;
 
 class MultipleImageUploader extends InputWidget
 {
-    public $limit = 1;
     public static $autoIdPrefix = "insert_image_";
+    public        $limit        = 1;
 
-    public function init()
-    {
-        if ($this->limit < 1){
+    public function init() {
+        if ($this->limit < 1) {
             $this->limit = 1;
         }
     }
 
-    public function run()
-    {
+    public function run() {
         UEditorAssets::register($this->getView());
 
         $baseID = self::getId();
 
-        $editor_id = "editor_".$baseID;
-        $btn_id = "btn_".$baseID;
-        $img_list_wrapper_id = "image_wrapper_".$baseID;
+        $editor_id           = "editor_" . $baseID;
+        $btn_id              = "btn_" . $baseID;
+        $img_list_wrapper_id = "image_wrapper_" . $baseID;
 
         $js = <<<_UEDITOR_
 var $editor_id = UE.getEditor("$editor_id", {
@@ -72,11 +70,11 @@ var $editor_id = UE.getEditor("$editor_id", {
 _UEDITOR_;
         $this->getView()->registerJs($js);
 
-        echo Html::button("Upload",['id'=>$btn_id,'class'=>'insert-image-btn']);
+        echo Html::button("Upload", ['id' => $btn_id, 'class' => 'insert-image-btn']);
 
-        echo Html::textarea("","",['id'=>$editor_id,'style'=>'display:none']);
-        if ($this->limit > 1){
-            echo Html::tag("ul","",['id'=>$img_list_wrapper_id,'class'=>'upload-image-list-wrapper']);
+        echo Html::textarea("", "", ['id' => $editor_id, 'style' => 'display:none']);
+        if ($this->limit > 1) {
+            echo Html::tag("ul", "", ['id' => $img_list_wrapper_id, 'class' => 'upload-image-list-wrapper']);
         }
     }
 }

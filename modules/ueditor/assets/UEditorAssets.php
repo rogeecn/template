@@ -7,12 +7,12 @@ use yii\web\AssetBundle;
 class UEditorAssets extends AssetBundle
 {
     public $sourcePath = '@modules/ueditor/static';
-    public $js = [
+    public $js         = [
         'ueditor.config.js?v=1.0.1',
         'ueditor.all.min.js',
     ];
-    public $css = [
+    public $css        = [
     ];
-    public $depends = [
+    public $depends    = [
     ];
 }

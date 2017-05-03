@@ -9,18 +9,17 @@ use yii\widgets\InputWidget;
 
 class UEditorInput extends InputWidget
 {
-    public function run()
-    {
+    public function run() {
         UEditorAssets::register($this->getView());
 
         $id = self::getId();
-        if ($this->hasModel()){
-            echo Html::activeTextarea($this->model,$this->attribute,['id'=>$id]);
-        }else{
-            if (empty($this->name)){
+        if ($this->hasModel()) {
+            echo Html::activeTextarea($this->model, $this->attribute, ['id' => $id]);
+        } else {
+            if (empty($this->name)) {
                 throw new InvalidParamException("argument 'name' is required!");
             }
-            echo Html::textarea($this->name,$this->value,['id'=>$id]);
+            echo Html::textarea($this->name, $this->value, ['id' => $id]);
         }
 
         $js = <<<_UEDITOR_

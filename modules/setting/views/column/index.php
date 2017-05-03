@@ -1,11 +1,12 @@
 <?php
 use modules\setting\models\Setting;
+
 /** @var \yii\web\View $this */
 /** @var \modules\setting\models\Setting[] $columnList */
 \yii\bootstrap\BootstrapThemeAsset::register($this);
 
 $groupList = Setting::getGroupList(true);
-$typeList = Setting::getTypeList();
+$typeList  = Setting::getTypeList();
 ?>
 
 <div class="panel panel-default">
@@ -26,21 +27,21 @@ $typeList = Setting::getTypeList();
         </tr>
         </thead>
         <tbody>
-        <?php foreach($columnList as $item):?>
+        <?php foreach ($columnList as $item): ?>
             <tr>
-                <td><?=$item->title?></td>
-                <td><?=$item->alias?></td>
-                <td><?=$groupList[$item->group_id]?></td>
-                <td><?=$item->value?></td>
-                <td><?=$item->hint?></td>
-                <td><?=$typeList[$item->type]?></td>
-                <td><?=$item->pre_configure?></td>
+                <td><?= $item->title ?></td>
+                <td><?= $item->alias ?></td>
+                <td><?= $groupList[$item->group_id] ?></td>
+                <td><?= $item->value ?></td>
+                <td><?= $item->hint ?></td>
+                <td><?= $typeList[$item->type] ?></td>
+                <td><?= $item->pre_configure ?></td>
                 <td>
-                    <a href="<?=\yii\helpers\Url::to(['/setting/column/update','id'=>$item->primaryKey])?>">[EDIT]</a>
-                    <a href="<?=\yii\helpers\Url::to(['/setting/column/delete','id'=>$item->primaryKey])?>">[DELETE]</a>
+                    <a href="<?= \yii\helpers\Url::to(['/setting/column/update', 'id' => $item->primaryKey]) ?>">[EDIT]</a>
+                    <a href="<?= \yii\helpers\Url::to(['/setting/column/delete', 'id' => $item->primaryKey]) ?>">[DELETE]</a>
                 </td>
             </tr>
-        <?php endforeach;;?>
+        <?php endforeach;; ?>
         </tbody>
     </table>
 </div>

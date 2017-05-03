@@ -2,8 +2,6 @@
 
 namespace modules\article\models;
 
-use Yii;
-
 /**
  * This is the model class for table "sticky_article".
  *
@@ -17,16 +15,14 @@ class StickyArticle extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'sticky_article';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['article_id'], 'required'],
             [['article_id', 'order', 'category'], 'integer'],
@@ -36,13 +32,12 @@ class StickyArticle extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'id' => 'ID',
+            'id'         => 'ID',
             'article_id' => 'Article ID',
-            'order' => 'Order',
-            'category' => 'Category',
+            'order'      => 'Order',
+            'category'   => 'Category',
         ];
     }
 }

@@ -1,7 +1,7 @@
 <?php
 /** @var \yii\web\View $this */
 /** @var \modules\setting\models\Setting[] $groupList */
-    \yii\bootstrap\BootstrapThemeAsset::register($this)
+\yii\bootstrap\BootstrapThemeAsset::register($this)
 ?>
 
 <div class="panel panel-default">
@@ -17,16 +17,16 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach($groupList as $item):?>
+        <?php foreach ($groupList as $item): ?>
             <tr>
-                <td><?=$item->title?></td>
-                <td><?=$item->alias?></td>
+                <td><?= $item->title ?></td>
+                <td><?= $item->alias ?></td>
                 <td>
-                    <a href="<?=\yii\helpers\Url::to(['/setting/group/update','id'=>$item->primaryKey])?>">[EDIT]</a>
-                    <a href="<?=\yii\helpers\Url::to(['/setting/group/delete','id'=>$item->primaryKey])?>">[DELETE]</a>
+                    <a href="<?= \yii\helpers\Url::to(['/setting/group/update', 'id' => $item->primaryKey]) ?>">[EDIT]</a>
+                    <a href="<?= \yii\helpers\Url::to(['/setting/group/delete', 'id' => $item->primaryKey]) ?>">[DELETE]</a>
                 </td>
             </tr>
-        <?php endforeach;;?>
+        <?php endforeach;; ?>
         </tbody>
     </table>
 </div>

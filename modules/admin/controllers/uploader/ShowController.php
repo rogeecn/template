@@ -7,8 +7,7 @@ use modules\admin\base\AuthController;
 
 class ShowController extends AuthController
 {
-    public function actionIndex()
-    {
+    public function actionIndex() {
         return $this->render("index");
     }
 }

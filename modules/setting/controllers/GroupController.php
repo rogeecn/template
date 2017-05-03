@@ -5,45 +5,40 @@ namespace modules\setting\controllers;
 use common\util\Request;
 use modules\admin\base\AuthController;
 use modules\setting\models\Setting;
-use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 class GroupController extends AuthController
 {
-    public function actionIndex()
-    {
-        return $this->render("index",['groupList'=>Setting::getGroupList()]);
+    public function actionIndex() {
+        return $this->render("index", ['groupList' => Setting::getGroupList()]);
     }
 
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Setting();
-        if (Request::isPost()&&$model->load(Request::post())&&$model->createGroup()){
+        if (Request::isPost() && $model->load(Request::post()) && $model->createGroup()) {
             $this->redirect(['index']);
         }
-        return $this->render('create',[
-            'model'=>$model
+        return $this->render('create', [
+            'model' => $model,
         ]);
     }
 
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = Setting::findOne($id);
-        if (!$model){
+        if (!$model) {
             throw new NotFoundHttpException();
         }
-        if (Request::isPost()&&$model->load(Request::post())&&$model->save()){
+        if (Request::isPost() && $model->load(Request::post()) && $model->save()) {
             $this->redirect(['index']);
         }
-        return $this->render('update',[
-            'model'=>$model
+        return $this->render('update', [
+            'model' => $model,
         ]);
     }
 
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $model = Setting::findOne($id);
-        Setting::deleteAll(['group_id'=>$model->id]);
+        Setting::deleteAll(['group_id' => $model->id]);
         $model->delete();
         $this->redirect(['index']);
     }

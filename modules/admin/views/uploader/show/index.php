@@ -3,11 +3,11 @@
 ?>
 <div class="row">
     <div class="col-md-12">
-        <?=\modules\ueditor\widget\MultipleImageUploader::widget(['name'=>'test'])?>
+        <?= \modules\ueditor\widget\MultipleImageUploader::widget(['name' => 'test']) ?>
     </div>
 
     <div class="col-md-12">
-        <?=\modules\ueditor\widget\UEditorInput::widget(['name'=>'test'])?>
+        <?= \modules\ueditor\widget\UEditorInput::widget(['name' => 'test']) ?>
     </div>
 </div>
 

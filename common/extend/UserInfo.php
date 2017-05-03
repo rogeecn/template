@@ -4,7 +4,7 @@ namespace common\extend;
 
 class UserInfo
 {
-    public function Instance()
+    public static function Instance()
     {
         return \Yii::$app->getUser();
     }

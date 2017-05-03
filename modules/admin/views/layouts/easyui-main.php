@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+
 \modules\admin\assets\EasyUIAssets::register($this);
 
 ?>

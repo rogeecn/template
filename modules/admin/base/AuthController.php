@@ -3,7 +3,6 @@ namespace modules\admin\base;
 
 
 use application\base\WebController;
-use common\extend\UserInfo;
 
 class AuthController extends WebController
 {

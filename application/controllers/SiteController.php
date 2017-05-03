@@ -4,10 +4,9 @@ namespace application\controllers;
 use application\base\WebController;
 use common\extend\UserInfo;
 
-class SiteController extends  WebController
+class SiteController extends WebController
 {
-    public function actionIndex()
-    {
+    public function actionIndex() {
         return $this->render("index");
     }
 }

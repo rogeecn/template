@@ -7,19 +7,19 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'application',
-    'language'=>'zh-CN',
-    'basePath' => dirname(__DIR__),
+    'id'                  => 'application',
+    'language'            => 'zh-CN',
+    'basePath'            => dirname(__DIR__),
     'controllerNamespace' => 'application\controllers',
-    'bootstrap' => ['log'],
-    'modules' => [
-        'admin' => [
+    'bootstrap'           => ['log'],
+    'modules'             => [
+        'admin'   => [
             'class' => 'modules\admin\Module',
         ],
         'ueditor' => [
             'class' => 'modules\ueditor\Module',
         ],
-        'tag' => [
+        'tag'     => [
             'class' => 'modules\tag\Module',
         ],
         'article' => [
@@ -29,24 +29,24 @@ return [
             'class' => 'modules\setting\Module',
         ],
     ],
-    'components' => [
-        'user' => [
-            'identityClass' => 'common\User',
+    'components'          => [
+        'user'         => [
+            'identityClass'   => 'common\User',
             'enableAutoLogin' => true,
-            'identityCookie' => [
-                'name' => '_IDENTITY_APPLICATION',
-                'httpOnly' => true
+            'identityCookie'  => [
+                'name'     => '_IDENTITY_APPLICATION',
+                'httpOnly' => true,
             ],
         ],
-        'session' => [
+        'session'      => [
             // this is the name of the session cookie used for login on the application
             'name' => 'SESS_APPLICATION',
         ],
-        'log' => [
+        'log'          => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'targets'    => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class'  => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
             ],
@@ -54,17 +54,17 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'urlManager' => [
+        'urlManager'   => [
             'enablePrettyUrl' => true,
-            'showScriptName' => false,
+            'showScriptName'  => false,
         ],
         'request'      => [
             'csrfParam' => '_CSRF_APPLICATION',
-            'parsers' => [
+            'parsers'   => [
                 'application/json' => 'yii\web\JsonParser',
                 'text/json'        => 'yii\web\JsonParser',
             ],
         ],
     ],
-    'params' => $params,
+    'params'              => $params,
 ];

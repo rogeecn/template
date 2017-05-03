@@ -9,8 +9,7 @@ use yii\web\Response;
 
 class RestController extends Controller
 {
-    public function actions()
-    {
+    public function actions() {
         return [
             'error' => [
                 'class' => ErrorAction::className(),
@@ -18,11 +17,10 @@ class RestController extends Controller
         ];
     }
 
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'contentNegotiator' => [
-                'class' => ContentNegotiator::className(),
+                'class'   => ContentNegotiator::className(),
                 'formats' => [
                     'application/json' => Response::FORMAT_JSON,
                 ],
@@ -30,8 +28,7 @@ class RestController extends Controller
         ];
     }
 
-    public function beforeAction($action)
-    {
+    public function beforeAction($action) {
         return parent::beforeAction($action);
     }
 }

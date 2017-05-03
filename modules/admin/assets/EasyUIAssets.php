@@ -7,13 +7,13 @@ use yii\web\AssetBundle;
 class EasyUIAssets extends AssetBundle
 {
     public $sourcePath = '@modules/admin/static';
-    public $js = [
-        'jquery.easyui.min.js'
+    public $js         = [
+        'jquery.easyui.min.js',
     ];
-    public $css = [
-        'themes/gray/easyui.css'
+    public $css        = [
+        'themes/gray/easyui.css',
     ];
-    public $depends = [
+    public $depends    = [
         'yii\web\JqueryAsset',
     ];
 }

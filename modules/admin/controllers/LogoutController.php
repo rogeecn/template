@@ -7,8 +7,7 @@ use modules\admin\base\AuthController;
 
 class LogoutController extends AuthController
 {
-    public function actionIndex()
-    {
+    public function actionIndex() {
         UserInfo::logout();
         return $this->goHome();
     }

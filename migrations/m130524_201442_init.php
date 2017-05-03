@@ -32,7 +32,7 @@ class m130524_201442_init extends Migration
             'password_hash' => \Yii::$app->security->generatePasswordHash('admin'),
             'password_reset_token' => "",
             'email' => '123@qq.com',
-            'status' => \common\models\User::STATUS_ACTIVE,
+            'status' => \common\User::ST_ENABLE,
             'created_at' => time(),
             'updated_at' => time(),
         ]);

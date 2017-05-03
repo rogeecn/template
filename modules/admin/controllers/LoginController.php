@@ -4,15 +4,14 @@ namespace modules\admin\controllers;
 
 use application\base\WebController;
 use common\extend\UserInfo;
-use modules\admin\models\LoginForm;
 use common\util\Request;
+use modules\admin\models\LoginForm;
 
 class LoginController extends WebController
 {
     public $layout = "login";
 
-    public function actionIndex()
-    {
+    public function actionIndex() {
         if (!UserInfo::isGuest()) {
             return $this->redirect('/admin');
         }

@@ -8,10 +8,9 @@ use modules\tag\models\Tag;
 
 class CompleteController extends RestAuthController
 {
-    public function actionIndex()
-    {
-        $item = trim(Request::input("term",""));
-        if (empty($item)){
+    public function actionIndex() {
+        $item = trim(Request::input("term", ""));
+        if (empty($item)) {
             return [];
         }
 

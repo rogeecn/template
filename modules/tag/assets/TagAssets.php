@@ -8,13 +8,13 @@ use yii\web\AssetBundle;
 class TagAssets extends AssetBundle
 {
     public $sourcePath = '@modules/tag/static/dist';
-    public $js = [
-        'jquery.tagsinput.min.js'
+    public $js         = [
+        'jquery.tagsinput.min.js',
     ];
-    public $css = [
-        'jquery.tagsinput.min.css'
+    public $css        = [
+        'jquery.tagsinput.min.css',
     ];
-    public $depends = [
+    public $depends    = [
         'yii\jui\JuiAsset',
     ];
 }

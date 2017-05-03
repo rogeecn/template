@@ -2,13 +2,11 @@
 
 namespace modules\article\models;
 
-use Yii;
-
 /**
  * This is the model class for table "article".
  *
  * @property integer $id
- * @property string $title
+ * @property string  $title
  * @property integer $user_id
  * @property integer $type
  * @property integer $index_show
@@ -21,19 +19,17 @@ class Article extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'article';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['title', 'user_id', 'type', 'index_show'], 'required'],
-            [['user_id','status', 'type', 'index_show', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'status', 'type', 'index_show', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 240],
             [['status'], 'default', 'value' => self::ST_ENABLE],
         ];
@@ -42,13 +38,12 @@ class Article extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'user_id' => 'User ID',
-            'type' => 'Type',
+            'id'         => 'ID',
+            'title'      => 'Title',
+            'user_id'    => 'User ID',
+            'type'       => 'Type',
             'index_show' => 'Index Show',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

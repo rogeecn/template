@@ -5,46 +5,41 @@ namespace modules\setting\controllers;
 use common\util\Request;
 use modules\admin\base\AuthController;
 use modules\setting\models\Setting;
-use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 class ColumnController extends AuthController
 {
-    public function actionIndex()
-    {
-        $columnList = Setting::find()->where(['display'=>Setting::DISPLAY_COLUMN])->all();
-        return $this->render("index",['columnList'=>$columnList]);
+    public function actionIndex() {
+        $columnList = Setting::find()->where(['display' => Setting::DISPLAY_COLUMN])->all();
+        return $this->render("index", ['columnList' => $columnList]);
     }
 
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Setting();
-        if (Request::isPost()&&$model->load(Request::post())&&$model->createColumn()){
+        if (Request::isPost() && $model->load(Request::post()) && $model->createColumn()) {
             $this->redirect(['index']);
         }
-        return $this->render('create',[
-            'model'=>$model
+        return $this->render('create', [
+            'model' => $model,
         ]);
     }
 
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = Setting::findOne($id);
-        if (!$model){
+        if (!$model) {
             throw new NotFoundHttpException();
         }
-        if (Request::isPost()&&$model->load(Request::post())&&$model->save()){
+        if (Request::isPost() && $model->load(Request::post()) && $model->save()) {
             $this->redirect(['index']);
         }
-        return $this->render('update',[
-            'model'=>$model
+        return $this->render('update', [
+            'model' => $model,
         ]);
     }
 
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $model = Setting::findOne($id);
-        Setting::deleteAll(['group_id'=>$model->id]);
+        Setting::deleteAll(['group_id' => $model->id]);
         $model->delete();
         $this->redirect(['index']);
     }

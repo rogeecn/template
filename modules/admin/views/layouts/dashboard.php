@@ -3,8 +3,8 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use yii\helpers\Html;
 use modules\admin\assets\EasyUIAssets;
+use yii\helpers\Html;
 
 EasyUIAssets::register($this);
 ?>
@@ -50,7 +50,7 @@ EasyUIAssets::register($this);
     $(function () {
         //class="easyui-tree" data-options="lines:true,method:'get',url:'/dashboard/tree'"
         $('#menu-tree').tree({
-            url: "/admin/tree?v="+Math.random(),
+            url: "/admin/tree?v=" + Math.random(),
             lines: true,
             onClick: function (node) {
                 if (node.attributes && node.attributes.url) {

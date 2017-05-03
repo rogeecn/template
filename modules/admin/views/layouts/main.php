@@ -3,8 +3,8 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use yii\helpers\Html;
 use common\widgets\Alert;
+use yii\helpers\Html;
 
 //\application\assets\AppAsset::register($this);
 ?>

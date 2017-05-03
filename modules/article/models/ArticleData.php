@@ -2,31 +2,27 @@
 
 namespace modules\article\models;
 
-use Yii;
-
 /**
  * This is the model class for table "article_data".
  *
  * @property integer $id
- * @property string $show_image
- * @property string $description
- * @property string $content
+ * @property string  $show_image
+ * @property string  $description
+ * @property string  $content
  */
 class ArticleData extends \common\base\ActiveRecord
 {
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'article_data';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['content'], 'required'],
             [['content'], 'string'],
@@ -38,13 +34,12 @@ class ArticleData extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'id' => 'ID',
-            'show_image' => 'Show Image',
+            'id'          => 'ID',
+            'show_image'  => 'Show Image',
             'description' => 'Description',
-            'content' => 'Content',
+            'content'     => 'Content',
         ];
     }
 }
