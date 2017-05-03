@@ -1,9 +1,7 @@
 <?php
 /** @var \yii\web\View $this */
 /** @var \modules\setting\models\Setting $model */
-\yii\bootstrap\BootstrapThemeAsset::register($this)
 ?>
-
 <?php $form = \yii\bootstrap\ActiveForm::begin(); ?>
 <?= $form->errorSummary($model) ?>
 

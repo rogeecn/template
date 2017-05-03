@@ -19,7 +19,6 @@ $typeList  = Setting::getTypeList();
             <th>Title</th>
             <th>Alias</th>
             <th>Group</th>
-            <th>Value</th>
             <th>Hint</th>
             <th>Type</th>
             <th>PreConfigure</th>
@@ -32,7 +31,6 @@ $typeList  = Setting::getTypeList();
                 <td><?= $item->title ?></td>
                 <td><?= $item->alias ?></td>
                 <td><?= $groupList[$item->group_id] ?></td>
-                <td><?= $item->value ?></td>
                 <td><?= $item->hint ?></td>
                 <td><?= $typeList[$item->type] ?></td>
                 <td><?= $item->pre_configure ?></td>

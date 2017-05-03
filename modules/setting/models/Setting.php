@@ -67,6 +67,7 @@ class Setting extends \common\base\ActiveRecord
         foreach ($columnModels as $columnModel) {
             $tmpData = $columnModel->toArray();
 
+            $tmpData['formName'] = sprintf("group[%d][%s]",$groupId,$columnModel['alias']);
             $tmpData['pre_configure'] = explode("\n", $columnModel['pre_configure']);;
             $retList[] = $tmpData;
         }

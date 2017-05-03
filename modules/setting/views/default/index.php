@@ -10,7 +10,7 @@
 $form = \yii\bootstrap\ActiveForm::begin();
 
 $items = [];
-foreach ($groupList as $groupData) {
+foreach ($groupList as $groupID=>$groupData) {
     $items[] = [
         'label'   => $groupData['name'],
         'content' => $this->render("_tab", [
@@ -21,7 +21,7 @@ foreach ($groupList as $groupData) {
 }
 $items[0]['active'] = true;
 
-if (empty($items)) {
+if (!empty($items)) {
     echo \yii\bootstrap\Tabs::widget([
         'items' => $items,
     ]);
