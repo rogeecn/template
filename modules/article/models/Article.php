@@ -12,6 +12,7 @@ use Yii;
  * @property integer $user_id
  * @property integer $type
  * @property integer $index_show
+ * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  */
@@ -32,8 +33,9 @@ class Article extends \common\base\ActiveRecord
     {
         return [
             [['title', 'user_id', 'type', 'index_show'], 'required'],
-            [['user_id', 'type', 'index_show', 'created_at', 'updated_at'], 'integer'],
+            [['user_id','status', 'type', 'index_show', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 240],
+            [['status'], 'default', 'value' => self::ST_ENABLE],
         ];
     }
 

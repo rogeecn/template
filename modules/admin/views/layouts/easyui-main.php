@@ -4,9 +4,8 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use common\widgets\Alert;
+\modules\admin\assets\EasyUIAssets::register($this);
 
-//\application\assets\AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -15,17 +14,11 @@ use common\widgets\Alert;
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title>admin</title>
     <?php $this->head() ?>
 </head>
-<body style="padding-top: 20px;">
+<body class="easyui-layout">
 <?php $this->beginBody() ?>
-
-<div class="container-fluid">
-    <?= Alert::widget() ?>
-    <?= $content ?>
-</div>
+<div data-options="region:'center',border:false"><?= $content ?></div>
 <?php $this->endBody() ?>
-</body>
 </html>
 <?php $this->endPage() ?>

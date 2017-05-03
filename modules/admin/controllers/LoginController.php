@@ -4,7 +4,7 @@ namespace modules\admin\controllers;
 
 use application\base\WebController;
 use common\extend\UserInfo;
-use common\models\LoginForm;
+use modules\admin\models\LoginForm;
 use common\util\Request;
 
 class LoginController extends WebController
@@ -14,7 +14,7 @@ class LoginController extends WebController
     public function actionIndex()
     {
         if (!UserInfo::isGuest()) {
-            return $this->redirect('/admin/login');
+            return $this->redirect('/admin');
         }
 
         $model = new LoginForm();

@@ -25,10 +25,13 @@ return [
         'article' => [
             'class' => 'modules\article\Module',
         ],
+        'setting' => [
+            'class' => 'modules\setting\Module',
+        ],
     ],
     'components' => [
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\User',
             'enableAutoLogin' => true,
             'identityCookie' => [
                 'name' => '_IDENTITY_APPLICATION',

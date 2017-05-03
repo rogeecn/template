@@ -41,9 +41,42 @@ class TreeController extends RestController
                         'attributes' => [
                             'url' => Url::to(['/tag'])
                         ],
+                    ],
+                    [
+                        'text' => 'Setting',
+                        'attributes' => [
+                            'url' => Url::to(['/setting'])
+                        ],
                     ]
                 ],
+            ],
+
+            [
+                'text' => 'Setting',
+                'state' => 'open',
+                'children' => [
+                    [
+                        'text' => 'Setting',
+                        'attributes' => [
+                            'url' => Url::to(['/setting'])
+                        ],
+                    ],
+                    [
+                        'text' => 'Group',
+                        'attributes' => [
+                            'url' => Url::to(['/setting/group'])
+                        ],
+                    ],
+                    [
+                        'text' => 'Column',
+                        'attributes' => [
+                            'url' => Url::to(['/setting/column'])
+                        ],
+                    ],
+                ],
             ]
+
+
         ];
     }
 }

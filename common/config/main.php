@@ -13,6 +13,7 @@ return [
                 'migrations',
                 'modules\tag\migrations',
                 'modules\article\migrations',
+                'modules\setting\migrations',
             ],
         ],
     ],

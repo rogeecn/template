@@ -19,6 +19,7 @@ class m170502_040812_article extends Migration
             'user_id'=>$this->integer()->notNull(),
             'type'=>$this->integer()->notNull(),
             'index_show'=>$this->integer()->notNull(),
+            'status'=>$this->integer()->notNull(),
             'created_at'=>$this->integer(),
             'updated_at'=>$this->integer(),
         ],$tableOptions);
