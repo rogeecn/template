@@ -16,6 +16,7 @@ use yii\helpers\ArrayHelper;
  * @property string  $hint
  * @property string  $type
  * @property string  $pre_configure
+ * @property integer  $order
  */
 class Setting extends \common\base\ActiveRecord
 {
@@ -81,7 +82,7 @@ class Setting extends \common\base\ActiveRecord
     public function rules() {
         return [
             [['alias', 'title', 'display'], 'required'],
-            [['display', 'group_id'], 'integer'],
+            [['display','order', 'group_id'], 'integer'],
             [['alias', 'title'], 'string', 'max' => 240],
             [['value', 'hint', 'pre_configure'], 'string', 'max' => 1200],
             [['type'], 'string', 'max' => 100],
