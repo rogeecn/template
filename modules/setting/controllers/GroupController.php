@@ -10,6 +10,12 @@ use yii\web\NotFoundHttpException;
 class GroupController extends AuthController
 {
     public function actionIndex() {
+        if (Request::isPost()){
+            $orderList = Request::post("order");
+            foreach ($orderList as $id=>$newOrder){
+                Setting::updateAll(['order'=>intval($newOrder)],['id'=>$id]);
+            }
+        }
         return $this->render("index", ['groupList' => Setting::getGroupList()]);
     }
 

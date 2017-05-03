@@ -32,53 +32,6 @@ class Setting extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName() {
-        return 'setting';
-    }
-
-    public static function getTypeList() {
-        return [
-            self::TYPE_STRING        => "字符串",
-            self::TYPE_TEXT          => "文本",
-            self::TYPE_HTML          => "HTML文本",
-            self::TYPE_SINGLE_SELECT => "单选下拉",
-            self::TYPE_MULTI_SELECT  => "多选下拉",
-        ];
-    }
-
-    public static function getGroupList($asArray = false) {
-        $groupList = Setting::find()->where(['display' => Setting::DISPLAY_GROUP])->all();
-        if (!$asArray) {
-            return $groupList;
-        }
-
-        return ArrayHelper::map($groupList, "id", "title");
-    }
-
-    public static function getGroupColumnList($groupId) {
-        $condition = [
-            'group_id' => $groupId,
-            'display'  => Setting::DISPLAY_COLUMN,
-        ];
-
-        /** @var Setting[] $columnModels */
-        $columnModels = Setting::find()->where($condition)->all();
-
-        $retList = [];
-        foreach ($columnModels as $columnModel) {
-            $tmpData = $columnModel->toArray();
-
-            $tmpData['formName'] = sprintf("group[%d][%s]",$groupId,$columnModel['alias']);
-            $tmpData['pre_configure'] = explode("\n", $columnModel['pre_configure']);;
-            $retList[] = $tmpData;
-        }
-
-        return $retList;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function rules() {
         return [
             [['alias', 'title', 'display'], 'required'],
@@ -104,6 +57,54 @@ class Setting extends \common\base\ActiveRecord
             'type'          => 'Type',
             'pre_configure' => 'Pre Configure',
         ];
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName() {
+        return 'setting';
+    }
+
+    public static function getTypeList() {
+        return [
+            self::TYPE_STRING        => "字符串",
+            self::TYPE_TEXT          => "文本",
+            self::TYPE_HTML          => "HTML文本",
+            self::TYPE_SINGLE_SELECT => "单选下拉",
+            self::TYPE_MULTI_SELECT  => "多选下拉",
+        ];
+    }
+
+    public static function getGroupList($asArray = false) {
+        $groupList = Setting::find()->where(['display' => Setting::DISPLAY_GROUP])->orderBy(['order'=>SORT_ASC])->all();
+        if (!$asArray) {
+            return $groupList;
+        }
+
+        return ArrayHelper::map($groupList, "id", "title");
+    }
+
+    public static function getGroupColumnList($groupId) {
+        $condition = [
+            'group_id' => $groupId,
+            'display'  => Setting::DISPLAY_COLUMN,
+        ];
+
+        /** @var Setting[] $columnModels */
+        $columnModels = Setting::find()->where($condition)->orderBy(['order'=>SORT_ASC])->all();
+
+        $retList = [];
+        foreach ($columnModels as $columnModel) {
+            $tmpData = $columnModel->toArray();
+
+            $tmpData['formName'] = sprintf("group[%d][%s]",$groupId,$columnModel['alias']);
+            $tmpData['pre_configure'] = explode("\n", $columnModel['pre_configure']);;
+            $retList[] = $tmpData;
+        }
+
+        return $retList;
     }
 
     public function createColumn() {

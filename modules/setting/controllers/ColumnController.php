@@ -10,7 +10,13 @@ use yii\web\NotFoundHttpException;
 class ColumnController extends AuthController
 {
     public function actionIndex() {
-        $columnList = Setting::find()->where(['display' => Setting::DISPLAY_COLUMN])->all();
+        if (Request::isPost()){
+            $orderList = Request::post("order");
+            foreach ($orderList as $id=>$newOrder){
+                Setting::updateAll(['order'=>intval($newOrder)],['id'=>$id]);
+            }
+        }
+        $columnList = Setting::find()->where(['display' => Setting::DISPLAY_COLUMN])->orderBy(['group_id'=>SORT_ASC,'order'=>SORT_DESC])->all();
         return $this->render("index", ['columnList' => $columnList]);
     }
 
