@@ -1,26 +1,23 @@
 <?php
 use modules\setting\models\Setting;
-use yii\bootstrap\Html;
+use LayUI\components\Html;
 
 /** @var \yii\bootstrap\ActiveForm $form */
 ?>
 <?php foreach ($columns as $column): ?>
-<div class="form-group">
-    <label><?= $column['title'] ?></label>
+<div class="layui-form-item">
+    <label class="layui-form-label"><?= $column['title'] ?></label>
+    <div class="layui-input-inline">
     <?php
     switch ($column['type']) {
         case Setting::TYPE_TEXT:
-            echo Html::textarea($column['formName'], $column['value'], ['class' => 'form-control']);
+            echo Html::textarea($column['formName'], $column['value']);
             break;
         case Setting::TYPE_SINGLE_SELECT:
-            echo Html::dropDownList($column['formName'], $column['value'], $column["pre_configure"], ['class' => 'form-control']);
+            echo Html::radioList($column['formName'], $column['value'], $column["pre_configure"] );
             break;
         case Setting::TYPE_MULTI_SELECT:
-            echo Html::dropDownList($column['formName'], $column['value'], $column["pre_configure"], [
-                'multiple' => true,
-                'style'    => "height:50px",
-                'class'    => 'form-control',
-            ]);
+            echo Html::checkboxList($column['formName'], $column['value'], $column["pre_configure"]);
             break;
         case Setting::TYPE_HTML:
             echo \modules\ueditor\widget\UEditorInput::widget([
@@ -29,9 +26,10 @@ use yii\bootstrap\Html;
             ]);
             break;
         default:
-            echo Html::textInput($column['formName'], $column['value'], ['class' => 'form-control']);
+            echo Html::textInput($column['formName'], $column['value']);
     }
     ?>
-    <span class="help-block"><?= $column['hint'] ?></span>
+    </div>
+    <?= Html::hint($column['hint']) ?>
 </div>
 <?php endforeach;?>

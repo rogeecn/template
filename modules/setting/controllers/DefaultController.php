@@ -15,6 +15,9 @@ class DefaultController extends AuthController
 
             foreach ($formData as $groupID=>$keyMapData){
                 foreach ($keyMapData as $alias=>$value){
+                    if (is_array($value)){
+                        $value=implode(",",$value);
+                    }
                     Setting::updateAll(['value'=>$value],['group_id'=>$groupID,'alias'=>$alias]);
                 }
             }

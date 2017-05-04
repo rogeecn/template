@@ -9,7 +9,9 @@ use yii\bootstrap\Html;
 $groupList = Setting::getGroupList(true);
 $typeList  = Setting::getTypeList();
 ?>
-
+<?php
+\yii\grid\GridView::widget()
+?>
 <?php $form = \yii\bootstrap\ActiveForm::begin()?>
 <div class="panel panel-default">
     <div class="panel-heading text-right">

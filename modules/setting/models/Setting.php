@@ -99,6 +99,9 @@ class Setting extends \common\base\ActiveRecord
         foreach ($columnModels as $columnModel) {
             $tmpData = $columnModel->toArray();
 
+            if($tmpData['type']==self::TYPE_MULTI_SELECT){
+                $tmpData['value'] = explode(",",$tmpData['value']);
+            }
             $tmpData['formName'] = sprintf("group[%d][%s]",$groupId,$columnModel['alias']);
             $tmpData['pre_configure'] = explode("\n", $columnModel['pre_configure']);;
             $retList[] = $tmpData;

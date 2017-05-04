@@ -18,7 +18,7 @@ use yii\helpers\Html;
     <title>admin</title>
     <?php $this->head() ?>
 </head>
-<body style="padding-top: 20px;">
+<body>
 <?php $this->beginBody() ?>
 
 <div class="container-fluid">
@@ -26,6 +26,10 @@ use yii\helpers\Html;
     <?= $content ?>
 </div>
 <?php $this->endBody() ?>
+<script>
+    var element = layui.element();
+    var form = layui.form();
+</script>
 </body>
 </html>
 <?php $this->endPage() ?>

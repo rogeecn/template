@@ -7,6 +7,11 @@ use yii\bootstrap\Html;
 ?>
 
 <?php $form = \yii\bootstrap\ActiveForm::begin()?>
+<?=\LayUI\components\Tabs::widget([
+    'columns'=>['title','alias','order','opt'],
+    'dataList'=>[
+    ]
+])?>
 <div class="panel panel-default">
     <div class="panel-heading text-right">
         <a href="/setting/group/create">CREATE</a>

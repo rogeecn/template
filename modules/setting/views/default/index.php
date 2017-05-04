@@ -7,7 +7,7 @@
         }
     </style>
 <?php
-$form = \yii\bootstrap\ActiveForm::begin();
+$form = \LayUI\components\ActiveForm::begin();
 
 $items = [];
 foreach ($groupList as $groupID=>$groupData) {
@@ -21,10 +21,12 @@ foreach ($groupList as $groupID=>$groupData) {
 }
 $items[0]['active'] = true;
 
+
+
 if (!empty($items)) {
-    echo \yii\bootstrap\Tabs::widget([
+    echo \LayUI\components\Tabs::widget([
         'items' => $items,
     ]);
-    echo \yii\bootstrap\Html::submitButton("Submit", ['class' => 'btn btn-primary']);
+    echo \LayUI\components\Html::submitWrapper(\LayUI\components\Html::submitButton());
 }
-\yii\bootstrap\ActiveForm::end();
+\LayUI\components\ActiveForm::end();
