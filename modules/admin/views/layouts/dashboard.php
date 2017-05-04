@@ -55,14 +55,18 @@
             e.preventDefault();
             e.stopPropagation();
 
+            var link = $(this).attr("href");
+            if (link.length == 0 || link == "#"){
+                return false;
+            }
+
             var _iframeTpl = '<iframe src="_HREF_" frameborder="0" width="100%" height="100%"></iframe>';
             element.tabAdd('tab-container', {
                 title: $(this).text(),
-                content: _iframeTpl.replace("_HREF_",$(this).attr("href")),
-                id: $(this).attr("href")
+                content: _iframeTpl.replace("_HREF_",link),
+                id: link,
             });
-            element.tabChange('tab-container', $(this).attr("href")); //切换到：用户管理
-
+            element.tabChange('tab-container', link);
             return false;
         })
     })
