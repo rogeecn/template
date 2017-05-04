@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="layui-body">
-        <div class="layui-tab layui-tab-brief" lay-filter="tab-container"  lay-allowclose="true" style="margin: 0">
+        <div class="layui-tab layui-tab-brief main-tab-container" lay-filter="tab-container"  lay-allowclose="true" style="margin: 0">
             <ul class="layui-tab-title site-demo-title">
                 <li class="layui-this">控制台</li>
             </ul>
@@ -57,6 +57,11 @@
 
             var link = $(this).attr("href");
             if (link.length == 0 || link == "#"){
+                return false;
+            }
+
+            if ($(".main-tab-container .layui-tab-title li[lay-id='"+link+"']").length > 0){
+                element.tabChange('tab-container', link);
                 return false;
             }
 
