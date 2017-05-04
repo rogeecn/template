@@ -1,55 +1,39 @@
 <?php
-use yii\bootstrap\Html;
+use LayUI\components\Html;
 
 /** @var \yii\web\View $this */
 /** @var \modules\setting\models\Setting[] $groupList */
-\yii\bootstrap\BootstrapThemeAsset::register($this);
-?>
 
-<?php $form = \yii\bootstrap\ActiveForm::begin()?>
-<?=\LayUI\components\Tabs::widget([
-    'columns'=>['title','alias','order','opt'],
-    'dataList'=>[
-    ]
-])?>
-<div class="panel panel-default">
-    <div class="panel-heading text-right">
-        <a href="/setting/group/create">CREATE</a>
-    </div>
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Alias</th>
-            <th>Order</th>
-            <th>OPT</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        foreach ($groupList as $item):
-            $orderAttr = [
-                'data-old' => $item->order,
-                'data-id'  => $item->primaryKey,
-                'class'    => 'form-control input-sm',
-                'name'     => sprintf("order[%d]", $item->primaryKey),
-            ];
-            ?>
+$form = \LayUI\components\ActiveForm::begin();
+echo \LayUI\components\Table::widget([
+    'columns'      => [
+        'title',
+        'alias',
+        [
+            'key'   => 'order',
+            'value' => function ($data) {
+                $orderAttr = [
+                    'data-old'     => $data->order,
+                    'data-id'      => $data->primaryKey,
+                    'autocomplete' => 'off',
+                    'name'         => sprintf("order[%d]", $data->primaryKey),
+                ];
+                return Html::activeTextInput($data, "order", $orderAttr);
+            },
+        ],
+        [
+            'label' => 'OPT',
+            'value' => function ($data) {
+                $class  = ['class' => 'layui-btn layui-btn-small layui-btn-primary'];
+                $edit   = Html::a("EDIT", ['/setting/group/update', 'id' => $data->primaryKey], $class);
+                $delete = Html::a("DELETE", ['/setting/group/delete', 'id' => $data->primaryKey], $class);
+                return Html::buttonGroup([$edit, $delete]);
+            },
+        ],
+    ],
+    'dataProvider' => $groupList,
+]);
 
-            <tr>
-                <td><?= $item->title ?></td>
-                <td><?= $item->alias ?></td>
-                <td><?= Html::activeTextInput($item, "order", $orderAttr); ?></td>
-                <td>
-                    <a href="<?= \yii\helpers\Url::to(['/setting/group/update', 'id' => $item->primaryKey]) ?>">[EDIT]</a>
-                    <a href="<?= \yii\helpers\Url::to(['/setting/group/delete', 'id' => $item->primaryKey]) ?>">[DELETE]</a>
-                </td>
-            </tr>
-        <?php endforeach;; ?>
-        </tbody>
-    </table>
-    <div class="panel-footer text-right">
-        <?= Html::submitButton("SUBMIT", ['class' => 'btn btn-primary']) ?>
-    </div>
-</div>
-<?php \yii\bootstrap\ActiveForm::end();?>
+echo Html::submitButton();
+
+\LayUI\components\ActiveForm::end();

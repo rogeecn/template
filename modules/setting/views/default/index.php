@@ -2,8 +2,8 @@
 /** @var \yii\web\View $this */
 ?>
     <style>
-        .tab-content {
-            padding-top: 20px;
+        .layui-form-item .layui-input-inline{
+            width: 500px;
         }
     </style>
 <?php
