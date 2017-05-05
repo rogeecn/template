@@ -76,4 +76,10 @@ class Html extends BaseHtml
         }
         return implode("\n", $itemList);
     }
+
+    public static function icon($icon,$options=[])
+    {
+        self::addCssClass($options,['class'=>'layui-icon']);
+        return self::tag("i",$icon,$options);
+    }
 }

@@ -6,11 +6,25 @@ use LayUI\components\Html;
 
 $form = \LayUI\components\ActiveForm::begin();
 echo \LayUI\components\Table::widget([
+    'dataProvider' => $groupList,
+    'sortable' => true,
     'columns'      => [
+        [
+            'label'=>'',
+            'options'=>[
+                'style'=>'width: 10px;',
+            ],
+            'value'=>function($data){
+                return Html::icon("&#xe649;",['class'=>'drag-handle']);
+            }
+        ],
         'title',
         'alias',
         [
             'key'   => 'order',
+            'options'=>[
+                'style'=>'width: 80px;',
+            ],
             'value' => function ($data) {
                 $orderAttr = [
                     'data-old'     => $data->order,
@@ -31,7 +45,6 @@ echo \LayUI\components\Table::widget([
             },
         ],
     ],
-    'dataProvider' => $groupList,
 ]);
 
 echo Html::submitButton();

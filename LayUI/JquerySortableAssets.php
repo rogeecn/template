@@ -3,17 +3,15 @@ namespace LayUI;
 
 use yii\web\AssetBundle;
 
-class LayUIAssets extends AssetBundle
+class JquerySortableAssets extends AssetBundle
 {
-    public $sourcePath = "@LayUI/assets/layui/build";
+    public $sourcePath = "@LayUI/assets/jquery-sortable";
 
     public $js = [
-//        "layui.js"
-        "lay/dest/layui.all.js"
+        "jquery-sortable.min.js"
     ];
 
     public $css = [
-        "css/layui.css"
     ];
 
     public $depends = [

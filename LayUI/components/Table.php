@@ -2,6 +2,7 @@
 namespace LayUI\components;
 
 
+use LayUI\JquerySortableAssets;
 use LayUI\LayUIAssets;
 use yii\base\Widget;
 
@@ -11,6 +12,7 @@ class Table extends Widget
     public $columns  = [];
     public $dataProvider = [];
     public $options  = [];
+    public $sortable = false;
 
     public function run() {
         $html = "\n";
@@ -26,6 +28,36 @@ class Table extends Widget
             $this->options['class'] = 'layui-table ';
         }
 
+        if (!isset($this->options['id'])){
+            $this->options['id']=self::getId();
+        }
+
+        if ($this->sortable){
+            JquerySortableAssets::register($this->getView());
+            $sortableJS = <<<_JS_
+// Sortable rows
+$('#{$this->options['id']}').sortable({
+  handle: 'i.drag-handle',
+  containerSelector: 'table',
+  itemPath: '> tbody',
+  itemSelector: 'tr',
+  placeholder: '<tr class="placeholder"></tr>'
+});
+_JS_;
+            $sortablePlaceholder = <<<_CSS_
+i.drag-handle{
+    cursor: move;
+}
+tr.placeholder{
+    background: lightyellow;
+    height: 5px;
+}
+_CSS_;
+
+
+            $this->getView()->registerJs($sortableJS);
+            $this->getView()->registerCss($sortablePlaceholder);
+        }
         LayUIAssets::register($this->getView());
         return "\n".Html::tag('table', $html, $this->options);
     }
@@ -46,7 +78,14 @@ class Table extends Widget
         $cols=[];
         foreach ($this->columns as $column) {
             list($key, $label) = $this->getKeyAndLabel($column);
-            $cols[] = Html::tag("td", $label, ['data-key' => $key]);
+
+            if (is_array($column)){
+                if (!isset($column['options'])){
+                    $column['options'] = [];
+                }
+                $column['options']['data-key'] = $key;
+            }
+            $cols[] = Html::tag("td", $label, $column['options']);
         }
 
         return Html::tag("thead", Html::tag("tr",implode("\n",$cols)));
