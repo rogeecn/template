@@ -2,8 +2,8 @@
 namespace LayUI\components;
 
 
-use LayUI\JquerySortableAssets;
 use LayUI\LayUIAssets;
+use plugins\sortable\SortableAssets;
 use yii\base\Widget;
 
 class Table extends Widget
@@ -34,7 +34,7 @@ class Table extends Widget
         }
 
         if ($this->sortable){
-            JquerySortableAssets::register($this->getView());
+            SortableAssets::register($this->getView());
             $sortableJS = <<<_JS_
 // Sortable rows
 $('#{$this->options['id']}').sortable({

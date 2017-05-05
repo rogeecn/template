@@ -1,10 +1,16 @@
 <?php
 namespace LayUI\components;
 
+use modules\ueditor\widget\UEditorInput;
 use yii\helpers\BaseHtml;
 
 class Html extends BaseHtml
 {
+    public static function activeEditor($model, $attribute, $options = [])
+    {
+        return UEditorInput::widget(['model'=>$model,'attribute'=>$attribute,'options'=>$options]);
+    }
+
     public static function submitButton($content = '提交', $options = []) {
         if (!isset($options['class'])) {
             self::addCssClass($options, "layui-btn");
@@ -25,6 +31,15 @@ class Html extends BaseHtml
     public static function textInput($name, $value = '', $options = []) {
         self::addCssClass($options, ["layui-input"]);
         return parent::textInput($name, $value, $options);
+    }
+
+    public static function radio($name, $checked = false, $options = [])
+    {
+        return self::booleanInput('radio', $name, $checked, $options);
+    }
+    public static function checkbox($name, $checked = false, $options = [])
+    {
+        return self::booleanInput('checkbox', $name, $checked, $options);
     }
 
     public static function textarea($name, $value = '', $options = []) {
@@ -77,9 +92,83 @@ class Html extends BaseHtml
         return implode("\n", $itemList);
     }
 
+    public static function activeRadio($model, $attribute, $options = [])
+    {
+        return self::activeBooleanInput('radio', $model, $attribute, $options);
+    }
+
+    public static function activeCheckbox($model, $attribute, $options = [])
+    {
+        return self::activeBooleanInput('checkbox', $model, $attribute, $options);
+    }
+
+
+    public static function activeRadioList($model, $attribute, $items, $options = []){
+        return self::activeListInput('radioList', $model, $attribute, $items, $options);
+    }
+
+    public static function activeCheckboxList($model, $attribute, $items, $options = []){
+        return self::activeListInput('checkboxList', $model, $attribute, $items, $options);
+    }
+
     public static function icon($icon,$options=[])
     {
         self::addCssClass($options,['class'=>'layui-icon']);
         return self::tag("i",$icon,$options);
+    }
+
+
+    protected static function activeListInput($type, $model, $attribute, $items, $options = [])
+    {
+        $name = isset($options['name']) ? $options['name'] : self::getInputName($model, $attribute);
+        $selection = isset($options['value']) ? $options['value'] : self::getAttributeValue($model, $attribute);
+        if (!array_key_exists('unselect', $options)) {
+            $options['unselect'] = '';
+        }
+        if (!array_key_exists('id', $options)) {
+            $options['id'] = self::getInputId($model, $attribute);
+        }
+
+        return self::$type($name, $selection, $items, $options);
+    }
+
+    protected static function activeBooleanInput($type, $model, $attribute, $options = [])
+    {
+        $name = isset($options['name']) ? $options['name'] : self::getInputName($model, $attribute);
+        $value = self::getAttributeValue($model, $attribute);
+        $options['title'] = 'Helo';//$value;
+
+        if (!array_key_exists('value', $options)) {
+            $options['value'] = '1';
+        }
+        if (!array_key_exists('uncheck', $options)) {
+            $options['uncheck'] = '0';
+        }
+        if (!array_key_exists('label', $options)) {
+            $options['label'] = self::encode($model->getAttributeLabel(self::getAttributeName($attribute)));
+        }
+
+        $checked = "$value" === "{$options['value']}";
+
+        if (!array_key_exists('id', $options)) {
+            $options['id'] = self::getInputId($model, $attribute);
+        }
+
+        return self::$type($name, $checked, $options);
+    }
+
+    protected static function booleanInput($type, $name, $checked = false, $options = [])
+    {
+        $options['checked'] = (bool) $checked;
+        $value = array_key_exists('value', $options) ? $options['value'] : '1';
+        if (isset($options['uncheck'])) {
+            // add a hidden field so that if the checkbox is not selected, it still submits a value
+            $hidden = self::hiddenInput($name, $options['uncheck']);
+            unset($options['uncheck']);
+        } else {
+            $hidden = '';
+        }
+
+        return $hidden . self::input($type, $name, $value, $options);
     }
 }

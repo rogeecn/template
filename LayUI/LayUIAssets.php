@@ -5,7 +5,7 @@ use yii\web\AssetBundle;
 
 class LayUIAssets extends AssetBundle
 {
-    public $sourcePath = "@LayUI/assets/layui/build";
+    public $sourcePath = "@LayUI/assets/build";
 
     public $js = [
 //        "layui.js"
@@ -13,7 +13,8 @@ class LayUIAssets extends AssetBundle
     ];
 
     public $css = [
-        "css/layui.css"
+        "css/layui.css",
+        "custom.css",
     ];
 
     public $depends = [

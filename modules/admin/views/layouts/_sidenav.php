@@ -10,6 +10,13 @@
             <dd><a href="/tag">TAG</a></dd>
         </dl>
     </li>
+    <li class="layui-nav-item layui-nav-itemed">
+        <a href="#">Category<span class="layui-nav-more"></span></a>
+        <dl class="layui-nav-child">
+            <dd><a href="/category">Category</a></dd>
+            <dd><a href="/category/control/create">Create</a></dd>
+        </dl>
+    </li>
 
     <li class="layui-nav-item layui-nav-itemed">
         <a href="#">Setting<span class="layui-nav-more"></span></a>

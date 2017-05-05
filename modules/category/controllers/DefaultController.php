@@ -2,17 +2,10 @@
 
 namespace modules\category\controllers;
 
-use yii\web\Controller;
+use modules\admin\base\AuthController;
 
-/**
- * Default controller for the `category` module
- */
-class DefaultController extends Controller
+class DefaultController extends AuthController
 {
-    /**
-     * Renders the index view for the module
-     * @return string
-     */
     public function actionIndex()
     {
         return $this->render('index');

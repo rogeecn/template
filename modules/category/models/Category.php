@@ -11,6 +11,7 @@ use Yii;
  * @property string $alias
  * @property string $path
  * @property integer $pid
+ * @property integer $order
  */
 class Category extends \common\base\ActiveRecord
 {
@@ -29,7 +30,7 @@ class Category extends \common\base\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['pid'], 'integer'],
+            [['pid','order'], 'integer'],
             [['name', 'alias'], 'string', 'max' => 120],
             [['path'], 'string', 'max' => 1200],
         ];

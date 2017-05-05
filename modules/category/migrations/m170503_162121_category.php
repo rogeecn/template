@@ -19,6 +19,7 @@ class m170503_162121_category extends Migration
             'alias' => $this->string(120)->notNull()->defaultValue(""),
             'path'  => $this->string(1200)->notNull()->defaultValue(""),
             'pid'   => $this->integer()->notNull()->defaultValue(0),
+            'order'   => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
     }
 

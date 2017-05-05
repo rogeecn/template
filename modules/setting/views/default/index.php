@@ -1,11 +1,6 @@
 <?php
 /** @var \yii\web\View $this */
 ?>
-    <style>
-        .layui-form-item .layui-input-inline{
-            width: 500px;
-        }
-    </style>
 <?php
 $form = \LayUI\components\ActiveForm::begin();
 

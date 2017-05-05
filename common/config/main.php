@@ -5,6 +5,16 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'jsOptions' => [
+                        'position' => \yii\web\View::POS_HEAD
+                    ],
+                ],
+            ],
+        ],
     ],
     'controllerMap' => [
         'migrate' => [

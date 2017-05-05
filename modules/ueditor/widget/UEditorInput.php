@@ -12,14 +12,15 @@ class UEditorInput extends InputWidget
     public function run() {
         UEditorAssets::register($this->getView());
 
+        $html = "";
         $id = self::getId();
         if ($this->hasModel()) {
-            echo Html::activeTextarea($this->model, $this->attribute, ['id' => $id]);
+            $html.= Html::activeTextarea($this->model, $this->attribute, ['id' => $id]);
         } else {
             if (empty($this->name)) {
                 throw new InvalidParamException("argument 'name' is required!");
             }
-            echo Html::textarea($this->name, $this->value, ['id' => $id]);
+            $html.= Html::textarea($this->name, $this->value, ['id' => $id]);
         }
 
         $js = <<<_UEDITOR_
@@ -27,5 +28,7 @@ class UEditorInput extends InputWidget
 _UEDITOR_;
 
         $this->getView()->registerJs($js);
+
+        return $html;
     }
 }

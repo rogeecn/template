@@ -1,7 +1,8 @@
 <?php
 
-namespace yii\bootstrap;
+namespace LayUI\components;
 
+use modules\ueditor\widget\UEditorInput;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -85,10 +86,20 @@ use yii\helpers\ArrayHelper;
  */
 class ActiveField extends \yii\widgets\ActiveField
 {
+    public $options = ['class' => 'layui-form-item'];
+
+    public $inputOptions = ['class' => 'layui-input'];
+    /**
+     * @var array the default options for the label tags. The parameter passed to [[label()]] will be
+     * merged with this property when rendering the label tag.
+     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     */
+    public $labelOptions = ['class' => 'layui-form-label'];
     /**
      * @var boolean whether to render [[checkboxList()]] and [[radioList()]] inline.
      */
-    public $inline = false;
+    public $inlineInputWrapperOption= ['class'=>"layui-input-inline"];
+    public $blockInputWrapperOption= ['class'=>"layui-input-block"];
     /**
      * @var string|null optional template to render the `{input}` placeholder content
      */
@@ -182,133 +193,77 @@ class ActiveField extends \yii\widgets\ActiveField
         return parent::render($content);
     }
 
-    /**
-     * @inheritdoc
-     */
+    public function editor($options=[])
+    {
+        $this->label(false);
+        $this->parts['{input}'] = Html::activeEditor($this->model,$this->attribute,$options);
+//        $this->parts['{input}'] =  Html::tag("div",$this->parts['{input}'],$this->blockInputWrapperOption);
+
+        return $this;
+    }
+
+    public function textInput($options = [])
+    {
+        parent::textInput($options);
+        $this->parts['{input}'] =  Html::tag("div",$this->parts['{input}'],$this->inlineInputWrapperOption);
+        return $this;
+    }
+
+    public function textarea($options = [])
+    {
+        Html::addCssClass($options,['layui-textarea']);
+        parent::textarea($options);
+        $this->parts['{input}'] =  Html::tag("div",$this->parts['{input}'],$this->inlineInputWrapperOption);
+        return $this;
+    }
+
     public function checkbox($options = [], $enclosedByLabel = true)
     {
-        if ($enclosedByLabel) {
-            if (!isset($options['template'])) {
-                $this->template = $this->form->layout === 'horizontal' ?
-                    $this->horizontalCheckboxTemplate : $this->checkboxTemplate;
-            } else {
-                $this->template = $options['template'];
-                unset($options['template']);
-            }
-            if (isset($options['label'])) {
-                $this->parts['{labelTitle}'] = $options['label'];
-            }
-            if ($this->form->layout === 'horizontal') {
-                Html::addCssClass($this->wrapperOptions, $this->horizontalCssClasses['offset']);
-            }
-            $this->labelOptions['class'] = null;
-        }
+        $this->addAriaAttributes($options);
+        $this->adjustLabelFor($options);
 
-        return parent::checkbox($options, false);
+        $options['lay-skin'] = "primary";
+        $this->parts['{input}'] = Html::activeCheckbox($this->model, $this->attribute, $options);
+        $this->parts['{input}'] =  Html::tag("div",$this->parts['{input}'],$this->inlineInputWrapperOption);
+
+        return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function radio($options = [], $enclosedByLabel = true)
     {
-        if ($enclosedByLabel) {
-            if (!isset($options['template'])) {
-                $this->template = $this->form->layout === 'horizontal' ?
-                    $this->horizontalRadioTemplate : $this->radioTemplate;
-            } else {
-                $this->template = $options['template'];
-                unset($options['template']);
-            }
-            if (isset($options['label'])) {
-                $this->parts['{labelTitle}'] = $options['label'];
-            }
-            if ($this->form->layout === 'horizontal') {
-                Html::addCssClass($this->wrapperOptions, $this->horizontalCssClasses['offset']);
-            }
-            $this->labelOptions['class'] = null;
-        }
+        $this->addAriaAttributes($options);
+        $this->adjustLabelFor($options);
+        $this->parts['{input}'] = Html::activeRadio($this->model, $this->attribute, $options);
+        $this->parts['{input}'] =  Html::tag("div",$this->parts['{input}'],$this->inlineInputWrapperOption);
 
-        return parent::radio($options, false);
+        return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function checkboxList($items, $options = [])
     {
-        if ($this->inline) {
-            if (!isset($options['template'])) {
-                $this->template = $this->inlineCheckboxListTemplate;
-            } else {
-                $this->template = $options['template'];
-                unset($options['template']);
-            }
-            if (!isset($options['itemOptions'])) {
-                $options['itemOptions'] = [
-                    'labelOptions' => ['class' => 'checkbox-inline'],
-                ];
-            }
-        }  elseif (!isset($options['item'])) {
-            $itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : [];
-            $options['item'] = function ($index, $label, $name, $checked, $value) use ($itemOptions) {
-                $options = array_merge(['label' => $label, 'value' => $value], $itemOptions);
-                return '<div class="checkbox">' . Html::checkbox($name, $checked, $options) . '</div>';
-            };
-        }
         parent::checkboxList($items, $options);
+        $this->parts['{input}'] = Html::activeCheckboxList($this->model, $this->attribute, $items, $options);
+        $this->parts['{input}'] =  Html::tag("div",$this->parts['{input}'],$this->inlineInputWrapperOption);
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
+    public function dropDownList($items, $options = [])
+    {
+        parent::dropDownList($items,$options);
+        $this->parts['{input}'] =  Html::tag("div",$this->parts['{input}'],$this->inlineInputWrapperOption);
+
+        return $this;
+    }
+
     public function radioList($items, $options = [])
     {
-        if ($this->inline) {
-            if (!isset($options['template'])) {
-                $this->template = $this->inlineRadioListTemplate;
-            } else {
-                $this->template = $options['template'];
-                unset($options['template']);
-            }
-            if (!isset($options['itemOptions'])) {
-                $options['itemOptions'] = [
-                    'labelOptions' => ['class' => 'radio-inline'],
-                ];
-            }
-        }  elseif (!isset($options['item'])) {
-            $itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : [];
-            $options['item'] = function ($index, $label, $name, $checked, $value) use ($itemOptions) {
-                $options = array_merge(['label' => $label, 'value' => $value], $itemOptions);
-                return '<div class="radio">' . Html::radio($name, $checked, $options) . '</div>';
-            };
-        }
         parent::radioList($items, $options);
+        $this->parts['{input}'] = Html::activeRadioList($this->model, $this->attribute, $items, $options);
+        $this->parts['{input}'] =  Html::tag("div",$this->parts['{input}'],$this->inlineInputWrapperOption);
         return $this;
     }
 
-    /**
-     * Renders Bootstrap static form control.
-     * @param array $options the tag options in terms of name-value pairs. These will be rendered as
-     * the attributes of the resulting tag. There are also a special options:
-     *
-     * - encode: boolean, whether value should be HTML-encoded or not.
-     *
-     * @return $this the field object itself
-     * @since 2.0.5
-     * @see http://getbootstrap.com/css/#forms-controls-static
-     */
-    public function staticControl($options = [])
-    {
-        $this->adjustLabelFor($options);
-        $this->parts['{input}'] = Html::activeStaticControl($this->model, $this->attribute, $options);
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function label($label = null, $options = [])
     {
         if (is_bool($label)) {
@@ -324,35 +279,19 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
-    /**
-     * @param boolean $value whether to render a inline list
-     * @return $this the field object itself
-     * Make sure you call this method before [[checkboxList()]] or [[radioList()]] to have any effect.
-     */
-    public function inline($value = true)
-    {
-        $this->inline = (bool) $value;
-        return $this;
-    }
 
-    /**
-     * @param array $instanceConfig the configuration passed to this instance's constructor
-     * @return array the layout specific default configuration for this instance
-     */
     protected function createLayoutConfig($instanceConfig)
     {
         $config = [
             'hintOptions' => [
-                'tag' => 'p',
-                'class' => 'help-block',
+                'tag' => 'div',
+                'class' => 'layui-form-mid layui-word-aux',
             ],
             'errorOptions' => [
-                'tag' => 'p',
-                'class' => 'help-block help-block-error',
+                'tag' => 'div',
+                'class' => 'layui-form-mid layui-word-aux',
             ],
-            'inputOptions' => [
-                'class' => 'form-control',
-            ],
+            'inputOptions' => $this->inputOptions,
         ];
 
         $layout = $instanceConfig['form']->layout;
@@ -407,4 +346,5 @@ class ActiveField extends \yii\widgets\ActiveField
             $this->parts['{labelTitle}'] = $label;
         }
     }
+
 }

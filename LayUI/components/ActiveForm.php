@@ -62,7 +62,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
      * @var string the default field class name when calling [[field()]] to create a new field.
      * @see fieldConfig
      */
-    public $fieldClass = 'yii\bootstrap\ActiveField';
+    public $fieldClass = 'LayUI\components\ActiveField';
     /**
      * @var array HTML attributes for the form tag. Default is `['role' => 'form']`.
      */
