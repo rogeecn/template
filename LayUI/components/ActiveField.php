@@ -197,7 +197,7 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         $this->label(false);
         $this->parts['{input}'] = Html::activeEditor($this->model,$this->attribute,$options);
-//        $this->parts['{input}'] =  Html::tag("div",$this->parts['{input}'],$this->blockInputWrapperOption);
+        $this->parts['{input}'] =  Html::tag("div",$this->parts['{input}'],['style'=>'margin-right: 5px']);
 
         return $this;
     }
