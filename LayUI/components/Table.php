@@ -13,6 +13,7 @@ class Table extends Widget
     public $dataProvider = [];
     public $options  = [];
     public $sortable = false;
+    public $orderInput = 'input';
 
     public function run() {
         $html = "\n";
@@ -41,7 +42,12 @@ $('#{$this->options['id']}').sortable({
   containerSelector: 'table',
   itemPath: '> tbody',
   itemSelector: 'tr',
-  placeholder: '<tr class="placeholder"></tr>'
+  placeholder: '<tr class="placeholder"></tr>',
+  onDrop: function(item,container,_super){
+    $(item).closest("table").find("tbody tr").each(function(index,item){
+        $(item).find("{$this->orderInput}").val(index)
+    });
+  }
 });
 _JS_;
             $sortablePlaceholder = <<<_CSS_

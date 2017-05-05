@@ -8,6 +8,7 @@ $form = \LayUI\components\ActiveForm::begin();
 echo \LayUI\components\Table::widget([
     'dataProvider' => $groupList,
     'sortable' => true,
+    'orderInput'=>'input',
     'columns'      => [
         [
             'label'=>'',

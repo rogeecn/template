@@ -10,10 +10,12 @@ use modules\setting\models\Setting;
 /** @var \yii\web\View $this */
 /** @var \modules\setting\models\Setting[] $groupList */
 
+
 $form = \LayUI\components\ActiveForm::begin();
 echo \LayUI\components\Table::widget([
     'dataProvider' => $columnList,
     'sortable'=>true,
+    'orderInput'=>'input',
     'columns'      => [
         [
             'label'=>'',
