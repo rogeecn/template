@@ -3,28 +3,22 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use common\widgets\Alert;
 use yii\helpers\Html;
 
 //\application\assets\AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html>
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title>admin</title>
     <?php $this->head() ?>
 </head>
-<body>
+<body style="padding: 10px;">
 <?php $this->beginBody() ?>
-
-<div class="container-fluid">
-    <?= Alert::widget() ?>
-    <?= $content ?>
-</div>
+<?= $content ?>
 <?php $this->endBody() ?>
 <script>
     var element = layui.element();

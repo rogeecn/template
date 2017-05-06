@@ -15,7 +15,7 @@
     <?php $this->head() ?>
     <style>
         .layui-body .layui-tab-item{
-            height:100%;
+            height: 99.5%;
         }
     </style>
 </head>
@@ -35,7 +35,7 @@
             <ul class="layui-tab-title site-demo-title">
                 <li class="layui-this">控制台</li>
             </ul>
-            <div class="layui-body layui-tab-content" style="left: 0px;top:40px;bottom: 0px">
+            <div class="layui-body layui-tab-content" style="padding:0px;left: 0px;top:40px;bottom: 0px">
                 <div class="layui-tab-item layui-show">
                     <p>Dashboard</p>
                 </div>
