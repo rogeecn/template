@@ -76,6 +76,7 @@ _CSS_;
         foreach ($this->colGroup as $colGroup) {
             if (!empty($colGroup)) {
                 $cols[] = Html::tag("col", "", ['width' => $colGroup]);
+                continue;
             }
             $cols[] = Html::tag("col", "");
         }

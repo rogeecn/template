@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Article;
 use LayUI\components\ActiveForm;
 use LayUI\components\GridView;
 use LayUI\components\Html;
@@ -9,9 +10,6 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\search\Article */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title                   = 'Articles';
-$this->params['breadcrumbs'][] = $this->title;
-
 ?>
 <?php $form = ActiveForm::begin([
     'action' => ['index'],
@@ -20,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= \LayUI\components\Table::widget([
     'dataProvider' => [1],
     'showHeader'   => false,
+    "colGroup"     => [120, 0, 0, 0, 120, 175],
     'columns'      => [
         [
             'value' => function () use ($searchModel) {
@@ -43,7 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'value' => function () use ($searchModel) {
-                return Html::activeTextInput($searchModel, "status", ['placeholder' => 'status']);
+                $list = Article::getStatusList();
+                return Html::activeDropDownList($searchModel, "status", $list, [
+                    'prompt'      => '所有',
+                    'placeholder' => 'status',
+                ]);
             },
         ],
         [
