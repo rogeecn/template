@@ -2,18 +2,19 @@
 
 namespace modules\article\controllers;
 
+use modules\article\models\ArticleSearch;
+use common\util\Request;
 use modules\admin\base\AuthController;
 
-/**
- * Default controller for the `article` module
- */
 class DefaultController extends AuthController
 {
-    /**
-     * Renders the index view for the module
-     * @return string
-     */
     public function actionIndex() {
-        return $this->render('index');
+        $searchModel = new ArticleSearch();
+        $dataProvider = $searchModel->search(Request::input());
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }

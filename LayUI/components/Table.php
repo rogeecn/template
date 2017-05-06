@@ -8,12 +8,13 @@ use yii\base\Widget;
 
 class Table extends Widget
 {
-    public $colGroup = [];
-    public $columns  = [];
+    public $colGroup     = [];
+    public $columns      = [];
     public $dataProvider = [];
-    public $options  = [];
-    public $sortable = false;
-    public $orderInput = 'input';
+    public $options      = [];
+    public $sortable     = false;
+    public $orderInput   = 'input';
+    public $showHeader   = true;
 
     public function run() {
         $html = "\n";
@@ -21,21 +22,23 @@ class Table extends Widget
             $html .= $this->renderTableColGroup();
         }
 
-        $html .= $this->renderTableHead()."\n";
-        $html .= $this->renderTableBody()."\n";
+        if ($this->showHeader) {
+            $html .= $this->renderTableHead() . "\n";
+        }
+        $html .= $this->renderTableBody() . "\n";
 
 
         if (empty($this->options['class'])) {
             $this->options['class'] = 'layui-table ';
         }
 
-        if (!isset($this->options['id'])){
-            $this->options['id']=self::getId();
+        if (!isset($this->options['id'])) {
+            $this->options['id'] = self::getId();
         }
 
-        if ($this->sortable){
+        if ($this->sortable) {
             SortableAssets::register($this->getView());
-            $sortableJS = <<<_JS_
+            $sortableJS          = <<<_JS_
 // Sortable rows
 $('#{$this->options['id']}').sortable({
   handle: 'i.drag-handle',
@@ -65,28 +68,28 @@ _CSS_;
             $this->getView()->registerCss($sortablePlaceholder);
         }
         LayUIAssets::register($this->getView());
-        return "\n".Html::tag('table', $html, $this->options);
+        return "\n" . Html::tag('table', $html, $this->options);
     }
 
     private function renderTableColGroup() {
         $cols = [];
         foreach ($this->colGroup as $colGroup) {
-            if (isset($colGroup['width'])) {
+            if (!empty($colGroup)) {
                 $cols[] = Html::tag("col", "", ['width' => $colGroup]);
             }
             $cols[] = Html::tag("col", "");
         }
 
-        return Html::tag("colgroup", implode("\n",$cols));
+        return Html::tag("colgroup", implode("\n", $cols));
     }
 
     private function renderTableHead() {
-        $cols=[];
+        $cols = [];
         foreach ($this->columns as $column) {
             list($key, $label) = $this->getKeyAndLabel($column);
 
-            if (is_array($column)){
-                if (!isset($column['options'])){
+            if (is_array($column)) {
+                if (!isset($column['options'])) {
                     $column['options'] = [];
                 }
                 $column['options']['data-key'] = $key;
@@ -94,7 +97,7 @@ _CSS_;
             $cols[] = Html::tag("td", $label, $column['options']);
         }
 
-        return Html::tag("thead", Html::tag("tr",implode("\n",$cols)));
+        return Html::tag("thead", Html::tag("tr", implode("\n", $cols)));
     }
 
     private function renderTableBody() {
@@ -112,10 +115,10 @@ _CSS_;
                 }
                 $cols[] = Html::tag("td", $value);
             }
-            $rows[] = Html::tag("tr", implode("\n",$cols));
+            $rows[] = Html::tag("tr", implode("\n", $cols));
         }
 
-        $tableBody = Html::tag("tbody", implode("\n",$rows));
+        $tableBody = Html::tag("tbody", implode("\n", $rows));
         return $tableBody;
     }
 

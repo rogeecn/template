@@ -4,10 +4,11 @@
     </li>
 
     <li class="layui-nav-item layui-nav-itemed">
-        <a href="#">Elements<span class="layui-nav-more"></span></a>
+        <a href="#">Article<span class="layui-nav-more"></span></a>
         <dl class="layui-nav-child">
-            <dd><a href="/admin/uploader/show">UEDITOR</a></dd>
-            <dd><a href="/tag">TAG</a></dd>
+            <dd><a href="/article">文章列表</a></dd>
+            <dd><a href="/article/create">添加文章</a></dd>
+            <dd><a href="/tag">TAG管理</a></dd>
         </dl>
     </li>
     <li class="layui-nav-item layui-nav-itemed">

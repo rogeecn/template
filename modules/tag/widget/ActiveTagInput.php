@@ -10,10 +10,6 @@ class ActiveTagInput extends InputWidget
 {
     public $tags = [];
 
-    public function init() {
-
-    }
-
     public function run() {
         $id = self::getId(true);
         TagAssets::register($this->getView());

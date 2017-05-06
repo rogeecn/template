@@ -19,6 +19,14 @@ class Html extends BaseHtml
         return parent::submitButton($content, $options);
     }
 
+    public static function resetButton($content = '重置', $options = []) {
+        if (!isset($options['class'])) {
+            self::addCssClass($options, "layui-btn layui-btn-primary");
+        }
+
+        return parent::resetButton($content, $options);
+    }
+
     public static function buttonGroup($buttons = []) {
         return Html::tag("div", implode("\n", $buttons), ['class' => 'layui-btn-group']);
     }

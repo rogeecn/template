@@ -1,6 +1,7 @@
 <?php
 namespace LayUI\components;
 
+use LayUI\LayUIAssets;
 use Yii;
 use yii\base\InvalidConfigException;
 
@@ -84,6 +85,8 @@ class ActiveForm extends \yii\widgets\ActiveForm
         if ($this->layout !== 'default') {
             Html::addCssClass($this->options, 'layui-form layui-form-' . $this->layout);
         }
+
+        LayUIAssets::register($this->getView());
         parent::init();
     }
 
