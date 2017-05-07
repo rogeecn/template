@@ -10,7 +10,7 @@ use modules\category\models\Category;
 $form = ActiveForm::begin();
 
 
-echo $form->field($model,"pid")->dropdownList($model->getFlatIndentList(true));
+echo $form->field($model,"pid")->dropdownList(Category::getFlatIndentList(true));
 echo $form->field($model,"name")->textInput();
 echo $form->field($model,"alias")->textInput();
 

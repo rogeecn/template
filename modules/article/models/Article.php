@@ -45,6 +45,7 @@ class Article extends \common\base\ActiveRecord
             'id'         => 'ID',
             'title'      => 'Title',
             'user_id'    => 'User ID',
+            'category_id'    => 'Category',
             'type'       => 'Type',
             'index_show' => 'Index Show',
             'created_at' => 'Created At',

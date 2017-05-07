@@ -80,7 +80,7 @@ class Category extends \common\base\ActiveRecord
         }
     }
 
-    public function getFlatIndentList($showRoot = false) {
+    public static function getFlatIndentList($showRoot = false) {
         $list = self::getIndentList();
 
         $items = [];
