@@ -5,7 +5,7 @@ use LayUI\components\Html;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\search\Tag */
+/* @var $searchModel \modules\tag\models\Tag */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title                   = 'Tags';

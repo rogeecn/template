@@ -7,6 +7,7 @@ namespace modules\article\models;
  *
  * @property integer $id
  * @property string  $title
+ * @property integer $category_id
  * @property integer $user_id
  * @property integer $type
  * @property integer $index_show
@@ -29,9 +30,10 @@ class Article extends \common\base\ActiveRecord
     public function rules() {
         return [
             [['title', 'user_id', 'type', 'index_show'], 'required'],
-            [['user_id', 'status', 'type', 'index_show', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'category_id', 'status', 'type', 'index_show', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 240],
             [['status'], 'default', 'value' => self::ST_ENABLE],
+            ['category_id', 'default', 'value' => 0],
         ];
     }
 

@@ -1,13 +1,13 @@
 <?php
 
-use common\models\Article;
+use modules\article\models\Article;
 use LayUI\components\ActiveForm;
 use LayUI\components\GridView;
 use LayUI\components\Html;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\search\Article */
+/* @var $searchModel Article */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 ?>
