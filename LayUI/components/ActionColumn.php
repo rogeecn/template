@@ -4,6 +4,7 @@ namespace LayUI\components;
 
 class ActionColumn extends \yii\grid\ActionColumn
 {
+    public $template = '{update} {delete}';
     protected function initDefaultButtons() {
         $this->initDefaultButton('update', '编辑');
         $this->initDefaultButton('delete', '删除', [
