@@ -27,6 +27,14 @@ class Html extends BaseHtml
         return parent::resetButton($content, $options);
     }
 
+    public static function resetButtonLink($content = '重置',$link=[], $options = []) {
+        if (!isset($options['class'])) {
+            self::addCssClass($options, "layui-btn layui-btn-primary");
+        }
+
+        return Html::a($content,$link,$options);
+    }
+
     public static function buttonGroup($buttons = []) {
         return Html::tag("div", implode("\n", $buttons), ['class' => 'layui-btn-group']);
     }
@@ -144,8 +152,8 @@ class Html extends BaseHtml
     {
         $name = isset($options['name']) ? $options['name'] : self::getInputName($model, $attribute);
         $value = self::getAttributeValue($model, $attribute);
-        $options['title'] = 'Helo';//$value;
 
+        $options['title'] = isset($options['title']) ? $options['title'] : $name;
         if (!array_key_exists('value', $options)) {
             $options['value'] = '1';
         }

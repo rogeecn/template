@@ -10,7 +10,7 @@ class DefaultController extends AuthController
 {
     public function actionIndex() {
         $searchModel = new ArticleSearch();
-        $dataProvider = $searchModel->search(Request::input());
+        $dataProvider = $searchModel->search(Request::get());
 
         return $this->render('index', [
             'searchModel' => $searchModel,

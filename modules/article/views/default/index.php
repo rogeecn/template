@@ -1,5 +1,6 @@
 <?php
 
+use modules\category\models\Category;
 use modules\article\models\Article;
 use LayUI\components\ActiveForm;
 use LayUI\components\GridView;
@@ -18,7 +19,7 @@ use yii\widgets\Pjax;
 <?= \LayUI\components\Table::widget([
     'dataProvider' => [1],
     'showHeader'   => false,
-    "colGroup"     => [120, 0, 0, 0, 120, 175],
+    "colGroup"     => [120, 0, 0, 0, 120,120, 175],
     'columns'      => [
         [
             'value' => function () use ($searchModel) {
@@ -37,7 +38,17 @@ use yii\widgets\Pjax;
         ],
         [
             'value' => function () use ($searchModel) {
-                return Html::activeTextInput($searchModel, "index_show", ['placeholder' => 'index_show']);
+                return Html::activeDropDownList($searchModel, "index_show", [1=>'是',0=>'否'],[
+                    'prompt' => '首页展示'
+                ]);
+            },
+        ],
+        [
+            'value' => function () use ($searchModel) {
+                $list = Category::getFlatIndentList();
+                return Html::activeDropDownList($searchModel, "category_id", $list, [
+                    'prompt'      => '所有',
+                ]);
             },
         ],
         [
@@ -45,14 +56,13 @@ use yii\widgets\Pjax;
                 $list = Article::getStatusList();
                 return Html::activeDropDownList($searchModel, "status", $list, [
                     'prompt'      => '所有',
-                    'placeholder' => 'status',
                 ]);
             },
         ],
         [
             'value' => function () use ($searchModel) {
                 $submitBtn = Html::submitButton();
-                $resetBtn  = Html::resetButton();
+                $resetBtn  = Html::resetButton("重置",['default/index']);
                 return $submitBtn . $resetBtn;
             },
         ],
@@ -65,12 +75,22 @@ use yii\widgets\Pjax;
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'columns'      => [
-        ['class' => 'yii\grid\SerialColumn'],
         'id',
         'title',
+        [
+            'attribute'=>'category_id',
+            'value'=>function($data){
+                return Category::getName($data->category_id);
+            },
+        ],
         'user_id',
         'type',
-        'index_show',
+        [
+            'attribute'=>'index_show',
+            'value'=>function($data){
+                return $data->index_show == 1?'是':'否';
+            },
+        ],
         'status',
         'created_at:datetime',
         'created_at:datetime',

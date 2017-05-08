@@ -17,4 +17,9 @@ class UserInfo
     {
         return self::Instance()->logout(true);
     }
+
+    public static function getID()
+    {
+        return self::Instance()->getId();
+    }
 }

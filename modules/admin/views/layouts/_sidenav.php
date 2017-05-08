@@ -7,7 +7,7 @@
         <a href="#">Article<span class="layui-nav-more"></span></a>
         <dl class="layui-nav-child">
             <dd><a href="/article">文章列表</a></dd>
-            <dd><a href="/article/create">添加文章</a></dd>
+            <dd><a href="/article/select-type">添加文章</a></dd>
             <dd><a href="/tag">TAG管理</a></dd>
         </dl>
     </li>

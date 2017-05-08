@@ -1,7 +1,6 @@
 <?php
 /**
  * 封装请求参数获取
- * User: yanghao-c
  */
 namespace common\util;
 class Request
@@ -28,30 +27,12 @@ class Request
         return self::get($param, $default);
     }
 
-    public static function input_urldecode($param = null, $default = null) {
-        $val = self::cookie($param, null);
-        if ($val != null) {
-            return urldecode(self::cookie($param, $default));
-        }
-
-        $val = self::post($param, null);
-        if ($val != null) {
-            return urldecode(self::post($param, $default));
-        }
-
-        return urldecode(self::get($param, $default));
-    }
-
     public static function get($param = null, $default = null) {
         return self::getRequest()->get($param, $default);
     }
 
     public static function post($param = null, $default = null) {
         return self::getRequest()->post($param, $default);
-    }
-
-    public static function params() {
-        return self::getRequest()->getParams();
     }
 
     public static function isAjax() {

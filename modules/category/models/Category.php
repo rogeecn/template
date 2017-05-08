@@ -25,7 +25,7 @@ class Category extends \common\base\ActiveRecord
      */
     public function rules() {
         return [
-            [['name'], 'required'],
+            [['name','alias'], 'required'],
             [['pid', 'order'], 'integer'],
             [['name', 'alias'], 'string', 'max' => 120],
             [['path'], 'string', 'max' => 1200],
@@ -91,5 +91,10 @@ class Category extends \common\base\ActiveRecord
         }
         self::formatFlatIndentList($list, $items, $level);
         return $items;
+    }
+
+    public static function getName($categoryID)
+    {
+        return self::findOne($categoryID)->name;
     }
 }

@@ -2,6 +2,10 @@
 
 namespace modules\article\models;
 
+
+use common\extend\UserInfo;
+use yii\behaviors\TimestampBehavior;
+
 /**
  * This is the model class for table "article".
  *
@@ -24,16 +28,24 @@ class Article extends \common\base\ActiveRecord
         return 'article';
     }
 
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
     /**
      * @inheritdoc
      */
     public function rules() {
         return [
-            [['title', 'user_id', 'type', 'index_show'], 'required'],
-            [['user_id', 'category_id', 'status', 'type', 'index_show', 'created_at', 'updated_at'], 'integer'],
+            [['title', 'type','category_id'], 'required'],
+            [['user_id', 'category_id','status', 'type', 'index_show', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 240],
             [['status'], 'default', 'value' => self::ST_ENABLE],
             ['category_id', 'default', 'value' => 0],
+            [['index_show'], 'default', 'value' => 0],
         ];
     }
 
@@ -51,5 +63,11 @@ class Article extends \common\base\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        $this->user_id = UserInfo::getID();
+        return parent::beforeSave($insert);
     }
 }
