@@ -8,9 +8,9 @@ use LayUI\components\Html;
 
 $titleStyle = ['style' => 'font-size: 18px;color: #01aaed'];
 ?>
-<?php foreach ($typeList as $typeAlias => $typeInfo): ?>
+<?php foreach ($typeList as $typeInfo): ?>
     <blockquote class="layui-elem-quote" style="margin-top: 20px;">
-        <h1><?= Html::a($typeInfo['label'], ['/article/create', 'type' => $typeAlias], $titleStyle) ?></h1>
+        <h1><?= Html::a($typeInfo['name'], ['/article/create', 'type' => $typeInfo['id']], $titleStyle) ?></h1>
         <hr>
         <p><?= $typeInfo['description'] ?></p>
     </blockquote>

@@ -8,7 +8,8 @@
         <dl class="layui-nav-child">
             <dd><a href="/article/manage">文章列表</a></dd>
             <dd><a href="/article/type/list">添加文章</a></dd>
-            <dd><a href="/tag">TAG管理</a></dd>
+            <dd><a href="/tag">标签管理</a></dd>
+            <dd><a href="/article/type/manage">文章类型</a></dd>
         </dl>
     </li>
     <li class="layui-nav-item layui-nav-itemed">
