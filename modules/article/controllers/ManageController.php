@@ -6,7 +6,7 @@ use modules\article\models\ArticleSearch;
 use common\util\Request;
 use modules\admin\base\AuthController;
 
-class DefaultController extends AuthController
+class ManageController extends AuthController
 {
     public function actionIndex() {
         $searchModel = new ArticleSearch();

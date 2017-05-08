@@ -1,10 +1,10 @@
 <?php
 
-namespace modules\article\controllers;
+namespace modules\article\controllers\type;
 
 use modules\admin\base\AuthController;
 
-class SelectTypeController extends AuthController
+class ListController extends AuthController
 {
     public function actionIndex() {
         $typeList = [
@@ -22,3 +22,4 @@ class SelectTypeController extends AuthController
         ]);
     }
 }
+

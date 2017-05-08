@@ -13,7 +13,7 @@ class CreateController extends AuthController
         $model->type = Request::input("type");
 
         if (Request::isPost() && $model->load(Request::post())&&$model->save()){
-            return $this->redirect("/article");
+            return $this->redirect("/article/manage");
         }
 
         return $this->render('index', [

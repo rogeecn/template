@@ -6,8 +6,8 @@
     <li class="layui-nav-item layui-nav-itemed">
         <a href="#">Article<span class="layui-nav-more"></span></a>
         <dl class="layui-nav-child">
-            <dd><a href="/article">文章列表</a></dd>
-            <dd><a href="/article/select-type">添加文章</a></dd>
+            <dd><a href="/article/manage">文章列表</a></dd>
+            <dd><a href="/article/type/list">添加文章</a></dd>
             <dd><a href="/tag">TAG管理</a></dd>
         </dl>
     </li>

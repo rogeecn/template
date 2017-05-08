@@ -3,12 +3,19 @@ namespace LayUI\components;
 
 use modules\ueditor\widget\UEditorInput;
 use yii\helpers\BaseHtml;
+use yii\helpers\Url;
 
 class Html extends BaseHtml
 {
-    public static function activeEditor($model, $attribute, $options = [])
-    {
-        return UEditorInput::widget(['model'=>$model,'attribute'=>$attribute,'options'=>$options]);
+    public static function a($text, $url = null, $options = []) {
+        if ($url !== null) {
+            $options['href'] = Url::to($url, true);
+        }
+        return self::tag('a', $text, $options);
+    }
+
+    public static function activeEditor($model, $attribute, $options = []) {
+        return UEditorInput::widget(['model' => $model, 'attribute' => $attribute, 'options' => $options]);
     }
 
     public static function submitButton($content = '提交', $options = []) {
@@ -27,12 +34,12 @@ class Html extends BaseHtml
         return parent::resetButton($content, $options);
     }
 
-    public static function resetButtonLink($content = '重置',$link=[], $options = []) {
+    public static function resetButtonLink($content = '重置', $link = [], $options = []) {
         if (!isset($options['class'])) {
             self::addCssClass($options, "layui-btn layui-btn-primary");
         }
 
-        return Html::a($content,$link,$options);
+        return Html::a($content, $link, $options);
     }
 
     public static function buttonGroup($buttons = []) {
@@ -49,12 +56,11 @@ class Html extends BaseHtml
         return parent::textInput($name, $value, $options);
     }
 
-    public static function radio($name, $checked = false, $options = [])
-    {
+    public static function radio($name, $checked = false, $options = []) {
         return self::booleanInput('radio', $name, $checked, $options);
     }
-    public static function checkbox($name, $checked = false, $options = [])
-    {
+
+    public static function checkbox($name, $checked = false, $options = []) {
         return self::booleanInput('checkbox', $name, $checked, $options);
     }
 
@@ -108,35 +114,31 @@ class Html extends BaseHtml
         return implode("\n", $itemList);
     }
 
-    public static function activeRadio($model, $attribute, $options = [])
-    {
+    public static function activeRadio($model, $attribute, $options = []) {
         return self::activeBooleanInput('radio', $model, $attribute, $options);
     }
 
-    public static function activeCheckbox($model, $attribute, $options = [])
-    {
+    public static function activeCheckbox($model, $attribute, $options = []) {
         return self::activeBooleanInput('checkbox', $model, $attribute, $options);
     }
 
 
-    public static function activeRadioList($model, $attribute, $items, $options = []){
+    public static function activeRadioList($model, $attribute, $items, $options = []) {
         return self::activeListInput('radioList', $model, $attribute, $items, $options);
     }
 
-    public static function activeCheckboxList($model, $attribute, $items, $options = []){
+    public static function activeCheckboxList($model, $attribute, $items, $options = []) {
         return self::activeListInput('checkboxList', $model, $attribute, $items, $options);
     }
 
-    public static function icon($icon,$options=[])
-    {
-        self::addCssClass($options,['class'=>'layui-icon']);
-        return self::tag("i",$icon,$options);
+    public static function icon($icon, $options = []) {
+        self::addCssClass($options, ['class' => 'layui-icon']);
+        return self::tag("i", $icon, $options);
     }
 
 
-    protected static function activeListInput($type, $model, $attribute, $items, $options = [])
-    {
-        $name = isset($options['name']) ? $options['name'] : self::getInputName($model, $attribute);
+    protected static function activeListInput($type, $model, $attribute, $items, $options = []) {
+        $name      = isset($options['name']) ? $options['name'] : self::getInputName($model, $attribute);
         $selection = isset($options['value']) ? $options['value'] : self::getAttributeValue($model, $attribute);
         if (!array_key_exists('unselect', $options)) {
             $options['unselect'] = '';
@@ -148,9 +150,8 @@ class Html extends BaseHtml
         return self::$type($name, $selection, $items, $options);
     }
 
-    protected static function activeBooleanInput($type, $model, $attribute, $options = [])
-    {
-        $name = isset($options['name']) ? $options['name'] : self::getInputName($model, $attribute);
+    protected static function activeBooleanInput($type, $model, $attribute, $options = []) {
+        $name  = isset($options['name']) ? $options['name'] : self::getInputName($model, $attribute);
         $value = self::getAttributeValue($model, $attribute);
 
         $options['title'] = isset($options['title']) ? $options['title'] : $name;
@@ -173,10 +174,9 @@ class Html extends BaseHtml
         return self::$type($name, $checked, $options);
     }
 
-    protected static function booleanInput($type, $name, $checked = false, $options = [])
-    {
-        $options['checked'] = (bool) $checked;
-        $value = array_key_exists('value', $options) ? $options['value'] : '1';
+    protected static function booleanInput($type, $name, $checked = false, $options = []) {
+        $options['checked'] = (bool)$checked;
+        $value              = array_key_exists('value', $options) ? $options['value'] : '1';
         if (isset($options['uncheck'])) {
             // add a hidden field so that if the checkbox is not selected, it still submits a value
             $hidden = self::hiddenInput($name, $options['uncheck']);

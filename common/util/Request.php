@@ -31,6 +31,10 @@ class Request
         return self::getRequest()->get($param, $default);
     }
 
+    public static function queryParams() {
+        return self::getRequest()->getQueryParams();
+    }
+
     public static function post($param = null, $default = null) {
         return self::getRequest()->post($param, $default);
     }
