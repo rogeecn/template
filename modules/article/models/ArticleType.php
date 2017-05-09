@@ -1,6 +1,7 @@
 <?php
 
 namespace modules\article\models;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "article_type".
@@ -45,4 +46,15 @@ class ArticleType extends \common\base\ActiveRecord
         ];
     }
 
+    public static function getList()
+    {
+        $typeList = ArticleType::find()->orderBy(['order'=>SORT_ASC])->asArray()->all();
+        return ArrayHelper::map($typeList,"id","name");
+    }
+
+    public static function getTypeName($typeID)
+    {
+        $list = self::getList();
+        return $list[$typeID];
+    }
 }

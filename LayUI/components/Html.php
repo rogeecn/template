@@ -26,6 +26,18 @@ class Html extends BaseHtml
         return parent::submitButton($content, $options);
     }
 
+    public static function linkButton($text, $url = null, $options = []) {
+        if ($url !== null) {
+            $options['href'] = Url::to($url, true);
+        }
+
+        $options['class'] = "layui-btn ";
+        if (isset($options['color'])){
+            self::addCssClass($options,"layui-".$options['color']);
+        }
+        return self::tag('a', $text, $options);
+    }
+
     public static function resetButton($content = '重置', $options = []) {
         if (!isset($options['class'])) {
             self::addCssClass($options, "layui-btn layui-btn-primary");

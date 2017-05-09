@@ -16,9 +16,9 @@ return [
             ],
         ],
         'formatter' => [
-            'dateFormat'     => 'yy-MM-dd',
-            'datetimeFormat' => 'yy/MM/dd HH:i:s',
-            'timeFormat'     => 'H:i:s',
+            'dateFormat'     => 'php:y/m/d',
+            'datetimeFormat' => 'php:y/m/d H:i',
+            'timeFormat'     => 'php:H:i:s',
         ],
     ],
     'controllerMap' => [

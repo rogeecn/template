@@ -8,6 +8,12 @@ use LayUI\components\Html;
 
 $titleStyle = ['style' => 'font-size: 18px;color: #01aaed'];
 ?>
+<?php if (empty($typeList)):?>
+    <blockquote class="layui-elem-quote" style="margin-top: 20px;">
+        <p>还没有设置文章类型</p>
+    </blockquote>
+<?php endif;?>
+
 <?php foreach ($typeList as $typeInfo): ?>
     <blockquote class="layui-elem-quote" style="margin-top: 20px;">
         <h1><?= Html::a($typeInfo['name'], ['/article/create', 'type' => $typeInfo['id']], $titleStyle) ?></h1>
