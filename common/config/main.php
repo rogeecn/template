@@ -15,6 +15,11 @@ return [
                 ],
             ],
         ],
+        'formatter' => [
+            'dateFormat'     => 'yy-MM-dd',
+            'datetimeFormat' => 'yy/MM/dd HH:i:s',
+            'timeFormat'     => 'H:i:s',
+        ],
     ],
     'controllerMap' => [
         'migrate' => [

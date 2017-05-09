@@ -62,6 +62,8 @@
 
             if ($(".main-tab-container .layui-tab-title li[lay-id='"+link+"']").length > 0){
                 element.tabChange('tab-container', link);
+
+                $(".layui-body .layui-show").find("iframe").attr("src",link);
                 return false;
             }
 

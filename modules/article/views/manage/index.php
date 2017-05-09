@@ -95,7 +95,9 @@ use yii\widgets\Pjax;
         'created_at:datetime',
         'created_at:datetime',
 
-        ['class' => 'yii\grid\ActionColumn'],
+        [
+            'class' => \LayUI\components\ActionColumn::className(),
+        ],
     ],
 ]); ?>
 <?php Pjax::end(); ?>
