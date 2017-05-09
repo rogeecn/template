@@ -94,8 +94,10 @@ _CSS_;
                     $column['options'] = [];
                 }
                 $column['options']['data-key'] = $key;
+                $cols[] = Html::tag("td", $label, $column['options']);
+                continue;
             }
-            $cols[] = Html::tag("td", $label, $column['options']);
+            $cols[] = Html::tag("td", $label);
         }
 
         return Html::tag("thead", Html::tag("tr", implode("\n", $cols)));
@@ -143,6 +145,9 @@ _CSS_;
             return [null, $column['label']];
         }
 
-        return [$column['key'], ucfirst($column['key'])];
+        if (isset($column['key'])){
+            return [$column['key'], ucfirst($column['key'])];
+        }
+        return [null,null];
     }
 }

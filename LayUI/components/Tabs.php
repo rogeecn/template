@@ -80,6 +80,9 @@ class Tabs extends Widget
         parent::init();
         Html::addCssClass($this->options, ['layui-tab', $this->navType]);
         Html::addCssClass($this->headerOptions, ['layui-tab-title']);
+        if (!isset($this->options['id'])){
+            $this->options['id'] = "tab-id-";
+        }
     }
 
     /**

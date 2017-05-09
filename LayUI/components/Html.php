@@ -47,7 +47,12 @@ class Html extends BaseHtml
     }
 
     public static function activeTextInput($model, $attribute, $options = []) {
-        $options['class'] = 'layui-input ' . $options['class'];
+        if (isset($options['class'])){
+            $options['class'] = 'layui-input ' . $options['class'];
+        }else{
+            $options['class'] = 'layui-input';
+        }
+
         return parent::activeInput('text', $model, $attribute, $options);
     }
 
