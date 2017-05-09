@@ -46,7 +46,7 @@ echo \LayUI\components\Html::endTag("div");
             'template' => '{column} {update} {delete}',
             'buttons'  => [
                 'column' => function ($url, $model, $key) {
-                    return Html::a('[字段编辑]', ['article/type/field']);
+                    return Html::a('[字段编辑]', ['/article/field/manage','type'=>$model->id]);
                 },
             ],
         ],

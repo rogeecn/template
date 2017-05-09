@@ -75,14 +75,12 @@ class ArticleField extends \common\base\ActiveRecord
             if (!is_dir($path)) {
                 continue;
             }
-            echo $path."<hr/>";
 
             $subHandle = opendir($path);
             if ($subHandle === false) {
                 continue;
             }
             while (($subFile = readdir($subHandle)) !== false) {
-                echo $subFile."<hr/>";
                 if ($subFile === '.' || $subFile === '..') {
                     continue;
                 }
@@ -100,12 +98,22 @@ class ArticleField extends \common\base\ActiveRecord
     }
 
     public static function fieldList() {
-        $fieldDirs = self::fieldClasses();
-        return $fieldDirs;
+        $fieldClasses = self::fieldClasses();
 
-        $list = [];
-        foreach ($fieldDirs as $dir) {
-
+        $fields = [];
+        foreach ($fieldClasses as $classPath) {
+            $fields[] = self::getFieldClassInfo($classPath);
         }
+        return $fields;
+    }
+
+    public static function getFieldClassInfo($fieldClass)
+    {
+        return call_user_func_array([(new $fieldClass()),"getInfo"],[]);
+    }
+
+    public static function getTypeFieldList($type)
+    {
+        return self::find()->where(['type_id'=>$type])->orderBy(['order'=>SORT_ASC])->asArray()->all();
     }
 }
