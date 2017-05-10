@@ -53,7 +53,7 @@ class CreateController extends AuthController
 
 
             return $this->renderSuccess(null, [
-                Html::linkButton("继续添加", ['/article/create', 'type' => $model->type]),
+                Html::linkButton("继续添加", ['/article/create', 'type' => $articleModel->type]),
             ]);
         }
 
