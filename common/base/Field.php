@@ -3,7 +3,6 @@ namespace common\base;
 
 
 use yii\base\Widget;
-use yii\widgets\InputWidget;
 
 class Field extends Widget
 {
@@ -11,6 +10,7 @@ class Field extends Widget
         return [
             'class' => self::className(),
             'name' => $this->fieldName,
+            'table' => $this->defaultTable,
             'description' => $this->fieldDescription,
         ];
     }

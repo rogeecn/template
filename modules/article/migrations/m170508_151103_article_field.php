@@ -18,6 +18,7 @@ class m170508_151103_article_field extends Migration
             'type_id'     => $this->integer()->notNull(),
             'label'       => $this->string(255)->notNull(),
             'name'        => $this->string(255)->notNull(),
+            'table'       => $this->string(255)->notNull(),
             'options'     => $this->text()->notNull(),
             'description' => $this->string(255)->notNull(),
             'class'       => $this->string(255)->notNull(),

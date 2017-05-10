@@ -9,48 +9,54 @@ use modules\category\models\Category;
 /* @var $allFields array */
 /* @var $typeFields array */
 ?>
+<?php $form = ActiveForm::begin()?>
+<div class="text-right">
+    <?=Html::submitButton()?>
+    <?=Html::linkButton("添加字段",['/article/field/attach','type'=>$type])?>
+</div>
 
-<table width="100%">
-    <tbody>
-    <tr>
-        <td width="60%" style="vertical-align: text-top;">
-            <?=\LayUI\components\Table::widget([
-                'dataProvider'=>$typeFields,
-                'columns'=>[
-                    "label",
-                    "name",
-                    "description",
-                    "options",
-                    [
-                        'value'=>function($data){
-                           $editBtn =  Html::a("[编辑] ",["/article/field/manage/update",'id'=>$data['id']]);
-                            $deleteBtn = Html::a("[删除]",["/article/field/manage/delete",'id'=>$data['id']]);
-                            return $editBtn.$deleteBtn;
-                        }
-                    ],
-                ]
-            ])
-            ?>
-
-        </td>
-
-        <td width="5%"></td>
-
-        <td width="35%" style="vertical-align: text-top;">
-            <?=\LayUI\components\Table::widget([
-                'dataProvider'=>$allFields,
-                'columns'=>[
-                    "name",
-                    "class",
-                    [
-                        'value'=>function($data) use ($type){
-                            return Html::a("添加",["/article/field/manage/create",'class'=>$data['class'],'type'=>$type]);
-                        }
-                    ]
-                ]
-            ])
-            ?>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<?=\LayUI\components\Table::widget([
+    'dataProvider'=>$typeFields,
+    'sortable'=>true,
+    'orderInput'=>'input',
+    'columns'      => [
+        [
+            'label'=>'',
+            'options'=>[
+                'style'=>'width: 10px;',
+            ],
+            'value'=>function($data){
+                return Html::icon("&#xe649;",['class'=>'drag-handle']);
+            }
+        ],
+        "label",
+        "name",
+        "table",
+        "description",
+        "options",
+        [
+            'key'   => 'order',
+            'options'=>[
+                'style'=>'width: 80px;',
+            ],
+            'value' => function ($data) {
+                $orderAttr = [
+                    'data-old'     => $data['order'],
+                    'data-id'      => $data['id'],
+                    'name'         => sprintf("order[%d]", $data['id']),
+                    'autocomplete' => 'off',
+                ];
+                return Html::textInput($orderAttr['name'], $data['order'],$orderAttr);
+            },
+        ],
+        [
+            'value'=>function($data){
+               $editBtn =  Html::a("[编辑] ",["/article/field/manage/update",'id'=>$data['id']]);
+                $deleteBtn = Html::a("[删除]",["/article/field/manage/delete",'id'=>$data['id']]);
+                return $editBtn.$deleteBtn;
+            }
+        ],
+    ]
+])
+?>
+<?php ActiveForm::end()?>
