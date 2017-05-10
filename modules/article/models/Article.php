@@ -28,6 +28,11 @@ class Article extends \common\base\ActiveRecord
         return 'article';
     }
 
+    public function formName()
+    {
+        return "";
+    }
+
     public function behaviors()
     {
         return [

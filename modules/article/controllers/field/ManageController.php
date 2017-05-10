@@ -63,6 +63,31 @@ class ManageController extends AuthController
         return $this->renderSuccess($model->getErrors());
     }
 
+    public function actionUpdate($id)
+    {
+        $model = ArticleField::findOne($id);
+        if (Request::isPost()){
+            $info = Request::input("info");
+
+            $model->setAttributes([
+                'name' => $info['name'],
+                'table' => $info['table'],
+                'description' => $info['description'],
+                'label' => $info['label'],
+                'options' => $info['options'],
+            ]);
+
+            if ($model->save()) {
+                return $this->renderSuccess(sprintf("字段 [%s] 编辑成功", $info['name']), [
+                    Html::linkButton("继续修改", ['/article/field/manage/update', 'id' => $id]),
+                ]);
+            }
+        }
+
+
+        return $this->render('update',$model->toArray());
+    }
+
     public function actionDelete($id)
     {
         $model   = ArticleField::findOne($id);

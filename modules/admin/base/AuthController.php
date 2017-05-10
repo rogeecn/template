@@ -23,6 +23,9 @@ class AuthController extends WebController
 
     public function renderFailed($reasons = [])
     {
+        if (is_string($reasons)){
+            $reasons = "Err: ".$reasons;
+        }
         return $this->render("@modules/admin/views/common/fail",[
             'reasons'=>$reasons,
         ]);

@@ -16,5 +16,11 @@ use modules\category\models\Category;
 <?= $form->field($model, "title")->textInput() ?>
 <?= $form->field($model, "category_id")->dropDownList(Category::getFlatIndentList()) ?>
 <?= $form->field($model, "index_show")->label("&nbsp")->checkbox(['title'=>'首页展示']) ?>
+<?php  foreach ($typeFields as $typeField):?>
+    <?=$typeField['class']::widget([
+        'action'=>'renderField',
+        'config'=>$typeField
+    ])?>
+<?php endforeach;?>
 <?= Html::submitWrapper(Html::submitButton()) ?>
 <?php ActiveForm::end() ?>
