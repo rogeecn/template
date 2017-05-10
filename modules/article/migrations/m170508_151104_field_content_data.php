@@ -3,9 +3,9 @@ namespace modules\article\migrations;
 
 use yii\db\Migration;
 
-class m170502_040814_article_data extends Migration
+class m170508_151104_field_content_data extends Migration
 {
-    public $_table = "{{%article_data}}";
+    public $_table = "{{%field_content_data}}";
 
     public function safeUp() {
         $tableOptions = null;
@@ -15,7 +15,6 @@ class m170502_040814_article_data extends Migration
 
         $this->createTable($this->_table, [
             'id'          => $this->primaryKey(),
-            'show_image'  => $this->string(255)->notNull()->defaultValue(""),
             'description' => $this->string(1200)->notNull()->defaultValue(""),
             'content'     => $this->text()->notNull(),
         ], $tableOptions);

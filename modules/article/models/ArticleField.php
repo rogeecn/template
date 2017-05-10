@@ -2,6 +2,7 @@
 
 namespace modules\article\models;
 
+use fields\ueditor\UEditorField;
 use yii\helpers\StringHelper;
 
 /**
@@ -31,10 +32,10 @@ class ArticleField extends \common\base\ActiveRecord
      */
     public function rules() {
         return [
-            [['type_id','table','label', 'name', 'options', 'description', 'class'], 'required'],
+            [['type_id', 'table', 'label', 'name', 'options', 'description', 'class'], 'required'],
             [['type_id', 'order'], 'integer'],
             [['options'], 'string'],
-            [['label', 'name', 'table','description', 'class'], 'string', 'max' => 255],
+            [['label', 'name', 'table', 'description', 'class'], 'string', 'max' => 255],
             ['order', 'default', 'value' => 0],
         ];
     }
@@ -48,7 +49,7 @@ class ArticleField extends \common\base\ActiveRecord
             'type_id'     => 'Type ID',
             'label'       => 'Label',
             'name'        => 'Name',
-            'table'        => 'Table',
+            'table'       => 'Table',
             'options'     => 'Options',
             'description' => 'Description',
             'class'       => 'Class',
@@ -109,19 +110,18 @@ class ArticleField extends \common\base\ActiveRecord
         return $fields;
     }
 
-    public static function getFieldClassInfo($fieldClass)
-    {
-        return call_user_func_array([(new $fieldClass()),"getInfo"],[]);
+    public static function getFieldClassInfo($fieldClass) {
+        return $fieldClass::field([
+            'action' => 'getInfo',
+        ]);
     }
 
-    public static function getTypeFieldList($type)
-    {
-        return self::find()->where(['type_id'=>$type])->orderBy(['order'=>SORT_ASC])->asArray()->all();
+    public static function getTypeFieldList($type) {
+        return self::find()->where(['type_id' => $type])->orderBy(['order' => SORT_ASC])->asArray()->all();
     }
 
-    public static function getTableList()
-    {
+    public static function getTableList() {
         $tables = \Yii::$app->getDb()->getSchema()->getTableNames();
-        return array_combine($tables,$tables);
+        return array_combine($tables, $tables);
     }
 }

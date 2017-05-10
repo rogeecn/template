@@ -3,26 +3,23 @@
 namespace modules\article\controllers\field;
 
 use common\util\Request;
-use LayUI\components\ActiveField;
 use LayUI\components\Html;
-use modules\article\models\Article;
-use modules\article\models\ArticleField;
 use modules\admin\base\AuthController;
+use modules\article\models\ArticleField;
 
 class ManageController extends AuthController
 {
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $type = Request::input("type");
         if (empty($type)) {
             return $this->renderFailed(['type' => '参数为空']);
         }
 
-        if (Request::isPost()){
+        if (Request::isPost()) {
             $orderList = Request::input("order");
 
-            foreach ($orderList as $id=>$newOrder){
-                ArticleField::updateAll(['order'=>$newOrder],['id'=>$id]);
+            foreach ($orderList as $id => $newOrder) {
+                ArticleField::updateAll(['order' => $newOrder], ['id' => $id]);
             }
         }
 
@@ -30,28 +27,27 @@ class ManageController extends AuthController
         $typeFields = ArticleField::getTypeFieldList($type);
 
         return $this->render("index", [
-            "allFields" => $allFields,
+            "allFields"  => $allFields,
             "typeFields" => $typeFields,
-            "type" => $type,
+            "type"       => $type,
         ]);
     }
 
-    public function actionCreate()
-    {
-        if (!Request::isPost() || empty(Request::input("info"))){
-            return $this->renderFailed(["info"=>'信息为空']);
+    public function actionCreate() {
+        if (!Request::isPost() || empty(Request::input("info"))) {
+            return $this->renderFailed(["info" => '信息为空']);
         }
 
-        $info = Request::input("info");
+        $info  = Request::input("info");
         $model = new ArticleField();
         $model->setAttributes([
-            'name' => $info['name'],
-            'table' => $info['table'],
-            'class' => $info['class'],
+            'name'        => $info['name'],
+            'table'       => $info['table'],
+            'class'       => $info['class'],
             'description' => $info['description'],
-            'type_id' => $info['type'],
-            'label' => $info['label'],
-            'options' => $info['options'],
+            'type_id'     => $info['type'],
+            'label'       => $info['label'],
+            'options'     => $info['options'],
         ]);
 
         if ($model->save()) {
@@ -63,18 +59,17 @@ class ManageController extends AuthController
         return $this->renderSuccess($model->getErrors());
     }
 
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = ArticleField::findOne($id);
-        if (Request::isPost()){
+        if (Request::isPost()) {
             $info = Request::input("info");
 
             $model->setAttributes([
-                'name' => $info['name'],
-                'table' => $info['table'],
+                'name'        => $info['name'],
+                'table'       => $info['table'],
                 'description' => $info['description'],
-                'label' => $info['label'],
-                'options' => $info['options'],
+                'label'       => $info['label'],
+                'options'     => json_encode($info['options']),
             ]);
 
             if ($model->save()) {
@@ -85,11 +80,13 @@ class ManageController extends AuthController
         }
 
 
-        return $this->render('update',$model->toArray());
+        return $this->render('update', [
+            'fieldData'   => $model->toArray(),
+            'fieldConfig' => ArticleField::getFieldClassInfo($model->class),
+        ]);
     }
 
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $model   = ArticleField::findOne($id);
         $type_id = $model->type_id;
         $model->delete();

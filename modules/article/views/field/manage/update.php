@@ -2,8 +2,6 @@
 
 use LayUI\components\ActiveForm;
 use LayUI\components\Html;
-use modules\article\models\Article;
-use modules\category\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $allFields array */
@@ -11,7 +9,7 @@ use modules\category\models\Category;
 
 $tableList = \modules\article\models\ArticleField::getTableList();
 ?>
-<?php $form = ActiveForm::begin()?>
+<?php $form = ActiveForm::begin() ?>
 <table class="layui-table">
     <colgroup>
         <col width="10%">
@@ -20,34 +18,51 @@ $tableList = \modules\article\models\ArticleField::getTableList();
     <tbody>
     <tr>
         <th class="text-right">Class</th>
-        <td><?=$class?></td>
+        <td><?= $fieldData['class'] ?></td>
     </tr>
     <tr>
         <th class="text-right">Label</th>
-        <td><?=Html::textInput("info[label]",$label)?></td>
+        <td><?= Html::textInput("info[label]", $fieldData['label']) ?></td>
     </tr>
     <tr>
         <th class="text-right">Name</th>
-        <td><?=Html::textInput("info[name]",$name)?></td>
+        <td><?= Html::textInput("info[name]", $fieldData['name']) ?></td>
     </tr>
     <tr>
         <th class="text-right">Description</th>
-        <td><?=Html::textarea('info[description]',$description)?></td>
+        <td><?= Html::textarea('info[description]', $fieldData['description']) ?></td>
     </tr>
     <tr>
         <th class="text-right">Table</th>
-        <td><?=Html::dropDownList("info[table]",$table,$tableList,['prompt'=>'请选择绑定表'])?></td>
+        <td><?= Html::dropDownList("info[table]", $fieldData['table'], $tableList, ['prompt' => '请选择绑定表']) ?></td>
     </tr>
     <tr>
         <th class="text-right">Options</th>
-        <td><?=Html::textarea('info[options]',$options)?></td>
+        <td>
+            <?php
+            $fieldData['options'] = json_decode($fieldData['options'], true);
+            foreach ($fieldConfig['options'] as $option) {
+                echo Html::beginTag("div", ['style' => 'margin-bottom: 20px;']);
+                $inputType = $option['type'];
+
+                $fieldValue = $fieldData['options'][$option['name']]['value'];
+                $fieldName  = sprintf("info[options][%s]", $option['name']);
+                switch ($inputType) {
+                    case "checkbox":
+                        echo Html::checkbox($fieldName, $fieldValue, $option['config']);
+                        break;
+                }
+                echo Html::endTag("div");
+            }
+            ?>
+        </td>
     </tr>
     <tr>
         <th class="text-right">&nbsp;</th>
-        <td><?=Html::submitButton()?></td>
+        <td><?= Html::submitButton() ?></td>
     </tr>
     </tbody>
 </table>
 
-<?php ActiveForm::end();?>
+<?php ActiveForm::end(); ?>
 
