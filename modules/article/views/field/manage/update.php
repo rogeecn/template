@@ -45,7 +45,11 @@ $tableList = \modules\article\models\ArticleField::getTableList();
                 echo Html::beginTag("div", ['style' => 'margin-bottom: 20px;']);
                 $inputType = $option['type'];
 
-                $fieldValue = $fieldData['options'][$option['name']]['value'];
+                if (isset($fieldData['options'][$option['name']])){
+                    $fieldValue = $fieldData['options'][$option['name']];
+                }else{
+                    $fieldValue = $option['value'];
+                }
                 $fieldName  = sprintf("info[options][%s]", $option['name']);
                 switch ($inputType) {
                     case "checkbox":

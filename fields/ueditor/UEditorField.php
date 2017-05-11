@@ -60,12 +60,24 @@ class UEditorField extends Field implements IField
 
         $content = "";
         if ($this->options['showDescription']) {
-            $input = Html::textarea(sprintf("%s[description]", $this->name), $this->value['description']);
+
+            $value = "";
+            if (isset($this->value['description'])){
+                $value = $this->value['description'];
+            }
+            $input = Html::textarea(sprintf("%s[description]", $this->name), $value);
             $label = Html::label($this->label['description'], "", ['class' => 'layui-form-label']);
             $content .= $this->inputBlock($label, $input);
         }
+
+        $value = "";
+        if (isset($this->value['content'])){
+            $value = $this->value['content'];
+        }
+
+        $input = Html::textarea(sprintf("%s[content]", $this->name), $value);
         $label = Html::label($this->label['content'], "", ['class' => 'layui-form-label']);
-        $input = UEditorInput::widget(['name' => sprintf("%s[content]", $this->name), 'value' => $this->value['content']]);
+        $input = UEditorInput::widget(['name' => sprintf("%s[content]", $this->name), 'value' => $value]);
         $content .= $this->inputBlock($label, $input);
 
         return $content;
