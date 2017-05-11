@@ -38,29 +38,40 @@ class UEditorField extends Field implements IField
     }
 
     protected function createData() {
-        $sql    = "insert into `{$this->table}` (`id`,`description`,`content`) values(?,?,?)";
-        $params = [1 => $this->dataID, $this->fieldData['description'], $this->fieldData['content']];
-        $ret    = $this->createCommand($sql, $params)->execute();
+        $ret = $this->createCommand()->insert($this->table,[
+            'id'=>$this->dataID,
+            'description'=>$this->fieldData['description'],
+            'content'=>$this->fieldData['content'],
+        ])->execute();
+
         if (!$ret) {
             throw new Exception("table '$this->table': create data failed!");
         }
     }
 
     protected function updateData() {
-        $sql    = "update `{$this->table}` set `description`=?, `content`=? where `id`=?";
-        $params = [1 => $this->fieldData['description'], $this->fieldData['content'], $this->dataID];
-        $ret    = $this->createCommand($sql, $params)->execute();
-        if (!$ret) {
-            throw new Exception("table '$this->table': update data failed!");
-        }
+        $this->createCommand()->update($this->table,[
+            'description'=>$this->fieldData['description'],
+            'content'=>$this->fieldData['content'],
+        ],['id'=>$this->dataID])->execute();
+    }
+
+    private function getData(){
+       return $this->getQuery()
+           ->from($this->table)
+           ->where(['id'=>$this->dataID])
+           ->one();
     }
 
     protected function renderField() {
         $this->label = json_decode($this->label, true);
 
+        // 如果存在ID说明是可以查询数据的
+        if (!empty($this->dataID)){
+            $this->value = $this->getData();
+        }
         $content = "";
         if ($this->options['showDescription']) {
-
             $value = "";
             if (isset($this->value['description'])){
                 $value = $this->value['description'];

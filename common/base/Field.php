@@ -4,6 +4,7 @@ namespace common\base;
 
 use yii\base\InvalidParamException;
 use yii\base\Widget;
+use yii\db\Query;
 
 class Field extends Widget
 {
@@ -77,7 +78,12 @@ class Field extends Widget
         return call_user_func_array([$this, $this->action], []);
     }
 
-    public function createCommand($sql, $params = []) {
+    protected function createCommand($sql=null, $params = []) {
         return \Yii::$app->getDb()->createCommand($sql, $params);
+    }
+
+    protected function getQuery()
+    {
+        return (new Query());
     }
 }

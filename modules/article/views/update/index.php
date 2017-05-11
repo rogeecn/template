@@ -21,7 +21,8 @@ use modules\category\models\Category;
 <?php  foreach ($typeFields as $typeField):?>
     <?=$typeField['class']::field([
         'action'=>'renderField',
-        'config'=>$typeField
+        'config'=>$typeField,
+        'dataID'=>$model->id,
     ])?>
 <?php endforeach;?>
 <?= Html::submitWrapper(Html::submitButton()) ?>

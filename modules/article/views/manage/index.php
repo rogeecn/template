@@ -120,6 +120,11 @@ $statusList = Article::getStatusList();
 
         [
             'class' => \LayUI\components\ActionColumn::className(),
+            'buttons'=>[
+                'update'=>function ($url, $model, $key){
+                    return Html::a("[编辑]",['/article/update','id'=>$model->id]);
+                }
+            ]
         ],
     ],
 ]); ?>
