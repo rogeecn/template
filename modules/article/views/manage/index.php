@@ -123,6 +123,13 @@ $statusList = Article::getStatusList();
             'buttons'=>[
                 'update'=>function ($url, $model, $key){
                     return Html::a("[编辑]",['/article/update','id'=>$model->id]);
+                },
+                'delete'=>function ($url, $model, $key){
+                    return Html::a("[删除]",['/article/delete','id'=>$model->id],[
+                        'data-confirm' => '确认删除?',
+                        'data-method'  => 'post',
+                        'style'        => 'color: red;',
+                    ]);
                 }
             ]
         ],

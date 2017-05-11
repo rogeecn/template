@@ -2,6 +2,7 @@
 
 namespace modules\article\controllers;
 
+use common\base\Field;
 use common\extend\UserInfo;
 use common\util\Request;
 use LayUI\components\Html;
@@ -38,7 +39,7 @@ class CreateController extends AuthController
 
                 foreach ($typeFields as $field) {
                     $field['class']::field([
-                        'action'    => 'createData',
+                        'action'    => Field::ACTION_CREATE,
                         'config'    => $field,
                         'fieldData' => Request::post($field['name']),
                         'dataID'    => $articleID,

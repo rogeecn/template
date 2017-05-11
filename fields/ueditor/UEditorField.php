@@ -6,7 +6,6 @@ use common\base\Field;
 use common\base\IField;
 use LayUI\components\Html;
 use modules\ueditor\widget\UEditorInput;
-use yii\db\Exception;
 
 class UEditorField extends Field implements IField
 {
@@ -37,31 +36,6 @@ class UEditorField extends Field implements IField
         ];
     }
 
-    protected function createData() {
-        $ret = $this->createCommand()->insert($this->table,[
-            'id'=>$this->dataID,
-            'description'=>$this->fieldData['description'],
-            'content'=>$this->fieldData['content'],
-        ])->execute();
-
-        if (!$ret) {
-            throw new Exception("table '$this->table': create data failed!");
-        }
-    }
-
-    protected function updateData() {
-        $this->createCommand()->update($this->table,[
-            'description'=>$this->fieldData['description'],
-            'content'=>$this->fieldData['content'],
-        ],['id'=>$this->dataID])->execute();
-    }
-
-    private function getData(){
-       return $this->getQuery()
-           ->from($this->table)
-           ->where(['id'=>$this->dataID])
-           ->one();
-    }
 
     protected function renderField() {
         $this->label = json_decode($this->label, true);

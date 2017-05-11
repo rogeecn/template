@@ -2,6 +2,7 @@
 
 namespace modules\article\models;
 
+use common\base\Field;
 use fields\ueditor\UEditorField;
 use yii\helpers\StringHelper;
 
@@ -112,7 +113,7 @@ class ArticleField extends \common\base\ActiveRecord
 
     public static function getFieldClassInfo($fieldClass) {
         return $fieldClass::field([
-            'action' => 'getInfo',
+            'action' => Field::ACTION_INFO,
         ]);
     }
 

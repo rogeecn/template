@@ -12,7 +12,7 @@ use modules\article\models\ArticleField;
 use yii\base\Exception;
 use yii\base\InvalidParamException;
 
-class UpdateController extends AuthController
+class DeleteController extends AuthController
 {
     public function actionIndex($id) {
         $articleModel       = Article::findOne($id);
@@ -21,22 +21,15 @@ class UpdateController extends AuthController
         if (Request::isPost()) {
             $trans = \Yii::$app->getDb()->beginTransaction();
             try {
-                # save article main data
-                $articleModel->title       = Request::input("title");
-                $articleModel->user_id     = UserInfo::getID();
-                $articleModel->category_id = Request::input("category_id");
-                $articleModel->index_show  = Request::input("index_show");
-                if (!$articleModel->save()) {
-                    throw new Exception(json_encode($articleModel->getFirstErrors()));
+                if (!$articleModel->delete()) {
+                    throw new Exception(json_encode($articleModel->getErrors()));
                 }
-                $articleID = $articleModel->primaryKey;
 
                 foreach ($typeFields as $field) {
                     $field['class']::field([
-                        'action'    => Field::ACTION_UPDATE,
+                        'action'    => Field::ACTION_DELETE,
                         'config'    => $field,
-                        'fieldData' => Request::post($field['name']),
-                        'dataID'    => $articleID,
+                        'dataID'    => $id,
                     ]);
                 }
 
@@ -48,7 +41,7 @@ class UpdateController extends AuthController
 
 
             return $this->renderSuccess(null, [
-                Html::linkButton("继续编辑", ['/article/update', 'id' => $articleModel->id]),
+                Html::linkButton("返回列表", ['/article/manage']),
             ]);
         }
 

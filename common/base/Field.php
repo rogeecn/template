@@ -2,6 +2,7 @@
 namespace common\base;
 
 
+use yii\db\Exception;
 use yii\base\InvalidParamException;
 use yii\base\Widget;
 use yii\db\Query;
@@ -20,6 +21,13 @@ class Field extends Widget
     public $options     = [];
     public $fieldData   = [];
     public $dataID      = null;
+
+    const ACTION_CREATE = 'createData';
+    const ACTION_UPDATE = 'updateData';
+    const ACTION_DELETE = 'deleteData';
+    const ACTION_GET = 'getData';
+    const ACTION_INFO = 'getInfo';
+    const ACTION_RENDER = 'renderField';
 
     public static function field($config = []) {
         try {
@@ -85,5 +93,30 @@ class Field extends Widget
     protected function getQuery()
     {
         return (new Query());
+    }
+
+    protected function getData(){
+        return $this->getQuery()
+            ->from($this->table)
+            ->where(['id'=>$this->dataID])
+            ->one();
+    }
+
+    protected function createData() {
+        $this->fieldData['id'] = $this->dataID;
+        $ret = $this->createCommand()->insert($this->table,$this->fieldData)->execute();
+
+        if (!$ret) {
+            throw new Exception("table '$this->table': create data failed!");
+        }
+    }
+
+
+    protected function updateData() {
+        $this->createCommand()->update($this->table,$this->fieldData,['id'=>$this->dataID])->execute();
+    }
+
+    protected function deleteData() {
+        $this->createCommand()->delete($this->table,["id"=>$this->dataID])->execute();
     }
 }

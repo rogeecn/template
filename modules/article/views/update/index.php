@@ -20,7 +20,7 @@ use modules\category\models\Category;
 ?>
 <?php  foreach ($typeFields as $typeField):?>
     <?=$typeField['class']::field([
-        'action'=>'renderField',
+        'action'=>\common\base\Field::ACTION_RENDER,
         'config'=>$typeField,
         'dataID'=>$model->id,
     ])?>
