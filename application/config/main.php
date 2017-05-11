@@ -13,19 +13,22 @@ return [
     'controllerNamespace' => 'application\controllers',
     'bootstrap'           => ['log'],
     'modules'             => [
-        'admin'   => [
+        'test'     => [
+            'class' => 'application\modules\test\Module',
+        ],
+        'admin'    => [
             'class' => 'modules\admin\Module',
         ],
-        'ueditor' => [
+        'ueditor'  => [
             'class' => 'modules\ueditor\Module',
         ],
-        'tag'     => [
+        'tag'      => [
             'class' => 'modules\tag\Module',
         ],
-        'article' => [
+        'article'  => [
             'class' => 'modules\article\Module',
         ],
-        'setting' => [
+        'setting'  => [
             'class' => 'modules\setting\Module',
         ],
         'category' => [
@@ -67,6 +70,9 @@ return [
                 'application/json' => 'yii\web\JsonParser',
                 'text/json'        => 'yii\web\JsonParser',
             ],
+        ],
+        'view'         => [
+            'theme' => 'common\extend\Theme',
         ],
     ],
     'params'              => $params,

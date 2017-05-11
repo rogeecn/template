@@ -1,5 +1,6 @@
 <?php
 Yii::setAlias('@common', dirname(__DIR__));
+Yii::setAlias('@themes', dirname(dirname(__DIR__)) . '/themes');
 Yii::setAlias('@application', dirname(dirname(__DIR__)) . '/application');
 Yii::setAlias('@fields', dirname(dirname(__DIR__)) . '/fields');
 Yii::setAlias('@modules', dirname(dirname(__DIR__)) . '/modules');
