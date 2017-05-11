@@ -119,4 +119,40 @@ class Setting extends \common\base\ActiveRecord
         $this->display = self::DISPLAY_GROUP;
         return $this->save();
     }
+
+    public static function flatSettings()
+    {
+        $groups = self::getGroupList(true);
+
+        $data =[];
+        foreach ($groups as $groupID=>$groupAlias){
+            $columnList = self::getGroupColumnList($groupID);
+            foreach ($columnList as $columnData){
+                $columnKey = sprintf("%s.%s",$groupAlias,$columnData['alias']);
+                /*switch ($columnData['type']){
+                    case self::TYPE_STRING:
+                    case self::TYPE_HTML:
+                    case self::TYPE_TEXT:
+                        $value = $columnData['value'];
+                        break;
+                    case self::TYPE_SINGLE_SELECT:
+                        $value = $columnData['pre_configure'][$columnData['value']];
+                        break;
+                    case self::TYPE_MULTI_SELECT:
+                        $keys = explode(",",$columnData['value']);
+
+                        $value = [];
+                        foreach ($keys as $key){
+                            $value[] = $columnData['pre_configure'][$key];
+                        }
+                        break;
+                }
+
+                $data[$columnKey] = $value;
+                */
+                $data[$columnKey] = $columnData['value'];
+            }
+        }
+        return $data;
+    }
 }
