@@ -6,7 +6,7 @@ use LayUI\components\Html;
 
 \LayUI\LayUIAssets::register($this);
 
-$titleStyle = ['style' => 'font-size: 18px;color: #01aaed'];
+$titleStyle = ['style' => 'font-size: 18px;color: #01aaed;display:block'];
 ?>
 <?php if (empty($typeList)):?>
     <blockquote class="layui-elem-quote" style="margin-top: 20px;">
