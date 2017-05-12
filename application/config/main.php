@@ -17,7 +17,10 @@ return [
             'class' => 'application\modules\admin\Module',
         ],
         'ueditor'  => [
-            'class' => 'application\modules\ueditor\Module',
+            'class' => 'modules\ueditor\Module',
+        ],
+        'fex'  => [
+            'class' => 'modules\fex\Module',
         ],
 //        'tag'      => [
 //            'class' => 'modules\tag\Module',
