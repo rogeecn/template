@@ -1,5 +1,5 @@
 <?php
-namespace modules\article\migrations;
+namespace migrations;
 
 use yii\db\Migration;
 

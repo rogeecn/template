@@ -1,5 +1,5 @@
 <?php
-$cmd = 'php yii migrate/create --interactive=0 -F="@console/migrations/template/migration.php" %s';
+$cmd = 'php yii migrate/create --interactive=0 -F="@migrations/template/tpl.php" --migrationPath="@migrations" %s';
 
 if ($argc == 1) {
     echo "CMD FORMAT: php migration.php xxxx";

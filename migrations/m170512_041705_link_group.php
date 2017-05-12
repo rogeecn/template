@@ -1,11 +1,12 @@
 <?php
+
 namespace migrations;
 
 use yii\db\Migration;
 
-class m170503_063244_setting extends Migration
+class m170512_041705_link_group extends Migration
 {
-    public $_table = "{{%setting}}";
+    public $_table = "{{%link_group}}";
 
     public function safeUp() {
         $tableOptions = null;
@@ -22,8 +23,7 @@ class m170503_063244_setting extends Migration
             'value'         => $this->string(1200)->notNull()->defaultValue(""),
             'hint'          => $this->string(1200)->notNull()->defaultValue(""),
             'type'          => $this->string(100)->notNull()->defaultValue(""),
-            'pre_configure' => $this->string(1200)->notNull()->defaultValue(""),
-        ], $tableOptions);
+        ],$tableOptions);
     }
 
     public function safeDown() {

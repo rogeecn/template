@@ -1,11 +1,23 @@
 <?php
+echo "<?php\n";
+$classSplit = explode("_",$className,3);
+if (strpos($classSplit[2] , "alter_") === 0){
+    $classSplit = explode("_",$classSplit[2],2);
+
+    $tableName = $classSplit[1];
+}else{
+    $tableName = $classSplit[2];
+}
+
+?>
+
 namespace migrations;
 
 use yii\db\Migration;
 
-class m170508_132159_article_type extends Migration
+class <?=$className?> extends Migration
 {
-    public $_table = "{{%article_type}}";
+    public $_table = "{{%<?=$tableName?>}}";
 
     public function safeUp() {
         $tableOptions = null;
@@ -15,10 +27,6 @@ class m170508_132159_article_type extends Migration
 
         $this->createTable($this->_table, [
             'id'          => $this->primaryKey(),
-            'name'        => $this->string(255)->notNull(),
-            'alias'       => $this->string(255)->notNull(),
-            'description' => $this->string(255)->notNull(),
-            'order'       => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
     }
 
@@ -26,4 +34,3 @@ class m170508_132159_article_type extends Migration
         $this->dropTable($this->_table);
     }
 }
-
