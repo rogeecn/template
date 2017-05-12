@@ -3,7 +3,7 @@ namespace application\modules\admin\controllers\setting;
 
 use common\util\Request;
 use application\base\AuthController;
-use modules\setting\models\Setting;
+use common\models\Setting;
 use yii\web\NotFoundHttpException;
 
 class GroupController extends AuthController

@@ -52,7 +52,7 @@ class ManageController extends AuthController
 
         if ($model->save()) {
             return $this->renderSuccess(sprintf("字段 [%s] 添加成功", $info['name']), [
-                Html::linkButton("继续添加", ['/article/field/manage', 'type' => $info['type']]),
+                Html::linkButton("继续添加", ['/admin/article/field/manage', 'type' => $info['type']]),
             ]);
         }
 
@@ -74,7 +74,7 @@ class ManageController extends AuthController
 
             if ($model->save()) {
                 return $this->renderSuccess(sprintf("字段 [%s] 编辑成功", $info['name']), [
-                    Html::linkButton("继续修改", ['/article/field/manage/update', 'id' => $id]),
+                    Html::linkButton("继续修改", ['/admin/article/field/manage/update', 'id' => $id]),
                 ]);
             }
         }

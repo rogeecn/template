@@ -48,7 +48,8 @@ class UpdateController extends AuthController
 
 
             return $this->renderSuccess(null, [
-                Html::linkButton("继续编辑", ['/article/update', 'id' => $articleModel->id]),
+                Html::linkButton("继续编辑", ['/admin/article/update', 'id' => $articleModel->id]),
+                Html::linkButton("返回列表", ['/admin/article/manage']),
             ]);
         }
 

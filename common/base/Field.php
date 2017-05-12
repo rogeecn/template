@@ -113,6 +113,10 @@ class Field extends Widget
 
 
     protected function updateData() {
+        if (!$this->getData()){
+            $this->createData();
+            return;
+        }
         $this->createCommand()->update($this->table,$this->fieldData,['id'=>$this->dataID])->execute();
     }
 
