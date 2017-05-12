@@ -12,6 +12,7 @@ $typeList  = \common\models\LinkGroup::getTypeList();
 <?= $form->field($model, "type")->dropDownList($typeList) ?>
 <?= $form->field($model, "title")->textInput() ?>
 <?= $form->field($model, "alias")->textInput() ?>
+<?= $form->field($model, "image")->textInput() ?>
 <?= $form->field($model, "value")->textInput() ?>
 
 <?= Html::submitWrapper(Html::submitButton() )?>

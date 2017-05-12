@@ -16,12 +16,13 @@ class m170512_041705_link_group extends Migration
 
         $this->createTable($this->_table, [
             'id'            => $this->primaryKey(),
-            'alias'         => $this->string(240)->notNull(),
             'title'         => $this->string(240)->notNull(),
+            'alias'         => $this->string(120)->notNull(),
             'display'       => $this->integer()->notNull(), // 0:group, 1:value
             'group_id'      => $this->integer(11)->notNull()->defaultValue(0),
             'value'         => $this->string(1200)->notNull()->defaultValue(""),
             'type'          => $this->string(100)->notNull()->defaultValue(""),
+            'image'          => $this->string(240)->notNull()->defaultValue(""),
             'order'          => $this->integer()->notNull()->defaultValue(0),
         ],$tableOptions);
     }

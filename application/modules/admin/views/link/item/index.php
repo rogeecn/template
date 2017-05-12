@@ -31,26 +31,15 @@ echo \LayUI\components\Table::widget([
             }
         ],
         [
-            'key'   => 'group',
-            'value' => function ($data) {
-                $groupList = Setting::getGroupList(true);
-                return $groupList[$data->group_id];
-            },
-        ],
-        [
             'key'   => 'type',
             'value' => function ($data) {
-                $typeList = Setting::getTypeList();
+                $typeList = \common\models\LinkGroup::getTypeList();
                 return $typeList[$data->type];
             },
         ],
-        'alias',
         'title',
-        "hint",
-        [
-            'key'   => 'pre_configure',
-            'label' => 'PreConfigure',
-        ],
+        'image',
+        'value',
         [
             'key'   => 'order',
             'options'=>[
@@ -70,8 +59,8 @@ echo \LayUI\components\Table::widget([
             'label' => 'OPT',
             'value' => function ($data) {
                 $class  = ['class' => 'layui-btn layui-btn-small layui-btn-primary'];
-                $edit   = Html::a("EDIT", ['/admin/setting/column/update', 'id' => $data->primaryKey], $class);
-                $delete = Html::a("DELETE", ['/admin/setting/column/delete', 'id' => $data->primaryKey], $class);
+                $edit   = Html::a("EDIT", ['/admin/link/item/update', 'id' => $data->primaryKey], $class);
+                $delete = Html::a("DELETE", ['/admin/link/item/delete', 'id' => $data->primaryKey], $class);
                 return Html::buttonGroup([$edit, $delete]);
             },
         ],

@@ -44,7 +44,7 @@ class ItemController extends AuthController
         $model->group_id = $id;
 
         if (Request::isPost() && $model->load(Request::post()) && $model->createColumn()) {
-            $this->redirect(['index']);
+            $this->redirect(['index','group'=>$id]);
         }
         return $this->render('create', [
             'model' => $model,
@@ -66,8 +66,8 @@ class ItemController extends AuthController
 
     public function actionDelete($id) {
         $model = LinkGroup::findOne($id);
-        LinkGroup::deleteAll(['group_id' => $model->id]);
+        LinkGroup::deleteAll(['id' => $model->id]);
         $model->delete();
-        $this->redirect(['index']);
+        $this->redirect(['index','group'=>$model->group_id]);
     }
 }

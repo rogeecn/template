@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property integer $id
  * @property string $alias
+ * @property string $image
  * @property string $title
  * @property integer $display
  * @property integer $group_id
@@ -41,9 +42,9 @@ class LinkGroup extends ActiveRecord
     public function rules()
     {
         return [
-            [['alias','value', 'title', 'display'], 'required'],
+            [['alias','title', 'display'], 'required'],
             [['display', 'group_id','order'], 'integer'],
-            [['alias', 'title'], 'string', 'max' => 240],
+            [['alias','image', 'title'], 'string', 'max' => 240],
             [['value'], 'string', 'max' => 1200],
             [['type'], 'string', 'max' => 100],
             [['order'], 'default', 'value' => 0],
