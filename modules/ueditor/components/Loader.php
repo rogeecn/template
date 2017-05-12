@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: yanghao
- * Date: 2017/4/28
- * Time: 16:35
- */
-
 namespace modules\ueditor\components;
 
 

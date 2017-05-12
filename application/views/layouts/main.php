@@ -12,7 +12,7 @@ AppAsset::register($this);
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>YaCms</title>
+    <title>ms</title>
     <?php $this->head() ?>
 </head>
 <body>

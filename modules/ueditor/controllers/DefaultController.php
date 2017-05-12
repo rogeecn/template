@@ -3,7 +3,7 @@
 namespace modules\ueditor\controllers;
 
 use common\util\Request;
-use modules\ueditor\base\RestController;
+use application\base\RestController;
 use modules\ueditor\components\Loader;
 
 class DefaultController extends RestController

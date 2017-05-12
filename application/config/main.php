@@ -13,27 +13,24 @@ return [
     'controllerNamespace' => 'application\controllers',
     'bootstrap'           => ['log'],
     'modules'             => [
-        'test'     => [
-            'class' => 'application\modules\test\Module',
-        ],
         'admin'    => [
-            'class' => 'modules\admin\Module',
+            'class' => 'application\modules\admin\Module',
         ],
         'ueditor'  => [
-            'class' => 'modules\ueditor\Module',
+            'class' => 'application\modules\ueditor\Module',
         ],
-        'tag'      => [
-            'class' => 'modules\tag\Module',
-        ],
-        'article'  => [
-            'class' => 'modules\article\Module',
-        ],
-        'setting'  => [
-            'class' => 'modules\setting\Module',
-        ],
-        'category' => [
-            'class' => 'modules\category\Module',
-        ],
+//        'tag'      => [
+//            'class' => 'modules\tag\Module',
+//        ],
+//        'article'  => [
+//            'class' => 'modules\article\Module',
+//        ],
+//        'setting'  => [
+//            'class' => 'modules\setting\Module',
+//        ],
+//        'category' => [
+//            'class' => 'modules\category\Module',
+//        ],
     ],
     'components'          => [
         'user'         => [
@@ -71,9 +68,9 @@ return [
                 'text/json'        => 'yii\web\JsonParser',
             ],
         ],
-        'view'         => [
-            'theme' => 'common\extend\Theme',
-        ],
+//        'view'         => [
+//            'theme' => 'common\extend\Theme',
+//        ],
     ],
     'params'              => $params,
 ];

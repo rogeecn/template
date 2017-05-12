@@ -26,10 +26,6 @@ return [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationNamespaces' => [
                 'migrations',
-                'modules\tag\migrations',
-                'modules\article\migrations',
-                'modules\setting\migrations',
-                'modules\category\migrations'
             ],
         ],
     ],
