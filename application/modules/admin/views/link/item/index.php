@@ -1,14 +1,8 @@
 <?php
 use LayUI\components\Html;
-use common\models\Setting;
 
 /** @var \yii\web\View $this */
-/** @var \common\models\Setting[] $columnList */
-
-
-/** @var \yii\web\View $this */
-/** @var \common\models\Setting[] $groupList */
-
+/** @var \common\models\LinkGroup[] $columnList */
 
 ?>
 <div class="text-right">

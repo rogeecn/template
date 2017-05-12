@@ -2,7 +2,7 @@
 use LayUI\components\Html;
 
 /** @var \yii\web\View $this */
-/** @var \common\models\Setting[] $groupList */
+/** @var \common\models\LinkGroup[] $groupList */
 ?>
 
 <div class="text-right">
@@ -48,8 +48,8 @@ echo \LayUI\components\Table::widget([
             'label' => 'OPT',
             'value' => function ($data) {
                 $class  = ['class' => 'layui-btn layui-btn-small layui-btn-primary'];
-                $edit   = Html::a("EDIT", ['/admin/setting/group/update', 'id' => $data->primaryKey], $class);
-                $delete = Html::a("DELETE", ['/admin/setting/group/delete', 'id' => $data->primaryKey], $class);
+                $edit   = Html::a("EDIT", ['/admin/link/group/update', 'id' => $data->primaryKey], $class);
+                $delete = Html::a("DELETE", ['/admin/link/group/delete', 'id' => $data->primaryKey], $class);
                 return Html::buttonGroup([$edit, $delete]);
             },
         ],

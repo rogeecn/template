@@ -2,7 +2,7 @@
 use LayUI\components\ActiveForm;
 use LayUI\components\Html;
 /** @var \yii\web\View $this */
-/** @var \common\models\Setting $model */
+/** @var \common\models\LinkGroup $model */
 $typeList  = \common\models\LinkGroup::getTypeList();
 ?>
 
