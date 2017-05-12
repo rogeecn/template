@@ -12,12 +12,12 @@ use common\models\Setting;
 
 ?>
 <div class="text-right">
-    <?=Html::linkButton("创建",['/admin/setting/column/create','id'=>$groupId])?>
+    <?=Html::linkButton("创建",['/admin/link/item/create','id'=>$groupId])?>
 </div>
 <?php
 $form = \LayUI\components\ActiveForm::begin();
 echo \LayUI\components\Table::widget([
-    'dataProvider' => $columnList,
+    'dataProvider' => $linkList,
     'sortable'=>true,
     'orderInput'=>'input',
     'columns'      => [

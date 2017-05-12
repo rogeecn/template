@@ -25,7 +25,8 @@
         <dl class="layui-nav-child">
             <dd><a href="/admin/setting/manage">Setting</a></dd>
             <dd><a href="/admin/setting/group">Group</a></dd>
-            <dd><a href="/admin/setting/column">Column</a></dd>
+            <dd><a href="/admin/link/group">Link</a></dd>
         </dl>
     </li>
+
 </ul>

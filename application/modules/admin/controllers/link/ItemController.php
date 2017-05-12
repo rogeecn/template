@@ -1,20 +1,20 @@
 <?php
 
-namespace application\modules\admin\controllers\setting;
+namespace application\modules\admin\controllers\link;
 
 use common\util\Request;
 use application\base\AuthController;
-use common\models\Setting;
+use common\models\LinkGroup;
 use yii\base\InvalidParamException;
 use yii\web\NotFoundHttpException;
 
-class ColumnController extends AuthController
+class ItemController extends AuthController
 {
     public function actionIndex() {
         if (Request::isPost()){
             $orderList = Request::post("order");
             foreach ($orderList as $id=>$newOrder){
-                Setting::updateAll(['order'=>intval($newOrder)],['id'=>$id]);
+                LinkGroup::updateAll(['order'=>intval($newOrder)],['id'=>$id]);
             }
         }
 
@@ -25,22 +25,22 @@ class ColumnController extends AuthController
 
         $condition = [
             'group_id'=>$groupID,
-            'display' => Setting::DISPLAY_COLUMN,
+            'display' => LinkGroup::DISPLAY_LINK,
         ];
         $sort = ['group_id'=>SORT_ASC,'order'=>SORT_DESC];
-        $columnList = Setting::find()->where($condition)->orderBy($sort)->all();
+        $linkList = LinkGroup::find()->where($condition)->orderBy($sort)->all();
         return $this->render("index", [
-            'columnList' => $columnList,
+            'linkList' => $linkList,
             'groupId'=>$groupID,
         ]);
     }
 
     public function actionCreate($id) {
-        if (!Setting::findOne($id)){
+        if (!LinkGroup::findOne($id)){
             throw new NotFoundHttpException("table setting's id:{$id} is not exist");
         }
 
-        $model = new Setting();
+        $model = new LinkGroup();
         $model->group_id = $id;
 
         if (Request::isPost() && $model->load(Request::post()) && $model->createColumn()) {
@@ -52,7 +52,7 @@ class ColumnController extends AuthController
     }
 
     public function actionUpdate($id) {
-        $model = Setting::findOne($id);
+        $model = LinkGroup::findOne($id);
         if (!$model) {
             throw new NotFoundHttpException();
         }
@@ -65,8 +65,8 @@ class ColumnController extends AuthController
     }
 
     public function actionDelete($id) {
-        $model = Setting::findOne($id);
-        Setting::deleteAll(['group_id' => $model->id]);
+        $model = LinkGroup::findOne($id);
+        LinkGroup::deleteAll(['group_id' => $model->id]);
         $model->delete();
         $this->redirect(['index']);
     }

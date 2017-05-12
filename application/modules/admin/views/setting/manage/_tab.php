@@ -20,7 +20,7 @@ use LayUI\components\Html;
             echo Html::checkboxList($column['formName'], $column['value'], $column["pre_configure"]);
             break;
         case Setting::TYPE_HTML:
-            echo \application\modules\ueditor\widget\UEditorInput::widget([
+            echo modules\ueditor\widget\UEditorInput::widget([
                 'name'  => $column['formName'],
                 'value' => $column['value'],
             ]);

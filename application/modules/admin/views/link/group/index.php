@@ -6,7 +6,7 @@ use LayUI\components\Html;
 ?>
 
 <div class="text-right">
-    <?=Html::linkButton("创建",['/admin/setting/group/create'])?>
+    <?=Html::linkButton("创建",['/admin/link/group/create'])?>
 </div>
 <?php
 $form = \LayUI\components\ActiveForm::begin();
@@ -40,7 +40,7 @@ echo \LayUI\components\Table::widget([
             'label' => 'Column',
             'value' => function ($data) {
                 $class  = ['class' => 'layui-btn layui-btn-small layui-btn-primary'];
-                $column   = Html::a("字段管理", ['/admin/setting/column', 'group' => $data->primaryKey], $class);
+                $column   = Html::a("链接管理", ['/admin/link/item', 'group' => $data->primaryKey], $class);
                 return $column;
             },
         ],
