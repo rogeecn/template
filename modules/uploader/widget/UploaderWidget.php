@@ -91,6 +91,7 @@ function(res, input){
 _JS_SUCCESS_;
         }
 
+        // 必须返回true/false 要不不会上传的。
         if (empty($this->options['handleBefore'])) {
             $this->options['handleBefore'] = <<<_JS_BEOFRE_
 function(input){
