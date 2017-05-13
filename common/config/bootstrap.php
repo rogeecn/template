@@ -2,6 +2,7 @@
 Yii::setAlias('@common', dirname(__DIR__));
 Yii::setAlias('@themes', dirname(dirname(__DIR__)) . '/themes');
 Yii::setAlias('@application', dirname(dirname(__DIR__)) . '/application');
+Yii::setAlias('@upload', dirname(dirname(__DIR__)) . '/application/web/uploads');
 Yii::setAlias('@fields', dirname(dirname(__DIR__)) . '/fields');
 Yii::setAlias('@console', dirname(dirname(__DIR__)) . '/console');
 Yii::setAlias('@migrations', dirname(dirname(__DIR__)) . '/migrations');

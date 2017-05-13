@@ -19,9 +19,10 @@ return [
         'ueditor'  => [
             'class' => 'modules\ueditor\Module',
         ],
-        'fex'  => [
-            'class' => 'modules\fex\Module',
+        'uploader' => [
+            'class' => 'modules\uploader\Module',
         ],
+
 //        'tag'      => [
 //            'class' => 'modules\tag\Module',
 //        ],
