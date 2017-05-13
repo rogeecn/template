@@ -20,4 +20,14 @@ class ActiveRecord extends \yii\db\ActiveRecord
         $list = self::getStatusList();
         return $list[$id];
     }
+
+    public function getFlatErrors() {
+        $errors = $this->getErrors();
+
+        $flatErrors = [];
+        foreach ($errors as $field => $error) {
+            $flatErrors[$field] = implode(",", $error);
+        }
+        return $flatErrors;
+    }
 }

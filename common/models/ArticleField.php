@@ -33,11 +33,12 @@ class ArticleField extends \common\base\ActiveRecord
      */
     public function rules() {
         return [
-            [['type_id', 'table', 'label', 'name', 'options', 'description', 'class'], 'required'],
+            [['type_id', 'table', 'label', 'name', 'description', 'class'], 'required'],
             [['type_id', 'order'], 'integer'],
             [['options'], 'string'],
             [['label', 'name', 'table', 'description', 'class'], 'string', 'max' => 255],
             ['order', 'default', 'value' => 0],
+            ['options', 'default', 'value' => '[]'],
         ];
     }
 

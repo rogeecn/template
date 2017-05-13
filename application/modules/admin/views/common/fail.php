@@ -11,7 +11,7 @@
         </ul>
         <hr>
         <div class="tip-buttons" style="text-align: right;">
-            <?=\LayUI\components\Html::linkButton("返回修改",'javascript:history.go(-1)',['color'=>'primary'])?>
+            <?=\LayUI\components\Html::linkButton("返回修改",'#',['color'=>'primary','onClick'=>'javascript:history.go(-1)'])?>
         </div>
     </blockquote>
 </div>

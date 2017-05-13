@@ -3,9 +3,9 @@
 namespace application\modules\admin\controllers\article\field;
 
 use application\base\AuthController;
+use common\models\ArticleField;
 use common\util\Request;
 use LayUI\components\Html;
-use common\models\ArticleField;
 
 class ManageController extends AuthController
 {
@@ -51,12 +51,12 @@ class ManageController extends AuthController
         ]);
 
         if ($model->save()) {
-            return $this->renderSuccess(sprintf("字段 [%s] 添加成功", $info['name']), [
+            return $this->renderSuccess(sprintf("字段 [%s] 添加成功", $model->name), [
                 Html::linkButton("继续添加", ['/admin/article/field/manage', 'type' => $info['type']]),
             ]);
         }
 
-        return $this->renderSuccess($model->getErrors());
+        return $this->renderFailed($model->getFlatErrors());
     }
 
     public function actionUpdate($id) {

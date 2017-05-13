@@ -48,10 +48,13 @@ class UploaderWidget extends InputWidget
         $fileInput = Html::fileInput('ajax-file-upload', "", $this->options);
 
         $imageList = is_array($this->value) ? $this->value : explode(",", $this->value);
+        $imageList = array_filter($imageList);
 
         $liList = [];
         foreach ($imageList as $image) {
             if (strpos($image, "http") === 0) {
+                $imageURL = $image;
+            } elseif (strpos($image, "//") === 0) {
                 $imageURL = $image;
             } else {
                 $imageURL = $this->sourceURL . ltrim($image, "/");
@@ -71,8 +74,16 @@ class UploaderWidget extends InputWidget
         if (empty($this->handleSuccess)) {
             $this->handleSuccess = <<<_JS_
 function(res, input){
+    var _html_tpl = '<li>';
+    _html_tpl += '<img src="{$this->sourceURL}_IMG_PATH_"/>';
+    _html_tpl += '<input type=hidden name="{$this->name}[]" value="{$this->sourceURL}_IMG_PATH_"/>';
+    _html_tpl += '</li>';
+    
+    
     console.log(res); 
-    $(".image-upload").append("<li><img src='$this->sourceURL" + res.data.path + "' /></li>");
+    var html = _html_tpl.replace("_IMG_PATH_",res.data.path)
+    html = html.replace("_IMG_PATH_",res.data.path)
+    $(".image-upload").append(html);
 }
 _JS_;
         }
@@ -92,9 +103,9 @@ _JS_;
     ul > li {
         display: inline-block;
         padding: 10px;
-        width: 150px;
-        height: 150px;
-        border: 1px solid #c2ccd1;
+        width: 100px;
+        height: 100px;
+        border: 1px solid #e6e6e6;
     }
 
     ul > li img {
