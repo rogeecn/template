@@ -2,18 +2,8 @@
 /** @var \yii\web\View $this */
 ?>
 <style>
-    body{
+    body {
         padding: 100px;
-    }
-    ul>li{
-        display: inline-block;
-        padding: 10px;
-        width: 200px;
-        height: 200px;
-        border: 1px solid #c2ccd1;
-    }
-    ul>li img{
-        max-width: 100%;
     }
 </style>
 

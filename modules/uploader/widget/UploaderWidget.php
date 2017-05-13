@@ -14,9 +14,10 @@ class UploaderWidget extends InputWidget
 
     public $action = "/uploader/upload";
     // images,file,video,audio
-    public $sourceURL = "//tpl.local/uploads/";
-    public $fileType  = "images";
-    public $showText  = "Upload";
+    public $sourceURL  = "//tpl.local/uploads/";
+    public $fileType   = "images";
+    public $showText   = "Upload";
+    public $limitCount = 2;
 
     public $template = "<ul class='image-upload'><li>{input}</li>\n{image}</ul>";
 
@@ -29,10 +30,11 @@ class UploaderWidget extends InputWidget
 
     public function init() {
         LayUIAssets::register($this->getView());
+        $this->getView()->registerJs($this->getJs());
+        $this->getView()->registerCss($this->getCSS());
     }
 
     public function run() {
-        $this->getView()->registerJs($this->getJs());
 
         if (!isset($this->options['id'])) {
             $this->options['id'] = self::getId();
@@ -43,18 +45,20 @@ class UploaderWidget extends InputWidget
         $this->options['lay-title'] = $this->showText;
         Html::addCssClass($this->options, "layui-upload-file");
 
-        $fileInput = Html::fileInput('ajax-file-upload', $this->value, $this->options);
+        $fileInput = Html::fileInput('ajax-file-upload', "", $this->options);
 
         $imageList = is_array($this->value) ? $this->value : explode(",", $this->value);
 
         $liList = [];
         foreach ($imageList as $image) {
             if (strpos($image, "http") === 0) {
-                $image = Html::img($image);
+                $imageURL = $image;
             } else {
-                $image = Html::img($this->sourceURL . ltrim($image, "/"));
+                $imageURL = $this->sourceURL . ltrim($image, "/");
             }
-            $liList[] = Html::tag("li", $image);
+            $image    = Html::img($imageURL);
+            $input    = Html::hiddenInput($this->name . "[]", $imageURL);
+            $liList[] = Html::tag("li", $image . $input);
         }
 
         return strtr($this->template, [
@@ -81,5 +85,28 @@ layui.upload({
 }); 
 _JS_;
         return $js;
+    }
+
+    private function getCSS() {
+        $css = <<<_CSS
+    ul > li {
+        display: inline-block;
+        padding: 10px;
+        width: 150px;
+        height: 150px;
+        border: 1px solid #c2ccd1;
+    }
+
+    ul > li img {
+        width: 100%;
+        height: 100%;
+    }
+
+    ul > li .layui-upload-button {
+        width: 100%;
+        height: 100%;
+    }
+_CSS;
+        return $css;
     }
 }
