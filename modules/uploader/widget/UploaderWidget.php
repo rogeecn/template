@@ -4,31 +4,34 @@ namespace modules\uploader\widget;
 
 use LayUI\components\Html;
 use LayUI\LayUIAssets;
-use yii\web\AssetBundle;
 use yii\widgets\InputWidget;
 
 class UploaderWidget extends InputWidget
 {
-    /** @var  AssetBundle */
-    private $asset;
-
     public $action = "/uploader/upload";
-    // images,file,video,audio
-    public $sourceURL  = "//tpl.local/uploads/";
-    public $fileType   = "images";
-    public $showText   = "Upload";
-    public $limitCount = 2;
+
+    /**
+     * @var array
+     * - limitCount
+     * -
+     */
+    public $options        = [];
+    public $defaultOptions = [
+        'limitCount'      => 1,
+        'fileType'        => 'images',  // images,file,video,audio
+        'showText'        => "Upload",
+        'sourceURL'       => "//tpl.local/uploads/",
+        'handleSuccess'   => '',
+        //返回的参数item，即为当前的input DOM对象
+        'handleBefore'    => '',//function(input){console.log("文件上传中");}
+        'validExtensions' => ['jpg', 'jpeg', 'png', 'bmp', 'gif'],
+    ];
 
     public $template = "<ul class='image-upload'><li>{input}</li>\n{image}</ul>";
 
-    public $validExtensions = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
-
-    public $handleSuccess = '';
-
-    //返回的参数item，即为当前的input DOM对象
-    public $handleBefore = 'function(input){console.log("文件上传中");}';
 
     public function init() {
+        $this->options = array_merge($this->defaultOptions, $this->options);
         LayUIAssets::register($this->getView());
         $this->getView()->registerJs($this->getJs());
         $this->getView()->registerCss($this->getCSS());
@@ -40,12 +43,12 @@ class UploaderWidget extends InputWidget
             $this->options['id'] = self::getId();
         }
 
-        $this->options['lay-ext']   = implode("|", $this->validExtensions);
-        $this->options['lay-type']  = $this->fileType;
-        $this->options['lay-title'] = $this->showText;
-        Html::addCssClass($this->options, "layui-upload-file");
+        $options['lay-ext']   = implode("|", $this->options['validExtensions']);
+        $options['lay-type']  = $this->options['fileType'];
+        $options['lay-title'] = $this->options['showText'];
+        $options['class']     = "layui-upload-file";
 
-        $fileInput = Html::fileInput('ajax-file-upload', "", $this->options);
+        $fileInput = Html::fileInput('ajax-file-upload', "", $options);
 
         $imageList = is_array($this->value) ? $this->value : explode(",", $this->value);
         $imageList = array_filter($imageList);
@@ -57,7 +60,7 @@ class UploaderWidget extends InputWidget
             } elseif (strpos($image, "//") === 0) {
                 $imageURL = $image;
             } else {
-                $imageURL = $this->sourceURL . ltrim($image, "/");
+                $imageURL = $this->options['sourceURL'] . ltrim($image, "/");
             }
             $image    = Html::img($imageURL);
             $input    = Html::hiddenInput($this->name . "[]", $imageURL);
@@ -71,12 +74,12 @@ class UploaderWidget extends InputWidget
     }
 
     private function getJs() {
-        if (empty($this->handleSuccess)) {
-            $this->handleSuccess = <<<_JS_
+        if (empty($this->options['handleSuccess'])) {
+            $this->options['handleSuccess'] = <<<_JS_SUCCESS_
 function(res, input){
     var _html_tpl = '<li>';
-    _html_tpl += '<img src="{$this->sourceURL}_IMG_PATH_"/>';
-    _html_tpl += '<input type=hidden name="{$this->name}[]" value="{$this->sourceURL}_IMG_PATH_"/>';
+    _html_tpl += '<img src="{$this->options['sourceURL']}_IMG_PATH_"/>';
+    _html_tpl += '<input type=hidden name="{$this->name}[]" value="{$this->options['sourceURL']}_IMG_PATH_"/>';
     _html_tpl += '</li>';
     
     
@@ -85,14 +88,28 @@ function(res, input){
     html = html.replace("_IMG_PATH_",res.data.path)
     $(".image-upload").append(html);
 }
-_JS_;
+_JS_SUCCESS_;
         }
+
+        if (empty($this->options['handleBefore'])) {
+            $this->options['handleBefore'] = <<<_JS_BEOFRE_
+function(input){
+    if (($(".image-upload>li").length -1)>={$this->options['limitCount']}){
+        alert("上传数量超出限制: "+{$this->options['limitCount']});
+        return false;
+    }
+}
+_JS_BEOFRE_;
+
+        }
+
+
         $js = <<<_JS_
-var SOURCE_URL = "$this->sourceURL";
+var SOURCE_URL = "$this->options['sourceURL']";
 layui.upload({
   url: '{$this->action}'
-  ,before: {$this->handleBefore}
-  ,success: {$this->handleSuccess}
+  ,before: {$this->options['handleBefore']}
+  ,success: {$this->options['handleSuccess']}
 }); 
 _JS_;
         return $js;

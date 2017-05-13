@@ -7,6 +7,46 @@ use yii\helpers\Url;
 
 class Html extends BaseHtml
 {
+    public static function inlineFormItem($inputType, $label, $name, $value, $options = []) {
+        return self::formItem($inputType, "inline", $label, $name, $value, $options);
+    }
+
+    public static function blockFormItem($inputType, $label, $name, $value, $options = []) {
+        return self::formItem($inputType, "block", $label, $name, $value, $options);
+    }
+
+    private static function formItem($inputType, $type, $label, $name, $value, $options = []) {
+
+        $inputWrapper = self::tag("div", "{input}", ['class' => "layui-input-" . $type]);
+        $htmlTemplate = self::tag("div", "{label}" . $inputWrapper, ['class' => "layui-form-item"]);
+
+        $inputHtml = "";
+        $labelHtml = self::label($label, "", ['class' => "layui-form-label"]);
+        switch ($inputType) {
+            case 'textInput':
+            case 'textarea':
+                $inputHtml = self::$inputType($name, $value, $options);
+                break;
+            case 'checkbox':
+            case 'radio':
+                $labelHtml = "";
+                if (!isset($options['title'])) {
+                    $options['title'] = $label;
+                }
+                $inputHtml = self::$inputType($name, $value, $options);
+                break;
+            case 'dropDownList':
+            case 'radioList':
+                $inputHtml = self::$inputType($name, $value, $options);
+                break;
+        }
+
+        return strtr($htmlTemplate, [
+            '{label}' => $labelHtml,
+            '{input}' => $inputHtml,
+        ]);
+    }
+
     public static function a($text, $url = null, $options = []) {
         if ($url !== null) {
             $options['href'] = Url::to($url, true);
@@ -32,8 +72,8 @@ class Html extends BaseHtml
         }
 
         $options['class'] = "layui-btn ";
-        if (isset($options['color'])){
-            self::addCssClass($options,"layui-".$options['color']);
+        if (isset($options['color'])) {
+            self::addCssClass($options, "layui-" . $options['color']);
         }
         return self::tag('a', $text, $options);
     }
@@ -59,9 +99,9 @@ class Html extends BaseHtml
     }
 
     public static function activeTextInput($model, $attribute, $options = []) {
-        if (isset($options['class'])){
+        if (isset($options['class'])) {
             $options['class'] = 'layui-input ' . $options['class'];
-        }else{
+        } else {
             $options['class'] = 'layui-input';
         }
 

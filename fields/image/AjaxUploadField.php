@@ -13,6 +13,20 @@ class AjaxUploadField extends Field implements IField
     public $description = "ajax 图片上传";
     public $table       = "field_upload_image";
 
+    public function getOptions() {
+        return [
+            [
+                'type'   => 'textInput',
+                'name'   => 'limitCount',
+                'label'  => '图片上限',
+                'value'  => 3,
+                'config' => [
+                    'placeholder' => '上传图片数量上限',
+                ],
+            ],
+        ];
+    }
+
     public function init() {
         parent::init();
         switch ($this->action) {
@@ -36,8 +50,9 @@ class AjaxUploadField extends Field implements IField
 
         $itemClass = "layui-input-block";
         $input     = UploaderWidget::widget([
-            'name'  => sprintf("%s[%s]", $this->name, $this->name),
-            'value' => explode(",", $this->value['image']),
+            'name'    => sprintf("%s[%s]", $this->name, $this->name),
+            'value'   => explode(",", $this->value['image']),
+            'options' => $this->options,
         ]);
         $content .= Html::tag("div", $input, ['class' => $itemClass]);
         $content .= Html::endTag("div");

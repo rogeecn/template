@@ -42,21 +42,15 @@ $tableList = \common\models\ArticleField::getTableList();
             <?php
             $fieldData['options'] = json_decode($fieldData['options'], true);
             foreach ($fieldConfig['options'] as $option) {
-                echo Html::beginTag("div", ['style' => 'margin-bottom: 20px;']);
                 $inputType = $option['type'];
 
-                if (isset($fieldData['options'][$option['name']])){
+                if (isset($fieldData['options'][$option['name']])) {
                     $fieldValue = $fieldData['options'][$option['name']];
-                }else{
+                } else {
                     $fieldValue = $option['value'];
                 }
-                $fieldName  = sprintf("info[options][%s]", $option['name']);
-                switch ($inputType) {
-                    case "checkbox":
-                        echo Html::checkbox($fieldName, $fieldValue, $option['config']);
-                        break;
-                }
-                echo Html::endTag("div");
+                $fieldName = sprintf("info[options][%s]", $option['name']);
+                echo Html::inlineFormItem($inputType, $option['label'], $fieldName, $fieldValue, $option['config']);
             }
             ?>
         </td>
