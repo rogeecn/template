@@ -98,6 +98,7 @@ function(input){
         alert("上传数量超出限制: "+{$this->options['limitCount']});
         return false;
     }
+    return true;
 }
 _JS_BEOFRE_;
 
