@@ -1,13 +1,10 @@
 <?php
-namespace modules\tag\assets;
-
+namespace application\modules\admin\assets;
 
 use yii\web\AssetBundle;
-
-
 class TagAssets extends AssetBundle
 {
-    public $sourcePath = '@application/modules/assets/static/tag/dist';
+    public $sourcePath = '@application/modules/admin/assets/static/tag/dist';
     public $js         = [
         'jquery.tagsinput.min.js',
     ];

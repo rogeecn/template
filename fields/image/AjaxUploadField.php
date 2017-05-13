@@ -32,6 +32,9 @@ class AjaxUploadField extends Field implements IField
         switch ($this->action) {
             case self::ACTION_CREATE:
             case self::ACTION_UPDATE:
+                if (empty($this->fieldData['image'])) {
+                    $this->fieldData['image'] = [];
+                }
                 $this->fieldData['image'] = implode(",", $this->fieldData['image']);
                 break;
         }

@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ['class' => 'yii\grid\SerialColumn'],
         'name',
         'reference_count',
-        ['class' => 'yii\grid\ActionColumn'],
+        ['class' => \LayUI\components\ActionColumn::className()],
     ],
 ]); ?>
 <?php Pjax::end(); ?>

@@ -119,7 +119,7 @@ _JS_;
 
     private function getCSS() {
         $css = <<<_CSS
-    ul > li {
+    ul.image-upload > li {
         display: inline-block;
         padding: 10px;
         width: 100px;
@@ -127,12 +127,12 @@ _JS_;
         border: 1px solid #e6e6e6;
     }
 
-    ul > li img {
+    ul.image-upload > li img {
         width: 100%;
         height: 100%;
     }
 
-    ul > li .layui-upload-button {
+    ul.image-upload > li .layui-upload-button {
         width: 100%;
         height: 100%;
     }

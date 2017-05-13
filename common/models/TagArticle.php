@@ -20,54 +20,6 @@ class TagArticle extends \common\base\ActiveRecord
         return 'tag_article';
     }
 
-    public static function setArticleTags($articleID, $tagList) {
-        $tagDataList      = self::getArticleTags($articleID);
-        $currentTagIDList = ArrayHelper::getColumn($tagDataList, "id");
-
-        $tagIDList = Tag::getIDListByTagName($tagList);
-
-        $removeTags = array_diff($currentTagIDList, $tagIDList);
-        $newTags    = array_diff($tagIDList, $currentTagIDList);
-
-        if (!empty($removeTags)) {
-            TagArticle::deleteAll(['article_id' => $articleID, 'tag_id' => $removeTags]);
-            foreach ($removeTags as $removeTagID) {
-                Tag::descTagReferenceCountByID($removeTagID);
-            }
-            return true;
-        }
-
-        if (!empty($newTags)) {
-            foreach ($newTags as $newTag) {
-                $tagModel = Tag::createTag($newTag);
-                if ($tagModel->hasErrors()) {
-                    continue;
-                }
-
-                $model             = new TagArticle();
-                $model->tag_id     = $tagModel->primaryKey;
-                $model->article_id = $articleID;
-                $model->save();
-            }
-            return true;
-        }
-
-        return true;
-    }
-
-    public static function getArticleTags($articleID) {
-        $tags = self::find()->with("tag")->where(['article_id' => $articleID])->all();
-
-        $tagList = [];
-        foreach ($tags as $tag) {
-            $tags[] = [
-                'name' => $tag->tag->name,
-                'id'   => $tag->id,
-            ];
-        }
-
-        return $tagList;
-    }
 
     /**
      * @inheritdoc
@@ -93,4 +45,58 @@ class TagArticle extends \common\base\ActiveRecord
     public function getTag() {
         return $this->hasOne(Tag::className(), ['id' => 'tag_id']);
     }
+
+    public static function setArticleTags($articleID, $tagList) {
+        $tagDataList        = self::getArticleTags($articleID);
+        $currentTagNameList = ArrayHelper::getColumn($tagDataList, "name");
+
+        $tagList = array_unique($tagList);
+
+        $removeTags = array_diff($currentTagNameList, $tagList);
+        $newTags    = array_diff($tagList, $currentTagNameList);
+
+        if (!empty($removeTags)) {
+            $removeTagIDList = Tag::getIDListByTagName($removeTags);
+            TagArticle::deleteAll(['article_id' => $articleID, 'tag_id' => $removeTagIDList]);
+            foreach ($removeTagIDList as $removeTagID) {
+                Tag::descTagReferenceCountByID($removeTagID);
+            }
+        }
+
+        if (!empty($newTags)) {
+            foreach ($newTags as $newTag) {
+                $tagModel = Tag::getByTagName($newTag);
+                if (!$tagModel) {
+                    $tagModel = Tag::createTag($newTag);
+                    if ($tagModel->hasErrors()) {
+                        continue;
+                    }
+                } else {
+                    $tagModel->incReferenceCount();
+                }
+
+                $model             = new TagArticle();
+                $model->tag_id     = $tagModel->primaryKey;
+                $model->article_id = $articleID;
+                $model->save();
+            }
+        }
+
+        return true;
+    }
+
+    public static function getArticleTags($articleID) {
+        $tags = self::find()->with("tag")->where(['article_id' => $articleID])->all();
+
+        $tagList = [];
+        foreach ($tags as $tag) {
+            $tagList[] = [
+                'name' => $tag->tag->name,
+                'id'   => $tag->id,
+            ];
+        }
+
+        return $tagList;
+    }
+
 }

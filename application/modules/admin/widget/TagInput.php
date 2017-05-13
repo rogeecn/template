@@ -1,19 +1,17 @@
 <?php
-namespace modules\admin\widget;
+namespace application\modules\admin\widget;
 
 
-use modules\tag\assets\TagAssets;
+use application\modules\admin\assets\TagAssets;
 use yii\helpers\Html;
 use yii\widgets\InputWidget;
 
-class ActiveTagInput extends InputWidget
+class TagInput extends InputWidget
 {
-    public $tags = [];
-
     public function run() {
         $id = self::getId(true);
         TagAssets::register($this->getView());
-        echo Html::textInput($this->name, implode(",", $this->tags), ['id' => $id]);
+        echo Html::textInput($this->name, $this->value, ['id' => $id]);
 
         $js = <<<_JS_
 $('#$id').tagsInput({
