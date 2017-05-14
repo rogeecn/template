@@ -43,7 +43,7 @@ class ItemController extends AuthController
         $model = new LinkGroup();
         $model->group_id = $id;
 
-        if (Request::isPost() && $model->load(Request::post()) && $model->createColumn()) {
+        if (Request::isPost() && $model->load(Request::post()) && $model->createLink()) {
             $this->redirect(['index','group'=>$id]);
         }
         return $this->render('create', [
