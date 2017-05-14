@@ -3,7 +3,7 @@
 namespace modules\admin\controllers\setting;
 
 use common\util\Request;
-use base\AuthController;
+use application\base\AuthController;
 use common\models\Setting;
 use yii\base\InvalidParamException;
 use yii\web\NotFoundHttpException;

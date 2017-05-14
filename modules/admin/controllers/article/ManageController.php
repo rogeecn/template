@@ -4,7 +4,7 @@ namespace modules\admin\controllers\article;
 
 use common\models\ArticleSearch;
 use common\util\Request;
-use base\AuthController;
+use application\base\AuthController;
 
 class ManageController extends AuthController
 {

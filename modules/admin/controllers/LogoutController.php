@@ -2,7 +2,7 @@
 namespace modules\admin\controllers;
 
 
-use base\AuthController;
+use application\base\AuthController;
 use common\extend\UserInfo;
 
 class LogoutController extends AuthController

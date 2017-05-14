@@ -6,13 +6,13 @@ class AuthController extends WebController
 {
     use TraitAuthAction;
 
-    public $layout = '@application/modules/admin/views/layouts/main';
+    public $layout = '@modules/admin/views/layouts/main';
 
     public function renderSuccess($msg = null, $buttons = []) {
         if (empty($msg)) {
             $msg = "恭喜您，操作成功";
         }
-        return $this->render("@application/modules/admin/views/common/success", [
+        return $this->render("@modules/admin/views/common/success", [
             'buttons' => $buttons,
             'msg'     => $msg,
         ]);
@@ -22,7 +22,7 @@ class AuthController extends WebController
         if (is_string($reasons)) {
             $reasons = ["Err: " => $reasons];
         }
-        return $this->render("@application/modules/admin/views/common/fail", [
+        return $this->render("@modules/admin/views/common/fail", [
             'reasons' => $reasons,
         ]);
     }

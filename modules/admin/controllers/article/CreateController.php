@@ -6,7 +6,7 @@ use common\base\Field;
 use common\extend\UserInfo;
 use common\util\Request;
 use LayUI\components\Html;
-use base\AuthController;
+use application\base\AuthController;
 use common\models\ArticleField;
 use common\models\Article;
 use yii\base\Exception;

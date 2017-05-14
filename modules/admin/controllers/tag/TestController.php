@@ -1,7 +1,7 @@
 <?php
 namespace modules\admin\controllers\tag;
 
-use base\AuthController;
+use application\base\AuthController;
 
 class TestController extends AuthController
 {

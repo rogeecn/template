@@ -2,7 +2,7 @@
 namespace modules\admin\controllers\category;
 
 use common\util\Request;
-use base\AuthController;
+use application\base\AuthController;
 use common\models\Category;
 
 class ControlController extends AuthController

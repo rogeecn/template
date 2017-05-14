@@ -3,7 +3,7 @@
 namespace modules\admin\controllers\article\type;
 
 use common\util\Request;
-use base\AuthController;
+use application\base\AuthController;
 use common\models\ArticleType;
 use common\models\ArticleTypeSearch;
 use yii\web\NotFoundHttpException;

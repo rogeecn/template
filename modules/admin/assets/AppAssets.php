@@ -6,7 +6,7 @@ use yii\web\AssetBundle;
 
 class AppAssets extends AssetBundle
 {
-    public $sourcePath = '@application/modules/admin/assets/static/custom';
+    public $sourcePath = '@modules/admin/assets/static/custom';
     public $css  =[
       'css/admin.css'
     ];

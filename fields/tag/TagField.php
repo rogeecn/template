@@ -2,7 +2,7 @@
 namespace fields\tag;
 
 
-use application\modules\admin\widget\TagInput;
+use modules\admin\widget\TagInput;
 use common\base\Field;
 use common\base\IField;
 use common\models\TagArticle;

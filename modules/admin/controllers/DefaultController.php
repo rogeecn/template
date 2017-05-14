@@ -3,7 +3,7 @@
 namespace modules\admin\controllers;
 
 
-use base\AuthController;
+use application\base\AuthController;
 
 class DefaultController extends AuthController
 {

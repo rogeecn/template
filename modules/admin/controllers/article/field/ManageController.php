@@ -2,7 +2,7 @@
 
 namespace modules\admin\controllers\article\field;
 
-use base\AuthController;
+use application\base\AuthController;
 use common\models\ArticleField;
 use common\util\Request;
 use LayUI\components\Html;

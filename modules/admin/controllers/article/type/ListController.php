@@ -4,7 +4,7 @@ namespace modules\admin\controllers\article\type;
 
 use common\models\ArticleField;
 use common\models\ArticleType;
-use base\AuthController;
+use application\base\AuthController;
 
 class ListController extends AuthController
 {

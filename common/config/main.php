@@ -1,7 +1,18 @@
 <?php
 return [
-    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'components' => [
+    'modules'       => [
+        'admin'    => [
+            'class' => 'modules\admin\Module',
+        ],
+        'ueditor'  => [
+            'class' => 'modules\ueditor\Module',
+        ],
+        'uploader' => [
+            'class' => 'modules\uploader\Module',
+        ],
+    ],
+    'vendorPath'    => dirname(dirname(__DIR__)) . '/vendor',
+    'components'    => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -10,12 +21,12 @@ return [
             'bundles' => [
                 'yii\web\JqueryAsset' => [
                     'jsOptions' => [
-                        'position' => \yii\web\View::POS_HEAD
+                        'position' => \yii\web\View::POS_HEAD,
                     ],
                 ],
             ],
         ],
-        'formatter' => [
+        'formatter'    => [
             'dateFormat'     => 'php:y/m/d',
             'datetimeFormat' => 'php:y/m/d H:i',
             'timeFormat'     => 'php:H:i:s',
@@ -23,7 +34,7 @@ return [
     ],
     'controllerMap' => [
         'migrate' => [
-            'class' => 'yii\console\controllers\MigrateController',
+            'class'               => 'yii\console\controllers\MigrateController',
             'migrationNamespaces' => [
                 'migrations',
             ],

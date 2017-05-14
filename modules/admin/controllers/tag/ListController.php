@@ -2,7 +2,7 @@
 namespace modules\admin\controllers\tag;
 
 use common\util\Request;
-use base\AuthController;
+use application\base\AuthController;
 use common\models\TagSearch;
 
 class ListController extends AuthController
