@@ -13,6 +13,9 @@ return [
     'controllerNamespace' => 'application\controllers',
     'bootstrap'           => ['log'],
     'modules'             => [
+        'go' => [
+            'class' => 'application\modules\go\Module',
+        ],
     ],
     'components'          => [
         'user'         => [
@@ -50,9 +53,16 @@ return [
                 'text/json'        => 'yii\web\JsonParser',
             ],
         ],
-        //        'view'         => [
-        //            'theme' => 'common\extend\Theme',
-        //        ],
+        'view' => [
+            'theme' => [
+                'basePath' => '@themes/basic',
+                'baseUrl' => '@themes/basic',
+                'pathMap' => [
+                    '@application/views' => '@themes/basic',
+                    '@application/modules' => '@themes/basic/modules',
+                ],
+            ],
+        ],
     ],
     'params'              => $params,
 ];
