@@ -8,9 +8,6 @@ use common\models\Article;
 class SiteController extends WebController
 {
     public function actionIndex() {
-        $data = Article::getDataByID(19,Field::MODE_SUMMARY);
-        var_dump($data);
-        exit;
         return $this->render("index");
     }
 

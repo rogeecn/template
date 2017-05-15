@@ -1,0 +1,17 @@
+.announcement {
+  padding: 2*$padding-size;
+  border-radius: $border-radius;
+  overflow: hidden;
+  border: 1px solid $color-border;
+  background: $color-white;
+  margin-bottom: 2*$margin-size;
+
+  .title {
+    font-size: $size-h3;
+    margin-bottom: $margin-size;
+  }
+
+  .info {
+    color: $color-fade-dark;
+  }
+}

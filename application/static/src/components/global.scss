@@ -1,0 +1,85 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  color: $color-text;
+  text-decoration: none;
+  &:hover {
+    color: $color-light;
+  }
+  .fade {
+    color: $color-fade;
+    &:hover {
+      color: $color-light;
+    }
+  }
+}
+
+.container {
+  width: $width-container;
+  margin: 0 auto;
+  @include clearfix;
+}
+
+html, body {
+  font-family: $font-yahei;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: $color-text;
+  background-color: $color-background;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+ul {
+  list-style: none;
+}
+
+.content {
+  @extend .float-left;
+  word-break: break-all;
+  word-wrap: break-word;
+  width: $width-content;
+}
+
+.sidebar {
+  @extend .float-right;
+  word-break: break-all;
+  word-wrap: break-word;
+  width: $width-sidebar;
+}
+
+.title {
+  h3 {
+    @extend .float-left;
+    font-size:$size-h2;
+  }
+
+  .more {
+    @extend .float-right;
+    color: $color-fade;
+    a {
+      color: $color-fade;
+    }
+  }
+}

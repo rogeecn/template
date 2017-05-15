@@ -1,0 +1,64 @@
+.nav {
+  background: $color-white;
+  border-bottom: 1px solid $color-border;
+  @include clearfix;
+  padding: 2*$padding-size 0;
+  margin-bottom: 2*$margin-size;
+
+  .nav-sub {
+    ul > li {
+      display: inline-block;
+      padding: $padding-size/2 $padding-size;
+    }
+    a {
+      color: $color-fade;
+    }
+
+    margin-bottom: $margin-size;
+  }
+
+  .nav-main {
+    @include clearfix;
+    $width-logo: 137px;
+    $height-logo: 37px;
+
+    .logo {
+      width: $width-logo;
+      height: $height-logo;
+      @extend .float-left;
+      a {
+        font-size: 0px;
+        display: block;
+        height: $height-logo;
+      }
+    }
+
+    .brand {
+      @extend .float-left;
+      font-size: 14px;
+      line-height: 15px;
+      color: $color-fade;
+      padding-left: $padding-size;
+      position: relative;
+      top: 1px;
+      margin-left: $margin-size;
+      overflow: hidden;
+      height: 30px;;
+      border-left: 1px solid $color-border;
+    }
+
+    .nav-menu {
+      @extend .float-right;
+
+      li {
+        display: block;
+        float: left;
+        a {
+          display: block;
+          font-size: $size-h3;
+          padding: $padding-size/2 $padding-size;
+        }
+      }
+    }
+  }
+}
