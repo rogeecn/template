@@ -32,14 +32,8 @@
     </div>
     <div class="layui-body" style="bottom: 0px;">
         <div class="layui-tab layui-tab-brief main-tab-container" lay-filter="tab-container"  lay-allowclose="true" style="margin: 0">
-            <ul class="layui-tab-title site-demo-title">
-                <li class="layui-this">控制台</li>
-            </ul>
-            <div class="layui-body layui-tab-content" style="padding:0px;left: 0px;top:40px;bottom: 0px">
-                <div class="layui-tab-item layui-show">
-                    <p>Dashboard</p>
-                </div>
-            </div>
+            <ul class="layui-tab-title site-demo-title"></ul>
+            <div class="layui-body layui-tab-content" style="padding:0px;left: 0px;top:40px;bottom: 0px"></div>
         </div>
     </div>
 </div>
@@ -72,7 +66,11 @@
             });
             element.tabChange('tab-container', link);
             return false;
-        })
+        });
+
+
+        // open first menu
+        $(".link-to-tab a").eq(0).click();
     })
 </script>
 </body>
