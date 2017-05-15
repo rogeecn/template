@@ -36,6 +36,19 @@ class UEditorField extends Field implements IField
         ];
     }
 
+    protected function getData(){
+        $fields = "*";
+        if ($this->mode && $this->mode == self::MODE_SUMMARY){
+            $fields = "id,description";
+        }
+
+        return $this->getQuery()
+            ->from($this->table)
+            ->select($fields)
+            ->where(['id'=>$this->dataID])
+            ->one();
+    }
+
 
     protected function renderField() {
         $this->label = json_decode($this->label, true);

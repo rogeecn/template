@@ -21,6 +21,11 @@ class Field extends Widget
     public $options     = [];
     public $fieldData   = [];
     public $dataID      = null;
+    public $mode      = null;
+
+
+    const MODE_SUMMARY = "SUMMARY";
+    const MODE_DETAIL = "DETAIL";
 
     const ACTION_CREATE = 'createData';
     const ACTION_UPDATE = 'updateData';

@@ -2,7 +2,7 @@
 namespace modules\admin\controllers;
 
 
-use base\WebController;
+use application\base\WebController;
 use common\extend\UserInfo;
 use common\models\AdminLoginForm;
 use common\util\Request;

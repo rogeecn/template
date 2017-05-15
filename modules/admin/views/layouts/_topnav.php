@@ -10,7 +10,7 @@
         line-height:40px;
         font-weight: bold;
         font-size: 30px;
-        color: #fff5d4;
+        color: #bdbdbe;
         background: #2B2E37;
     }
 </style>

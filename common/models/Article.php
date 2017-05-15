@@ -3,8 +3,10 @@
 namespace common\models;
 
 
+use common\base\Field;
 use common\extend\UserInfo;
 use yii\behaviors\TimestampBehavior;
+use yii\web\NotFoundHttpException;
 
 /**
  * This is the model class for table "article".
@@ -74,5 +76,30 @@ class Article extends \common\base\ActiveRecord
     {
         $this->user_id = UserInfo::getID();
         return parent::beforeSave($insert);
+    }
+
+    public static function getDataByID($articleID,$mode=null,$excludeFields = [])
+    {
+        $articleModel =  self::findOne($articleID);
+        if (!$articleModel){
+            throw new NotFoundHttpException();
+        }
+
+        $articleData = $articleModel->toArray();
+
+        $articleTypeFields = ArticleField::getTypeFieldList($articleModel->type);
+        foreach ($articleTypeFields as $articleField){
+            if (in_array($articleField['name'],$excludeFields)){
+                continue;
+            }
+
+            $articleData['fields'][$articleField['name']] = $articleField['class']::field([
+                'action'=>Field::ACTION_GET,
+                'dataID'=>$articleData['id'],
+                'mode'=>$mode,
+            ]);
+        }
+
+        return $articleData;
     }
 }
