@@ -1,7 +1,7 @@
 <?php
-namespace LayUI\components;
+namespace plugins\LayUI\components;
 
-use LayUI\LayUIAssets;
+use plugins\LayUI\LayUIAssets;
 use Yii;
 use yii\base\InvalidConfigException;
 
@@ -63,7 +63,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
      * @var string the default field class name when calling [[field()]] to create a new field.
      * @see fieldConfig
      */
-    public $fieldClass = 'LayUI\components\ActiveField';
+    public $fieldClass = 'plugins\LayUI\components\ActiveField';
     /**
      * @var array HTML attributes for the form tag. Default is `['role' => 'form']`.
      */

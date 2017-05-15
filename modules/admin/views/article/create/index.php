@@ -1,7 +1,7 @@
 <?php
 
-use LayUI\components\ActiveForm;
-use LayUI\components\Html;
+use plugins\LayUI\components\ActiveForm;
+use plugins\LayUI\components\Html;
 use common\models\Article;
 use common\models\Category;
 

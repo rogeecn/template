@@ -1,7 +1,7 @@
 <?php
-use LayUI\components\ActiveForm;
-use LayUI\components\GridView;
-use LayUI\components\Html;
+use plugins\LayUI\components\ActiveForm;
+use plugins\LayUI\components\GridView;
+use plugins\LayUI\components\Html;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
-<?= \LayUI\components\Table::widget([
+<?= \plugins\LayUI\components\Table::widget([
     'dataProvider' => [1],
     'showHeader'   => false,
     "colGroup"=>["",175],
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ['class' => 'yii\grid\SerialColumn'],
         'name',
         'reference_count',
-        ['class' => \LayUI\components\ActionColumn::className()],
+        ['class' => \plugins\LayUI\components\ActionColumn::className()],
     ],
 ]); ?>
 <?php Pjax::end(); ?>

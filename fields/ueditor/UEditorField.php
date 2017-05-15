@@ -4,7 +4,7 @@ namespace fields\ueditor;
 
 use common\base\Field;
 use common\base\IField;
-use LayUI\components\Html;
+use plugins\LayUI\components\Html;
 use modules\ueditor\widget\UEditorInput;
 
 class UEditorField extends Field implements IField

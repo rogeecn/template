@@ -1,11 +1,11 @@
 <?php
-namespace LayUI;
+namespace plugins\LayUI;
 
 use yii\web\AssetBundle;
 
 class LayUIAssets extends AssetBundle
 {
-    public $sourcePath = "@LayUI/assets/build";
+    public $sourcePath = "@plugins/LayUI/assets/build";
 
     public $js = [
 //        "layui.js"
@@ -19,5 +19,6 @@ class LayUIAssets extends AssetBundle
 
     public $depends = [
         'yii\web\JqueryAsset',
+        'plugins\FontAwesome\FontAwesome',
     ];
 }

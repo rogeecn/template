@@ -1,10 +1,10 @@
 <?php
-use LayUI\components\Html;
+use plugins\LayUI\components\Html;
 use common\models\Category;
-use LayUI\components\ActiveForm;
+use plugins\LayUI\components\ActiveForm;
 /** @var \common\models\Category $model */
 
-\LayUI\LayUIAssets::register($this);
+\plugins\LayUI\LayUIAssets::register($this);
 
 
 $form = ActiveForm::begin();

@@ -1,10 +1,10 @@
 <?php
-use LayUI\components\ActiveForm;
-use LayUI\components\Html;
+use plugins\LayUI\components\ActiveForm;
+use plugins\LayUI\components\Html;
 
 ActiveForm::begin();
 echo Html::tag("div", Html::submitButton(), ['style' => 'text-align:right;margin-bottom: 20px;']);
-echo \LayUI\components\Table::widget([
+echo \plugins\LayUI\components\Table::widget([
     'dataProvider' => $dataList,
     'sortable'     => true,
     'orderInput'   => 'input',
@@ -15,7 +15,7 @@ echo \LayUI\components\Table::widget([
                 'style' => 'width: 10px;',
             ],
             'value'   => function ($data) {
-                return Html::icon("&#xe649;", ['class' => 'drag-handle']);
+                return Html::icon("arrows",['drag-handle']);
             },
         ],
         'id',
@@ -44,7 +44,7 @@ echo \LayUI\components\Table::widget([
                 'style' => 'width: 20px;',
             ],
             'value'   => function ($data) {
-                return Html::a(Html::icon("&#xe642;"), ['/admin/category/control/update', 'id' => $data['id']]);
+                return Html::a(Html::icon("edit"), ['/admin/category/control/update', 'id' => $data['id']]);
             },
         ],
     ],

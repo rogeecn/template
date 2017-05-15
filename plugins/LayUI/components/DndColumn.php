@@ -1,5 +1,5 @@
 <?php
-namespace LayUI\components;
+namespace plugins\LayUI\components;
 
 
 use plugins\sortable\SortableAssets;

@@ -1,7 +1,7 @@
 <?php
 
-use LayUI\components\GridView;
-use LayUI\components\Html;
+use plugins\LayUI\components\GridView;
+use plugins\LayUI\components\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\ArticleTypeSearch */
@@ -10,28 +10,28 @@ use LayUI\components\Html;
 
 
 <?php
-\LayUI\components\ActiveForm::begin();
-echo \LayUI\components\Html::beginTag("div", ['style' => 'text-align:right']);
-$btnSave   = \LayUI\components\Html::submitButton("保存");
-$btnCreate = \LayUI\components\Html::a("创建", ['/admin/article/type/manage/create'], ['class' => 'layui-btn']);
-echo \LayUI\components\Html::buttonGroup([$btnCreate, $btnSave]);
-echo \LayUI\components\Html::endTag("div");
+\plugins\LayUI\components\ActiveForm::begin();
+echo \plugins\LayUI\components\Html::beginTag("div", ['style' => 'text-align:right']);
+$btnSave   = \plugins\LayUI\components\Html::submitButton("保存");
+$btnCreate = \plugins\LayUI\components\Html::a("创建", ['/admin/article/type/manage/create'], ['class' => 'layui-btn']);
+echo \plugins\LayUI\components\Html::buttonGroup([$btnCreate, $btnSave]);
+echo \plugins\LayUI\components\Html::endTag("div");
 ?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider, 'columns' => [
         [
-            'class'         => \LayUI\components\DndColumn::className(),
+            'class'         => \plugins\LayUI\components\DndColumn::className(),
             'headerOptions' => ['width' => 20],
             'content'       => function ($model) {
-                $dndIcon = \LayUI\components\Html::icon("&#xe649;", ['class' => 'drag-handle']);
+                $dndIcon = Html::icon("arrows", ['drag-handle']);
 
                 $orderAttr   = [
                     'data-old' => $model->order,
                     'data-id'  => $model->primaryKey,
                 ];
                 $name        = sprintf("order[%d]", $model->primaryKey);
-                $hiddenInput = \LayUI\components\Html::hiddenInput($name, $model->order, $orderAttr);
+                $hiddenInput = Html::hiddenInput($name, $model->order, $orderAttr);
                 return $dndIcon . $hiddenInput;
 
             },
@@ -42,7 +42,7 @@ echo \LayUI\components\Html::endTag("div");
         'description',
         'order',
         [
-            'class'    => \LayUI\components\ActionColumn::className(),
+            'class'    => \plugins\LayUI\components\ActionColumn::className(),
             'template' => '{column} {update} {delete}',
             'buttons'  => [
                 'column' => function ($url, $model, $key) {
@@ -52,4 +52,4 @@ echo \LayUI\components\Html::endTag("div");
         ],
     ],
 ]); ?>
-<?php \LayUI\components\ActiveForm::end(); ?>
+<?php \plugins\LayUI\components\ActiveForm::end(); ?>

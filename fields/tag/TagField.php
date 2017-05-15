@@ -6,7 +6,7 @@ use modules\admin\widget\TagInput;
 use common\base\Field;
 use common\base\IField;
 use common\models\TagArticle;
-use LayUI\components\Html;
+use plugins\LayUI\components\Html;
 use yii\helpers\ArrayHelper;
 
 class TagField extends Field implements IField

@@ -1,14 +1,14 @@
 <?php
-namespace LayUI\components;
+namespace plugins\LayUI\components;
 
 
-use LayUI\LayUIAssets;
+use plugins\LayUI\LayUIAssets;
 
 class GridView extends \yii\grid\GridView
 {
     public $tableOptions = ['class' => 'layui-table'];
     public $pager = [
-        'class' => 'LayUI\components\LinkPager'
+        'class' => 'plugins\LayUI\components\LinkPager'
     ];
 
     public function init() {

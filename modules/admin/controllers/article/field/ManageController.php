@@ -5,7 +5,7 @@ namespace modules\admin\controllers\article\field;
 use application\base\AuthController;
 use common\models\ArticleField;
 use common\util\Request;
-use LayUI\components\Html;
+use plugins\LayUI\components\Html;
 
 class ManageController extends AuthController
 {
@@ -39,6 +39,10 @@ class ManageController extends AuthController
         }
 
         $info  = Request::input("info");
+        if (!isset($info['options'])){
+            $info['options'] = [];
+        }
+
         $model = new ArticleField();
         $model->setAttributes([
             'name'        => $info['name'],
@@ -47,7 +51,7 @@ class ManageController extends AuthController
             'description' => $info['description'],
             'type_id'     => $info['type'],
             'label'       => $info['label'],
-            'options'     => $info['options'],
+            'options'     => json_encode($info['options']),
         ]);
 
         if ($model->save()) {
@@ -63,6 +67,10 @@ class ManageController extends AuthController
         $model = ArticleField::findOne($id);
         if (Request::isPost()) {
             $info = Request::input("info");
+
+            if (!isset($info['options'])){
+                $info['options'] = [];
+            }
 
             $model->setAttributes([
                 'name'        => $info['name'],

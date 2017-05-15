@@ -1,7 +1,7 @@
 <?php
 
-use LayUI\components\ActiveForm;
-use LayUI\components\Html;
+use plugins\LayUI\components\ActiveForm;
+use plugins\LayUI\components\Html;
 use common\models\Article;
 use common\models\Category;
 
@@ -9,7 +9,7 @@ use common\models\Category;
 /* @var $allFields array */
 /* @var $typeFields array */
 ?>
-<?=\LayUI\components\Table::widget([
+<?=\plugins\LayUI\components\Table::widget([
     'dataProvider'=>$allFields,
     'columns'=>[
         "class",

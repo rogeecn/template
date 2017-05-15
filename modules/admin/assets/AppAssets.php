@@ -11,7 +11,7 @@ class AppAssets extends AssetBundle
       'css/admin.css'
     ];
     public $depends = [
-        'LayUI\LayUIAssets',
+        'plugins\LayUI\LayUIAssets',
         'yii\web\JqueryAsset',
     ];
 }

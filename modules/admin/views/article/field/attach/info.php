@@ -1,8 +1,8 @@
 <?php
 
 use common\models\ArticleField;
-use LayUI\components\ActiveForm;
-use LayUI\components\Html;
+use plugins\LayUI\components\ActiveForm;
+use plugins\LayUI\components\Html;
 
 /* @var $this yii\web\View */
 /* @var $allFields array */
@@ -44,20 +44,27 @@ $tableList = ArticleField::getTableList();
         <td>
             <?php
             foreach ($options as $option) {
-                echo Html::beginTag("div", ['style' => 'margin-bottom: 20px;']);
-                $inputType = $option['type'];
+//                echo Html::beginTag("div", ['style' => 'margin-bottom: 20px;']);
+//
+//                switch ($inputType) {
+//                    case "checkbox":
+//                        echo Html::checkbox($fieldName, $fieldValue, $option['config']);
+//                        break;
+//                    case "textInput":
+//                        echo Html::checkbox($fieldName, $fieldValue, $option['config']);
+//                        break;
+//                }
+//                echo Html::endTag("div");
 
+                $inputType = $option['type'];
                 $fieldValue = $option['value'];
                 $fieldName  = sprintf("info[options][%s]", $option['name']);
-                switch ($inputType) {
-                    case "checkbox":
-                        echo Html::checkbox($fieldName, $fieldValue, $option['config']);
-                        break;
-                    case "textInput":
-                        echo Html::checkbox($fieldName, $fieldValue, $option['config']);
-                        break;
+                $label = "";
+                if (isset($option['label'])){
+                    $label = $option['label'];
                 }
-                echo Html::endTag("div");
+                $fieldName = sprintf("info[options][%s]", $option['name']);
+                echo Html::inlineFormItem($inputType, $label, $fieldName, $fieldValue, $option['config']);
             }
             ?>
         </td>

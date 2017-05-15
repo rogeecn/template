@@ -1,7 +1,7 @@
 <?php
-namespace LayUI\components;
+namespace plugins\LayUI\components;
 
-use LayUI\LayUIAssets;
+use plugins\LayUI\LayUIAssets;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;

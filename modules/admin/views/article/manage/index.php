@@ -2,9 +2,9 @@
 
 use common\models\Category;
 use common\models\Article;
-use LayUI\components\ActiveForm;
-use LayUI\components\GridView;
-use LayUI\components\Html;
+use plugins\LayUI\components\ActiveForm;
+use plugins\LayUI\components\GridView;
+use plugins\LayUI\components\Html;
 use yii\widgets\Pjax;
 use common\models\ArticleType;
 
@@ -20,7 +20,7 @@ $statusList = Article::getStatusList();
     'action' => ['index'],
     'method' => 'get',
 ]); ?>
-<?= \LayUI\components\Table::widget([
+<?= \plugins\LayUI\components\Table::widget([
     'dataProvider' => [1],
     'showHeader' => false,
     "colGroup" => [120, 0,120, 140, 140, 140, 140, 175],
@@ -119,7 +119,7 @@ $statusList = Article::getStatusList();
         'updated_at:datetime',
 
         [
-            'class' => \LayUI\components\ActionColumn::className(),
+            'class' => \plugins\LayUI\components\ActionColumn::className(),
             'buttons'=>[
                 'update'=>function ($url, $model, $key){
                     return Html::a("[编辑]",['/admin/article/update','id'=>$model->id]);

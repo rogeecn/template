@@ -4,7 +4,7 @@ namespace fields\image;
 
 use common\base\Field;
 use common\base\IField;
-use LayUI\components\Html;
+use plugins\LayUI\components\Html;
 use modules\uploader\widget\UploaderWidget;
 
 class AjaxUploadField extends Field implements IField

@@ -2,8 +2,8 @@
 namespace modules\uploader\widget;
 
 
-use LayUI\components\Html;
-use LayUI\LayUIAssets;
+use plugins\LayUI\components\Html;
+use plugins\LayUI\LayUIAssets;
 use yii\widgets\InputWidget;
 
 class UploaderWidget extends InputWidget
@@ -107,7 +107,7 @@ _JS_BEOFRE_;
 
 
         $js = <<<_JS_
-var SOURCE_URL = "$this->options['sourceURL']";
+var SOURCE_URL = "{$this->options['sourceURL']}";
 layui.upload({
   url: '{$this->action}'
   ,before: {$this->options['handleBefore']}

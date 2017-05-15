@@ -1,5 +1,5 @@
 <?php
-\LayUI\LayUIAssets::register($this);
+\plugins\LayUI\LayUIAssets::register($this);
 ?>
 <div style="width: 600px;margin: 10% auto;">
         <blockquote class="layui-elem-quote">

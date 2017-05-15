@@ -1,5 +1,5 @@
 <?php
-namespace LayUI\components;
+namespace plugins\LayUI\components;
 
 
 class ActionColumn extends \yii\grid\ActionColumn

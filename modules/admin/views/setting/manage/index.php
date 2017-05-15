@@ -2,7 +2,7 @@
 /** @var \yii\web\View $this */
 ?>
 <?php
-$form = \LayUI\components\ActiveForm::begin();
+$form = \plugins\LayUI\components\ActiveForm::begin();
 
 $items = [];
 foreach ($groupList as $groupID=>$groupData) {
@@ -19,9 +19,9 @@ $items[0]['active'] = true;
 
 
 if (!empty($items)) {
-    echo \LayUI\components\Tabs::widget([
+    echo \plugins\LayUI\components\Tabs::widget([
         'items' => $items,
     ]);
-    echo \LayUI\components\Html::submitWrapper(\LayUI\components\Html::submitButton());
+    echo \plugins\LayUI\components\Html::submitWrapper(\plugins\LayUI\components\Html::submitButton());
 }
-\LayUI\components\ActiveForm::end();
+\plugins\LayUI\components\ActiveForm::end();

@@ -1,7 +1,7 @@
 <?php
 
-use LayUI\components\ActiveForm;
-use LayUI\components\Html;
+use plugins\LayUI\components\ActiveForm;
+use plugins\LayUI\components\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ArticleType */

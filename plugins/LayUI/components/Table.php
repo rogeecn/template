@@ -1,8 +1,8 @@
 <?php
-namespace LayUI\components;
+namespace plugins\LayUI\components;
 
 
-use LayUI\LayUIAssets;
+use plugins\LayUI\LayUIAssets;
 use plugins\sortable\SortableAssets;
 use yii\base\Widget;
 

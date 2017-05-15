@@ -1,6 +1,6 @@
 <?php
-use LayUI\components\ActiveForm;
-use LayUI\components\Html;
+use plugins\LayUI\components\ActiveForm;
+use plugins\LayUI\components\Html;
 /** @var \yii\web\View $this */
 /** @var \common\models\Setting $model */
 $typeList  = \common\models\Setting::getTypeList();

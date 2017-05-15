@@ -1,7 +1,7 @@
 <?php
 
-use LayUI\components\ActiveForm;
-use LayUI\components\Html;
+use plugins\LayUI\components\ActiveForm;
+use plugins\LayUI\components\Html;
 
 /* @var $this yii\web\View */
 /* @var $allFields array */
@@ -49,8 +49,13 @@ $tableList = \common\models\ArticleField::getTableList();
                 } else {
                     $fieldValue = $option['value'];
                 }
+
+                $label = "";
+                if (isset($option['label'])){
+                    $label = $option['label'];
+                }
                 $fieldName = sprintf("info[options][%s]", $option['name']);
-                echo Html::inlineFormItem($inputType, $option['label'], $fieldName, $fieldValue, $option['config']);
+                echo Html::inlineFormItem($inputType, $label, $fieldName, $fieldValue, $option['config']);
             }
             ?>
         </td>

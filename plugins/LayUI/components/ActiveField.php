@@ -1,6 +1,6 @@
 <?php
 
-namespace LayUI\components;
+namespace plugins\LayUI\components;
 
 use yii\helpers\ArrayHelper;
 

@@ -1,6 +1,6 @@
 <?php
 use common\models\Setting;
-use LayUI\components\Html;
+use plugins\LayUI\components\Html;
 
 /** @var \yii\bootstrap\ActiveForm $form */
 ?>

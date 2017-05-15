@@ -1,5 +1,5 @@
 <?php
-\LayUI\LayUIAssets::register($this);
+\plugins\LayUI\LayUIAssets::register($this);
 ?>
 <div style="width: 600px;margin: 10% auto;">
     <blockquote class="layui-elem-quote" style="border-left-color: #FF5722;">
@@ -11,7 +11,7 @@
         </ul>
         <hr>
         <div class="tip-buttons" style="text-align: right;">
-            <?=\LayUI\components\Html::linkButton("返回修改",'#',['color'=>'primary','onClick'=>'javascript:history.go(-1)'])?>
+            <?=\plugins\LayUI\components\Html::linkButton("返回修改",'#',['color'=>'primary','onClick'=>'javascript:history.go(-1)'])?>
         </div>
     </blockquote>
 </div>

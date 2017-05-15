@@ -1,5 +1,5 @@
 <?php
-use LayUI\components\Html;
+use plugins\LayUI\components\Html;
 
 /** @var \yii\web\View $this */
 /** @var \common\models\LinkGroup[] $columnList */
@@ -9,8 +9,8 @@ use LayUI\components\Html;
     <?=Html::linkButton("创建",['/admin/link/item/create','id'=>$groupId])?>
 </div>
 <?php
-$form = \LayUI\components\ActiveForm::begin();
-echo \LayUI\components\Table::widget([
+$form = \plugins\LayUI\components\ActiveForm::begin();
+echo \plugins\LayUI\components\Table::widget([
     'dataProvider' => $linkList,
     'sortable'=>true,
     'orderInput'=>'input',
@@ -21,7 +21,7 @@ echo \LayUI\components\Table::widget([
                 'style'=>'width: 10px;',
             ],
             'value'=>function($data){
-                return Html::icon("&#xe649;",['class'=>'drag-handle']);
+                return Html::icon("arrows",['drag-handle']);
             }
         ],
         [
@@ -63,5 +63,5 @@ echo \LayUI\components\Table::widget([
 
 echo Html::submitButton();
 
-\LayUI\components\ActiveForm::end();
+\plugins\LayUI\components\ActiveForm::end();
 

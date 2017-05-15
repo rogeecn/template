@@ -5,7 +5,7 @@ namespace modules\admin\controllers\article;
 use common\base\Field;
 use common\extend\UserInfo;
 use common\util\Request;
-use LayUI\components\Html;
+use plugins\LayUI\components\Html;
 use application\base\AuthController;
 use common\models\ArticleField;
 use common\models\Article;

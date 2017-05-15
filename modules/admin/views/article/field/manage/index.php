@@ -1,7 +1,7 @@
 <?php
 
-use LayUI\components\ActiveForm;
-use LayUI\components\Html;
+use plugins\LayUI\components\ActiveForm;
+use plugins\LayUI\components\Html;
 use common\models\Article;
 use common\models\Category;
 
@@ -15,7 +15,7 @@ use common\models\Category;
     <?=Html::linkButton("添加字段",['/admin/article/field/attach','type'=>$type])?>
 </div>
 
-<?=\LayUI\components\Table::widget([
+<?=\plugins\LayUI\components\Table::widget([
     'dataProvider'=>$typeFields,
     'sortable'=>true,
     'orderInput'=>'input',
@@ -26,7 +26,7 @@ use common\models\Category;
                 'style'=>'width: 10px;',
             ],
             'value'=>function($data){
-                return Html::icon("&#xe649;",['class'=>'drag-handle']);
+                return Html::icon("arrows",['drag-handle']);
             }
         ],
         "label",

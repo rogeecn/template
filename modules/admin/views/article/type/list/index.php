@@ -1,10 +1,10 @@
 <?php
-use LayUI\components\Html;
+use plugins\LayUI\components\Html;
 
 /** @var array $types */
 /** @var \yii\web\View $this */
 
-\LayUI\LayUIAssets::register($this);
+\plugins\LayUI\LayUIAssets::register($this);
 
 $titleStyle = ['style' => 'font-size: 18px;color: #01aaed;display:block'];
 ?>

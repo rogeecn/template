@@ -21,7 +21,7 @@ div.tagsinput span.tag {
     /*font-family: helvetica;*/
 }
 
-i.layui-icon:hover {
+i.fa:hover {
     background: #FF5722;
     color: #ffffff !important;
 }

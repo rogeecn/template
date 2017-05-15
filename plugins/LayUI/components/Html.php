@@ -1,5 +1,5 @@
 <?php
-namespace LayUI\components;
+namespace plugins\LayUI\components;
 
 use modules\ueditor\widget\UEditorInput;
 use yii\helpers\BaseHtml;
@@ -188,9 +188,11 @@ class Html extends BaseHtml
         return self::activeListInput('checkboxList', $model, $attribute, $items, $options);
     }
 
-    public static function icon($icon, $options = []) {
-        self::addCssClass($options, ['class' => 'layui-icon']);
-        return self::tag("i", $icon, $options);
+    public static function icon($fontIconCss,$otherClass=[]) {
+        $classPrefix = "fa fa-";
+        $fontClass = $classPrefix.$fontIconCss;
+        $otherClass = implode(" ",$otherClass);
+        return self::tag("i", "", ['class' => $fontClass." ".$otherClass]);
     }
 
 
