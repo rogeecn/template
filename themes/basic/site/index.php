@@ -2,6 +2,26 @@
     <img src="http://www.daqianduan.com/wp-content/uploads/2014/11/hs-xiu.jpg" alt="">
 </div>
 
+<?=\plugins\Carousel\Carousel::widget([
+        'items'=>[
+                [
+                        'label'=>'image_1',
+                        'image'=>'http://www.daqianduan.com/wp-content/uploads/2014/11/hs-xiu.jpg',
+                        'url'=>'http://baidu.com',
+                ],
+                [
+                    'label'=>'image_1',
+                    'image'=>'http://www.daqianduan.com/wp-content/uploads/2014/11/hs-xiu.jpg',
+                    'url'=>'http://baidu.com',
+                ],
+                [
+                    'label'=>'image_1',
+                    'image'=>'http://www.daqianduan.com/wp-content/uploads/2014/11/hs-xiu.jpg',
+                    'url'=>'http://baidu.com',
+                ],
+        ]
+])?>
+
 <article class="announcement">
     <h3 class="title"><a href="">滴滴出行(杭州)招聘资深前端开发工程师</a></h3>
     <p class="info">滴滴出行杭州团队，支持代驾及专车业务。 岗位职责： 独立负责承担一个子业务的前端设计与开发工作 建设与维护团队前端工程化及服务化体系 任职要求：
