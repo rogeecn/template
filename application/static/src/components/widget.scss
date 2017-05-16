@@ -1,0 +1,84 @@
+@mixin widget-block-show($main-color: #428BCA){
+  &:hover {
+    border: 1px solid $main-color;
+  }
+
+  .band {
+    padding: $padding-size/2 $padding-size;
+    color: $color-white;
+    background: $main-color;
+    display: inline-block;
+    margin-bottom: $margin-size;
+  }
+  .title {
+    font-size: 20px;
+    color: $main-color;
+    margin-bottom: $margin-size;
+  }
+  .info {
+    color: $color-fade;
+  }
+}
+
+.widget {
+  background: $color-white;
+  margin-bottom: 2*$margin-size;
+
+  &.border{
+    border: 1px solid $color-border;
+    border-radius: $border-radius;
+  }
+
+  .block-show {
+    border: 1px solid $color-border;
+    border-radius: $border-radius;
+    padding: 0 2*$padding-size 2*$padding-size 2*$padding-size;
+
+    &.style01{
+      @include widget-block-show();
+    }
+
+
+    &.style02{
+      @include widget-block-show(#FF5E52);
+    }
+
+  }
+
+  .tag-cloud{
+    .title{
+      background: #fbfbfb;
+      border-bottom: 1px solid $color-border;
+      padding: $padding-size 2*$padding-size;
+    }
+
+    ul.body{
+      @include clearfix;
+      padding: 2*$padding-size;
+
+      li{
+        display: block;
+        float: left;
+        width: 33.3333%;
+        a{
+          display: block;
+          margin: 0 1px 1px 0;
+          padding: 0 8px;
+          font-size:12px;
+          height: 29px;
+          line-height: 29px;
+          overflow: hidden;
+          background: $color-background;
+          color: $color-fade-dark;
+
+          &:hover{
+            background: $color-light;
+            color: $color-white;
+          }
+        }
+
+      }
+    }
+  }
+}
+

@@ -2,7 +2,7 @@
   background: $color-white;
   border-bottom: 1px solid $color-border;
   @include clearfix;
-  padding: 2*$padding-size 0;
+  padding-bottom: 2*$padding-size;
   margin-bottom: 2*$margin-size;
 
   .nav-sub {
@@ -12,6 +12,7 @@
     }
     a {
       color: $color-fade;
+      @include link-hover;
     }
 
     margin-bottom: $margin-size;

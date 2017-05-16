@@ -11,8 +11,8 @@ class SiteController extends WebController
         return $this->render("index");
     }
 
-    public function actionTest()
+    public function actionRead()
     {
-        return $this->render("test");
+        return $this->render("read");
     }
 }

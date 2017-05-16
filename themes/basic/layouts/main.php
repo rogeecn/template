@@ -51,36 +51,72 @@ AppAsset::register($this);
         </div>
     </div>
 </header>
-
 <section class="container site-body">
     <div class="content">
-        <div class="carousel">
-            <img src="http://www.daqianduan.com/wp-content/uploads/2014/11/hs-xiu.jpg" alt="">
-        </div>
-
-        <article class="announcement">
-            <h3 class="title"><a href="">滴滴出行(杭州)招聘资深前端开发工程师</a></h3>
-            <p class="info">滴滴出行杭州团队，支持代驾及专车业务。 岗位职责： 独立负责承担一个子业务的前端设计与开发工作 建设与维护团队前端工程化及服务化体系 任职要求：
-                精通各种前端技术，对技术底层、原生JS、浏览器机制有深刻理解 有基于Node的全栈开发经验，对...</p>
-        </article>
-
-        <div class="title">
-            <h3>最新发布</h3>
-            <div class="more">
-                <a href="">themebetter 国内更好的WordPress主题服务商</a>
-            </div>
-        </div>
-
-        <article class="list-item">
-
-        </article>
+        <?= $content ?>
     </div>
 
     <aside class="sidebar">
-        asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        <div class="widget">
+            <div class="block-show style01">
+                <div class="band">吐血推荐</div>
+                <div class="title">DUX主题 新一代主题</div>
+                <div class="info">DUX Wordpress主题是大前端当前使用主题，是大前端积累多年Wordpress主题经验设计而成；更加扁平的风格和干净白色的架构会让网站显得内涵而出色...</div>
+            </div>
+        </div>
+
+        <div class="widget">
+            <div class="block-show style02">
+                <div class="band">吐血推荐</div>
+                <div class="title">DUX主题 新一代主题</div>
+                <div class="info">DUX Wordpress主题是大前端当前使用主题，是大前端积累多年Wordpress主题经验设计而成；更加扁平的风格和干净白色的架构会让网站显得内涵而出色...</div>
+            </div>
+        </div>
+
+
+        <div class="widget border">
+            <div class="tag-cloud">
+                <h3 class="title">标签云</h3>
+                <ul class="body">
+                  <li>
+                      <a href="http://www.daqianduan.com/tag/jobs">招聘/求职 (110)</a>
+                  </li>
+                    <li>
+                        <a href="http://www.daqianduan.com/tag/jobs">招聘/求职 (110)</a>
+                    </li>
+                    <li>
+                        <a href="http://www.daqianduan.com/tag/jobs">招聘/求职 (110)</a>
+                    </li>
+                    <li>
+                        <a href="http://www.daqianduan.com/tag/jobs">招聘/求职 (110)</a>
+                    </li>
+                    <li>
+                        <a href="http://www.daqianduan.com/tag/jobs">招聘/求职 (110)</a>
+                    </li>
+                    <li>
+                        <a href="http://www.daqianduan.com/tag/jobs">招聘/求职 (110)</a>
+                    </li>
+                    <li>
+                        <a href="http://www.daqianduan.com/tag/jobs">招聘/求职 (110)</a>
+                    </li>
+                    <li>
+                        <a href="http://www.daqianduan.com/tag/jobs">招聘/求职 (110)</a>
+                    </li>
+                    <li>
+                        <a href="http://www.daqianduan.com/tag/jobs">招聘/求职 (110)</a>
+                    </li>
+                    <li>
+                        <a href="http://www.daqianduan.com/tag/jobs">招聘/求职 (110)</a>
+                    </li>
+                    <li>
+                        <a href="http://www.daqianduan.com/tag/jobs">招聘/求职 (110)</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
     </aside>
 </section>
-<?= $content ?>
 <?php $this->endBody() ?>
 </body>
 </html>

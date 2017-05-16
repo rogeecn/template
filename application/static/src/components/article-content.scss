@@ -1,0 +1,132 @@
+.page-article {
+  padding: 2*$padding-size;
+  background: $color-white;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+
+  .article {
+
+    header {
+      @extend .text-center;
+    }
+
+    .meta {
+      @extend .text-center;
+
+      font-size: 12px;
+      margin-top: $margin-size;
+
+      & > span {
+        color: $color-fade;
+        margin-right: 1em;
+        a {
+          color: $color-fade;
+
+          &:hover {
+            color: $color-light;
+          }
+        }
+      }
+    }
+
+    .content-data {
+      border-top: 1px solid $color-border;
+      margin-top: 2*$padding-size;
+      padding-top: 4*$padding-size;
+      line-height: 25px;
+      font-size: 15px;
+
+      p {
+        margin-bottom: 2*$margin-size;
+        word-wrap: break-word;
+      }
+    }
+  }
+
+
+
+  .post-copyright{
+    @extend .text-center;
+    a{
+      color: $color-fade;
+    }
+    background: $color-background;
+    color: $color-fade;
+    margin: 2*$margin-size 0;
+    border-radius: $border-radius;
+    padding: $padding-size;
+
+    &:hover{
+      background: $color-light;
+      color: $color-white;
+      a{
+        color: $color-white;
+      }
+    }
+  }
+
+
+  .post-author{
+    $tmp-head-width: 50px;
+    $tmp-head-height: 50px;
+
+    border-left: 5px solid $color-background;
+    padding:$padding-size;
+    position: relative;
+    padding-left: 2*$padding-size;
+
+    .head{
+      width: $tmp-head-width;
+      height: $tmp-head-height;
+
+      display: block;
+      position: absolute;
+
+      background: url("../images/avatar.png") #eeeeee center center;
+      border-radius: 50%;
+      overflow: hidden;;
+      img{
+        width: 100%;
+        height:100%;
+      }
+    }
+
+    .author-info{
+      margin-left: $tmp-head-width + 2*$padding-size;
+      color: $color-fade-dark;
+      .signature{
+        margin-top: $margin-size/2;
+      }
+    }
+  }
+
+
+  .post-recommend{
+    margin-top: 4*$margin-size;
+    .title {
+      font-size: $size-h2;
+      border-bottom: 1px solid $color-border;
+      padding: $padding-size 0;
+      margin-bottom:$margin-size;
+    }
+
+    ul{
+      a{
+        color: $color-fade-dark;
+        font-size: 14px;
+
+        &:hover{
+          color: $color-light;
+        }
+      }
+      li{
+        padding: $padding-size/2;
+        &>i{
+          margin-right: $margin-size;
+          color: $color-fade-dark;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
