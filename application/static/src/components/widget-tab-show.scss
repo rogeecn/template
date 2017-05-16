@@ -1,0 +1,44 @@
+.widget {
+  &.tab-show {
+    ul.tab-nav {
+      background: #fbfbfb;
+      height: 36px;
+      line-height: 36px;
+      border-bottom: 1px solid $color-border;
+
+      li {
+        float: left;
+        width: 25%;
+        text-align: center;
+        color: #999;
+        border-right: 1px solid #eaeaea;
+        cursor: pointer;
+
+        &.active {
+          height: 37px;
+          background-color: #fff;
+          color: #666;
+          font-weight: bold;
+          cursor: default;
+        }
+      }
+    }
+
+    ul.tab-body {
+      & > li {
+        padding: 1.5*$padding-size;
+      }
+
+      ul {
+        &.list {
+          margin-bottom: -10px;
+          li {
+            font-size: 12px;
+          }
+        }
+      }
+
+    }
+  }
+}
+

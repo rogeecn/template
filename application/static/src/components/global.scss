@@ -69,13 +69,13 @@ ul {
   width: $width-sidebar;
 }
 
-.common-header{
+.common-header {
   @include clearfix;
   margin-bottom: $margin-size;
   .title {
     h3 {
       @extend .float-left;
-      font-size:$size-h2;
+      font-size: $size-h2;
     }
 
     .more {
@@ -89,7 +89,26 @@ ul {
   }
 }
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5,.h5,h6,.h6{
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   font-weight: 500;
-  line-height:1.1;
+  line-height: 1.1;
 }
+
+ul {
+  &.list {
+    li {
+      margin-bottom: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 14px;
+
+      time {
+        float: right;
+        color: #bbb;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+

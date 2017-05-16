@@ -104,7 +104,8 @@
         </article>
     </div>
 
-    <div class="post-copyright">未经允许不得转载：<a href="http://www.daqianduan.com">大前端</a> » <a href="http://www.daqianduan.com/6419.html">判断单、多张图片加载完成</a></div>
+    <div class="post-copyright">未经允许不得转载：<a href="http://www.daqianduan.com">大前端</a> » <a
+            href="http://www.daqianduan.com/6419.html">判断单、多张图片加载完成</a></div>
 
     <div class="post-author">
         <div class="head">
@@ -118,15 +119,31 @@
 
     <div class="post-recommend">
         <div class="title">相关推荐</div>
-        <ul>
-            <li><i>-</i><a href="">图表库–ECharts</a></li>
-            <li><i>-</i><a href="">图表库–ECharts</a></li>
-            <li><i>-</i><a href="">图表库–ECharts</a></li>
-            <li><i>-</i><a href="">图表库–ECharts</a></li>
-            <li><i>-</i><a href="">图表库–ECharts</a></li>
-            <li><i>-</i><a href="">图表库–ECharts</a></li>
-            <li><i>-</i><a href="">图表库–ECharts</a></li>
-            <li><i>-</i><a href="">图表库–ECharts</a></li>
+        <ul class="list">
+            <li>
+                <a href="">图表库–ECharts</a>
+                <time>2017-02-02</time>
+            </li>
+            <li>
+                <time>2017-02-02</time>
+                <a href="">图表库–ECharts</a></li>
+            <li>
+                <time>2017-02-02</time>
+                <a href="">图表库–ECharts</a></li>
+            <li>
+                <time>2017-02-02</time>
+                <a href="">图表库–ECharts</a></li>
+            <li>
+                <time>2017-02-02</time>
+                <a href="">图表库–ECharts</a></li>
+            <li>
+                <time>2017-02-02</time>
+                <a href="">图表库–ECharts</a></li>
+            <li>
+                <time>2017-02-02</time>
+                <a href="">图表库–ECharts</a></li>
         </ul>
     </div>
 </div>
+
+

@@ -1,0 +1,39 @@
+@mixin widget-block-show($main-color: #428BCA) {
+  &:hover {
+    border: 1px solid $main-color;
+  }
+
+  .band {
+    padding: $padding-size/2 $padding-size;
+    color: $color-white;
+    background: $main-color;
+    display: inline-block;
+    margin-bottom: $margin-size;
+  }
+  .title {
+    font-size: 20px;
+    color: $main-color;
+    margin-bottom: $margin-size;
+  }
+  .info {
+    color: $color-fade;
+  }
+}
+
+.widget {
+  .block-show {
+    border: 1px solid $color-border;
+    border-radius: $border-radius;
+    padding: 0 2*$padding-size 2*$padding-size 2*$padding-size;
+
+    &.style01 {
+      @include widget-block-show();
+    }
+
+    &.style02 {
+      @include widget-block-show(#FF5E52);
+    }
+
+  }
+}
+

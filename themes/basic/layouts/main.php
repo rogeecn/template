@@ -57,6 +57,25 @@ AppAsset::register($this);
     </div>
 
     <aside class="sidebar">
+        <div class="widget border tab-show">
+            <ul class="tab-nav">
+                <li class="active">网站公告</li>
+                <li>最新发布</li>
+            </ul>
+            <ul class="tab-body">
+                <li>
+                    <ul class="list">
+                        <li><time>2017-02-02</time><a href="">UX Wordpress主题是大前端当前使用主题，是大前端积累多年Wordpress主题经验设计而</a></li>
+                        <li><time>2017-02-02</time><a href="">UX Wordpress主题是大前端当前使用主题，是大前端积累多年Wordpress主题经验设计而</a></li>
+                        <li><time>2017-02-02</time><a href="">UX Wordpress主题是大前端当前使用主题，是大前端积累多年Wordpress主题经验设计而</a></li>
+                        <li><time>2017-02-02</time><a href="">UX Wordpress主题是大前端当前使用主题，是大前端积累多年Wordpress主题经验设计而</a></li>
+                        <li><time>2017-02-02</time><a href="">UX Wordpress主题是大前端当前使用主题，是大前端积累多年Wordpress主题经验设计而</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
         <div class="widget">
             <div class="block-show style01">
                 <div class="band">吐血推荐</div>

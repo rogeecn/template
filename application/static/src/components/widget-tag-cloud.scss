@@ -1,0 +1,38 @@
+.widget {
+  .tag-cloud {
+    .title {
+      background: #fbfbfb;
+      border-bottom: 1px solid $color-border;
+      padding: $padding-size 2*$padding-size;
+    }
+
+    ul.body {
+      @include clearfix;
+      padding: 2*$padding-size;
+
+      li {
+        display: block;
+        float: left;
+        width: 33.3333%;
+        a {
+          display: block;
+          margin: 0 1px 1px 0;
+          padding: 0 8px;
+          font-size: 12px;
+          height: 29px;
+          line-height: 29px;
+          overflow: hidden;
+          background: $color-background;
+          color: $color-fade-dark;
+
+          &:hover {
+            background: $color-light;
+            color: $color-white;
+          }
+        }
+
+      }
+    }
+  }
+}
+
