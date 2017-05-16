@@ -33,7 +33,7 @@ class Carousel extends Widget
     {
         $links = [];
         foreach ($this->items as $item){
-            $tmpLink = Html::a(Html::img($item['image']),$item['url']);
+            $tmpLink = Html::a(Html::img($item['image']),$item['url'],['title'=>$item['label']]);
             $links[]= $tmpLink;
         }
 

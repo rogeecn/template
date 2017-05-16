@@ -1,7 +1,3 @@
-<div class="carousel">
-    <img src="http://www.daqianduan.com/wp-content/uploads/2014/11/hs-xiu.jpg" alt="">
-</div>
-
 <?=\plugins\Carousel\Carousel::widget([
         'items'=>[
                 [
