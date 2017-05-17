@@ -21,7 +21,8 @@
 }
 
 .widget {
-  .block-show {
+  &.block-show {
+    display: block;
     border: 1px solid $color-border;
     border-radius: $border-radius;
     padding: 0 2*$padding-size 2*$padding-size 2*$padding-size;

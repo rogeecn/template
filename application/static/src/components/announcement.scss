@@ -7,6 +7,10 @@
   margin-bottom: 2*$margin-size;
 
   .title {
+    .category{
+      color: #FF5E52;
+      margin-right: $margin-size;
+    }
     font-size: $size-h3;
     font-weight:bold;
     margin-bottom: $margin-size;

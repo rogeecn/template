@@ -1,6 +1,7 @@
 <?php
-namespace plugins\Carousel;
+namespace widgets\Carousel;
 
+use plugins\Carousel\CarouselAssets;
 use yii\base\Widget;
 use yii\helpers\Html;
 
