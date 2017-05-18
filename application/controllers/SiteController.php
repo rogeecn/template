@@ -2,8 +2,7 @@
 namespace application\controllers;
 
 use application\base\WebController;
-use common\base\Field;
-use common\models\Article;
+use common\models\Category;
 
 class SiteController extends WebController
 {
@@ -11,8 +10,7 @@ class SiteController extends WebController
         return $this->render("index");
     }
 
-    public function actionRead()
-    {
+    public function actionRead() {
         return $this->render("read");
     }
 }

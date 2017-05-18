@@ -1,6 +1,11 @@
 <?php
+use common\extend\Html;
+
 /** @var $this \common\extend\View */
 ?>
+<?= \widgets\Breadcrumbs::widget([
+    'categoryID' => 8,
+]) ?>
 <?= \widgets\Carousel\Carousel::widget([
     'items' => [
         [

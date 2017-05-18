@@ -25,7 +25,7 @@ class Category extends \common\base\ActiveRecord
      */
     public function rules() {
         return [
-            [['name','alias'], 'required'],
+            [['name', 'alias'], 'required'],
             [['pid', 'order'], 'integer'],
             [['name', 'alias'], 'string', 'max' => 120],
             [['path'], 'string', 'max' => 1200],
@@ -69,11 +69,11 @@ class Category extends \common\base\ActiveRecord
     private static function formatFlatIndentList($list, &$items = [], $level = 0) {
         foreach ($list as $item) {
             $treeLevel = $level;
-            $prefix = "";
-            if ($treeLevel > 0 ){
-                $prefix = str_repeat("- ", $treeLevel*2);
+            $prefix    = "";
+            if ($treeLevel > 0) {
+                $prefix = str_repeat("- ", $treeLevel * 2);
             }
-            $items[$item['id']] =  $prefix. $item['name'];
+            $items[$item['id']] = $prefix . $item['name'];
             if (isset($item['children']) && is_array($item['children'])) {
                 self::formatFlatIndentList($item['children'], $items, ++$treeLevel);
             }
@@ -85,16 +85,27 @@ class Category extends \common\base\ActiveRecord
 
         $items = [];
         $level = 0;
-        if ($showRoot){
-            $level = 1;
-            $items[] ='根分类';
+        if ($showRoot) {
+            $level   = 1;
+            $items[] = '根分类';
         }
         self::formatFlatIndentList($list, $items, $level);
         return $items;
     }
 
-    public static function getName($categoryID)
-    {
+    public static function getName($categoryID) {
         return self::findOne($categoryID)->name;
+    }
+
+    public static function breadCrumb($catID) {
+        $list = self::getList();
+
+        $breadcrumbs = [];
+        while ($catID > 0) {
+            $breadcrumbs[] = $list[$catID];
+            $catID         = $list[$catID]['pid'];
+        }
+
+        return array_reverse($breadcrumbs);
     }
 }

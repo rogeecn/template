@@ -1,0 +1,9 @@
+.breadcrumbs {
+  margin-bottom: 2*$margin-size;
+
+  span.split {
+    color: $color-fade;
+    text-decoration: none;
+    padding: 0 $padding-size;
+  }
+}
