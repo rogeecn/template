@@ -1,5 +1,5 @@
 <?php
-namespace widgets;
+namespace widgets\Header;
 
 
 use common\base\Widget;
@@ -34,34 +34,19 @@ class Header extends Widget
 
     public function run()
     {
-
         $subNav  = $this->renderMenuList($this->subNav, $this->subNavOptions);
         $mainNav = $this->renderMenuList($this->mainNav, $this->mainNavOptions);
-        $logo    = $this->renderLogo($this->logo);
-        $brand   = $this->renderBrand($this->brand);
 
-        $subNavContainerHtml  = Html::div($subNav, $this->subNavContainerOptions);
-        $mainNavContainerHtml = Html::div($logo . $brand . $mainNav, $this->mainNavContainerOptions);
-
-        return Html::div(Html::div($subNavContainerHtml . $mainNavContainerHtml, $this->containerOptions), $this->options);
-    }
-
-    private function renderLogo($logo)
-    {
-        $image = "";
-        if (!empty($logo['image'])) {
-            $image = Html::img($logo['image'], ['alt' => $logo['title']]);
-        }
-        $html = Html::a($logo['title'] . $image, $logo['url']);
-
-        return Html::tag("h1", $html, ['class' => 'logo']);
-    }
-
-    private function renderBrand($brand)
-    {
-        $brand = explode(",", $brand);
-
-        return Html::div(implode("<br>", $brand), ['class' => 'brand']);
+        return $this->render("view", [
+            'subNav'                  => $subNav,
+            'mainNav'                 => $mainNav,
+            'logo'                    => $this->logo,
+            'brand'                   => array_filter(explode(",", $this->brand)),
+            'mainNavContainerOptions' => $this->mainNavContainerOptions,
+            'subNavContainerOptions'  => $this->subNavContainerOptions,
+            'options'                 => $this->options,
+            'containerOptions'        => $this->containerOptions,
+        ]);
     }
 
     private function renderMenuList($menuList, $options = [])

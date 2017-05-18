@@ -17,7 +17,7 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<?= \widgets\Header::widget([
+<?= \widgets\Header\Header::widget([
     'logo'    => [
         'title' => '大前端',
         'image' => 'http://www.daqianduan.com/wp-content/uploads/2015/01/logo.png',
@@ -39,7 +39,40 @@ AppAsset::register($this);
         ['label' => 'WordPress主题', 'url' => '/'],
     ],
 ]) ?>
-
+<!--<header class="nav">-->
+<!--    <div class="container">-->
+<!--        <div class="nav-sub text-right">-->
+<!--            <ul>-->
+<!--                <li><a href="">联系大前端</a></li>-->
+<!--                <li><a href="">联系大前端</a></li>-->
+<!--                <li><a href="">联系大前端</a></li>-->
+<!--                <li><a href="">联系大前端</a></li>-->
+<!--                <li><a href="">联系大前端</a></li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!---->
+<!--        <div class="nav-main text-right">-->
+<!--            <h1 class="logo">-->
+<!--                <a href="/">-->
+<!--                    <img src="http://www.daqianduan.com/wp-content/uploads/2015/01/logo.png">-->
+<!--                    大前端-->
+<!--                </a>-->
+<!--            </h1>-->
+<!--            <div class="brand">-->
+<!--                关注前端开发<br>关注用户体验-->
+<!--            </div>-->
+<!---->
+<!--            <ul class="nav-menu">-->
+<!--                <li><a href="">首页</a></li>-->
+<!--                <li><a href="">前端开发</a></li>-->
+<!--                <li><a href="">设计</a></li>-->
+<!--                <li><a href="">前端网址导航</a></li>-->
+<!--                <li><a href="">前端招聘</a></li>-->
+<!--                <li><a href="">WordPress主题</a></li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</header>-->
 <section class="container site-body">
     <div class="content">
         <?= $content ?>
