@@ -20,10 +20,10 @@ return [
     'components'          => [
         'user'         => [
             'identityClass'   => 'common\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => TRUE,
             'identityCookie'  => [
                 'name'     => '_IDENTITY_APPLICATION',
-                'httpOnly' => true,
+                'httpOnly' => TRUE,
             ],
         ],
         'session'      => [
@@ -43,8 +43,8 @@ return [
             'errorAction' => 'site/error',
         ],
         'urlManager'   => [
-            'enablePrettyUrl' => true,
-            'showScriptName'  => false,
+            'enablePrettyUrl' => TRUE,
+            'showScriptName'  => FALSE,
         ],
         'request'      => [
             'csrfParam' => '_CSRF_APPLICATION',
@@ -53,12 +53,13 @@ return [
                 'text/json'        => 'yii\web\JsonParser',
             ],
         ],
-        'view' => [
+        'view'         => [
+            'class' => 'common\extend\View',
             'theme' => [
                 'basePath' => '@themes/basic',
-                'baseUrl' => '@themes/basic',
-                'pathMap' => [
-                    '@application/views' => '@themes/basic',
+                'baseUrl'  => '@themes/basic',
+                'pathMap'  => [
+                    '@application/views'   => '@themes/basic',
                     '@application/modules' => '@themes/basic/modules',
                 ],
             ],

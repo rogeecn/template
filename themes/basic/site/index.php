@@ -1,3 +1,6 @@
+<?php
+/** @var $this \common\extend\View */
+?>
 <?= \widgets\Carousel\Carousel::widget([
     'items' => [
         [
@@ -20,7 +23,7 @@
 
 <?= \widgets\Announcement\Announcement::widget([
     'title'    => [
-        'label' => '滴滴出行(杭州)招聘资深前端开发工程师',
+        'label' => '滴滴出行(杭州)招聘资深前端开发工程师'.$this->setting("site.name"),
         'url'   => ["/read"],
     ],
     'category' => [

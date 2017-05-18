@@ -18,6 +18,7 @@ class m170513_102338_data_init extends Migration
                 'title'   => '网站设置',
                 'columns' => [
                     ['url', '网站地址', Setting::TYPE_STRING],
+                    ['logo', 'LOGO地址', Setting::TYPE_STRING],
                     ['name', '网站名称', Setting::TYPE_STRING],
                     ['slogan', '网站副标题', Setting::TYPE_STRING],
                     ['keyword', '关键字', Setting::TYPE_STRING],

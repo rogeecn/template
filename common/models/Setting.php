@@ -16,7 +16,7 @@ use yii\helpers\ArrayHelper;
  * @property string  $hint
  * @property string  $type
  * @property string  $pre_configure
- * @property integer  $order
+ * @property integer $order
  */
 class Setting extends \common\base\ActiveRecord
 {
@@ -32,10 +32,11 @@ class Setting extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['alias', 'title', 'display'], 'required'],
-            [['display','order', 'group_id'], 'integer'],
+            [['display', 'order', 'group_id'], 'integer'],
             [['alias', 'title'], 'string', 'max' => 240],
             [['value', 'hint', 'pre_configure'], 'string', 'max' => 1200],
             [['type'], 'string', 'max' => 100],
@@ -45,7 +46,8 @@ class Setting extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id'            => 'ID',
             'alias'         => 'Alias',
@@ -63,11 +65,21 @@ class Setting extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'setting';
     }
 
-    public static function getTypeList() {
+    public function beforeSave($insert)
+    {
+        $settingCacheFile = \Yii::getAlias("@runtime/data/setting.php");
+        @unlink($settingCacheFile);
+
+        return parent::beforeSave($insert);
+    }
+
+    public static function getTypeList()
+    {
         return [
             self::TYPE_STRING        => "字符串",
             self::TYPE_TEXT          => "文本",
@@ -77,8 +89,9 @@ class Setting extends \common\base\ActiveRecord
         ];
     }
 
-    public static function getGroupList($asArray = false) {
-        $groupList = Setting::find()->where(['display' => Setting::DISPLAY_GROUP])->orderBy(['order'=>SORT_ASC])->all();
+    public static function getGroupList($asArray = FALSE)
+    {
+        $groupList = Setting::find()->where(['display' => Setting::DISPLAY_GROUP])->orderBy(['order' => SORT_ASC])->all();
         if (!$asArray) {
             return $groupList;
         }
@@ -86,23 +99,24 @@ class Setting extends \common\base\ActiveRecord
         return ArrayHelper::map($groupList, "id", "title");
     }
 
-    public static function getGroupColumnList($groupId) {
+    public static function getGroupColumnList($groupId)
+    {
         $condition = [
             'group_id' => $groupId,
             'display'  => Setting::DISPLAY_COLUMN,
         ];
 
         /** @var Setting[] $columnModels */
-        $columnModels = Setting::find()->where($condition)->orderBy(['order'=>SORT_ASC])->all();
+        $columnModels = Setting::find()->where($condition)->orderBy(['order' => SORT_ASC])->all();
 
         $retList = [];
         foreach ($columnModels as $columnModel) {
             $tmpData = $columnModel->toArray();
 
-            if($tmpData['type']==self::TYPE_MULTI_SELECT){
-                $tmpData['value'] = explode(",",$tmpData['value']);
+            if ($tmpData['type'] == self::TYPE_MULTI_SELECT) {
+                $tmpData['value'] = explode(",", $tmpData['value']);
             }
-            $tmpData['formName'] = sprintf("group[%d][%s]",$groupId,$columnModel['alias']);
+            $tmpData['formName']      = sprintf("group[%d][%s]", $groupId, $columnModel['alias']);
             $tmpData['pre_configure'] = explode("\n", $columnModel['pre_configure']);;
             $retList[] = $tmpData;
         }
@@ -110,25 +124,29 @@ class Setting extends \common\base\ActiveRecord
         return $retList;
     }
 
-    public function createColumn() {
+    public function createColumn()
+    {
         $this->display = self::DISPLAY_COLUMN;
+
         return $this->save();
     }
 
-    public function createGroup() {
+    public function createGroup()
+    {
         $this->display = self::DISPLAY_GROUP;
+
         return $this->save();
     }
 
     public static function flatSettings()
     {
-        $groups = self::getGroupList(true);
+        $groups = self::getGroupList();
 
-        $data =[];
-        foreach ($groups as $groupID=>$groupAlias){
-            $columnList = self::getGroupColumnList($groupID);
-            foreach ($columnList as $columnData){
-                $columnKey = sprintf("%s.%s",$groupAlias,$columnData['alias']);
+        $data = [];
+        foreach ($groups as $groupModel) {
+            $columnList = self::getGroupColumnList($groupModel->id);
+            foreach ($columnList as $columnData) {
+                $columnKey = sprintf("%s.%s", $groupModel->alias, $columnData['alias']);
                 /*switch ($columnData['type']){
                     case self::TYPE_STRING:
                     case self::TYPE_HTML:
@@ -153,6 +171,7 @@ class Setting extends \common\base\ActiveRecord
                 $data[$columnKey] = $columnData['value'];
             }
         }
+
         return $data;
     }
 }
