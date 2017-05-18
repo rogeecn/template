@@ -1,0 +1,36 @@
+.pager {
+  margin: 2*$margin-size 0;
+  @extend .text-center;
+  & > ul {
+    display: inline-block;
+    margin-left: 0;
+    margin-bottom: 0;
+    padding: 0;
+
+    & > li {
+      display: inline;
+      overflow: hidden;
+
+      a {
+        border-radius: $border-radius;
+        background: #ddd;
+        color: $color-fade-dark;
+        padding: 3px $padding-size;
+        margin: 0 2px;
+
+        &:hover {
+          background: $color-fade;
+          color: $color-white;
+        }
+      }
+
+      &.active {
+        a {
+          background: #45B6F7;
+          color: $color-white;
+        }
+      }
+    }
+  }
+}
+

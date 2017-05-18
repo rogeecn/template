@@ -3,8 +3,10 @@ namespace widgets\ArticleList;
 
 
 use common\base\Widget;
+use common\extend\Html;
+use common\extend\LinkPager;
 use widgets\ListHeader;
-use yii\helpers\Html;
+use yii\data\Pagination;
 
 class ArticleList extends Widget
 {
@@ -32,8 +34,7 @@ class ArticleList extends Widget
     public $title = [];
     public $pager = [];
 
-    public function run()
-    {
+    public function run() {
         $lastIndex = count($this->items) - 1;
 
         $itemList = [];
@@ -68,6 +69,12 @@ class ArticleList extends Widget
         }
 
         $title = ListHeader::widget($this->title);
-        return $title.implode("\n", $itemList);
+
+        $linkPager = LinkPager::widget([
+            'pagination' => new Pagination($this->pager),
+        ]);
+        $linkPager = Html::div($linkPager, ['class' => 'pager']);
+
+        return $title . implode("\n", $itemList) . $linkPager;
     }
 }

@@ -23,7 +23,7 @@
 
 <?= \widgets\Announcement\Announcement::widget([
     'title'    => [
-        'label' => '滴滴出行(杭州)招聘资深前端开发工程师'.$this->setting("site.name"),
+        'label' => '滴滴出行(杭州)招聘资深前端开发工程师' . $this->setting("site.name"),
         'url'   => ["/read"],
     ],
     'category' => [
@@ -40,6 +40,9 @@
             'label' => 'themebetter 国内更好的WordPress主题服务商',
             'url'   => ["/"],
         ],
+    ],
+    'pager' => [
+        'totalCount' => 1000,
     ],
     'items' => [
         [
@@ -116,4 +119,3 @@
     ],
 ])
 ?>
-
