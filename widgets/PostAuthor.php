@@ -3,7 +3,7 @@ namespace widgets;
 
 
 use common\base\Widget;
-use plugins\LayUI\components\Html;
+use common\extend\Html;
 
 class PostAuthor extends Widget
 {
@@ -13,12 +13,12 @@ class PostAuthor extends Widget
 
     public function run()
     {
-        $headImage = Html::tag("div", Html::img($this->headImage), ['class' => 'head']);
+        $headImage = Html::div(Html::img($this->headImage), ['class' => 'head']);
 
-        $nickname   = Html::tag("span", Html::icon("user")."&nbsp;" . Html::tag("strong", $this->nickname), ['class' => 'name']);
+        $nickname   = Html::tag("span", Html::icon("user", "&nbsp;") . Html::tag("strong", $this->nickname), ['class' => 'name']);
         $signature  = Html::tag("p", $this->signature, ['class' => 'signature']);
-        $authorInfo = Html::tag("div", $nickname . $signature, ['class' => 'author-info']);
+        $authorInfo = Html::div($nickname . $signature, ['class' => 'author-info']);
 
-        return Html::tag('div', $headImage . $authorInfo, ['class' => 'post-author']);
+        return Html::div($headImage . $authorInfo, ['class' => 'post-author']);
     }
 }
