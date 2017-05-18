@@ -106,6 +106,17 @@ AppAsset::register($this);
 
     </aside>
 </section>
+<section class="widget full-column-show orange">
+    <div class="container">
+        <h2>themebetter 国内更好的WordPress主题服务商</h2>
+        <a target="blank" class="btn btn-lg" href="/">立即前往</a>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container text-center">
+        <p>© 2017 大前端 本站DUX主题由 themebetter.com 提供 <a href="">网站地图</a></p>
+    </div>
+</footer>
 <?php $this->endBody() ?>
 </body>
 </html>

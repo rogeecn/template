@@ -1,0 +1,14 @@
+.footer {
+  padding-top: 2*$padding-size;
+  padding-bottom: 5*$padding-size;
+  color: $color-fade;
+  background: $color-white;
+  border-top: 1px solid $color-border;
+
+  a{
+    color: $color-fade;
+  }
+  a:hover{
+    color: $color-text;
+  }
+}
