@@ -10,11 +10,13 @@ class ListItem extends Widget
     public $items   = [];
     public $options = [];
 
-    public function init() {
+    public function init()
+    {
         Html::addCssClass($this->options, "list");
     }
 
-    public function run() {
+    public function run()
+    {
         $itemList = [];
         foreach ($this->items as $index => $item) {
             if (!isset($item['options'])) {
@@ -30,7 +32,7 @@ class ListItem extends Widget
                 $item['options']['title'] = $item['title'];
             }
 
-            if ($index == 0 || $item['strong']) {
+            if ($index == 0 || (isset($item['strong']) && $item['strong'])) {
                 $item['title'] = Html::tag("strong", $item['title']);
             }
 
