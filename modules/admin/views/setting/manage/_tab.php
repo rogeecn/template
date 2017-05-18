@@ -7,7 +7,7 @@ use plugins\LayUI\components\Html;
 <?php foreach ($columns as $column): ?>
 <div class="layui-form-item">
     <label class="layui-form-label"><?= $column['title'] ?></label>
-    <div class="layui-input-inline">
+    <div class="layui-input-inline" style="width: 60%;">
     <?php
     switch ($column['type']) {
         case Setting::TYPE_TEXT:

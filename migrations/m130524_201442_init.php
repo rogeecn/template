@@ -27,9 +27,9 @@ class m130524_201442_init extends Migration
         ], $tableOptions);
 
         $this->insert('{{%user}}',[
-            'username' => 'admin',
+            'username' => 'rogeecn',
             'auth_key' => "123",
-            'password_hash' => \Yii::$app->security->generatePasswordHash('admin'),
+            'password_hash' => \Yii::$app->security->generatePasswordHash('Admin.123'),
             'password_reset_token' => "",
             'email' => '123@qq.com',
             'status' => \common\User::ST_ENABLE,
