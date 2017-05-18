@@ -32,7 +32,12 @@ AppAsset::register($this);
     ],
     'mainNav' => [
         ['label' => '首页', 'url' => '/'],
-        ['label' => '前端开发', 'url' => '/'],
+        ['label' => '前端开发', 'url' => '/', 'items' => [
+            ['label' => '前端开发', 'url' => '/'],
+            ['label' => '设计', 'url' => '/'],
+            ['label' => '前端网址导航', 'url' => '/'],
+            ['label' => '前端招聘', 'url' => '/'],
+        ]],
         ['label' => '设计', 'url' => '/'],
         ['label' => '前端网址导航', 'url' => '/'],
         ['label' => '前端招聘', 'url' => '/'],
@@ -45,7 +50,6 @@ AppAsset::register($this);
     </div>
 
     <aside class="sidebar">
-
         <?= \widgets\Tab\Tab::widget([
             'items' => [
                 [

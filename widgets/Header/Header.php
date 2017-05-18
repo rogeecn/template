@@ -23,17 +23,16 @@ class Header extends Widget
 
     public $subNav                 = [];
     public $subNavOptions          = [];
-    public $subNavContainerOptions = ['class' => 'nav-sub text-right'];
+    public $subNavContainerOptions = ['class' => 'menu nav-sub text-right'];
 
     public $mainNav                 = [];
-    public $mainNavOptions          = ['class' => 'nav-menu'];
+    public $mainNavOptions          = ['class' => 'menu nav-menu'];
     public $mainNavContainerOptions = ['class' => 'nav-main text-right'];
 
     public $options          = ['class' => 'nav'];
     public $containerOptions = ['class' => 'container'];
 
-    public function run()
-    {
+    public function run() {
         $subNav  = $this->renderMenuList($this->subNav, $this->subNavOptions);
         $mainNav = $this->renderMenuList($this->mainNav, $this->mainNavOptions);
 
@@ -49,13 +48,13 @@ class Header extends Widget
         ]);
     }
 
-    private function renderMenuList($menuList, $options = [])
-    {
+    private function renderMenuList($menuList, $options = []) {
         $menuItems = [];
         foreach ($menuList as $menu) {
             if (isset($menu['items'])) {
-                $tmpHtml = Html::tag("span", $menu['label']);
-                $tmpHtml .= $this->renderMenuList($menu['items']);
+                $downArrow = Html::icon("sort-down", "", ['style' => 'position: absolute;margin-left: 3px;']);
+                $tmpHtml   = Html::a($menu['label'] . $downArrow, "javascript:void(0);");
+                $tmpHtml .= $this->renderMenuList($menu['items'], ['class' => 'sub-menu']);
             } else {
                 $tmpHtml = Html::a($menu['label'], $menu['url']);
             }

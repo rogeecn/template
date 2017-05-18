@@ -1,7 +1,6 @@
 <?php
 namespace common\extend;
 
-
 class UserInfo
 {
     public static function Instance()
