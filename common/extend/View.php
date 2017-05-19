@@ -4,6 +4,7 @@ namespace common\extend;
 
 use common\models\Setting;
 use yii\helpers\FileHelper;
+use yii\helpers\Url;
 
 class View extends \yii\web\View
 {
@@ -65,5 +66,10 @@ class View extends \yii\web\View
     {
         parent::endBody();
         echo $this->setting("site.code_top");
+    }
+
+    public function categoryURL($alias)
+    {
+        return Url::toRoute(['/category/index', 'alias' => $alias]);
     }
 }

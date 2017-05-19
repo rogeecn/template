@@ -43,8 +43,7 @@ return [
             'errorAction' => 'site/error',
         ],
         'urlManager'   => [
-            'enablePrettyUrl' => TRUE,
-            'showScriptName'  => FALSE,
+            'class' => 'common\extend\UrlManager',
         ],
         'request'      => [
             'csrfParam' => '_CSRF_APPLICATION',

@@ -53,7 +53,7 @@ class Category extends \common\base\ActiveRecord
         foreach ($items as $item)
             $items[$item['pid']]['children'][$item['id']] = &$items[$item['id']];
 
-        return isset($items[0]['children']) ? $items[0]['children'] : array();
+        return isset($items[0]['children']) ? $items[0]['children'] : [];
     }
 
     public static function getIndentList()
@@ -156,5 +156,10 @@ class Category extends \common\base\ActiveRecord
         }
 
         return FALSE;
+    }
+
+    public static function getByAlias($alias)
+    {
+        return self::find()->where(['alias' => $alias])->one();
     }
 }

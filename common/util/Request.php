@@ -5,65 +5,83 @@
 namespace common\util;
 class Request
 {
-    private static function getRequest() {
+    private static function getRequest()
+    {
         return \Yii::$app->getRequest();
     }
 
-    public static function rawInput() {
+    public static function rawInput()
+    {
         return self::getRequest()->getRawBody();
     }
 
-    public static function input($param = null, $default = null) {
-        $val = self::cookie($param, null);
-        if ($val !== null) {
+    public static function input($param = NULL, $default = NULL)
+    {
+        $val = self::cookie($param, NULL);
+        if ($val !== NULL) {
             return self::cookie($param, $default);
         }
 
-        $val = self::post($param, null);
-        if ($val !== null) {
+        $val = self::post($param, NULL);
+        if ($val !== NULL) {
             return self::post($param, $default);
         }
 
         return self::get($param, $default);
     }
 
-    public static function get($param = null, $default = null) {
+    public static function get($param = NULL, $default = NULL)
+    {
         return self::getRequest()->get($param, $default);
     }
 
-    public static function queryParams() {
+    public static function queryParams()
+    {
         return self::getRequest()->getQueryParams();
     }
 
-    public static function post($param = null, $default = null) {
+    public static function post($param = NULL, $default = NULL)
+    {
         return self::getRequest()->post($param, $default);
     }
 
-    public static function isAjax() {
+    public static function isAjax()
+    {
         return self::getRequest()->getIsAjax();
     }
 
-    public static function isPost() {
+    public static function isPost()
+    {
         return self::getRequest()->getIsPost();
     }
 
-    public static function isPut() {
+    public static function isPut()
+    {
         return self::getRequest()->getIsPut();
     }
 
-    public static function isPjax() {
+    public static function isPjax()
+    {
         return self::getRequest()->getIsPjax();
     }
 
-    public static function ip() {
+    public static function ip()
+    {
         return self::getRequest()->getUserIP();
     }
 
-    public static function getHostInfo() {
+    public static function getHostInfo()
+    {
         return self::getRequest()->getHostInfo();
     }
 
-    public static function cookie($key, $default = null) {
+    public static function cookie($key, $default = NULL)
+    {
         return self::getRequest()->getCookies()->getValue($key, $default);
+    }
+
+    public static function pathInfo()
+    {
+        return self::getRequest()->getPathInfo();
     }
 }
