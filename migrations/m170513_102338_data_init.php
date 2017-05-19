@@ -38,6 +38,14 @@ class m170513_102338_data_init extends Migration
                     ['show', '展示文案', Setting::TYPE_TEXT],
                 ],
             ],
+            [
+                'alias'   => 'path',
+                'title'   => '访问路径',
+                'columns' => [
+                    ['article', '文章', Setting::TYPE_STRING],
+                    ['category', '分类', Setting::TYPE_STRING],
+                ],
+            ],
         ];
 
         foreach ($data as $group) {
