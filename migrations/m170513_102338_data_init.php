@@ -25,6 +25,7 @@ class m170513_102338_data_init extends Migration
                     ['description', '网站描述', Setting::TYPE_TEXT],
                     ['icp_number', 'ICP备案号', Setting::TYPE_STRING],
                     ['police_number', '公安备案号', Setting::TYPE_STRING],
+                    ['theme', '网站主题', Setting::TYPE_STRING],
                     ['code_top', '页头代码', Setting::TYPE_TEXT],
                     ['code_bottom', '页尾代码', Setting::TYPE_TEXT],
                 ],
