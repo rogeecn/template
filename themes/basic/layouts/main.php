@@ -12,7 +12,6 @@ AppAsset::register($this);
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>YCms</title>
     <?php $this->head() ?>
 </head>
 <body>
