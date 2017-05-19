@@ -7,18 +7,11 @@ use yii\web\Controller;
 
 class WebController extends Controller
 {
+    use TraitThemeSet;
+
     public function beforeAction($action)
     {
-
-        $themeName = $this->getView()->setting("site.theme")?:"basic";
-        echo $themeName ;exit;
-
-        $theme = \Yii::$app->getView()->theme;
-        $theme->setBasePath("@themes/" . $themeName);
-        $theme->pathMap = [
-            '@application/views'   => '@themes/' . $themeName,
-            '@application/modules' => '@themes/' . $themeName . '/modules',
-        ];
+        $this->setTheme();
 
         return parent::beforeAction($action);
     }
