@@ -77,11 +77,11 @@ use yii\helpers\ArrayHelper;
  * ActiveForm::end();
  * ```
  *
- * @see \yii\bootstrap\ActiveForm
- * @see http://getbootstrap.com/css/#forms
+ * @see    \yii\bootstrap\ActiveForm
+ * @see    http://getbootstrap.com/css/#forms
  *
  * @author Michael Härtl <haertl.mike@gmail.com>
- * @since 2.0
+ * @since  2.0
  */
 class ActiveField extends \yii\widgets\ActiveField
 {
@@ -97,7 +97,7 @@ class ActiveField extends \yii\widgets\ActiveField
     /**
      * @var boolean whether to render [[checkboxList()]] and [[radioList()]] inline.
      */
-    public $inlineInputWrapperOption = ['class' => "layui-input-inline"];
+    public $inlineInputWrapperOption = ['class' => "layui-input-inline", 'style' => 'min-width: 60%'];
     public $blockInputWrapperOption  = ['class' => "layui-input-block"];
     /**
      * @var string|null optional template to render the `{input}` placeholder content
@@ -153,7 +153,8 @@ class ActiveField extends \yii\widgets\ActiveField
     /**
      * @inheritdoc
      */
-    public function __construct($config = []) {
+    public function __construct($config = [])
+    {
         $layoutConfig = $this->createLayoutConfig($config);
         $config       = ArrayHelper::merge($layoutConfig, $config);
         parent::__construct($config);
@@ -162,7 +163,8 @@ class ActiveField extends \yii\widgets\ActiveField
     /**
      * @inheritdoc
      */
-    public function render($content = null) {
+    public function render($content = null)
+    {
         /*if ($content === null) {
             if (!isset($this->parts['{beginWrapper}'])) {
                 $options = $this->wrapperOptions;
@@ -190,7 +192,8 @@ class ActiveField extends \yii\widgets\ActiveField
         return parent::render($content);
     }
 
-    public function editor($options = []) {
+    public function editor($options = [])
+    {
         $this->label(false);
         $this->parts['{input}'] = Html::activeEditor($this->model, $this->attribute, $options);
         $this->parts['{input}'] = Html::tag("div", $this->parts['{input}'], ['style' => 'margin-right: 5px']);
@@ -198,7 +201,8 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
-    public function hiddenInput($options = []) {
+    public function hiddenInput($options = [])
+    {
         $options = array_merge($this->inputOptions, $options);
         $this->adjustLabelFor($options);
         $this->parts['{input}'] = Html::activeHiddenInput($this->model, $this->attribute, $options);
@@ -207,20 +211,25 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
-    public function textInput($options = []) {
+    public function textInput($options = [])
+    {
         parent::textInput($options);
         $this->parts['{input}'] = Html::tag("div", $this->parts['{input}'], $this->inlineInputWrapperOption);
+
         return $this;
     }
 
-    public function textarea($options = []) {
+    public function textarea($options = [])
+    {
         Html::addCssClass($options, ['layui-textarea']);
         parent::textarea($options);
         $this->parts['{input}'] = Html::tag("div", $this->parts['{input}'], $this->inlineInputWrapperOption);
+
         return $this;
     }
 
-    public function checkbox($options = [], $enclosedByLabel = true) {
+    public function checkbox($options = [], $enclosedByLabel = true)
+    {
         $this->addAriaAttributes($options);
         $this->adjustLabelFor($options);
 
@@ -231,7 +240,8 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
-    public function radio($options = [], $enclosedByLabel = true) {
+    public function radio($options = [], $enclosedByLabel = true)
+    {
         $this->addAriaAttributes($options);
         $this->adjustLabelFor($options);
         $this->parts['{input}'] = Html::activeRadio($this->model, $this->attribute, $options);
@@ -241,32 +251,39 @@ class ActiveField extends \yii\widgets\ActiveField
     }
 
 
-    public function checkboxList($items, $options = []) {
+    public function checkboxList($items, $options = [])
+    {
         parent::checkboxList($items, $options);
         $this->parts['{input}'] = Html::activeCheckboxList($this->model, $this->attribute, $items, $options);
         $this->parts['{input}'] = Html::tag("div", $this->parts['{input}'], $this->inlineInputWrapperOption);
+
         return $this;
     }
 
-    public function dropDownList($items, $options = []) {
+    public function dropDownList($items, $options = [])
+    {
         parent::dropDownList($items, $options);
         $this->parts['{input}'] = Html::tag("div", $this->parts['{input}'], $this->inlineInputWrapperOption);
 
         return $this;
     }
 
-    public function radioList($items, $options = []) {
+    public function radioList($items, $options = [])
+    {
         parent::radioList($items, $options);
         $this->parts['{input}'] = Html::activeRadioList($this->model, $this->attribute, $items, $options);
         $this->parts['{input}'] = Html::tag("div", $this->parts['{input}'], $this->inlineInputWrapperOption);
+
         return $this;
     }
 
-    public function label($label = null, $options = []) {
+    public function label($label = null, $options = [])
+    {
         if (is_bool($label)) {
             $this->enableLabel = $label;
             if ($label === false) {
                 $this->parts['{label}'] = "";
+
                 return $this;
             }
         }
@@ -274,11 +291,13 @@ class ActiveField extends \yii\widgets\ActiveField
         $this->enableLabel = true;
         $this->renderLabelParts($label, $options);
         parent::label($label, $options);
+
         return $this;
     }
 
 
-    protected function createLayoutConfig($instanceConfig) {
+    protected function createLayoutConfig($instanceConfig)
+    {
         $config = [
             'hintOptions'  => [
                 'tag'   => 'div',
@@ -319,10 +338,11 @@ class ActiveField extends \yii\widgets\ActiveField
     }
 
     /**
-     * @param string|null $label the label or null to use model label
+     * @param string|null $label   the label or null to use model label
      * @param array       $options the tag options
      */
-    protected function renderLabelParts($label = null, $options = []) {
+    protected function renderLabelParts($label = null, $options = [])
+    {
         $options = array_merge($this->labelOptions, $options);
         if ($label === null) {
             if (isset($options['label'])) {
