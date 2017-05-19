@@ -3,10 +3,14 @@ use plugins\LayUI\components\ActiveForm;
 use plugins\LayUI\components\Html;
 
 ActiveForm::begin();
-echo Html::tag("div", Html::submitButton(), ['style' => 'text-align:right;margin-bottom: 20px;']);
+$submitBtn = Html::submitButton();
+$createBtn = Html::a(Html::icon("plus") . '&nbsp;创建根分类', ['/admin/category/control/create', 'id' => 0], ['class' => 'layui-btn']);
+
+
+echo Html::tag("div", $submitBtn . $createBtn, ['style' => 'text-align:right;margin-bottom: 20px;']);
 echo \plugins\LayUI\components\Table::widget([
     'dataProvider' => $dataList,
-    'sortable'     => true,
+    'sortable'     => TRUE,
     'orderInput'   => 'input',
     'columns'      => [
         [
@@ -15,7 +19,7 @@ echo \plugins\LayUI\components\Table::widget([
                 'style' => 'width: 10px;',
             ],
             'value'   => function ($data) {
-                return Html::icon("arrows",['drag-handle']);
+                return Html::icon("arrows", ['drag-handle']);
             },
         ],
         'id',
@@ -35,16 +39,34 @@ echo \plugins\LayUI\components\Table::widget([
                     'autocomplete' => 'off',
                     'name'         => sprintf("order[%d]", $data['id']),
                 ];
+
                 return Html::textInput($name, $data['order'], $orderAttr);
             },
         ],
         [
             'label'   => '',
             'options' => [
-                'style' => 'width: 20px;',
+                'style' => 'width: 45px;',
             ],
             'value'   => function ($data) {
-                return Html::a(Html::icon("edit"), ['/admin/category/control/update', 'id' => $data['id']]);
+                $edit   = Html::a(Html::icon("edit", [], ['style' => 'margin-right: 10px;']), ['/admin/category/control/update', 'id' => $data['id']]);
+                $create = Html::a(Html::icon("plus", [], ['style' => 'margin-right: 10px;']), ['/admin/category/control/create', 'id' => $data['id']]);
+
+                return $edit . $create;
+            },
+        ],
+        [
+            'label'   => '',
+            'options' => [
+                'style' => 'width: 10px;',
+            ],
+            'value'   => function ($data) {
+                $delete = Html::a(Html::icon("close"), ['/admin/category/control/delete', 'id' => $data['id']], [
+                    'onclick' => 'return confirm("确认删除么,分类及子分类都会被同时删除？")',
+                    'style'   => 'color: red;',
+                ]);
+
+                return $delete;
             },
         ],
     ],

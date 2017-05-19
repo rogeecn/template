@@ -7,15 +7,18 @@ use yii\helpers\Url;
 
 class Html extends BaseHtml
 {
-    public static function inlineFormItem($inputType, $label, $name, $value, $options = []) {
+    public static function inlineFormItem($inputType, $label, $name, $value, $options = [])
+    {
         return self::formItem($inputType, "inline", $label, $name, $value, $options);
     }
 
-    public static function blockFormItem($inputType, $label, $name, $value, $options = []) {
+    public static function blockFormItem($inputType, $label, $name, $value, $options = [])
+    {
         return self::formItem($inputType, "block", $label, $name, $value, $options);
     }
 
-    private static function formItem($inputType, $type, $label, $name, $value, $options = []) {
+    private static function formItem($inputType, $type, $label, $name, $value, $options = [])
+    {
 
         $inputWrapper = self::tag("div", "{input}", ['class' => "layui-input-" . $type]);
         $htmlTemplate = self::tag("div", "{label}" . $inputWrapper, ['class' => "layui-form-item"]);
@@ -47,18 +50,22 @@ class Html extends BaseHtml
         ]);
     }
 
-    public static function a($text, $url = null, $options = []) {
-        if ($url !== null) {
-            $options['href'] = Url::to($url, true);
+    public static function a($text, $url = NULL, $options = [])
+    {
+        if ($url !== NULL) {
+            $options['href'] = Url::to($url, TRUE);
         }
+
         return self::tag('a', $text, $options);
     }
 
-    public static function activeEditor($model, $attribute, $options = []) {
+    public static function activeEditor($model, $attribute, $options = [])
+    {
         return UEditorInput::widget(['model' => $model, 'attribute' => $attribute, 'options' => $options]);
     }
 
-    public static function submitButton($content = '提交', $options = []) {
+    public static function submitButton($content = '提交', $options = [])
+    {
         if (!isset($options['class'])) {
             self::addCssClass($options, "layui-btn");
         }
@@ -66,19 +73,22 @@ class Html extends BaseHtml
         return parent::submitButton($content, $options);
     }
 
-    public static function linkButton($text, $url = null, $options = []) {
-        if ($url !== null) {
-            $options['href'] = Url::to($url, true);
+    public static function linkButton($text, $url = NULL, $options = [])
+    {
+        if ($url !== NULL) {
+            $options['href'] = Url::to($url, TRUE);
         }
 
         $options['class'] = "layui-btn ";
         if (isset($options['color'])) {
             self::addCssClass($options, "layui-" . $options['color']);
         }
+
         return self::tag('a', $text, $options);
     }
 
-    public static function resetButton($content = '重置', $options = []) {
+    public static function resetButton($content = '重置', $options = [])
+    {
         if (!isset($options['class'])) {
             self::addCssClass($options, "layui-btn layui-btn-primary");
         }
@@ -86,7 +96,8 @@ class Html extends BaseHtml
         return parent::resetButton($content, $options);
     }
 
-    public static function resetButtonLink($content = '重置', $link = [], $options = []) {
+    public static function resetButtonLink($content = '重置', $link = [], $options = [])
+    {
         if (!isset($options['class'])) {
             self::addCssClass($options, "layui-btn layui-btn-primary");
         }
@@ -94,11 +105,13 @@ class Html extends BaseHtml
         return Html::a($content, $link, $options);
     }
 
-    public static function buttonGroup($buttons = []) {
+    public static function buttonGroup($buttons = [])
+    {
         return Html::tag("div", implode("\n", $buttons), ['class' => 'layui-btn-group']);
     }
 
-    public static function activeTextInput($model, $attribute, $options = []) {
+    public static function activeTextInput($model, $attribute, $options = [])
+    {
         if (isset($options['class'])) {
             $options['class'] = 'layui-input ' . $options['class'];
         } else {
@@ -108,38 +121,49 @@ class Html extends BaseHtml
         return parent::activeInput('text', $model, $attribute, $options);
     }
 
-    public static function textInput($name, $value = '', $options = []) {
+    public static function textInput($name, $value = '', $options = [])
+    {
         self::addCssClass($options, ["layui-input"]);
+
         return parent::textInput($name, $value, $options);
     }
 
-    public static function radio($name, $checked = false, $options = []) {
+    public static function radio($name, $checked = FALSE, $options = [])
+    {
         return self::booleanInput('radio', $name, $checked, $options);
     }
 
-    public static function checkbox($name, $checked = false, $options = []) {
+    public static function checkbox($name, $checked = FALSE, $options = [])
+    {
         return self::booleanInput('checkbox', $name, $checked, $options);
     }
 
-    public static function textarea($name, $value = '', $options = []) {
+    public static function textarea($name, $value = '', $options = [])
+    {
         self::addCssClass($options, ["layui-textarea"]);
+
         return parent::textarea($name, $value, $options);
     }
 
-    public static function dropDownList($name, $selection = null, $items = [], $options = []) {
+    public static function dropDownList($name, $selection = NULL, $items = [], $options = [])
+    {
         self::addCssClass($options, ["layui-input"]);
+
         return parent::dropDownList($name, $selection, $items, $options);
     }
 
-    public static function submitWrapper($content) {
+    public static function submitWrapper($content)
+    {
         return Html::tag("div", Html::tag("div", $content, ['class' => 'layui-input-block']), ['class' => 'layui-form-item']);
     }
 
-    public static function hint($content) {
+    public static function hint($content)
+    {
         return Html::tag("div", $content, ['class' => "layui-form-mid layui-word-aux"]);
     }
 
-    public static function checkboxList($name, $selection = null, $items = [], $options = []) {
+    public static function checkboxList($name, $selection = NULL, $items = [], $options = [])
+    {
         self::addCssClass($options, ["layui-input"]);
         if (!isset($options['lay-skin'])) {
             $options['lay-skin'] = 'primary';
@@ -152,10 +176,12 @@ class Html extends BaseHtml
             $itemOption['value'] = $key;
             $itemList[]          = Html::checkbox($name . "[]", in_array($key, $selection), $itemOption);
         }
+
         return implode("\n", $itemList);
     }
 
-    public static function radioList($name, $selection = null, $items = [], $options = []) {
+    public static function radioList($name, $selection = NULL, $items = [], $options = [])
+    {
         self::addCssClass($options, ["layui-input"]);
         if (!isset($options['lay-skin'])) {
             $options['lay-skin'] = 'primary';
@@ -168,35 +194,45 @@ class Html extends BaseHtml
             $itemOption['value'] = $key;
             $itemList[]          = Html::radio($name, $key == $selection, $itemOption);
         }
+
         return implode("\n", $itemList);
     }
 
-    public static function activeRadio($model, $attribute, $options = []) {
+    public static function activeRadio($model, $attribute, $options = [])
+    {
         return self::activeBooleanInput('radio', $model, $attribute, $options);
     }
 
-    public static function activeCheckbox($model, $attribute, $options = []) {
+    public static function activeCheckbox($model, $attribute, $options = [])
+    {
         return self::activeBooleanInput('checkbox', $model, $attribute, $options);
     }
 
 
-    public static function activeRadioList($model, $attribute, $items, $options = []) {
+    public static function activeRadioList($model, $attribute, $items, $options = [])
+    {
         return self::activeListInput('radioList', $model, $attribute, $items, $options);
     }
 
-    public static function activeCheckboxList($model, $attribute, $items, $options = []) {
+    public static function activeCheckboxList($model, $attribute, $items, $options = [])
+    {
         return self::activeListInput('checkboxList', $model, $attribute, $items, $options);
     }
 
-    public static function icon($fontIconCss,$otherClass=[]) {
+    public static function icon($fontIconCss, $otherClass = [], $options = [])
+    {
         $classPrefix = "fa fa-";
-        $fontClass = $classPrefix.$fontIconCss;
-        $otherClass = implode(" ",$otherClass);
-        return self::tag("i", "", ['class' => $fontClass." ".$otherClass]);
+        $fontClass   = $classPrefix . $fontIconCss;
+        $otherClass  = implode(" ", $otherClass);
+
+        Html::addCssClass($options, [$fontClass, $otherClass]);
+
+        return self::tag("i", "", $options);
     }
 
 
-    protected static function activeListInput($type, $model, $attribute, $items, $options = []) {
+    protected static function activeListInput($type, $model, $attribute, $items, $options = [])
+    {
         $name      = isset($options['name']) ? $options['name'] : self::getInputName($model, $attribute);
         $selection = isset($options['value']) ? $options['value'] : self::getAttributeValue($model, $attribute);
         if (!array_key_exists('unselect', $options)) {
@@ -209,7 +245,8 @@ class Html extends BaseHtml
         return self::$type($name, $selection, $items, $options);
     }
 
-    protected static function activeBooleanInput($type, $model, $attribute, $options = []) {
+    protected static function activeBooleanInput($type, $model, $attribute, $options = [])
+    {
         $name  = isset($options['name']) ? $options['name'] : self::getInputName($model, $attribute);
         $value = self::getAttributeValue($model, $attribute);
 
@@ -233,7 +270,8 @@ class Html extends BaseHtml
         return self::$type($name, $checked, $options);
     }
 
-    protected static function booleanInput($type, $name, $checked = false, $options = []) {
+    protected static function booleanInput($type, $name, $checked = FALSE, $options = [])
+    {
         $options['checked'] = (bool)$checked;
         $value              = array_key_exists('value', $options) ? $options['value'] : '1';
         if (isset($options['uncheck'])) {

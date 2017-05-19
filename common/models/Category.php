@@ -16,14 +16,16 @@ class Category extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'category';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['name', 'alias'], 'required'],
             [['pid', 'order'], 'integer'],
@@ -35,7 +37,8 @@ class Category extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id'    => 'ID',
             'name'  => 'Name',
@@ -45,28 +48,35 @@ class Category extends \common\base\ActiveRecord
         ];
     }
 
-    private static function generateTree($items) {
+    private static function generateTree($items)
+    {
         foreach ($items as $item)
             $items[$item['pid']]['children'][$item['id']] = &$items[$item['id']];
+
         return isset($items[0]['children']) ? $items[0]['children'] : array();
     }
 
-    public static function getIndentList() {
+    public static function getIndentList()
+    {
         $list = self::getList();
+
         return self::generateTree($list);
     }
 
-    public static function getList() {
+    public static function getList()
+    {
         $dataList = Category::find()->orderBy(['pid' => SORT_ASC, 'order' => SORT_ASC])->asArray()->all();
 
         $keyDataList = [];
         foreach ($dataList as $data) {
             $keyDataList[$data['id']] = $data;
         }
+
         return $keyDataList;
     }
 
-    private static function formatFlatIndentList($list, &$items = [], $level = 0) {
+    private static function formatFlatIndentList($list, &$items = [], $level = 0)
+    {
         foreach ($list as $item) {
             $treeLevel = $level;
             $prefix    = "";
@@ -80,7 +90,8 @@ class Category extends \common\base\ActiveRecord
         }
     }
 
-    public static function getFlatIndentList($showRoot = false) {
+    public static function getFlatIndentList($showRoot = FALSE)
+    {
         $list = self::getIndentList();
 
         $items = [];
@@ -90,14 +101,17 @@ class Category extends \common\base\ActiveRecord
             $items[] = '根分类';
         }
         self::formatFlatIndentList($list, $items, $level);
+
         return $items;
     }
 
-    public static function getName($categoryID) {
+    public static function getName($categoryID)
+    {
         return self::findOne($categoryID)->name;
     }
 
-    public static function breadCrumb($catID) {
+    public static function breadCrumb($catID)
+    {
         $list = self::getList();
 
         $breadcrumbs = [];
@@ -107,5 +121,40 @@ class Category extends \common\base\ActiveRecord
         }
 
         return array_reverse($breadcrumbs);
+    }
+
+    public static function getSubTree($id, $showFlat = FALSE)
+    {
+        $list = self::getIndentList();
+
+        $list = self::getSubTreeItems($id, $list);
+        if (!$showFlat) {
+            return $list;
+        }
+
+        $items = [];
+        self::formatFlatIndentList([$list], $items);
+
+        return $items;
+    }
+
+    private static function getSubTreeItems($id, $list)
+    {
+        foreach ($list as $item) {
+            if ($item['id'] == $id) {
+                return $item;
+            }
+
+            if (isset($item['children']) && is_array($item['children'])) {
+                $ret = self::getSubTreeItems($id, $item['children']);
+                if ($ret == FALSE) {
+                    continue;
+                }
+
+                return $ret;
+            }
+        }
+
+        return FALSE;
     }
 }
