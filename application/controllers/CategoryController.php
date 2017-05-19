@@ -3,7 +3,6 @@ namespace application\controllers;
 
 use application\base\WebController;
 use common\models\Category;
-use common\util\Request;
 use yii\web\NotFoundHttpException;
 
 class CategoryController extends WebController
@@ -17,9 +16,6 @@ class CategoryController extends WebController
 
         $categoryInfo = $model->toArray();
 
-        var_dump($categoryInfo);
-        exit;
-
-        return $this->render("category");
+        return $this->render("/category");
     }
 }

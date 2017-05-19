@@ -3,7 +3,6 @@ use common\extend\Html;
 
 /** @var $this \common\extend\View */
 ?>
-<h1>Hello Ipao</h1>
 <?= \widgets\Breadcrumbs::widget([
     'categoryID' => 8,
 ]) ?>

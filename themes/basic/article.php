@@ -1,7 +1,7 @@
 <div class="page-article">
     <?= \widgets\Content\Content::widget([
         'title'       => '际的运用中有这样一种场景，某资源加载完成后再执行某个',
-        'content'     => $this->render("site/_content_data"),
+        'content'     => $this->render("_content_data"),
         'description' => "hello world!",
         'meta'        => [
             'time'         => '2017-01-01',
@@ -41,7 +41,7 @@
                 'time'  => '2017-02-02',
             ],
             [
-                'strong' => TRUE,
+                'strong' => true,
                 'title'  => 'UX Wordpress主题是大前端当前使用主题，是大前端积累多年Wordpress主题经验设计而',
                 'time'   => '2017-02-02',
             ],

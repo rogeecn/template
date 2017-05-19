@@ -9,6 +9,7 @@ $params = array_merge(
 return [
     'id'                  => 'application',
     'language'            => 'zh-CN',
+    'defaultRoute'        => 'index',
     'basePath'            => dirname(__DIR__),
     'controllerNamespace' => 'application\controllers',
     'bootstrap'           => ['log'],
@@ -20,10 +21,10 @@ return [
     'components'          => [
         'user'         => [
             'identityClass'   => 'common\User',
-            'enableAutoLogin' => TRUE,
+            'enableAutoLogin' => true,
             'identityCookie'  => [
                 'name'     => '_IDENTITY_APPLICATION',
-                'httpOnly' => TRUE,
+                'httpOnly' => true,
             ],
         ],
         'session'      => [
@@ -40,7 +41,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'error/error',
         ],
         'urlManager'   => [
             'class' => 'common\extend\UrlManager',
