@@ -12,7 +12,7 @@ AppAsset::register($this);
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>YCms</title>
+    <title>Hello Ipao</title>
     <?php $this->head() ?>
 </head>
 <body>

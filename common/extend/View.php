@@ -20,6 +20,9 @@ class View extends \yii\web\View
         } else {
             $data = json_decode(file_get_contents($settingCacheFile), TRUE);
         }
+        if (!isset($data[$configPath])) {
+            return FALSE;
+        }
 
         return $data[$configPath];
     }

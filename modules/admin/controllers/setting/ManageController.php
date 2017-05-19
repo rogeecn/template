@@ -1,28 +1,32 @@
 <?php
 namespace modules\admin\controllers\setting;
 
-use common\util\Request;
 use application\base\AuthController;
 use common\models\Setting;
+use common\util\Request;
 
 class ManageController extends AuthController
 {
 
-    public function actionIndex() {
-        if (Request::isPost()){
+    public function actionIndex()
+    {
+        if (Request::isPost()) {
             $formData = Request::post("group");
 
-            foreach ($formData as $groupID=>$keyMapData){
-                foreach ($keyMapData as $alias=>$value){
-                    if (is_array($value)){
-                        $value=implode(",",$value);
+            foreach ($formData as $groupID => $keyMapData) {
+                foreach ($keyMapData as $alias => $value) {
+                    if (is_array($value)) {
+                        $value = implode(",", $value);
                     }
-                    Setting::updateAll(['value'=>$value],['group_id'=>$groupID,'alias'=>$alias]);
+                    Setting::updateAll(['value' => $value], ['group_id' => $groupID, 'alias' => $alias]);
+
+                    $settingCacheFile = \Yii::getAlias("@runtime/data/setting.php");
+                    @unlink($settingCacheFile);
                 }
             }
         }
 
-        $groupList = Setting::getGroupList(true);
+        $groupList = Setting::getGroupList(TRUE);
         foreach ($groupList as $groupID => $groupItem) {
             $groupList[$groupID] = [
                 'name'    => $groupItem,

@@ -70,13 +70,6 @@ class Setting extends \common\base\ActiveRecord
         return 'setting';
     }
 
-    public function beforeSave($insert)
-    {
-        $settingCacheFile = \Yii::getAlias("@runtime/data/setting.php");
-        @unlink($settingCacheFile);
-
-        return parent::beforeSave($insert);
-    }
 
     public static function getTypeList()
     {
