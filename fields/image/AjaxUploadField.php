@@ -42,6 +42,7 @@ class AjaxUploadField extends Field implements IField
 
     protected function renderField() {
         // 如果存在ID说明是可以查询数据的
+        $this->value=['image'=>''];
         if (!empty($this->dataID)) {
             $this->value = $this->getData();
         }
@@ -54,7 +55,7 @@ class AjaxUploadField extends Field implements IField
         $itemClass = "layui-input-block";
         $input     = UploaderWidget::widget([
             'name'    => sprintf("%s[%s]", $this->name, $this->name),
-            'value'   => explode(",", $this->value['image']),
+            'value'   => array_filter(explode(",", $this->value['image'])),
             'options' => $this->options,
         ]);
         $content .= Html::tag("div", $input, ['class' => $itemClass]);

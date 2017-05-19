@@ -2,10 +2,10 @@
 namespace fields\tag;
 
 
-use modules\admin\widget\TagInput;
 use common\base\Field;
 use common\base\IField;
 use common\models\TagArticle;
+use modules\admin\widget\TagInput;
 use plugins\LayUI\components\Html;
 use yii\helpers\ArrayHelper;
 
@@ -15,12 +15,14 @@ class TagField extends Field implements IField
     public $description = "tag标签管理";
     public $table       = "tag";
 
-    public function getOptions() {
+    public function getOptions()
+    {
         return [
         ];
     }
 
-    public function createData() {
+    public function createData()
+    {
         if (empty($this->fieldData['tag'])) {
             return;
         }
@@ -30,22 +32,29 @@ class TagField extends Field implements IField
         TagArticle::setArticleTags($this->dataID, $tags);
     }
 
-    public function updateData() {
+    public function updateData()
+    {
         $tags = explode(",", $this->fieldData['tag']);
         $tags = array_filter(array_unique($tags));
         TagArticle::setArticleTags($this->dataID, $tags);
     }
 
-    public function getData() {
+    public function getData()
+    {
         $articleTags = TagArticle::getArticleTags($this->dataID);
         $retData     = [
             'tag' => ArrayHelper::getColumn($articleTags, "name"),
         ];
+
         return $retData;
     }
 
-    protected function renderField() {
+    protected function renderField()
+    {
         // 如果存在ID说明是可以查询数据的
+        $this->value = [
+            'tag' => [],
+        ];
         if (!empty($this->dataID)) {
             $this->value = $this->getData();
         }
