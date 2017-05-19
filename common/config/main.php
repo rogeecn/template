@@ -19,9 +19,31 @@ return [
 
         'assetManager' => [
             'bundles' => [
-                'yii\web\JqueryAsset' => [
+                'yii\web\JqueryAsset'             => [
                     'jsOptions' => [
                         'position' => \yii\web\View::POS_HEAD,
+                    ],
+                    'js'        => [
+                        '//cdn.staticfile.org/jquery/3.2.1/jquery.min.js',
+                    ],
+                ],
+                'plugins\FontAwesome\FontAwesome' => [
+                    'css' => [
+                        '//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css',
+                    ],
+                ],
+                'plugins\Carousel\CarouselAssets' => [
+                    'js'  => [
+                        '//cdn.staticfile.org/slick-carousel/1.6.0/slick.min.js',
+                    ],
+                    'css' => [
+                        '//cdn.staticfile.org/slick-carousel/1.6.0/slick.min.css',
+                        '//cdn.staticfile.org/slick-carousel/1.6.0/slick-theme.min.css',
+                    ],
+                ],
+                'plugins\sortable\SortableAssets' => [
+                    'js' => [
+                        '//cdn.staticfile.org/jquery-sortable/0.9.13/jquery-sortable-min.js',
                     ],
                 ],
             ],
