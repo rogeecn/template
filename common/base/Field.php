@@ -2,9 +2,9 @@
 namespace common\base;
 
 
-use yii\db\Exception;
 use yii\base\InvalidParamException;
 use yii\base\Widget;
+use yii\db\Exception;
 use yii\db\Query;
 
 class Field extends Widget
@@ -20,21 +20,22 @@ class Field extends Widget
     public $table       = "";
     public $options     = [];
     public $fieldData   = [];
-    public $dataID      = null;
-    public $mode      = null;
+    public $dataID      = NULL;
+    public $mode        = NULL;
 
 
     const MODE_SUMMARY = "SUMMARY";
-    const MODE_DETAIL = "DETAIL";
+    const MODE_DETAIL  = "DETAIL";
 
     const ACTION_CREATE = 'createData';
     const ACTION_UPDATE = 'updateData';
     const ACTION_DELETE = 'deleteData';
-    const ACTION_GET = 'getData';
-    const ACTION_INFO = 'getInfo';
+    const ACTION_GET    = 'getData';
+    const ACTION_INFO   = 'getInfo';
     const ACTION_RENDER = 'renderField';
 
-    public static function field($config = []) {
+    public static function field($config = [])
+    {
         try {
             /* @var $widget Widget */
             $config['class'] = get_called_class();
@@ -51,12 +52,14 @@ class Field extends Widget
         return $out;
     }
 
-    public function init() {
+    public function init()
+    {
         parent::init();
         $this->initParams();
     }
 
-    protected function getInfo() {
+    protected function getInfo()
+    {
         return [
             'class'       => self::className(),
             'name'        => $this->name,
@@ -66,7 +69,8 @@ class Field extends Widget
         ];
     }
 
-    public function initParams() {
+    public function initParams()
+    {
         if (empty($this->action)) {
             throw new InvalidParamException("missing params action");
         }
@@ -76,22 +80,25 @@ class Field extends Widget
                 continue;
             }
             if ($itemKey == "options") {
-                $this->$itemKey = json_decode($itemValue, true) ?: [];
+                $this->$itemKey = json_decode($itemValue, TRUE) ?: [];
                 continue;
             }
             $this->$itemKey = $itemValue;
         }
     }
 
-    protected function getOptions() {
+    protected function getOptions()
+    {
         return [];
     }
 
-    public function run() {
+    public function run()
+    {
         return call_user_func_array([$this, $this->action], []);
     }
 
-    protected function createCommand($sql=null, $params = []) {
+    protected function createCommand($sql = NULL, $params = [])
+    {
         return \Yii::$app->getDb()->createCommand($sql, $params);
     }
 
@@ -100,16 +107,18 @@ class Field extends Widget
         return (new Query());
     }
 
-    protected function getData(){
+    protected function getData()
+    {
         return $this->getQuery()
-            ->from($this->table)
-            ->where(['id'=>$this->dataID])
-            ->one();
+                    ->from($this->table)
+                    ->where(['id' => $this->dataID])
+                    ->one();
     }
 
-    protected function createData() {
+    protected function createData()
+    {
         $this->fieldData['id'] = $this->dataID;
-        $ret = $this->createCommand()->insert($this->table,$this->fieldData)->execute();
+        $ret                   = $this->createCommand()->insert($this->table, $this->fieldData)->execute();
 
         if (!$ret) {
             throw new Exception("table '$this->table': create data failed!");
@@ -117,15 +126,18 @@ class Field extends Widget
     }
 
 
-    protected function updateData() {
-        if (!$this->getData()){
+    protected function updateData()
+    {
+        if (!$this->getData()) {
             $this->createData();
+
             return;
         }
-        $this->createCommand()->update($this->table,$this->fieldData,['id'=>$this->dataID])->execute();
+        $this->createCommand()->update($this->table, $this->fieldData, ['id' => $this->dataID])->execute();
     }
 
-    protected function deleteData() {
-        $this->createCommand()->delete($this->table,["id"=>$this->dataID])->execute();
+    protected function deleteData()
+    {
+        $this->createCommand()->delete($this->table, ["id" => $this->dataID])->execute();
     }
 }

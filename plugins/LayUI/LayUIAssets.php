@@ -14,7 +14,6 @@ class LayUIAssets extends AssetBundle
 
     public $css = [
         "css/layui.css",
-        "custom.css",
     ];
 
     public $depends = [
