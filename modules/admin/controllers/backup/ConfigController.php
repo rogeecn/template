@@ -60,7 +60,7 @@ class ConfigController extends AuthController
             }
         }
 
-        \Yii::$app->getResponse()->sendContentAsFile(json_encode($retData), "config.json");
+        \Yii::$app->getResponse()->sendContentAsFile(json_encode($retData), sprintf("config-%s.json", date("YmdHis")));
     }
 
     public function actionImport()
