@@ -72,4 +72,24 @@ class View extends \yii\web\View
     {
         return Url::toRoute(['/category/index', 'alias' => $alias]);
     }
+
+    public function ICPNumber()
+    {
+        $ICPNumber = $this->setting("site.icp_number");
+        if (!empty($ICPNumber)) {
+            return Html::a($ICPNumber, "http://www.miitbeian.gov.cn/");
+        }
+
+        return "";
+    }
+
+    public function PoliceNumber()
+    {
+        $PoliceNumber = $this->setting("site.police_number");
+        if (!empty($PoliceNumber)) {
+            return Html::a($PoliceNumber, "#");
+        }
+
+        return "";
+    }
 }

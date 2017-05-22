@@ -1,9 +1,10 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this \common\extend\View */
 /* @var $content string */
 
 use application\assets\AppAsset;
+use common\extend\Html;
 
 AppAsset::register($this);
 ?>
@@ -16,34 +17,32 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<?= \widgets\Header\Header::widget([
-    'logo'    => [
-        'title' => '大前端',
-        'image' => 'http://www.daqianduan.com/wp-content/uploads/2015/01/logo.png',
-        'url'   => '/',
-    ],
-    'brand'   => '关注前端开发,关注用户体验',
-    'subNav'  => [
-        ['label' => '联系大前端', 'url' => '/'],
-        ['label' => '联系大前端', 'url' => '/'],
-        ['label' => '联系大前端', 'url' => '/'],
-        ['label' => '联系大前端', 'url' => '/'],
-    ],
-    'mainNav' => [
-        ['label' => '首页', 'url' => '/'],
-        ['label' => '前端开发', 'url' => '/', 'items' => [
-            ['label' => '前端开发', 'url' => '/'],
-            ['label' => '设计', 'url' => '/'],
-            ['label' => '前端网址导航', 'url' => '/'],
-            ['label' => '前端招聘', 'url' => '/'],
-        ]],
-        ['label' => '设计', 'url' => '/'],
-        ['label' => '前端网址导航', 'url' => '/'],
-        ['label' => '前端招聘', 'url' => '/'],
-        ['label' => 'WordPress主题', 'url' => '/'],
-    ],
-]) ?>
-<section class="container site-body">
+<header class="nav">
+    <div class="container">
+        <?= \widgets\NavItem::widget([
+            'items'            => \common\models\LinkGroup::getLinkByGroupAlias("nav-top"),
+            'containerOptions' => ['class' => 'menu nav-sub text-right'],
+        ]) ?>
+        <div class="nav-main text-right">
+            <h1 class="logo">
+                <?php
+                $logoImg  = Html::img($this->setting("site.logo"));
+                $siteName = $this->setting("site.name");
+                $siteUrl  = $this->setting("site.url");
+                echo Html::a($logoImg . $siteName, $siteUrl);
+                ?>
+            </h1>
+            <div class="brand">
+                <?= strtr($this->setting("site.slogan"), [',' => '<br>']) ?>
+            </div>
+            <?= \widgets\NavItem::widget([
+                'items'   => \common\models\LinkGroup::getLinkByGroupAlias("nav-main"),
+                'options' => ['class' => 'menu nav-menu'],
+            ]) ?>
+        </div>
+    </div>
+</header>
+<section class=" container site-body">
     <div class="content">
         <?= $content ?>
     </div>
@@ -78,22 +77,8 @@ AppAsset::register($this);
         ]) ?>
 
         <?= \widgets\TagCloud\TagCloud::widget([
-            'items' => [
-                '招聘/求职 (110)',
-                '招聘/求职 (110)',
-                '招聘/求职 (110)',
-                '招聘/求职 (110)',
-                '招聘/求职 (110)',
-                '招聘/求职 (110)',
-                '招聘/求职 (110)',
-                '招聘/求职 (110)',
-                '招聘/求职 (110)',
-                '招聘/求职 (110)',
-                '招聘/求职 (110)',
-            ],
+            'items' => \common\models\Tag::getList(18, true),
         ]) ?>
-
-
     </aside>
 </section>
 <?= \widgets\ColumnShow::widget([
@@ -107,7 +92,12 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container text-center">
-        <p>© 2017 大前端 本站DUX主题由 themebetter.com 提供 <a href="">网站地图</a></p>
+        <p>
+            <span>© <?= date("Y") ?></span>&nbsp;
+            <?= Html::a($this->setting("site.name"), $this->setting("site.url")) ?>&nbsp;
+            <?= $this->ICPNumber() ?>&nbsp;
+            <?= $this->PoliceNumber() ?>
+        </p>
     </div>
 </footer>
 <?php $this->endBody() ?>

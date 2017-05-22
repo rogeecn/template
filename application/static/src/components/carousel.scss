@@ -2,5 +2,22 @@
   height: 200px;
   border-radius: $border-radius;
   overflow: hidden;
-  margin-bottom: 2*$margin-size;
+  margin-bottom: 3*$margin-size;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 20;
+}
+
+.slick-prev {
+  left: 10px;
+}
+
+.slick-next {
+  right: 10px;
+}
+
+.slick-dots {
+  bottom: 10px;
 }

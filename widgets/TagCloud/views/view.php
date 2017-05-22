@@ -7,7 +7,7 @@ use yii\helpers\Html;
     <ul class="body">
         <?php foreach ($items as $tag): ?>
             <li>
-                <?= Html::a($tag, [$baseURL, $tagParam => $tag]) ?>
+                <?= Html::a($tag['label'], $tag['url']) ?>
             </li>
         <?php endforeach; ?>
     </ul>

@@ -205,5 +205,6 @@ class LinkGroup extends ActiveRecord
             }
         }
 
+        return $links;
     }
 }
