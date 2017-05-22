@@ -1,13 +1,13 @@
 <style>
-    #logo{
-        display:block;
+    #logo {
+        display: block;
         position: absolute;
         padding: 10px;
         height: 40px;
         width: 180px;
         z-index: 998;
         text-align: left;
-        line-height:40px;
+        line-height: 40px;
         font-weight: bold;
         font-size: 30px;
         color: #bdbdbe;

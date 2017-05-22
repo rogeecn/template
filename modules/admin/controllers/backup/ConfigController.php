@@ -8,6 +8,15 @@ use yii\db\Query;
 class ConfigController extends AuthController
 {
     public $dataList = [
+        'field'    => [
+            'label'       => '文章类型',
+            'name'        => 'field',
+            'description' => '文章类型',
+            'tables'      => [
+                'article_field',
+                'article_type',
+            ],
+        ],
         'category' => [
             'label'       => '分类',
             'name'        => 'category',
