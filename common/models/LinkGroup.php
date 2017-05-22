@@ -24,22 +24,24 @@ class LinkGroup extends ActiveRecord
     const DISPLAY_GROUP = "0";
     const DISPLAY_LINK  = "1";
 
-    const TYPE_FRIEND_LINK = "friend_link";
-    const TYPE_ARTICLE     = "article";
-    const TYPE_PAGE        = "page";
-    const TYPE_CATEGORY    = "category";
+    const TYPE_URL      = "url";
+    const TYPE_ARTICLE  = "article";
+    const TYPE_PAGE     = "page";
+    const TYPE_CATEGORY = "category";
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'link_group';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['alias', 'title', 'display'], 'required'],
             [['display', 'group_id', 'order'], 'integer'],
@@ -53,7 +55,8 @@ class LinkGroup extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id'       => 'ID',
             'alias'    => 'Alias',
@@ -66,15 +69,17 @@ class LinkGroup extends ActiveRecord
         ];
     }
 
-    public static function getTypeList() {
+    public static function getTypeList()
+    {
         return [
-            self::TYPE_FRIEND_LINK => "友情链接",
-            self::TYPE_ARTICLE     => "文章",
-            self::TYPE_PAGE        => "页面",
+            self::TYPE_URL     => "URL链接",
+            self::TYPE_ARTICLE => "文章",
+            self::TYPE_PAGE    => "页面",
         ];
     }
 
-    public static function getGroupList($asArray = false) {
+    public static function getGroupList($asArray = false)
+    {
         $groupList = self::find()->where(['display' => LinkGroup::DISPLAY_GROUP])->orderBy(['order' => SORT_ASC])->all();
         if (!$asArray) {
             return $groupList;
@@ -83,7 +88,8 @@ class LinkGroup extends ActiveRecord
         return ArrayHelper::map($groupList, "id", "title");
     }
 
-    public static function getGroupLinkList($groupId) {
+    public static function getGroupLinkList($groupId)
+    {
         $condition = [
             'group_id' => $groupId,
             'display'  => self::DISPLAY_LINK,
@@ -103,17 +109,22 @@ class LinkGroup extends ActiveRecord
         return $retList;
     }
 
-    public function createLink() {
+    public function createLink()
+    {
         $this->display = self::DISPLAY_LINK;
+
         return $this->save();
     }
 
-    public function createGroup() {
+    public function createGroup()
+    {
         $this->display = self::DISPLAY_GROUP;
+
         return $this->save();
     }
 
-    public static function flatSettings() {
+    public static function flatSettings()
+    {
         $groups = self::getGroupList(true);
 
         $data = [];
@@ -124,26 +135,32 @@ class LinkGroup extends ActiveRecord
                 $data[$columnKey] = $columnData['value'];
             }
         }
+
         return $data;
     }
 
-    public static function getLinkByGroupAlias($alias) {
+    public static function getLinkByGroupAlias($alias)
+    {
         $model = self::find()->where(['alias' => $alias, 'display' => self::DISPLAY_GROUP])->one();
         if (!$model) {
             return [];
         }
+
         return self::getGroupLinks($model->primaryKey);
     }
 
-    public static function getLinkByGroupID($id) {
+    public static function getLinkByGroupID($id)
+    {
         $model = self::find()->where(['id' => $id, 'display' => self::DISPLAY_GROUP])->one();
         if (!$model) {
             return [];
         }
+
         return self::getGroupLinks($model->primaryKey);
     }
 
-    public static function getGroupLinks($groupID) {
+    public static function getGroupLinks($groupID)
+    {
         /** @var LinkGroup[] $linkModelList */
         $linkModelList = self::find()->where(['group_id' => $groupID])->orderBy(['order' => SORT_ASC])->all();
 
