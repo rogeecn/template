@@ -14,7 +14,7 @@ class View extends \yii\web\View
     public function setting($configPath)
     {
         $settingCacheFile = \Yii::getAlias("@runtime/data/setting.php");
-        if (empty(selF::$_SETTING)) {
+        if (empty(self::$_SETTING)) {
             if (!is_file($settingCacheFile)) {
                 if (!is_dir(dirname($settingCacheFile))) {
                     FileHelper::createDirectory(dirname($settingCacheFile));
