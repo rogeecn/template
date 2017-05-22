@@ -109,6 +109,16 @@ class LinkGroup extends ActiveRecord
         return $retList;
     }
 
+    public function getGroupLinkCount()
+    {
+        $condition = [
+            'group_id' => $this->id,
+            'display'  => self::DISPLAY_LINK,
+        ];
+
+        return self::find()->where($condition)->count();
+    }
+
     public function createLink()
     {
         $this->display = self::DISPLAY_LINK;
@@ -173,7 +183,7 @@ class LinkGroup extends ActiveRecord
                         'url'   => ['/article/index', $linkModel->value],
                     ];
                     break;
-                case self::TYPE_FRIEND_LINK:
+                case self::TYPE_URL:
                     $links[] = [
                         'label' => $linkModel->title,
                         'url'   => $linkModel->value,
