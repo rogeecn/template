@@ -26,7 +26,8 @@ class Article extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'article';
     }
 
@@ -45,10 +46,11 @@ class Article extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            [['title', 'type','category_id'], 'required'],
-            [['user_id', 'category_id','status', 'type', 'index_show', 'created_at', 'updated_at'], 'integer'],
+            [['title', 'type', 'category_id'], 'required'],
+            [['user_id', 'category_id', 'status', 'type', 'index_show', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 240],
             [['status'], 'default', 'value' => self::ST_ENABLE],
             ['category_id', 'default', 'value' => 0],
@@ -59,47 +61,72 @@ class Article extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
-            'id'         => 'ID',
-            'title'      => 'Title',
-            'user_id'    => 'User ID',
-            'category_id'    => 'Category',
-            'type'       => 'Type',
-            'index_show' => 'Index Show',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'id'          => 'ID',
+            'title'       => 'Title',
+            'user_id'     => 'User ID',
+            'category_id' => 'Category',
+            'type'        => 'Type',
+            'index_show'  => 'Index Show',
+            'created_at'  => 'Created At',
+            'updated_at'  => 'Updated At',
         ];
     }
 
     public function beforeSave($insert)
     {
         $this->user_id = UserInfo::getID();
+
         return parent::beforeSave($insert);
     }
 
-    public static function getDataByID($articleID,$mode=null,$excludeFields = [])
+    public static function getDataByID($articleID, $mode = null, $excludeFields = [])
     {
-        $articleModel =  self::findOne($articleID);
-        if (!$articleModel){
+        $articleModel = self::findOne($articleID);
+        if (!$articleModel) {
             throw new NotFoundHttpException();
         }
 
         $articleData = $articleModel->toArray();
 
         $articleTypeFields = ArticleField::getTypeFieldList($articleModel->type);
-        foreach ($articleTypeFields as $articleField){
-            if (in_array($articleField['name'],$excludeFields)){
+        foreach ($articleTypeFields as $articleField) {
+            if (in_array($articleField['name'], $excludeFields)) {
                 continue;
             }
 
             $articleData['fields'][$articleField['name']] = $articleField['class']::field([
-                'action'=>Field::ACTION_GET,
-                'dataID'=>$articleData['id'],
-                'mode'=>$mode,
+                'action' => Field::ACTION_GET,
+                'dataID' => $articleData['id'],
+                'mode'   => $mode,
             ]);
         }
 
         return $articleData;
+    }
+
+    public static function getListByCategoryAlias($categoryAlias, $offset = 0, $limitCnt = 10)
+    {
+        $categoryModel = Category::getByAlias($categoryAlias);
+        $condition     = [
+            'category_id' => $categoryModel->primaryKey,
+            'status'      => self::ST_ENABLE,
+        ];
+
+        return self::getList($condition, $offset, $limitCnt);
+    }
+
+    private static function getList($condition = [], $offset = 0, $limitCount = 10)
+    {
+        $list = self::find()
+                    ->where($condition)
+                    ->offset($offset)
+                    ->limit($limitCount)
+                    ->orderBy(['id' => SORT_DESC])
+                    ->all();
+
+        return $list;
     }
 }

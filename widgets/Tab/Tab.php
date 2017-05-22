@@ -10,7 +10,18 @@ class Tab extends Widget
     public $items   = [];
     public $options = [];
 
-    public function run() {
+    public function init()
+    {
+        foreach ($this->items as &$item) {
+            if ($item['content'] instanceof \Closure) {
+                $item['content'] = $item['content']();
+                var_dump($item['content']);exit;
+            }
+        }
+    }
+
+    public function run()
+    {
         Html::addCssClass($this->options, ['widget', 'tab-show']);
 
         return $this->render("view", [

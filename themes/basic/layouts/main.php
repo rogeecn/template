@@ -52,29 +52,29 @@ AppAsset::register($this);
             'items' => [
                 [
                     'title'   => '网站公告',
-                    'content' => $this->render("_tab_content"),
+                    'content' => \widgets\ListItem::widget([
+                        'items' => function () {
+                            $dataList = \common\models\Article::getListByCategoryAlias("announcement");
+
+                            $items = [];
+                            foreach ($dataList as $data) {
+                                $items[] = [
+                                    'title' => $data['title'],
+                                    'url'   => \yii\helpers\Url::to(['article/id', 'id' => $data['id']]),
+                                    'time'  => date("Y-m-d", $data['created_at']),
+                                ];
+                            }
+
+                            return $items;
+                        },
+                    ]),
                 ],
             ],
         ]); ?>
 
-        <?= \widgets\BlockShow\BlockShow::widget([
-            'band'       => '推荐',
-            'tagOptions' => [
-                'href' => \yii\helpers\Url::to(['/recommend']),
-            ],
-            'title'      => 'DUX主题 新一代主题',
-            'content'    => 'DUX Wordpress主题是大前端当前使用主题，是大前端积累多年Wordpress主题经验设计而成；更加扁平的风格和干净白色的架构会让网站显得内涵而出色...',
-        ]) ?>
+        <?= \widgets\BlockShow\BlockShow::widget(['id' => 21]); ?>
 
-        <?= \widgets\BlockShow\BlockShow::widget([
-            'band'       => '推荐',
-            'style'      => 'style02',
-            'tagOptions' => [
-                'href' => \yii\helpers\Url::to(['/recommend']),
-            ],
-            'title'      => 'DUX主题 新一代主题',
-            'content'    => 'DUX Wordpress主题是大前端当前使用主题，是大前端积累多年Wordpress主题经验设计而成；更加扁平的风格和干净白色的架构会让网站显得内涵而出色...',
-        ]) ?>
+        <?= \widgets\BlockShow\BlockShow::widget(['id' => 22]); ?>
 
         <?= \widgets\TagCloud\TagCloud::widget([
             'items' => \common\models\Tag::getList(18, true),

@@ -13,6 +13,9 @@ class ListItem extends Widget
     public function init()
     {
         Html::addCssClass($this->options, "list");
+        if ($this->items instanceof \Closure) {
+            $this->items = ($this->items)();
+        }
     }
 
     public function run()
