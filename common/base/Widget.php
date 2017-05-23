@@ -7,7 +7,8 @@ use common\extend\View;
 class Widget extends \yii\base\Widget
 {
     /** @var  View */
-    protected $view;
+    protected        $view;
+    protected static $_CACHE;
 
     public function init()
     {

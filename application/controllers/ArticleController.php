@@ -17,6 +17,8 @@ class ArticleController extends WebController
 
     private function getData($id)
     {
-        return $this->render("/article");
+        return $this->render("/article", [
+            'articleID' => $id,
+        ]);
     }
 }
