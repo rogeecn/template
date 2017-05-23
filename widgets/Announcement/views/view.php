@@ -6,7 +6,7 @@ use yii\helpers\Html;
     <h3 class="title">
         <?php
         if (!empty($category)) {
-            echo Html::a(sprintf("[%s]", $category['label']), $category['url'], ['class' => 'category']);
+            echo Html::a(sprintf("【%s】", $category['label']), $category['url'], ['class' => 'category']);
         }
         ?>
         <?php

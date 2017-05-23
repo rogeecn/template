@@ -5,17 +5,7 @@
 <?= \widgets\Breadcrumbs::widget(['categoryID' => 8]) ?>
 <?= \widgets\Carousel\Carousel::widget(['articleType' => 'carousel']) ?>
 
-<?= \widgets\Announcement\Announcement::widget([
-    'title'    => [
-        'label' => '滴滴出行(杭州)招聘资深前端开发工程师' . $this->setting("site.name"),
-        'url'   => ["/read"],
-    ],
-    'category' => [
-        'label' => '你好中国',
-        'url'   => ["/category"],
-    ],
-    'content'  => '滴滴出行杭州团队，支持代驾及专车业务。 岗位职责： 独立负责承担一个子业务的前端设计与开发工作 建设与维护团队前端工程化及服务化体系 任职要求： 精通各种前端技术，对技术底层、原生JS、浏览器机制有深刻理解 有基于Node的全栈开发经验，对...',
-]) ?>
+<?= \widgets\Announcement\Announcement::widget([]) ?>
 
 <?= \widgets\ArticleList\ArticleList::widget([
     'title' => [
