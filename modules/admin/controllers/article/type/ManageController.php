@@ -2,15 +2,16 @@
 
 namespace modules\admin\controllers\article\type;
 
-use common\util\Request;
 use application\base\AuthController;
 use common\models\ArticleType;
 use common\models\ArticleTypeSearch;
+use common\util\Request;
 use yii\web\NotFoundHttpException;
 
 class ManageController extends AuthController
 {
-    public function actionIndex() {
+    public function actionIndex()
+    {
         if (Request::isPost()) {
             $orderList = Request::input("order");
             foreach ($orderList as $id => $newOrder) {
@@ -29,7 +30,8 @@ class ManageController extends AuthController
         ]);
     }
 
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $model = new ArticleType();
 
         if (Request::isPost() && $model->load(Request::post()) && $model->save()) {
@@ -41,7 +43,8 @@ class ManageController extends AuthController
         ]);
     }
 
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = ArticleType::findOne($id);
         if (!$model) {
             throw new NotFoundHttpException();
@@ -54,5 +57,12 @@ class ManageController extends AuthController
         return $this->render("create", [
             'model' => $model,
         ]);
+    }
+
+    public function actionDelete($id)
+    {
+        ArticleType::findOne($id)->delete();
+
+        return $this->redirect(['index']);
     }
 }

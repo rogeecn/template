@@ -107,11 +107,35 @@ class Article extends \common\base\ActiveRecord
         return $articleData;
     }
 
+    public static function getListByTypeAlias($typeAlias, $offset = 0, $limitCnt = 10)
+    {
+        $articleTypeModel = ArticleType::findOne(['alias' => $typeAlias]);
+
+        return self::getListByTypeID($articleTypeModel->id, $offset, $limitCnt);
+    }
+
+    public static function getListByTypeID($typeID, $offset = 0, $limitCnt = 10)
+    {
+        $condition = [
+            'type'   => $typeID,
+            'status' => self::ST_ENABLE,
+        ];
+
+        return self::getList($condition, $offset, $limitCnt);
+    }
+
     public static function getListByCategoryAlias($categoryAlias, $offset = 0, $limitCnt = 10)
     {
+        /** @var Category $categoryModel */
         $categoryModel = Category::getByAlias($categoryAlias);
-        $condition     = [
-            'category_id' => $categoryModel->primaryKey,
+
+        return self::getListByCategoryID($categoryModel->primaryKey, $offset, $limitCnt);
+    }
+
+    public static function getListByCategoryID($categoryID, $offset = 0, $limitCnt = 10)
+    {
+        $condition = [
+            'category_id' => $categoryID,
             'status'      => self::ST_ENABLE,
         ];
 
@@ -125,7 +149,22 @@ class Article extends \common\base\ActiveRecord
                     ->offset($offset)
                     ->limit($limitCount)
                     ->orderBy(['id' => SORT_DESC])
+                    ->asArray()
                     ->all();
+
+        foreach ($list as &$item) {
+            $articleTypeFields = ArticleField::getTypeFieldList($item['type']);
+            foreach ($articleTypeFields as $articleField) {
+                if (in_array($articleField['name'], [])) {
+                    continue;
+                }
+
+                $item['fields'][$articleField['name']] = $articleField['class']::field([
+                    'action' => Field::ACTION_GET,
+                    'dataID' => $item['id'],
+                ]);
+            }
+        }
 
         return $list;
     }

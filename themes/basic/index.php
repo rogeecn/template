@@ -1,30 +1,9 @@
 <?php
-use common\extend\Html;
 
 /** @var $this \common\extend\View */
 ?>
-<?= \widgets\Breadcrumbs::widget([
-    'categoryID' => 8,
-]) ?>
-<?= \widgets\Carousel\Carousel::widget([
-    'items' => [
-        [
-            'label' => 'image_1',
-            'image' => 'http://www.daqianduan.com/wp-content/uploads/2014/11/hs-xiu.jpg',
-            'url'   => 'http://baidu.com',
-        ],
-        [
-            'label' => 'image_1',
-            'image' => 'http://www.daqianduan.com/wp-content/uploads/2014/11/hs-xiu.jpg',
-            'url'   => 'http://baidu.com',
-        ],
-        [
-            'label' => 'image_1',
-            'image' => 'http://www.daqianduan.com/wp-content/uploads/2014/11/hs-xiu.jpg',
-            'url'   => 'http://baidu.com',
-        ],
-    ],
-]) ?>
+<?= \widgets\Breadcrumbs::widget(['categoryID' => 8]) ?>
+<?= \widgets\Carousel\Carousel::widget(['articleType' => 'carousel']) ?>
 
 <?= \widgets\Announcement\Announcement::widget([
     'title'    => [

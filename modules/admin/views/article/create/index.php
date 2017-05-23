@@ -14,7 +14,7 @@ use plugins\LayUI\components\Html;
 <?= $form->errorSummary($model) ?>
 <?= $form->field($model, "type")->label(false)->hiddenInput() ?>
 <?= $form->field($model, "title")->textInput() ?>
-<?= $form->field($model, "category_id")->dropDownList(Category::getFlatIndentList()) ?>
+<?= $form->field($model, "category_id")->dropDownList(Category::getFlatIndentList(true)) ?>
 <?php
 //= $form->field($model, "index_show")->label("&nbsp")->checkbox(['title'=>'首页展示'])
 ?>
