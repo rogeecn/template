@@ -35,7 +35,7 @@ class Content extends Widget
         $categoryData = Category::getByID($articleData['category_id']);
 
         $this->meta = [
-            'time'         => date("Ymd", $articleData['created_at']),
+            'time'         => date("y/m/d", $articleData['created_at']),
             'commentCount' => 0,
             'viewCount'    => 0,
             'category'     => [
