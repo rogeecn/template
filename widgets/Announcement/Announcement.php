@@ -26,7 +26,7 @@ class Announcement extends Widget
         $articleData    = Article::getDataByID($newData['id'], Field::MODE_SUMMARY);
         $this->title    = [
             'label' => $articleData['title'],
-            'url'   => ['article/index', 'id' => $articleData['id']],
+            'url'   => ['article/id', 'id' => $articleData['id']],
         ];
         $categoryData   = Category::getByID($articleData['category_id']);
         $this->category = [
