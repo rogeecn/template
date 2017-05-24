@@ -10,13 +10,14 @@ class m170523_144356_field_announcement_article extends Migration
 
     public function safeUp()
     {
-        $tableOptions = null;
+        $tableOptions = NULL;
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
         $this->createTable($this->_table, [
-            'id' => $this->primaryKey(),
+            'id'      => $this->primaryKey(),
+            'checked' => $this->smallInteger()->notNull()->defaultValue(0),
         ], $tableOptions);
     }
 

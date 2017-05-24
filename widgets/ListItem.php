@@ -45,9 +45,10 @@ class ListItem extends Widget
                 $tmpHtml .= Html::tag("span", $item['title'], $item['options']);
             }
 
-            $itemList[] = Html::tag("li", $tmpHtml);
+            $itemList[] = $tmpHtml;
         }
 
-        return Html::tag("ul", implode("\n", $itemList), $this->options);
+        return Html::ul($itemList, $this->options);
+//        return Html::tag("ul", implode("\n", $itemList), $this->options);
     }
 }

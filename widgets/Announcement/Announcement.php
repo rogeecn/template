@@ -18,22 +18,27 @@ class Announcement extends Widget
     {
         parent::init();
 
-        $newData        = (new Query())
+        $newData = (new Query())
             ->limit(1)
+            ->where(['checked' => 1])
             ->orderBy(['id' => SORT_DESC])
             ->from("field_announcement_article")
             ->one();
-        $articleData    = Article::getDataByID($newData['id'], Field::MODE_SUMMARY);
-        $this->title    = [
+
+        $articleData  = Article::getDataByID($newData['id'], Field::MODE_SUMMARY);
+        $categoryData = Category::getByID($articleData['category_id']);
+
+        $this->title = [
             'label' => $articleData['title'],
             'url'   => ['article/id', 'id' => $articleData['id']],
         ];
-        $categoryData   = Category::getByID($articleData['category_id']);
+
         $this->category = [
             'label' => $categoryData['name'],
             'url'   => ['category/index', 'alias' => $categoryData['alias']],
         ];
-        $this->content  = $articleData['fields']['data']['description'];
+
+        $this->content = $articleData['fields']['data']['description'];
     }
 
     public function run()

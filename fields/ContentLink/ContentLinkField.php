@@ -20,13 +20,13 @@ class ContentLinkField extends Field implements IField
     public function init()
     {
         parent::init();
-        $this->label = json_decode($this->label, true);
+        $this->label = json_decode($this->label, TRUE);
     }
 
     protected function renderField()
     {
         // 如果存在ID说明是可以查询数据的
-        $this->value = ['content' => '', 'link' => ''];
+        $this->value = ['content' => '', 'link' => '', 'style' => '', 'tag' => ''];
         if (!empty($this->dataID)) {
             $this->value = $this->getData();
         }

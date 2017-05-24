@@ -32,7 +32,8 @@ class Header extends Widget
     public $options          = ['class' => 'nav'];
     public $containerOptions = ['class' => 'container'];
 
-    public function run() {
+    public function run()
+    {
         $subNav  = $this->renderMenuList($this->subNav, $this->subNavOptions);
         $mainNav = $this->renderMenuList($this->mainNav, $this->mainNavOptions);
 
@@ -48,7 +49,8 @@ class Header extends Widget
         ]);
     }
 
-    private function renderMenuList($menuList, $options = []) {
+    private function renderMenuList($menuList, $options = [])
+    {
         $menuItems = [];
         foreach ($menuList as $menu) {
             if (isset($menu['items'])) {
@@ -59,9 +61,10 @@ class Header extends Widget
                 $tmpHtml = Html::a($menu['label'], $menu['url']);
             }
 
-            $menuItems[] = Html::li($tmpHtml);
+            $menuItems[] = $tmpHtml;
         }
 
-        return Html::tag("ul", implode("\n", $menuItems), $options);
+        return Html::ul($menuItems, $options);
+//        return Html::tag("ul", implode(implode"\n", $menuItems), $options);
     }
 }
