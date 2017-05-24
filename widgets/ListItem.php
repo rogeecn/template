@@ -47,6 +47,7 @@ class ListItem extends Widget
 
             $itemList[] = $tmpHtml;
         }
+        $this->options['encode'] = false;
 
         return Html::ul($itemList, $this->options);
 //        return Html::tag("ul", implode("\n", $itemList), $this->options);

@@ -3,6 +3,7 @@ namespace application\controllers;
 
 use application\base\WebController;
 use common\util\Request;
+use yii\db\Query;
 
 class IndexController extends WebController
 {

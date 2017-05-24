@@ -43,6 +43,10 @@ class Announcement extends Widget
 
     public function run()
     {
+        if (empty($this->title)) {
+            return "<!--announcement block empty-->";
+        }
+
         return $this->render("view", [
             'title'    => $this->title,
             'category' => $this->category,

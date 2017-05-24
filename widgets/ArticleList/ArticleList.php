@@ -5,8 +5,10 @@ namespace widgets\ArticleList;
 use common\base\Widget;
 use common\extend\Html;
 use common\extend\LinkPager;
+use common\util\Request;
 use widgets\ListHeader;
 use yii\data\Pagination;
+use yii\db\Query;
 
 class ArticleList extends Widget
 {
@@ -34,7 +36,70 @@ class ArticleList extends Widget
     public $title = [];
     public $pager = [];
 
-    public function run() {
+    public function init()
+    {
+        parent::init();
+
+        $currentPage = intval(Request::input("page"));
+        if ($currentPage < 1) {
+            $currentPage = 1;
+        }
+        $limit  = 10;
+        $offset = ($currentPage - 1) * $limit;
+
+        $columns = [
+            'a.id',
+            'a.title',
+            'f.username username',
+            'f.email email',
+            'e.image',
+            'a.type typeID',
+            'd.name typeName',
+            'a.created_at createdAt',
+            'a.category_id catID',
+            'b.name categoryName',
+            'b.alias categoryAlias',
+            'c.description',
+        ];
+        $query   = new Query();
+
+        $this->pager['totalCount'] = $query->from("article")
+                                           ->where(['type' => 2])
+                                           ->count();
+
+        $dataList = $query->from("article a")
+                          ->select(implode(",", $columns))
+                          ->where(['type' => 2])
+                          ->leftJoin("category b", "a.category_id = b.id")
+                          ->leftJoin("field_content_data c", "c.id = a.id")
+                          ->leftJoin("article_type d", "d.id = a.type")
+                          ->leftJoin("field_upload_image e", "e.id = a.id")
+                          ->leftJoin("member f", "f.id = a.user_id")
+                          ->limit($limit)
+                          ->offset($offset)
+                          ->orderBy(['id' => SORT_DESC])
+                          ->all();
+
+        $items = [];
+        foreach ($dataList as $data) {
+            $items[] = [
+                'title'   => $data['title'],
+                'url'     => ['article/id', 'id' => $data['id']],
+                'meta'    => [
+                    'time'         => date("Y-m-d", $data['createdAt']),
+                    'author'       => $data['username'],
+                    'viewCount'    => 0,
+                    'commentCount' => 0,
+                ],
+                'content' => $data['description'],
+                'image'   => array_filter(explode(",", $data['image'])),
+            ];
+        }
+        $this->items = $items;
+    }
+
+    public function run()
+    {
         $lastIndex = count($this->items) - 1;
 
         $itemList = [];
@@ -56,7 +121,6 @@ class ArticleList extends Widget
 
             if (count($item['image']) == 0) {
                 Html::addCssClass($item['options'], ['no-image']);
-
                 $content = $this->render("_no_image", $item);
             } elseif (count($item['image']) == 1) {
                 Html::addCssClass($item['options'], ['has-image']);

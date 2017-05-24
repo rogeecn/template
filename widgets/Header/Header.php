@@ -63,6 +63,7 @@ class Header extends Widget
 
             $menuItems[] = $tmpHtml;
         }
+        $options['encode'] = false;
 
         return Html::ul($menuItems, $options);
 //        return Html::tag("ul", implode(implode"\n", $menuItems), $options);

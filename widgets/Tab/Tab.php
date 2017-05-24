@@ -15,7 +15,6 @@ class Tab extends Widget
         foreach ($this->items as &$item) {
             if ($item['content'] instanceof \Closure) {
                 $item['content'] = $item['content']();
-                var_dump($item['content']);exit;
             }
         }
     }

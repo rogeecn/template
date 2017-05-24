@@ -7,7 +7,7 @@ use plugins\LayUI\components\Html;
 /* @var $model common\User */
 /* @var $form yii\widgets\ActiveForm */
 $roleList   = \common\models\MemberRole::getList();
-$statusList = \common\models\User::getStatusList();
+$statusList = \common\User::getStatusList();
 ?>
 
 
