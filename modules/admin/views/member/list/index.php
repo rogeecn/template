@@ -14,6 +14,7 @@ use yii\widgets\Pjax;
     'action' => ['index'],
     'method' => 'get',
 ]); ?>
+
 <?= \plugins\LayUI\components\Table::widget([
     'dataProvider' => [1],
     'showHeader'   => FALSE,

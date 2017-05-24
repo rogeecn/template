@@ -14,6 +14,7 @@ use plugins\LayUI\components\Html;
 <?= $form->field($model, 'email')->textInput() ?>
 <?= $form->field($model, 'username')->textInput() ?>
 <?= $form->field($model, 'password')->textInput() ?>
+<?= $form->field($model, 'role')->dropDownList(\common\models\MemberRole::getList()) ?>
 <?= $form->field($model, 'status')->dropDownList(\common\models\User::getStatusList()) ?>
 <?= Html::submitWrapper(Html::submitButton()); ?>
 
