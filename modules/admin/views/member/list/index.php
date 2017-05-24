@@ -32,6 +32,13 @@ use yii\widgets\Pjax;
         ],
         [
             'value' => function () use ($searchModel) {
+                return Html::activeDropDownList($searchModel, "role", \common\models\MemberRole::getList(), [
+                    'prompt' => '----请选择----',
+                ]);
+            },
+        ],
+        [
+            'value' => function () use ($searchModel) {
                 return Html::activeDropDownList($searchModel, "status", \common\User::getStatusList(), [
                     'prompt' => '----请选择----',
                 ]);
@@ -58,13 +65,26 @@ use yii\widgets\Pjax;
         'email',
         'password',
         [
+            'attribute' => 'role',
+            'value'     => function ($data) {
+                return \common\models\MemberRole::getRoleNameByID($data->role);
+            },
+        ],
+        [
             'attribute' => 'status',
             'value'     => function ($data) {
                 return \common\User::getStatusValue($data->status);
             },
         ],
         'created_at:datetime',
-        ['class' => \plugins\LayUI\components\ActionColumn::className()],
+        [
+            'class'   => \plugins\LayUI\components\ActionColumn::className(),
+            'buttons' => [
+                'update' => function ($url, $model, $key) {
+                    return Html::a("[编辑]", ['/admin/member/update', 'id' => $model->id]);
+                },
+            ],
+        ],
     ],
 ]); ?>
 <?php Pjax::end(); ?>

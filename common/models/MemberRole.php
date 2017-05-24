@@ -41,8 +41,16 @@ class MemberRole extends \common\base\ActiveRecord
 
     public static function getList()
     {
-        $models = self::findAll([]);
-
+        $models = self::find()->all();
         return ArrayHelper::map($models, 'id', 'title');
+    }
+
+    public static function getRoleNameByID($id)
+    {
+        $model = self::findOne($id);
+        if (!$model){
+            return "";
+        }
+        return $model->title;
     }
 }
