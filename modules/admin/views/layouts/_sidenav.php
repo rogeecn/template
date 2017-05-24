@@ -24,6 +24,13 @@ use common\extend\Html;
         </dl>
     </li>
     <li class="layui-nav-item layui-nav-itemed">
+        <a href="#"><?= Html::icon("users", "&nbsp;") ?>用户管理<span class="layui-nav-more"></span></a>
+        <dl class="layui-nav-child">
+            <dd><a href="/admin/member/list">用户列表</a></dd>
+            <dd><a href="/admin/member/create">添加用户</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item layui-nav-itemed">
         <a href="#"><?= Html::icon("cogs", "&nbsp;") ?>设置<span class="layui-nav-more"></span></a>
         <dl class="layui-nav-child">
             <dd><a href="/admin/setting/manage">参数设置</a></dd>
