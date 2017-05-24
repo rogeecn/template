@@ -54,9 +54,8 @@ use yii\widgets\Pjax;
     'columns'      => [
         'id',
         'username',
-        'auth_key',
-        'password_hash',
         'email',
+        'password',
         [
             'attribute' => 'status',
             'value'     => function ($data) {
@@ -64,7 +63,7 @@ use yii\widgets\Pjax;
             },
         ],
         'created_at:datetime',
-        ['class' => 'yii\grid\ActionColumn'],
+        ['class' => \plugins\LayUI\components\ActionColumn::className()],
     ],
 ]); ?>
 <?php Pjax::end(); ?>

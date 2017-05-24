@@ -13,7 +13,7 @@ use plugins\LayUI\components\Html;
 
 <?= $form->field($model, 'email')->textInput() ?>
 <?= $form->field($model, 'username')->textInput() ?>
-<?= $form->field($model, 'password_hash')->textInput() ?>
+<?= $form->field($model, 'password')->textInput() ?>
 <?= $form->field($model, 'status')->dropDownList(\common\models\User::getStatusList()) ?>
 <?= Html::submitWrapper(Html::submitButton()); ?>
 
