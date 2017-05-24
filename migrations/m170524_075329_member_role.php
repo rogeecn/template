@@ -21,6 +21,12 @@ class m170524_075329_member_role extends Migration
             'pid'    => $this->integer()->notNull()->defaultValue(0),
             'rights' => $this->text(),
         ], $tableOptions);
+
+        $this->insert($this->_table, [
+            'title'  => '管理员',
+            'pid'    => 0,
+            'rights' => "[]",
+        ]);
     }
 
     public function safeDown()
