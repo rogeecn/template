@@ -1,5 +1,0 @@
-<?= \widgets\ListItem::widget([
-    'items' => [
-    ],
-]); ?>
-

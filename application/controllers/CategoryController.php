@@ -9,7 +9,8 @@ class CategoryController extends WebController
 {
     public function actionIndex($alias)
     {
-        $model = Category::getByAlias($alias);
+        $this->layout = "category";
+        $model        = Category::getByAlias($alias);
         if (!$model) {
             throw new NotFoundHttpException();
         }
