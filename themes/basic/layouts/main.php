@@ -72,9 +72,8 @@ AppAsset::register($this);
             ],
         ]); ?>
 
-        <?= \widgets\BlockShow\BlockShow::widget(['id' => 21]); ?>
-
-        <?= \widgets\BlockShow\BlockShow::widget(['id' => 22]); ?>
+        <?= \widgets\BlockShow\BlockShow::widget(['id' => 23]); ?>
+        <?= \widgets\BlockShow\BlockShow::widget(['id' => 24]); ?>
 
         <?= \widgets\TagCloud\TagCloud::widget([
             'items' => \common\models\Tag::getList(18, true),

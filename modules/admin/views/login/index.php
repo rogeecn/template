@@ -1,29 +1,24 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \common\models\LoginForm */
+/* @var $model \common\models\AdminLoginForm */
 
-use yii\bootstrap\ActiveForm;
-use yii\helpers\Html;
+use plugins\LayUI\components\ActiveForm;
+use plugins\LayUI\components\Html;
 
 $this->title = 'Login';
 ?>
 
-<div class="row" style="margin-top: 20%">
-    <div class="col-xs-6 col-xs-offset-3">
-        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-        <?= $form->field($model, 'password')->passwordInput() ?>
-
-        <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-        <div class="form-group">
-            <?= Html::submitButton('登录', ['class' => 'btn btn-block btn-primary', 'name' => 'login-button']) ?>
-        </div>
-
-        <?php ActiveForm::end(); ?>
-    </div>
+<style>
+    .layui-form-item .layui-input-inline {
+        width: auto;
+    }
+</style>
+<div id="form" style="width: 600px; margin: 0 auto; margin-top: 10%;">
+    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+    <?= $form->field($model, 'username')->textInput(['autofocus' => TRUE]) ?>
+    <?= $form->field($model, 'password')->passwordInput() ?>
+    <?= $form->field($model, 'rememberMe')->label("")->checkbox(['title' => 'Remember Me']) ?>
+    <?= Html::submitWrapper(Html::submitButton()); ?>
+    <?php ActiveForm::end(); ?>
 </div>

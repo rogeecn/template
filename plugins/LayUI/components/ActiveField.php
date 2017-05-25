@@ -143,11 +143,11 @@ class ActiveField extends \yii\widgets\ActiveField
     /**
      * @var boolean whether to render the error. Default is `true` except for layout `inline`.
      */
-    public $enableError = true;
+    public $enableError = TRUE;
     /**
      * @var boolean whether to render the label. Default is `true`.
      */
-    public $enableLabel = true;
+    public $enableLabel = TRUE;
 
 
     /**
@@ -163,7 +163,7 @@ class ActiveField extends \yii\widgets\ActiveField
     /**
      * @inheritdoc
      */
-    public function render($content = null)
+    public function render($content = NULL)
     {
         /*if ($content === null) {
             if (!isset($this->parts['{beginWrapper}'])) {
@@ -194,7 +194,7 @@ class ActiveField extends \yii\widgets\ActiveField
 
     public function editor($options = [])
     {
-        $this->label(false);
+        $this->label(FALSE);
         $this->parts['{input}'] = Html::activeEditor($this->model, $this->attribute, $options);
         $this->parts['{input}'] = Html::tag("div", $this->parts['{input}'], ['style' => 'margin-right: 5px']);
 
@@ -219,6 +219,14 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
+    public function passwordInput($options = [])
+    {
+        parent::passwordInput($options);
+        $this->parts['{input}'] = Html::tag("div", $this->parts['{input}'], $this->inlineInputWrapperOption);
+
+        return $this;
+    }
+
     public function textarea($options = [])
     {
         Html::addCssClass($options, ['layui-textarea']);
@@ -228,7 +236,7 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
-    public function checkbox($options = [], $enclosedByLabel = true)
+    public function checkbox($options = [], $enclosedByLabel = TRUE)
     {
         $this->addAriaAttributes($options);
         $this->adjustLabelFor($options);
@@ -240,7 +248,7 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
-    public function radio($options = [], $enclosedByLabel = true)
+    public function radio($options = [], $enclosedByLabel = TRUE)
     {
         $this->addAriaAttributes($options);
         $this->adjustLabelFor($options);
@@ -277,18 +285,18 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
-    public function label($label = null, $options = [])
+    public function label($label = NULL, $options = [])
     {
         if (is_bool($label)) {
             $this->enableLabel = $label;
-            if ($label === false) {
+            if ($label === FALSE) {
                 $this->parts['{label}'] = "";
 
                 return $this;
             }
         }
 
-        $this->enableLabel = true;
+        $this->enableLabel = TRUE;
         $this->renderLabelParts($label, $options);
         parent::label($label, $options);
 
@@ -331,7 +339,7 @@ class ActiveField extends \yii\widgets\ActiveField
             $config['hintOptions']          = ['class' => 'help-block ' . $cssClasses['hint']];
         } elseif ($layout === 'inline') {
             $config['labelOptions'] = ['class' => 'sr-only'];
-            $config['enableError']  = false;
+            $config['enableError']  = FALSE;
         }
 
         return $config;
@@ -341,10 +349,10 @@ class ActiveField extends \yii\widgets\ActiveField
      * @param string|null $label   the label or null to use model label
      * @param array       $options the tag options
      */
-    protected function renderLabelParts($label = null, $options = [])
+    protected function renderLabelParts($label = NULL, $options = [])
     {
         $options = array_merge($this->labelOptions, $options);
-        if ($label === null) {
+        if ($label === NULL) {
             if (isset($options['label'])) {
                 $label = $options['label'];
                 unset($options['label']);
