@@ -22,6 +22,9 @@ class Breadcrumbs extends Widget
             $linkList[] = Html::a($breadItem['name'], $url);
         }
 
+        $index = Html::a(Html::icon("home", "&nbsp") . "首页", ['/']);
+        array_unshift($linkList, $index);
+
         $splitHtml = Html::tag("span", $this->splitChar, ['class' => 'split']);
 
         return Html::div(implode($splitHtml, $linkList), $this->options);

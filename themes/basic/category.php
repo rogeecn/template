@@ -1,6 +1,8 @@
 <?php
 /** @var $this \common\extend\View */
 ?>
+<?= \widgets\Breadcrumbs::widget(['categoryID' => 8]) ?>
+
 <div class="row">
     <?php for ($i = 0; $i < 3; $i++): ?>
         <div class="box">
