@@ -1,0 +1,14 @@
+.row {
+  @include clearfix;
+
+  margin: 0 -$padding-size;
+  .box {
+    margin: 0px $padding-size;
+    width: $width-container/3 - $padding-size;
+    float: left;
+  }
+
+  .box:nth-child(2) {
+    margin: 0px $padding-size/2;
+  }
+}

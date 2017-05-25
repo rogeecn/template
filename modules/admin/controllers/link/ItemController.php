@@ -3,6 +3,7 @@
 namespace modules\admin\controllers\link;
 
 use application\base\AuthController;
+use common\models\Category;
 use common\models\LinkGroup;
 use common\util\Request;
 use yii\base\InvalidParamException;
@@ -30,6 +31,17 @@ class ItemController extends AuthController
         ];
         $sort      = ['group_id' => SORT_ASC, 'order' => SORT_ASC];
         $linkList  = LinkGroup::find()->where($condition)->orderBy($sort)->all();
+
+        foreach ($linkList as &$linkItem) {
+            if ($linkItem['type'] == LinkGroup::TYPE_CATEGORY) {
+                $categoryModel = Category::findOne($linkItem['value']);
+                if (!$categoryModel) {
+                    continue;
+                }
+                $linkItem['title'] = $categoryModel->name;
+                $linkItem['alias'] = $categoryModel->alias;
+            }
+        }
 
         return $this->render("index", [
             'linkList' => $linkList,
@@ -62,7 +74,7 @@ class ItemController extends AuthController
             throw new NotFoundHttpException();
         }
         if (Request::isPost() && $model->load(Request::post()) && $model->save()) {
-            $this->redirect(['index']);
+            $this->redirect(['index', 'group' => $model->group_id]);
         }
 
         return $this->render('update', [

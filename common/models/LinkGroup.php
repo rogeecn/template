@@ -43,7 +43,7 @@ class LinkGroup extends ActiveRecord
     public function rules()
     {
         return [
-            [['alias', 'title', 'display'], 'required'],
+            [['display'], 'required'],
             [['display', 'group_id', 'order'], 'integer'],
             [['alias', 'image', 'title'], 'string', 'max' => 240],
             [['value'], 'string', 'max' => 1200],
@@ -72,9 +72,10 @@ class LinkGroup extends ActiveRecord
     public static function getTypeList()
     {
         return [
-            self::TYPE_URL     => "URL链接",
-            self::TYPE_ARTICLE => "文章",
-            self::TYPE_PAGE    => "页面",
+            self::TYPE_URL      => "URL链接",
+            self::TYPE_ARTICLE  => "文章",
+            self::TYPE_PAGE     => "页面",
+            self::TYPE_CATEGORY => "分类",
         ];
     }
 
@@ -180,7 +181,7 @@ class LinkGroup extends ActiveRecord
                 case self::TYPE_ARTICLE:
                     $links[] = [
                         'label' => $linkModel->title,
-                        'url'   => ['/article/index', $linkModel->value],
+                        'url'   => ['/article/id', 'id' => $linkModel->value],
                     ];
                     break;
                 case self::TYPE_URL:
@@ -192,14 +193,14 @@ class LinkGroup extends ActiveRecord
                 case self::TYPE_PAGE:
                     $links[] = [
                         'label' => $linkModel->title,
-                        'url'   => ['/page/index', $linkModel->value],
+                        'url'   => ['/page/index', 'id' => $linkModel->value],
                     ];
                     break;
                 case self::TYPE_CATEGORY:
                     $categoryModel = Category::findOne($linkModel->value);
                     $links[]       = [
                         'label' => $categoryModel->name,
-                        'url'   => ['/category/index', $linkModel->value],
+                        'url'   => ['/category/index', 'alias' => $categoryModel->alias],
                     ];
                     break;
             }

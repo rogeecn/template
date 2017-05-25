@@ -17,6 +17,10 @@ a {
   }
 }
 
+.clearfix {
+  @include clearfix;
+}
+
 .container {
   width: $width-container;
   margin: 0 auto;

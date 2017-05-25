@@ -30,6 +30,7 @@ class Category extends \common\base\ActiveRecord
             [['name', 'alias'], 'required'],
             [['pid', 'order'], 'integer'],
             [['name', 'alias'], 'string', 'max' => 120],
+            [['alias'], 'unique'],
             [['path'], 'string', 'max' => 1200],
         ];
     }
@@ -90,7 +91,7 @@ class Category extends \common\base\ActiveRecord
         }
     }
 
-    public static function getFlatIndentList($showRoot = FALSE)
+    public static function getFlatIndentList($showRoot = false)
     {
         $list = self::getIndentList();
 
@@ -128,7 +129,7 @@ class Category extends \common\base\ActiveRecord
         return array_reverse($breadcrumbs);
     }
 
-    public static function getSubTree($id, $showFlat = FALSE)
+    public static function getSubTree($id, $showFlat = false)
     {
         $list = self::getIndentList();
 
@@ -152,7 +153,7 @@ class Category extends \common\base\ActiveRecord
 
             if (isset($item['children']) && is_array($item['children'])) {
                 $ret = self::getSubTreeItems($id, $item['children']);
-                if ($ret == FALSE) {
+                if ($ret == false) {
                     continue;
                 }
 
@@ -160,7 +161,7 @@ class Category extends \common\base\ActiveRecord
             }
         }
 
-        return FALSE;
+        return false;
     }
 
     public static function getByAlias($alias)
