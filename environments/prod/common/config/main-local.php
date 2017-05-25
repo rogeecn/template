@@ -2,11 +2,13 @@
 return [
     'components' => [
         'db'     => [
-            'class'    => 'yii\db\Connection',
-            'dsn'      => 'mysql:host=localhost;dbname=yii2advanced',
-            'username' => 'root',
-            'password' => '',
-            'charset'  => 'utf8',
+            'class'               => 'yii\db\Connection',
+            'dsn'                 => 'mysql:host=localhost;dbname=yii2advanced',
+            'username'            => 'root',
+            'password'            => '',
+            'charset'             => 'utf8',
+            'enableSchemaCache'   => TRUE,
+            'schemaCacheDuration' => 3600,
         ],
         'mailer' => [
             'class'    => 'yii\swiftmailer\Mailer',
