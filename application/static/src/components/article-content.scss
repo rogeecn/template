@@ -8,6 +8,7 @@
 
     header {
       @extend .text-center;
+      margin: 2*$margin-size 0;
     }
 
     .meta {

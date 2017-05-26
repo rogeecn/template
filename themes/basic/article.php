@@ -1,9 +1,9 @@
 <div class="content">
-    <?= \widgets\Breadcrumbs::widget(['categoryID' => 8]) ?>
+    <?= \widgets\Breadcrumbs::widget(['categoryID' => $categoryID]) ?>
 
     <div class="page-article">
-        <?= \widgets\Content\Content::widget(['articleID' => $articleID]); ?>
-        <?= \widgets\ContentCopyright::widget(['articleID' => $articleID]) ?>
+        <?= \widgets\Content\Content::widget(['articleID' => $articleInfo['id']]); ?>
+        <?= \widgets\ContentCopyright::widget(['articleID' => $articleInfo['id']]) ?>
 
         <?php /*= \widgets\PostAuthor::widget([
         'headImage' => 'https://secure.gravatar.com/avatar/fbe1c43581600c6a1e6c3de93321f7e8?s=100&d=mm',

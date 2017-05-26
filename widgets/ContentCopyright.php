@@ -14,14 +14,14 @@ class ContentCopyright extends Widget
 
     public function run()
     {
-        $articleData = self::$_CACHE['article_' . $this->articleID];
+        $articleData = self::getCache('article_' . $this->articleID);
         if (!$articleData) {
             $articleData = Article::getDataByID($this->articleID);
             if (!$articleData) {
                 throw new NotFoundHttpException();
             }
         }
-        self::$_CACHE['article_' . $this->articleID] = $articleData;
+        self::setCache("article_" . $this->articleID, $articleData);
 
         /** @var View $view */
         $view        = $this->getView();

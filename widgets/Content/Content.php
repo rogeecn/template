@@ -21,11 +21,14 @@ class Content extends Widget
     {
         parent::init();
 
-        $articleData = Article::getDataByID($this->articleID);
+        $articleData = self::getCache('article_' . $this->articleID);
         if (!$articleData) {
-            throw new NotFoundHttpException();
+            $articleData = Article::getDataByID($this->articleID);
+            if (!$articleData) {
+                throw new NotFoundHttpException();
+            }
         }
-        self::$_CACHE['article_' . $this->articleID] = $articleData;
+        self::setCache("article_" . $this->articleID, $articleData);
 
         $this->title       = $articleData['title'];
         $this->content     = $articleData['fields']['data']['content'];
