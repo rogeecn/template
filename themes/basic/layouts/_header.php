@@ -17,9 +17,6 @@ use common\extend\Html;
                 echo Html::a($logoImg . $siteName, $siteUrl);
                 ?>
             </h1>
-            <div class="brand">
-                <?= strtr($this->setting("site.slogan"), [',' => '<br>']) ?>
-            </div>
             <?= \widgets\NavItem::widget([
                 'items'   => \common\models\LinkGroup::getLinkByGroupAlias("nav-main"),
                 'options' => ['class' => 'menu nav-menu'],

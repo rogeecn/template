@@ -13,7 +13,9 @@ class CategoryController extends WebController
         if (!$model) {
             throw new NotFoundHttpException();
         }
-        $categoryInfo     = $model->toArray();
+        $categoryInfo = $model->toArray();
+        $this->getView()->setTitle($categoryInfo['name']);
+
         $categoryChildren = Category::getCategoryChildren($categoryInfo['id']);
 
         return $this->render("/category", [

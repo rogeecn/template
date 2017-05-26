@@ -69,7 +69,8 @@ class ConfigController extends AuthController
             }
         }
 
-        \Yii::$app->getResponse()->sendContentAsFile(json_encode($retData), sprintf("config-%s.json", date("YmdHis")));
+        $fileName = sprintf("config-%s.json", date("Ymd-H-i-s"));
+        \Yii::$app->getResponse()->sendContentAsFile(json_encode($retData), $fileName);
     }
 
     public function actionImport()
@@ -78,7 +79,7 @@ class ConfigController extends AuthController
             return $this->redirect(['index']);
         }
         $configData = Request::input("config");
-        $configData = json_decode($configData, TRUE);
+        $configData = json_decode($configData, true);
 
         foreach ($configData as $table => $data) {
             foreach ($data as $itemData) {

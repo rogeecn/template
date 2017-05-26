@@ -27,6 +27,7 @@ class ArticleController extends WebController
         }
         Widget::setCache("article_info_" . $id, $articleInfo);
         $categoryInfo = Category::findOne($articleInfo['category_id']);
+        $this->getView()->setTitle($articleInfo['title']);
 
         return $this->render("/article", [
             'articleInfo'  => $articleInfo,

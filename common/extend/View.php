@@ -9,6 +9,8 @@ use yii\helpers\Url;
 class View extends \yii\web\View
 {
     private static $_SETTING;
+    private        $keywords;
+    private        $description;
 
     // site.name 点连接格式
     public function setting($configPath)
@@ -33,6 +35,26 @@ class View extends \yii\web\View
         return self::$_SETTING[$configPath];
     }
 
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    public function appendTitle($title, $seperator = '-')
+    {
+        $this->title = sprintf("%s %s %s", $title, $seperator, $this->title);
+    }
+
+    public function setKeywords($keywords)
+    {
+        $this->keywords = $keywords;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
     public function head()
     {
         $title = $this->setting("site.name");
@@ -46,15 +68,17 @@ class View extends \yii\web\View
         echo Html::tag("title", $title);
 
         //register keywords
+        $defaultKeywords = $this->setting('site.keywords');
         $this->registerMetaTag([
             'name'    => 'keywords',
-            'content' => $this->setting('site.keywords'),
+            'content' => empty($this->keywords) ? $defaultKeywords : $this->keywords,
         ], 'keywords');
 
         //register description
+        $defaultDescription = $this->setting('site.description');
         $this->registerMetaTag([
             'name'    => 'description',
-            'content' => $this->setting('site.description'),
+            'content' => empty($this->description) ? $defaultDescription : $this->description,
         ], 'description');
 
         parent::head();

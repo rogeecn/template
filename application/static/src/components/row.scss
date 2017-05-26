@@ -15,6 +15,7 @@
     }
 
     ul {
+      min-height: 388px;
       list-style: disc;
       color: #bbb;
       @include clearfix;
