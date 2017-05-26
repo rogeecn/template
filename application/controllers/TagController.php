@@ -7,6 +7,8 @@ class TagController extends WebController
 {
     public function actionIndex($name)
     {
-        return $this->render("/tag");
+        return $this->render("/tag", [
+            'page-type' => 'tag',
+        ]);
     }
 }

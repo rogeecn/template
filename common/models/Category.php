@@ -91,7 +91,7 @@ class Category extends \common\base\ActiveRecord
         }
     }
 
-    public static function getFlatIndentList($showRoot = false)
+    public static function getFlatIndentList($showRoot = FALSE)
     {
         $list = self::getIndentList();
 
@@ -129,7 +129,7 @@ class Category extends \common\base\ActiveRecord
         return array_reverse($breadcrumbs);
     }
 
-    public static function getSubTree($id, $showFlat = false)
+    public static function getSubTree($id, $showFlat = FALSE)
     {
         $list = self::getIndentList();
 
@@ -153,7 +153,7 @@ class Category extends \common\base\ActiveRecord
 
             if (isset($item['children']) && is_array($item['children'])) {
                 $ret = self::getSubTreeItems($id, $item['children']);
-                if ($ret == false) {
+                if ($ret == FALSE) {
                     continue;
                 }
 
@@ -161,7 +161,7 @@ class Category extends \common\base\ActiveRecord
             }
         }
 
-        return false;
+        return FALSE;
     }
 
     public static function getByAlias($alias)
@@ -172,5 +172,12 @@ class Category extends \common\base\ActiveRecord
     public static function getByID($id)
     {
         return self::findOne($id);
+    }
+
+    public static function getCategoryChildren($id)
+    {
+        $categoryList = self::find()->where(['pid' => $id])->orderBy(['order' => SORT_ASC])->all();
+
+        return $categoryList;
     }
 }

@@ -9,13 +9,18 @@ class CategoryController extends WebController
 {
     public function actionIndex($alias)
     {
-        $model        = Category::getByAlias($alias);
+        $model = Category::getByAlias($alias);
         if (!$model) {
             throw new NotFoundHttpException();
         }
+        $categoryInfo     = $model->toArray();
+        $categoryChildren = Category::getCategoryChildren($categoryInfo['id']);
 
-        $categoryInfo = $model->toArray();
-
-        return $this->render("/category");
+        return $this->render("/category", [
+            'categoryChildren' => $categoryChildren,
+            'categoryInfo'     => $categoryInfo,
+            'categoryID'       => $categoryInfo['id'],
+            'page-type'        => 'category',
+        ]);
     }
 }

@@ -13,25 +13,34 @@
       border-bottom: 1px solid $color-border;
       padding: $padding-size 2*$padding-size;
     }
-    .body {
+
+    ul {
+      list-style: disc;
+      color: #bbb;
       @include clearfix;
       padding: $padding-size 2*$padding-size;
 
       li {
-        $height: 25px;
+        $height: 26px;
         $time-width: 70px;
+        line-height: $height;
+        padding-left: 10px;
+        overflow: hidden;
+        background: url(http://i0.sinaimg.cn/home/main/index2013/0403/icon.png) no-repeat 0 -880px;
+
         a {
           display: block;
-          margin-right: $time-width;
+          margin-right: $time-width + $margin-size;
           overflow: hidden;
-          line-height: $height;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         time {
+          color: $color-fade;
           display: block;
           width: $time-width;
           font-size: 12px;
-          line-height: $height;
           float: right;
         }
       }
@@ -39,7 +48,7 @@
   }
 
   .box:nth-child(2) {
-    margin: 0px $padding-size/2;
+    margin: 0 $padding-size/2;
   }
 
 }

@@ -7,7 +7,8 @@ class ArticleController extends WebController
 {
     public function actionAlias($alias)
     {
-        return $this->actionId("10");
+
+        return $this->actionId(10);
     }
 
     public function actionId($id)
@@ -17,8 +18,9 @@ class ArticleController extends WebController
 
     private function getData($id)
     {
+
         return $this->render("/article", [
-            'articleID' => $id,
+            'page-type' => 'article',
         ]);
     }
 }

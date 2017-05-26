@@ -12,6 +12,8 @@ class IndexController extends WebController
             return $this->redirect("/", 301);
         }
 
-        return $this->render("/index");
+        return $this->render("/index", [
+            'page-type' => 'index',
+        ]);
     }
 }
