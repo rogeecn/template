@@ -6,9 +6,40 @@
     margin: 0px $padding-size;
     width: $width-container/3 - $padding-size;
     float: left;
+
+    .title {
+      font-size: 16px;
+      background: #fbfbfb;
+      border-bottom: 1px solid $color-border;
+      padding: $padding-size 2*$padding-size;
+    }
+    .body {
+      @include clearfix;
+      padding: $padding-size 2*$padding-size;
+
+      li {
+        $height: 25px;
+        $time-width: 70px;
+        a {
+          display: block;
+          margin-right: $time-width;
+          overflow: hidden;
+          line-height: $height;
+        }
+
+        time {
+          display: block;
+          width: $time-width;
+          font-size: 12px;
+          line-height: $height;
+          float: right;
+        }
+      }
+    }
   }
 
   .box:nth-child(2) {
     margin: 0px $padding-size/2;
   }
+
 }

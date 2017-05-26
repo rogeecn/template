@@ -1,34 +1,22 @@
 <?php
 /** @var $this \common\extend\View */
 ?>
-<?= \widgets\Breadcrumbs::widget(['categoryID' => 8]) ?>
+<?= \widgets\Breadcrumbs::widget(['categoryID' => 20]) ?>
 
 <div class="row">
     <?php for ($i = 0; $i < 3; $i++): ?>
         <div class="box">
-            <?= \widgets\Tab\Tab::widget([
-                'items' => [
-                    [
-                        'title'   => '网站公告',
-                        'content' => \widgets\ListItem::widget([
-                            'items' => function () {
-                                $dataList = \common\models\Article::getListByCategoryAlias("announcement");
-
-                                $items = [];
-                                foreach ($dataList as $data) {
-                                    $items[] = [
-                                        'title' => $data['title'],
-                                        'url'   => \yii\helpers\Url::to(['article/id', 'id' => $data['id']]),
-                                        'time'  => date("Y-m-d", $data['created_at']),
-                                    ];
-                                }
-
-                                return $items;
-                            },
-                        ]),
-                    ],
-                ],
-            ]); ?>
+            <div class="widget border">
+                <h2 class="title"><a href="/">你好中国</a></h2>
+                <ul class="body">
+                    <?php for ($k = 1; $k < 10; $k++): ?>
+                        <li>
+                            <time>2017-01-02</time>
+                            <a href="/">你你好中国333你好中国333好中国333</a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </div>
         </div>
     <?php endfor; ?>
 </div>
