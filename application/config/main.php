@@ -14,17 +14,20 @@ return [
     'controllerNamespace' => 'application\controllers',
     'bootstrap'           => ['log'],
     'modules'             => [
-        'go' => [
+        'go'  => [
             'class' => 'application\modules\go\Module',
+        ],
+        'api' => [
+            'class' => 'modules\api\Module',
         ],
     ],
     'components'          => [
         'user'         => [
             'identityClass'   => 'common\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => TRUE,
             'identityCookie'  => [
                 'name'     => '_IDENTITY_APPLICATION',
-                'httpOnly' => true,
+                'httpOnly' => TRUE,
             ],
         ],
         'session'      => [

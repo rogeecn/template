@@ -15,7 +15,7 @@ class TagInput extends InputWidget
 
         $js = <<<_JS_
 $('#$id').tagsInput({
-  autocomplete_url: '/tag/complete',
+  autocomplete_url: '/admin/tag/complete',
   autocomplete: {
     selectFirst:true,
     width:'100px',
