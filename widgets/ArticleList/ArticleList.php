@@ -32,9 +32,10 @@ class ArticleList extends Widget
         ]
     ];
     */
-    public $items = [];
-    public $title = [];
-    public $pager = [];
+    public $items     = [];
+    public $title     = [];
+    public $pager     = [];
+    public $condition = [];
 
     public function init()
     {
@@ -64,12 +65,12 @@ class ArticleList extends Widget
         $query   = new Query();
 
         $this->pager['totalCount'] = $query->from("article")
-                                           ->where(['type' => 2])
+                                           ->where($this->condition)
                                            ->count();
 
         $dataList = $query->from("article a")
                           ->select(implode(",", $columns))
-                          ->where(['type' => 2])
+                          ->where($this->condition)
                           ->leftJoin("category b", "a.category_id = b.id")
                           ->leftJoin("field_content_data c", "c.id = a.id")
                           ->leftJoin("article_type d", "d.id = a.type")
@@ -100,6 +101,9 @@ class ArticleList extends Widget
 
     public function run()
     {
+        if ($this->pager['totalCount'] == 0) {
+            return Html::div("此分类下还没有发布文章", ['class' => 'empty-list']);
+        }
         $lastIndex = count($this->items) - 1;
 
         $itemList = [];
