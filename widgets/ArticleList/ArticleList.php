@@ -34,7 +34,7 @@ class ArticleList extends Widget
     */
     public $items     = [];
     public $title     = [];
-    public $pager     = [];
+    public $pager     = ['pageSize' => 10];
     public $condition = [];
 
     public function init()
@@ -45,7 +45,7 @@ class ArticleList extends Widget
         if ($currentPage < 1) {
             $currentPage = 1;
         }
-        $limit  = 10;
+        $limit  = $this->pager['pageSize'];
         $offset = ($currentPage - 1) * $limit;
 
         $columns = [
@@ -101,8 +101,10 @@ class ArticleList extends Widget
 
     public function run()
     {
+        $title = ListHeader::widget($this->title);
+
         if ($this->pager['totalCount'] == 0) {
-            return Html::div("此分类下还没有发布文章", ['class' => 'empty-list']);
+            return $title . Html::div("此分类下还没有发布文章", ['class' => 'empty-list']);
         }
         $lastIndex = count($this->items) - 1;
 
@@ -136,7 +138,6 @@ class ArticleList extends Widget
             $itemList[] = $content;
         }
 
-        $title = ListHeader::widget($this->title);
 
         $linkPager = LinkPager::widget([
             'pagination' => new Pagination($this->pager),
