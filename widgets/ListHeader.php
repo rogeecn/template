@@ -12,9 +12,13 @@ class ListHeader extends Widget
 
     public function run()
     {
-        $title    = Html::tag("h3", $this->title);
-        $more     = Html::tag("div", Html::a($this->more['label'], $this->more['url']), ['class' => 'more']);
-        $allTitle = Html::tag("div", $title . $more, ['class' => 'title']);
+        $title = Html::tag("h3", $this->title);
+
+        $moreLinkHtml = "";
+        if (!empty($this->more)) {
+            $moreLinkHtml = Html::tag("div", Html::a($this->more['label'], $this->more['url']), ['class' => 'more']);
+        }
+        $allTitle = Html::tag("div", $title . $moreLinkHtml, ['class' => 'title']);
 
         return Html::tag("div", $allTitle, ['class' => 'common-header']);
     }
