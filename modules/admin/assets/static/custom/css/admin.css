@@ -1,19 +1,37 @@
-.layui-form-item .layui-input-inline{
-  width: 500px;
+.layui-form-item .layui-input-inline {
+    width: 500px;
 }
 
 .layui-tab-title {
-  z-index: 999999999;
+    z-index: 999999999;
 }
 
-.text-right{
-  text-align: right;
+.text-right {
+    text-align: right;
 }
 
-.text-left{
-  text-align: left;
+.text-left {
+    text-align: left;
 }
 
-.text-center{
-  text-align: center;
+.text-center {
+    text-align: center;
+}
+
+#logo {
+    display: block;
+    position: absolute;
+    padding: 10px;
+    height: 40px;
+    width: 180px;
+    z-index: 998;
+    text-align: left;
+    line-height: 40px;
+    font-size: 40px;
+    color: #bdbdbe;
+    background: #2B2E37;
+}
+
+#logo:hover{
+    color: #009688;
 }
