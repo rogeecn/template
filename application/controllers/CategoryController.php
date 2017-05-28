@@ -18,7 +18,12 @@ class CategoryController extends WebController
 
         $categoryChildren = Category::getCategoryChildren($categoryInfo['id']);
 
-        return $this->render("/category", [
+        $view = '/category';
+        if (count($categoryChildren) == 0) {
+            $view = '/category-list';
+        }
+
+        return $this->render($view, [
             'categoryChildren' => $categoryChildren,
             'categoryInfo'     => $categoryInfo,
             'categoryID'       => $categoryInfo['id'],

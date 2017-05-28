@@ -32,9 +32,11 @@ class ArticleList extends Widget
         ]
     ];
     */
-    public $items = [];
-    public $title = [];
-    public $pager = [];
+    public $items     = [];
+    public $title     = [];
+    public $showPager = true;
+    public $pager     = ['pageSize' => 10];
+    public $condition = [];
 
     public function init()
     {
@@ -44,7 +46,7 @@ class ArticleList extends Widget
         if ($currentPage < 1) {
             $currentPage = 1;
         }
-        $limit  = 10;
+        $limit  = $this->pager['pageSize'];
         $offset = ($currentPage - 1) * $limit;
 
         $columns = [
@@ -63,13 +65,20 @@ class ArticleList extends Widget
         ];
         $query   = new Query();
 
-        $this->pager['totalCount'] = $query->from("article")
-                                           ->where(['type' => 2])
-                                           ->count();
+        if ($this->showPager == true) {
+            $totalCount = $query->from("article")
+                                ->where($this->condition)
+                                ->count();
+
+            $this->pager['totalCount'] = $totalCount;
+        } else {
+            $offset                    = 0;
+            $this->pager['totalCount'] = $this->pager['pageSize'];
+        }
 
         $dataList = $query->from("article a")
                           ->select(implode(",", $columns))
-                          ->where(['type' => 2])
+                          ->where($this->condition)
                           ->leftJoin("category b", "a.category_id = b.id")
                           ->leftJoin("field_content_data c", "c.id = a.id")
                           ->leftJoin("article_type d", "d.id = a.type")
@@ -100,6 +109,11 @@ class ArticleList extends Widget
 
     public function run()
     {
+        $title = ListHeader::widget($this->title);
+
+        if ($this->pager['totalCount'] == 0) {
+            return $title . Html::div("此分类下还没有发布文章", ['class' => 'empty-list']);
+        }
         $lastIndex = count($this->items) - 1;
 
         $itemList = [];
@@ -119,20 +133,22 @@ class ArticleList extends Widget
             }
 
 
-            if (count($item['image']) == 0) {
-                Html::addCssClass($item['options'], ['no-image']);
-                $content = $this->render("_no_image", $item);
-            } elseif (count($item['image']) == 1) {
-                Html::addCssClass($item['options'], ['has-image']);
-                $content = $this->render("_head_image", $item);
-            } else {
-                Html::addCssClass($item['options'], ['list-image']);
-                $content = $this->render("_image_list", $item);
+            switch (count($item['image'])) {
+                case 0:
+                    Html::addCssClass($item['options'], ['no-image']);
+                    $content = $this->render("_no_image", $item);
+                    break;
+                case 1:
+                    Html::addCssClass($item['options'], ['has-image']);
+                    $content = $this->render("_head_image", $item);
+                    break;
+                default:
+                    Html::addCssClass($item['options'], ['list-image']);
+                    $content = $this->render("_image_list", $item);
             }
             $itemList[] = $content;
         }
 
-        $title = ListHeader::widget($this->title);
 
         $linkPager = LinkPager::widget([
             'pagination' => new Pagination($this->pager),
