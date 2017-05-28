@@ -34,6 +34,7 @@ class ArticleList extends Widget
     */
     public $items     = [];
     public $title     = [];
+    public $showPager = true;
     public $pager     = ['pageSize' => 10];
     public $condition = [];
 
@@ -64,9 +65,16 @@ class ArticleList extends Widget
         ];
         $query   = new Query();
 
-        $this->pager['totalCount'] = $query->from("article")
-                                           ->where($this->condition)
-                                           ->count();
+        if ($this->showPager == true) {
+            $totalCount = $query->from("article")
+                                ->where($this->condition)
+                                ->count();
+
+            $this->pager['totalCount'] = $totalCount;
+        } else {
+            $offset                    = 0;
+            $this->pager['totalCount'] = $this->pager['pageSize'];
+        }
 
         $dataList = $query->from("article a")
                           ->select(implode(",", $columns))
@@ -125,15 +133,18 @@ class ArticleList extends Widget
             }
 
 
-            if (count($item['image']) == 0) {
-                Html::addCssClass($item['options'], ['no-image']);
-                $content = $this->render("_no_image", $item);
-            } elseif (count($item['image']) == 1) {
-                Html::addCssClass($item['options'], ['has-image']);
-                $content = $this->render("_head_image", $item);
-            } else {
-                Html::addCssClass($item['options'], ['list-image']);
-                $content = $this->render("_image_list", $item);
+            switch (count($item['image'])) {
+                case 0:
+                    Html::addCssClass($item['options'], ['no-image']);
+                    $content = $this->render("_no_image", $item);
+                    break;
+                case 1:
+                    Html::addCssClass($item['options'], ['has-image']);
+                    $content = $this->render("_head_image", $item);
+                    break;
+                default:
+                    Html::addCssClass($item['options'], ['list-image']);
+                    $content = $this->render("_image_list", $item);
             }
             $itemList[] = $content;
         }
