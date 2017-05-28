@@ -34,7 +34,7 @@ class ArticleList extends Widget
     */
     public $items     = [];
     public $title     = [];
-    public $showPager = true;
+    public $showPager = TRUE;
     public $pager     = ['pageSize' => 10];
     public $condition = [];
 
@@ -46,7 +46,7 @@ class ArticleList extends Widget
         if ($currentPage < 1) {
             $currentPage = 1;
         }
-        $limit  = $this->pager['pageSize'];
+        $limit  = isset($this->pager['pageSize']) ? $this->pager['pageSize'] : 10;
         $offset = ($currentPage - 1) * $limit;
 
         $columns = [
@@ -65,7 +65,7 @@ class ArticleList extends Widget
         ];
         $query   = new Query();
 
-        if ($this->showPager == true) {
+        if ($this->showPager == TRUE) {
             $totalCount = $query->from("article")
                                 ->where($this->condition)
                                 ->count();
