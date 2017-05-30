@@ -22,7 +22,9 @@ class Tab extends Widget
         $js = <<<_JS
 $("body").on("mouseover",".tab-show .tab-nav li",function(e){
     if ($(this).hasClass("active")){return;}
+    
     var index = $(this).index()
+    
     var tabNav = $(this).closest(".tab-nav");
     var tabBody = $(this).closest(".tab-show").find(".tab-body");
     
