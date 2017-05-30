@@ -26,7 +26,7 @@ class ManageController extends AuthController
             }
         }
 
-        $groupList = Setting::getGroupList(TRUE);
+        $groupList = Setting::getGroupList(true);
         foreach ($groupList as $groupID => $groupItem) {
             $groupList[$groupID] = [
                 'name'    => $groupItem,

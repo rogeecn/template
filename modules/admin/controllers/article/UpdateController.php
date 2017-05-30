@@ -2,20 +2,20 @@
 
 namespace modules\admin\controllers\article;
 
+use application\base\AuthController;
 use common\base\Field;
 use common\extend\UserInfo;
+use common\models\Article;
+use common\models\ArticleField;
 use common\util\Request;
 use plugins\LayUI\components\Html;
-use application\base\AuthController;
-use common\models\ArticleField;
-use common\models\Article;
 use yii\base\Exception;
-use yii\base\InvalidParamException;
 
 class UpdateController extends AuthController
 {
-    public function actionIndex($id) {
-        $articleModel       = Article::findOne($id);
+    public function actionIndex($id)
+    {
+        $articleModel = Article::findOne($id);
 
         $typeFields = ArticleField::getTypeFieldList($articleModel->type);
         if (Request::isPost()) {
@@ -43,6 +43,7 @@ class UpdateController extends AuthController
                 $trans->commit();
             } catch (\Exception $e) {
                 $trans->rollBack();
+
                 return $this->renderFailed($e->getMessage());
             }
 

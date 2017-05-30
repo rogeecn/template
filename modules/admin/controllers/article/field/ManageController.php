@@ -9,7 +9,8 @@ use plugins\LayUI\components\Html;
 
 class ManageController extends AuthController
 {
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $type = Request::input("type");
         if (empty($type)) {
             return $this->renderFailed(['type' => '参数为空']);
@@ -33,13 +34,14 @@ class ManageController extends AuthController
         ]);
     }
 
-    public function actionCreate() {
+    public function actionCreate()
+    {
         if (!Request::isPost() || empty(Request::input("info"))) {
             return $this->renderFailed(["info" => '信息为空']);
         }
 
-        $info  = Request::input("info");
-        if (!isset($info['options'])){
+        $info = Request::input("info");
+        if (!isset($info['options'])) {
             $info['options'] = [];
         }
 
@@ -63,12 +65,13 @@ class ManageController extends AuthController
         return $this->renderFailed($model->getFlatErrors());
     }
 
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = ArticleField::findOne($id);
         if (Request::isPost()) {
             $info = Request::input("info");
 
-            if (!isset($info['options'])){
+            if (!isset($info['options'])) {
                 $info['options'] = [];
             }
 
@@ -94,10 +97,12 @@ class ManageController extends AuthController
         ]);
     }
 
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         $model   = ArticleField::findOne($id);
         $type_id = $model->type_id;
         $model->delete();
+
         return $this->renderSuccess(null, [
             Html::linkButton("继续操作", ['index', 'type' => $type_id]),
         ]);

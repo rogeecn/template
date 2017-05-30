@@ -6,7 +6,8 @@ use application\base\AuthController;
 
 class DashboardController extends AuthController
 {
-    public function actionIndex() {
+    public function actionIndex()
+    {
         return $this->render("index");
     }
 }

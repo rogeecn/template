@@ -12,7 +12,7 @@ class DeleteController extends AuthController
     {
         $model         = $this->findModel($id);
         $model->status = User::ST_REMOVED;
-        $model->save(FALSE);
+        $model->save(false);
 
         return $this->renderSuccess("删除成功", [
             \plugins\LayUI\components\Html::linkButton("返回列表", ['/admin/member/list']),
@@ -21,7 +21,7 @@ class DeleteController extends AuthController
 
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== NULL) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         }
         throw new NotFoundHttpException('The requested page does not exist.');

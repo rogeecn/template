@@ -2,19 +2,20 @@
 
 namespace modules\admin\controllers\article;
 
+use application\base\AuthController;
 use common\base\Field;
 use common\extend\UserInfo;
+use common\models\Article;
+use common\models\ArticleField;
 use common\util\Request;
 use plugins\LayUI\components\Html;
-use application\base\AuthController;
-use common\models\ArticleField;
-use common\models\Article;
 use yii\base\Exception;
 use yii\base\InvalidParamException;
 
 class CreateController extends AuthController
 {
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $type = Request::input("type");
         if (empty($type)) {
             throw new InvalidParamException("type is required");
@@ -49,6 +50,7 @@ class CreateController extends AuthController
                 $trans->commit();
             } catch (\Exception $e) {
                 $trans->rollBack();
+
                 return $this->renderFailed($e->getMessage());
             }
 

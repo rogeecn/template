@@ -11,7 +11,8 @@ class LoginController extends WebController
 {
     public $layout = "login";
 
-    public function actionIndex() {
+    public function actionIndex()
+    {
         if (!UserInfo::isGuest()) {
             return $this->redirect('/admin');
         }
@@ -20,6 +21,7 @@ class LoginController extends WebController
         if ($model->load(Request::post()) && $model->login()) {
             return $this->redirect('/admin');
         }
+
         return $this->render('index', [
             'model' => $model,
         ]);

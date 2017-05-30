@@ -21,7 +21,7 @@ class Tab extends Widget
 
     public function run()
     {
-        Html::addCssClass($this->options, ['widget', 'tab-show']);
+        Html::addCssClass($this->options, ['widget', 'border', 'tab-show']);
 
         return $this->render("view", [
             'options' => $this->options,

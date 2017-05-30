@@ -3,8 +3,8 @@
 namespace modules\admin\controllers\article\field;
 
 use application\base\AuthController;
-use common\util\Request;
 use common\models\ArticleField;
+use common\util\Request;
 
 class AttachController extends AuthController
 {
@@ -15,13 +15,14 @@ class AttachController extends AuthController
             return $this->renderFailed(['type' => '参数为空']);
         }
 
-        $allFields  = ArticleField::fieldList();
+        $allFields = ArticleField::fieldList();
+
 //        $typeFields = ArticleField::getTypeFieldList($type);
 
         return $this->render("index", [
             "allFields" => $allFields,
-//            "typeFields" => $typeFields,
-            "type" => $type,
+            //            "typeFields" => $typeFields,
+            "type"      => $type,
         ]);
     }
 
@@ -37,6 +38,6 @@ class AttachController extends AuthController
             return $this->renderFailed(['class' => '参数为空']);
         }
 
-        return $this->render("info",ArticleField::getFieldClassInfo($class));
+        return $this->render("info", ArticleField::getFieldClassInfo($class));
     }
 }

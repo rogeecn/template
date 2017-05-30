@@ -1,18 +1,19 @@
 <?php
 namespace modules\admin\controllers\tag;
 
-use common\util\Request;
 use application\base\AuthController;
 use common\models\TagSearch;
+use common\util\Request;
 
 class ListController extends AuthController
 {
-    public function actionIndex() {
-        $searchModel = new TagSearch();
+    public function actionIndex()
+    {
+        $searchModel  = new TagSearch();
         $dataProvider = $searchModel->search(Request::input());
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

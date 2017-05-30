@@ -34,7 +34,7 @@ class ControlController extends AuthController
 
     public function actionDelete($id)
     {
-        $deleteItemTree = Category::getSubTree($id, TRUE);
+        $deleteItemTree = Category::getSubTree($id, true);
         if (count($deleteItemTree)) {
             Category::deleteAll(['id' => array_keys($deleteItemTree)]);
         }

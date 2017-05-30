@@ -7,8 +7,10 @@ use common\extend\UserInfo;
 
 class LogoutController extends AuthController
 {
-    public function actionIndex() {
+    public function actionIndex()
+    {
         UserInfo::logout();
+
         return $this->goHome();
     }
 }
