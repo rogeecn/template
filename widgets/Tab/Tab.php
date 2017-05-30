@@ -4,6 +4,7 @@ namespace widgets\Tab;
 
 use common\base\Widget;
 use plugins\LayUI\components\Html;
+use yii\web\JqueryAsset;
 
 class Tab extends Widget
 {
@@ -33,6 +34,7 @@ $("body").on("mouseover",".tab-show .tab-nav li",function(e){
 })
 _JS;
 
+        JqueryAsset::register($this->getView());
         $this->getView()->registerJs($js);
     }
 
