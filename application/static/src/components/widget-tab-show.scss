@@ -11,7 +11,7 @@
 
       li {
         float: left;
-        width: 25%;
+        padding: 0px 2*$padding-size;
         text-align: center;
         color: #999;
         border-right: 1px solid #eaeaea;
@@ -23,6 +23,7 @@
           color: #666;
           font-weight: bold;
           cursor: default;
+          display: block;
         }
       }
     }
@@ -30,6 +31,10 @@
     ul.tab-body {
       & > li {
         padding: 1.5*$padding-size;
+        display: none;
+        &.active {
+          display: block;
+        }
       }
 
       ul {

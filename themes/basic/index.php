@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<?php for ($j = 0; $j < 3; $j++): ?>
+<?php for ($j = 0; $j < 2; $j++): ?>
     <div class="row">
         <?php for ($i = 0; $i < 3; $i++): ?>
             <div class="box">
@@ -55,3 +55,19 @@
         <?php endfor; ?>
     </div>
 <?php endfor; ?>
+
+
+
+<?= \widgets\Tab\Tab::widget([
+    'options'   => ['style'=>"margin-top: 20px;"],
+    'items'   => [
+        [
+            'title'   => '友情链接',
+            'content' => 'hello 友情链接!',
+        ],
+        [
+            'title'   => '合作伙伴',
+            'content' => 'hello 合作伙伴!',
+        ],
+    ],
+]); ?>

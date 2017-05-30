@@ -17,6 +17,23 @@ class Tab extends Widget
                 $item['content'] = $item['content']();
             }
         }
+
+        $js = <<<_JS
+$("body").on("mouseover",".tab-show .tab-nav li",function(e){
+    if ($(this).hasClass("active")){return;}
+    var index = $(this).index()
+    var tabNav = $(this).closest(".tab-nav");
+    var tabBody = $(this).closest(".tab-show").find(".tab-body");
+    
+    tabNav.find("li").removeClass("active");
+    tabBody.find("li").removeClass("active");
+    
+    $(tabNav).find("li").eq(index).addClass("active");
+    $(tabBody).find("li").eq(index).addClass("active");
+})
+_JS;
+
+        $this->getView()->registerJs($js);
     }
 
     public function run()
