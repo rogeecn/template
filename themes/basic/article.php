@@ -1,6 +1,5 @@
+<?= \widgets\Breadcrumbs::widget(['categoryID' => $categoryID]) ?>
 <div class="content">
-    <?= \widgets\Breadcrumbs::widget(['categoryID' => $categoryID]) ?>
-
     <div class="page-article">
         <?= \widgets\Content\Content::widget(['articleID' => $articleInfo['id']]); ?>
         <?= \widgets\ContentCopyright::widget(['articleID' => $articleInfo['id']]) ?>
