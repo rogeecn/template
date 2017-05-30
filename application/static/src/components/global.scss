@@ -125,3 +125,10 @@ ul {
   letter-spacing: 0.3em;
   color: #ff5722;
 }
+
+.friendlink-list {
+  a {
+    margin-right: $margin-size;
+    margin-bottom: $margin-size;
+  }
+}

@@ -22,6 +22,11 @@ use yii\helpers\Html;
 <ul class="tab-body">
     <?php
     foreach ($items as $index => $item) {
+        if ($item instanceof \Closure) {
+            echo $item();
+            continue;
+        }
+
         if (!isset($item['contentOptions'])) {
             $item['contentOptions'] = [];
         }

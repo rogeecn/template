@@ -1,11 +1,18 @@
 .row {
   @include clearfix;
 
-  margin: 0 -$padding-size;
+  margin-left: -$padding-size;
+  margin-right: -$padding-size;
+
   .box {
     margin: 0px $padding-size;
+    margin-bottom: 2*$margin-size;
     width: $width-container/3 - $padding-size;
     float: left;
+
+    & > .widget {
+      margin-bottom: 0px;
+    }
 
     .title {
       font-size: 16px;

@@ -59,15 +59,20 @@
 
 
 <?= \widgets\Tab\Tab::widget([
-    'options'   => ['style'=>"margin-top: 20px;"],
+    'options' => ['style' => "margin-top: 20px;"],
     'items'   => [
         [
             'title'   => '友情链接',
-            'content' => 'hello 友情链接!',
-        ],
-        [
-            'title'   => '合作伙伴',
-            'content' => 'hello 合作伙伴!',
+            'content' => function () {
+                $linkList = \common\models\LinkGroup::getLinkByGroupAlias("friendlink");
+
+                $items = [];
+                foreach ($linkList as $item) {
+                    $items[] = \common\extend\Html::a($item['label'], $item['url'], ['target' => "_blank"]);
+                }
+
+                return \common\extend\Html::div(implode("\n", $items), ['class' => 'friendlink-list']);
+            },
         ],
     ],
 ]); ?>
