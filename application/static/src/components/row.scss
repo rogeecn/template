@@ -22,11 +22,11 @@
     }
 
     ul {
-      min-height: 388px;
       list-style: disc;
       color: #bbb;
       @include clearfix;
       padding: $padding-size 2*$padding-size;
+      min-height: 388px - 2*$padding-size;
 
       li {
         $height: 26px;

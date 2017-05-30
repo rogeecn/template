@@ -128,7 +128,6 @@ ul {
 
 .friendlink-list {
   a {
-    margin-right: $margin-size;
-    margin-bottom: $margin-size;
+    padding: 0px $padding-size $padding-size 0px;
   }
 }
