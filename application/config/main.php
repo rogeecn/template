@@ -14,9 +14,6 @@ return [
     'controllerNamespace' => 'application\controllers',
     'bootstrap'           => ['log'],
     'modules'             => [
-        'go'  => [
-            'class' => 'application\modules\go\Module',
-        ],
         'api' => [
             'class' => 'modules\api\Module',
         ],
