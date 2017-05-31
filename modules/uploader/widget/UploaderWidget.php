@@ -31,12 +31,12 @@ class UploaderWidget extends InputWidget
 
     public function init()
     {
-        $this->options = array_merge($this->defaultOptions, $this->options);
+        $this->defaultOptions['sourceURL'] = sprintf("//%s/uploads/", $this->getView()->setting("site.url"));
+        $this->options                     = array_merge($this->defaultOptions, $this->options);
         LayUIAssets::register($this->getView());
         $this->getView()->registerJs($this->getJs());
         $this->getView()->registerCss($this->getCSS());
 
-        $this->defaultOptions['sourceURL'] = sprintf("//%s/uploads/", $this->getView()->setting("site.url"));
     }
 
     public function run()
