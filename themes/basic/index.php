@@ -34,28 +34,26 @@
     </div>
 </div>
 
-<?php for ($j = 0; $j < 2; $j++): ?>
-    <div class="row">
-        <?php for ($i = 0; $i < 3; $i++): ?>
-            <div class="box">
-                <div class="widget border">
-                    <h2 class="title">
-                        <?= \common\extend\Html::a("Hello", $this->categoryURL("hello")) ?>
-                    </h2>
-                    <ul class="body">
-                        <?php for ($k = 1; $k < 15; $k++): ?>
-                            <li>
-                                <time>2017-01-02</time>
-                                <a href="/">你你好中国3333你好中国333好中国333333你好中国333好中国33333你好中国333好中国333</a>
-                            </li>
-                        <?php endfor; ?>
-                    </ul>
-                </div>
+<div class="clearfix">
+    <div class="content">
+        <?php for ($j = 0; $j < 3; $j++): ?>
+            <div class="widget border widget-box">
+                <h2 class="title">
+                    <?= \common\extend\Html::a("Hello", $this->categoryURL("hello")) ?>
+                </h2>
+                <ul class="body item-list">
+                    <?php for ($k = 1; $k < 5; $k++): ?>
+                        <li>
+                            <time>2017-01-02</time>
+                            <a href="/">你你好中国3333你好中国333好中国333333你好中国333好中国33333你好中国333好中国333</a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
             </div>
         <?php endfor; ?>
     </div>
-<?php endfor; ?>
-
+    <?= $this->render("sider") ?>
+</div>
 
 
 <?= \widgets\Tab\Tab::widget([

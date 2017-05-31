@@ -7,9 +7,24 @@
     border-radius: $border-radius;
   }
 
+  &.widget-box {
+    .title {
+      background: #fbfbfb;
+      border-bottom: 1px solid $color-border;
+      padding: $padding-size 2*$padding-size;
+
+      font-size: 18px;
+    }
+
+    .body {
+      @include clearfix;
+      padding: 2*$padding-size;
+    }
+  }
 }
 
 @import "widget-block-show";
 @import "widget-tag-cloud";
 @import "widget-tab-show";
 @import "widget-full-column-show";
+@import "widget-item-list";

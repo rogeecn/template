@@ -35,7 +35,7 @@ class ArticleList extends Widget
     public $items     = [];
     public $title     = [];
     public $showPager = TRUE;
-    public $pager     = ['pageSize' => 10];
+    public $pager     = ['defaultPageSize' => 10];
     public $condition = [];
 
     public function init()
