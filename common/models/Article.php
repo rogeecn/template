@@ -76,16 +76,18 @@ class Article extends \common\base\ActiveRecord
 
     public function beforeSave($insert)
     {
-        $this->user_id = UserInfo::getID();
+        if (empty($this->user_id)) {
+            $this->user_id = UserInfo::getID();
+        }
 
         return parent::beforeSave($insert);
     }
 
-    public static function getDataByID($articleID, $mode = NULL, $excludeFields = [])
+    public static function getDataByID($articleID, $mode = null, $excludeFields = [])
     {
         $articleModel = self::findOne($articleID);
         if (!$articleModel) {
-            return FALSE;
+            return false;
         }
 
         $articleData = $articleModel->toArray();

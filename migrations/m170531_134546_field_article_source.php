@@ -1,16 +1,12 @@
 <?php
+
 namespace migrations;
 
 use yii\db\Migration;
 
-class m170508_151104_field_content_data extends Migration
+class m170531_134546_field_article_source extends Migration
 {
-    public $_table = "{{%field_content_data}}";
-
-    public function longtext()
-    {
-        return $this->getDb()->getSchema()->createColumnSchemaBuilder('longtext');
-    }
+    public $_table = "{{%field_article_source}}";
 
     public function safeUp()
     {
@@ -20,9 +16,8 @@ class m170508_151104_field_content_data extends Migration
         }
 
         $this->createTable($this->_table, [
-            'id'          => $this->primaryKey(),
-            'description' => $this->string(1200)->notNull()->defaultValue(""),
-            'content'     => $this->longtext()->notNull(),
+            'id'         => $this->primaryKey(),
+            'source_url' => $this->string(500)->notNull()->defaultValue(""),
         ], $tableOptions);
     }
 
