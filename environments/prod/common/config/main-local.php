@@ -3,9 +3,9 @@ return [
     'components' => [
         'db'     => [
             'class'               => 'yii\db\Connection',
-            'dsn'                 => 'mysql:host=localhost;dbname=yii2advanced',
-            'username'            => 'root',
-            'password'            => '',
+            'dsn'                 => 'mysql:host='.SYSTEM_DB_HOST.';dbname=officejineng',
+            'username'            => SYSTEM_DB_USER,
+            'password'            => SYSTEM_DB_PASS,
             'charset'             => 'utf8',
             'enableSchemaCache'   => TRUE,
             'schemaCacheDuration' => 3600,
