@@ -2,7 +2,7 @@
 <div class="content">
     <div class="page-article">
         <?= \widgets\Content\Content::widget(['articleID' => $articleInfo['id']]); ?>
-        <?= \widgets\ContentCopyright::widget(['articleID' => $articleInfo['id']]) ?>
+        <?php /*= \widgets\ContentCopyright::widget(['articleID' => $articleInfo['id']]) */ ?>
 
         <?php /*= \widgets\PostAuthor::widget([
         'headImage' => 'https://secure.gravatar.com/avatar/fbe1c43581600c6a1e6c3de93321f7e8?s=100&d=mm',
@@ -10,7 +10,7 @@
         'signature' => '我就是我，颜色不一样的火',
     ]) */ ?>
 
-        <?= \widgets\RecommendList::widget([
+        <?php /*= \widgets\RecommendList::widget([
             'title' => '相关推荐',
             'items' => [
                 [
@@ -41,7 +41,7 @@
                     'time'  => '2017-02-02',
                 ],
             ],
-        ]) ?>
+        ]) */ ?>
     </div>
 </div>
 <?= $this->render("sider") ?>

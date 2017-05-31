@@ -41,6 +41,14 @@
         margin-bottom: 2*$margin-size;
         word-wrap: break-word;
       }
+
+      ul, ol, dl {
+        list-style-position: inside;
+      }
+
+      img {
+        max-width: 100%;
+      }
     }
   }
 

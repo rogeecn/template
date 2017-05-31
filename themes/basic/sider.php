@@ -1,5 +1,5 @@
 <aside class="sidebar">
-    <?= \widgets\Tab\Tab::widget([
+    <?php /*= \widgets\Tab\Tab::widget([
         'items' => [
             [
                 'title'   => '网站公告',
@@ -21,10 +21,10 @@
                 ]),
             ],
         ],
-    ]); ?>
+    ]); */ ?>
 
-    <?= \widgets\BlockShow\BlockShow::widget(['id' => 23]); ?>
-    <?= \widgets\BlockShow\BlockShow::widget(['id' => 24]); ?>
+    <?php /*= \widgets\BlockShow\BlockShow::widget(['id' => 23]); */ ?>
+    <?php /*= \widgets\BlockShow\BlockShow::widget(['id' => 24]); */ ?>
 
     <?= \widgets\TagCloud\TagCloud::widget([
         'items' => \common\models\Tag::getList(18, TRUE),

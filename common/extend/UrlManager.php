@@ -7,13 +7,13 @@ use yii\web\UrlNormalizer;
 
 class UrlManager extends \yii\web\UrlManager
 {
-    public $enablePrettyUrl = true;
-    public $showScriptName  = false;
+    public $enablePrettyUrl = TRUE;
+    public $showScriptName  = FALSE;
     /** @var UrlNormalizer */
     public $normalizer = [
         'class'                  => 'yii\web\UrlNormalizer',
-        'collapseSlashes'        => true,
-        'normalizeTrailingSlash' => true,
+        'collapseSlashes'        => TRUE,
+        'normalizeTrailingSlash' => TRUE,
     ];
 
     public function init()
@@ -41,19 +41,26 @@ class UrlManager extends \yii\web\UrlManager
         $key               = sprintf('%s/<alias:[\w|\-|_]+>', $articlePath);
         $this->rules[$key] = 'article/alias';
 
+        // tag with pager
+//        $key               = sprintf('%s/<name:(.*?)>/page-<page:\d+>', $tagPath);
+//        $this->rules[$key] = 'tag/index';
+
         //tag
         $key               = sprintf('%s/<name:(.*?)>', $tagPath);
         $this->rules[$key] = 'tag/index';
 
+
         /** @var Category[] $allCategory */
         $allCategory = Category::find()->all();
         foreach ($allCategory as $category) {
+//                $pageKey = sprintf('<alias:%s>/page-<page:\d+>', $categoryPath, $category->alias);
+            $key = sprintf("<alias:%s>", $category->alias);
             if (!empty($categoryPath)) {
-                $key = sprintf("/%s/<alias:%s>", $categoryPath, $category->alias);
-            } else {
-                $key = sprintf("/<alias:%s>", $category->alias);
+//                $pageKey = sprintf('%s/<alias:%s>/page-<page:\d+>', $categoryPath, $category->alias);
+                $key = sprintf("%s/<alias:%s>", $categoryPath, $category->alias);
             }
 
+//            $this->rules[$pageKey] = 'category/index';
             $this->rules[$key] = 'category/index';
         }
 

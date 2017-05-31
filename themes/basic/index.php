@@ -36,22 +36,10 @@
 
 <div class="clearfix">
     <div class="content">
-        <?php for ($j = 0; $j < 3; $j++): ?>
-            <div class="widget border widget-box">
-                <h2 class="title">
-                    <?= \common\extend\Html::a("Hello", $this->categoryURL("hello")) ?>
-                </h2>
-                <ul class="body item-list">
-                    <?php for ($k = 1; $k < 5; $k++): ?>
-                        <li>
-                            <time>2017-01-02</time>
-                            <a href="/">你你好中国3333你好中国333好中国333333你好中国333好中国33333你好中国333好中国333</a>
-                        </li>
-                    <?php endfor; ?>
-                </ul>
-            </div>
-        <?php endfor; ?>
+        <?= \widgets\CategoryBox::widget(['categoryAlias' => 'html-css']) ?>
+        <?= \widgets\CategoryBox::widget(['categoryAlias' => 'php']) ?>
     </div>
+
     <?= $this->render("sider") ?>
 </div>
 

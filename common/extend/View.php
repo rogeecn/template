@@ -24,12 +24,12 @@ class View extends \yii\web\View
                 self::$_SETTING = Setting::flatSettings();
                 file_put_contents($settingCacheFile, json_encode(self::$_SETTING));
             } else {
-                self::$_SETTING = json_decode(file_get_contents($settingCacheFile), true);
+                self::$_SETTING = json_decode(file_get_contents($settingCacheFile), TRUE);
             }
         }
 
         if (!isset(self::$_SETTING[$configPath])) {
-            return false;
+            return FALSE;
         }
 
         return self::$_SETTING[$configPath];
@@ -95,6 +95,17 @@ class View extends \yii\web\View
     public function categoryURL($alias)
     {
         return Url::toRoute(['/category/index', 'alias' => $alias]);
+    }
+
+
+    public function articleAliasURL($alias)
+    {
+        return Url::toRoute(['/article/alias', 'alias' => $alias]);
+    }
+
+    public function articleIDURL($id)
+    {
+        return Url::toRoute(['/article/id', 'id' => $id]);
     }
 
     public function ICPNumber()
