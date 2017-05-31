@@ -24,12 +24,12 @@ class View extends \yii\web\View
                 self::$_SETTING = Setting::flatSettings();
                 file_put_contents($settingCacheFile, json_encode(self::$_SETTING));
             } else {
-                self::$_SETTING = json_decode(file_get_contents($settingCacheFile), TRUE);
+                self::$_SETTING = json_decode(file_get_contents($settingCacheFile), true);
             }
         }
 
         if (!isset(self::$_SETTING[$configPath])) {
-            return FALSE;
+            return false;
         }
 
         return self::$_SETTING[$configPath];
@@ -68,11 +68,11 @@ class View extends \yii\web\View
         echo Html::tag("title", $title);
 
         //register keywords
-        $defaultKeywords = $this->setting('site.keywords');
+        $defaultKeywords = $this->setting('site.keyword');
         $this->registerMetaTag([
-            'name'    => 'keywords',
+            'name'    => 'keyword',
             'content' => empty($this->keywords) ? $defaultKeywords : $this->keywords,
-        ], 'keywords');
+        ], 'keyword');
 
         //register description
         $defaultDescription = $this->setting('site.description');
