@@ -66,6 +66,7 @@ class View extends \yii\web\View
             $title = sprintf("%s - %s", $title, $slogan);
         }
         echo Html::tag("title", $title);
+        echo "\n";
 
         //register keywords
         $defaultKeywords = $this->setting('site.keyword');
