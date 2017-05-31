@@ -20,7 +20,6 @@ class UploaderWidget extends InputWidget
         'limitCount'      => 1,
         'fileType'        => 'images',  // images,file,video,audio
         'showText'        => "Upload",
-        'sourceURL'       => "//tpl.local/uploads/",
         'handleSuccess'   => '',
         //返回的参数item，即为当前的input DOM对象
         'handleBefore'    => '',//function(input){console.log("文件上传中");}
@@ -30,14 +29,18 @@ class UploaderWidget extends InputWidget
     public $template = "<ul class='image-upload'><li>{input}</li>\n{image}</ul>";
 
 
-    public function init() {
+    public function init()
+    {
         $this->options = array_merge($this->defaultOptions, $this->options);
         LayUIAssets::register($this->getView());
         $this->getView()->registerJs($this->getJs());
         $this->getView()->registerCss($this->getCSS());
+
+        $this->defaultOptions['sourceURL'] = sprintf("//%s/uploads/", $this->getView()->setting("site.url"));
     }
 
-    public function run() {
+    public function run()
+    {
 
         if (!isset($this->options['id'])) {
             $this->options['id'] = self::getId();
@@ -73,7 +76,8 @@ class UploaderWidget extends InputWidget
         ]);
     }
 
-    private function getJs() {
+    private function getJs()
+    {
         if (empty($this->options['handleSuccess'])) {
             $this->options['handleSuccess'] = <<<_JS_SUCCESS_
 function(res, input){
@@ -114,10 +118,12 @@ layui.upload({
   ,success: {$this->options['handleSuccess']}
 }); 
 _JS_;
+
         return $js;
     }
 
-    private function getCSS() {
+    private function getCSS()
+    {
         $css = <<<_CSS
     ul.image-upload > li {
         display: inline-block;
@@ -137,6 +143,7 @@ _JS_;
         height: 100%;
     }
 _CSS;
+
         return $css;
     }
 }
