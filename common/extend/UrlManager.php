@@ -30,7 +30,7 @@ class UrlManager extends \yii\web\UrlManager
 
         $tagPath = \Yii::$app->getView()->setting("path.tag");
         if (!$tagPath) {
-            $tagPath = '';
+            $tagPath = 'tag';
         }
         $this->rules['/'] = 'index/index';
 
