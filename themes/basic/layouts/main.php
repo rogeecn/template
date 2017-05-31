@@ -23,10 +23,10 @@ AppAsset::register($this);
     <?= $content ?>
 </section>
 <?= \widgets\ColumnShow::widget([
-    'title' => 'themebetter 国内更好的WordPress主题服务商',
+    'title' => '办公技能网 国内优质office、编程等办公技能内容发布网',
     'link'  => [
         'label' => '立即前往',
-        'url'   => '/gogogo',
+        'url'   => '/',
     ],
     'style' => 'gray',
 ]) ?>

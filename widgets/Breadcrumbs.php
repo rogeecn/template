@@ -9,6 +9,7 @@ use common\models\Category;
 class Breadcrumbs extends Widget
 {
     public $categoryID = 0;
+    public $text       = "";
     public $splitChar  = '&raquo;';
     public $options    = ['class' => 'breadcrumbs'];
 
@@ -24,6 +25,11 @@ class Breadcrumbs extends Widget
 
         $index = Html::a(Html::icon("home", "&nbsp") . "首页", ['/']);
         array_unshift($linkList, $index);
+
+        if (!empty($this->text)) {
+            $text = Html::tag("span", $this->text);
+            array_push($linkList, $text);
+        }
 
         $splitHtml = Html::tag("span", $this->splitChar, ['class' => 'split']);
 

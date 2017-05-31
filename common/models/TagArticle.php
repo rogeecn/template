@@ -16,7 +16,8 @@ class TagArticle extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'tag_article';
     }
 
@@ -24,7 +25,8 @@ class TagArticle extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['tag_id', 'article_id'], 'required'],
             [['tag_id', 'article_id'], 'integer'],
@@ -34,7 +36,8 @@ class TagArticle extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id'         => 'ID',
             'tag_id'     => 'Tag ID',
@@ -42,11 +45,13 @@ class TagArticle extends \common\base\ActiveRecord
         ];
     }
 
-    public function getTag() {
+    public function getTag()
+    {
         return $this->hasOne(Tag::className(), ['id' => 'tag_id']);
     }
 
-    public static function setArticleTags($articleID, $tagList) {
+    public static function setArticleTags($articleID, $tagList)
+    {
         $tagDataList        = self::getArticleTags($articleID);
         $currentTagNameList = ArrayHelper::getColumn($tagDataList, "name");
 
@@ -82,10 +87,11 @@ class TagArticle extends \common\base\ActiveRecord
             }
         }
 
-        return true;
+        return TRUE;
     }
 
-    public static function getArticleTags($articleID) {
+    public static function getArticleTags($articleID)
+    {
         $tags = self::find()->with("tag")->where(['article_id' => $articleID])->all();
 
         $tagList = [];
@@ -99,4 +105,21 @@ class TagArticle extends \common\base\ActiveRecord
         return $tagList;
     }
 
+    public static function getTagArticleIDList($tagID, $page = 1, $limit = 10)
+    {
+        $offset    = ($page - 1) * $limit;
+        $tagIDList = self::find()->where(['tag_id' => $tagID])
+                         ->limit($limit)
+                         ->offset($offset)
+                         ->orderBy(['id' => SORT_DESC])
+                         ->all();
+        $articleID = ArrayHelper::getColumn($tagIDList, "article_id");
+
+        return $articleID;
+    }
+
+    public static function getTagArticleCount($tagID)
+    {
+        return self::find()->where(['tag_id' => $tagID])->count();
+    }
 }

@@ -35,7 +35,9 @@ class ArticleList extends Widget
     public $items     = [];
     public $title     = [];
     public $showPager = TRUE;
-    public $pager     = ['defaultPageSize' => 10];
+    public $pager     = [
+        'defaultPageSize' => 10,
+    ];
     public $condition = [];
 
     public function init()
@@ -46,44 +48,50 @@ class ArticleList extends Widget
         if ($currentPage < 1) {
             $currentPage = 1;
         }
-        $limit  = isset($this->pager['pageSize']) ? $this->pager['pageSize'] : 10;
+        $limit  = isset($this->pager['defaultPageSize']) ? $this->pager['defaultPageSize'] : 10;
         $offset = ($currentPage - 1) * $limit;
 
         $columns = [
-            'a.id',
-            'a.title',
-            'f.username username',
-            'f.email email',
-            'e.image',
-            'a.type typeID',
-            'd.name typeName',
-            'a.created_at createdAt',
-            'a.category_id catID',
-            'b.name categoryName',
-            'b.alias categoryAlias',
-            'c.description',
+            'article.id',
+            'article.title',
+            'member.username username',
+            'member.email email',
+            'field_upload_image.image',
+            'article.type typeID',
+            'article_type.name typeName',
+            'article.created_at createdAt',
+            'article.category_id catID',
+            'category.name categoryName',
+            'category.alias categoryAlias',
+            'field_content_data.description',
         ];
         $query   = new Query();
 
-        if ($this->showPager == TRUE) {
-            $totalCount = $query->from("article")
-                                ->where($this->condition)
-                                ->count();
-
+        if (!isset($this->pager['totalCount'])) {
+            $totalCount                = $query->from("article")
+                                               ->where($this->condition)
+                                               ->count();
             $this->pager['totalCount'] = $totalCount;
-        } else {
+        }
+
+        if (isset($this->pager['offset'])) {
+            $offset = $this->pager['offset'];
+            unset($this->pager['offset']);
+        }
+
+        if ($this->showPager === FALSE) {
             $offset                    = 0;
             $this->pager['totalCount'] = $this->pager['pageSize'];
         }
 
-        $dataList = $query->from("article a")
+        $dataList = $query->from("article")
                           ->select(implode(",", $columns))
                           ->where($this->condition)
-                          ->leftJoin("category b", "a.category_id = b.id")
-                          ->leftJoin("field_content_data c", "c.id = a.id")
-                          ->leftJoin("article_type d", "d.id = a.type")
-                          ->leftJoin("field_upload_image e", "e.id = a.id")
-                          ->leftJoin("member f", "f.id = a.user_id")
+                          ->leftJoin("category", "article.category_id = category.id")
+                          ->leftJoin("field_content_data", "field_content_data.id = article.id")
+                          ->leftJoin("article_type", "article_type.id = article.type")
+                          ->leftJoin("field_upload_image", "field_upload_image.id = article.id")
+                          ->leftJoin("member", "member.id = article.user_id")
                           ->limit($limit)
                           ->offset($offset)
                           ->orderBy(['id' => SORT_DESC])

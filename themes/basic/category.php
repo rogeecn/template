@@ -3,7 +3,6 @@
 /** @var $this \common\extend\View */
 /** @var $categoryChildren \common\models\Category[] */
 
-$categoryList = array_chunk($categoryChildren, 3);
 ?>
 <?= \widgets\Breadcrumbs::widget(['categoryID' => $categoryID]) ?>
 
