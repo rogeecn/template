@@ -32,6 +32,7 @@ class UrlManager extends \yii\web\UrlManager
         if (!$tagPath) {
             $tagPath = '';
         }
+        $this->rules['/'] = 'index/index';
 
         //article for id
         $key               = sprintf('%s/<id:\d+>', $articlePath);
