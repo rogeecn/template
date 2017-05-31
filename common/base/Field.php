@@ -20,8 +20,8 @@ class Field extends Widget
     public $table       = "";
     public $options     = [];
     public $fieldData   = [];
-    public $dataID      = NULL;
-    public $mode        = NULL;
+    public $dataID      = null;
+    public $mode        = null;
 
 
     const MODE_SUMMARY = "SUMMARY";
@@ -80,7 +80,7 @@ class Field extends Widget
                 continue;
             }
             if ($itemKey == "options") {
-                $this->$itemKey = json_decode($itemValue, TRUE) ?: [];
+                $this->$itemKey = json_decode($itemValue, true) ?: [];
                 continue;
             }
             $this->$itemKey = $itemValue;
@@ -97,7 +97,7 @@ class Field extends Widget
         return call_user_func_array([$this, $this->action], []);
     }
 
-    protected function createCommand($sql = NULL, $params = [])
+    protected function createCommand($sql = null, $params = [])
     {
         return \Yii::$app->getDb()->createCommand($sql, $params);
     }
@@ -118,7 +118,8 @@ class Field extends Widget
     protected function createData()
     {
         $this->fieldData['id'] = $this->dataID;
-        $ret                   = $this->createCommand()->insert($this->table, $this->fieldData)->execute();
+        $this->beforeSave(true);
+        $ret = $this->createCommand()->insert($this->table, $this->fieldData)->execute();
 
         if (!$ret) {
             throw new Exception("table '$this->table': create data failed!");
@@ -133,11 +134,16 @@ class Field extends Widget
 
             return;
         }
+        $this->beforeSave(false);
         $this->createCommand()->update($this->table, $this->fieldData, ['id' => $this->dataID])->execute();
     }
 
     protected function deleteData()
     {
         $this->createCommand()->delete($this->table, ["id" => $this->dataID])->execute();
+    }
+
+    protected function beforeSave($insert = false)
+    {
     }
 }

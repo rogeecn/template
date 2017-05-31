@@ -1,6 +1,13 @@
 <?php
 
 /** @var $this \common\extend\View */
+
+$allowTags                  = 'h1,h2,h3,h4,h5';
+echo "\n\n-----------------------\n\n";
+echo  \yii\helpers\HtmlPurifier::process($this->render("_html"), [
+    'HTML.Allowed' => $allowTags,
+]);
+echo "\n\n-----------------------\n\n";
 ?>
 <div class="clearfix">
     <div class="content">

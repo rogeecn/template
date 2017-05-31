@@ -4,8 +4,9 @@ namespace fields\ueditor;
 
 use common\base\Field;
 use common\base\IField;
-use plugins\LayUI\components\Html;
 use modules\ueditor\widget\UEditorInput;
+use plugins\LayUI\components\Html;
+use yii\helpers\HtmlPurifier;
 
 class UEditorField extends Field implements IField
 {
@@ -13,7 +14,8 @@ class UEditorField extends Field implements IField
     public $description = "UEditor 富文本编辑器";
     public $table       = "field_content_data";
 
-    protected function getOptions() {
+    protected function getOptions()
+    {
         return [
             [
                 'type'   => 'checkbox',
@@ -36,31 +38,45 @@ class UEditorField extends Field implements IField
         ];
     }
 
-    protected function getData(){
+    protected function getData()
+    {
         $fields = "*";
-        if ($this->mode && $this->mode == self::MODE_SUMMARY){
+        if ($this->mode && $this->mode == self::MODE_SUMMARY) {
             $fields = "id,description";
         }
 
         return $this->getQuery()
-            ->from($this->table)
-            ->select($fields)
-            ->where(['id'=>$this->dataID])
-            ->one();
+                    ->from($this->table)
+                    ->select($fields)
+                    ->where(['id' => $this->dataID])
+                    ->one();
+    }
+
+    protected function beforeSave($insert = false)
+    {
+        parent::beforeSave($insert);
+
+        $content = $this->fieldData['content'];
+
+        $allowTags                  = 'p,b,a[href],pre,code,i,ul,li,ol,dl,dt,span,hr,h2,h3,h4,h5,h6,strong,div,br,img[src]';
+        $this->fieldData['content'] = HtmlPurifier::process($content, [
+            'HTML.Allowed' => $allowTags,
+        ]);
     }
 
 
-    protected function renderField() {
+    protected function renderField()
+    {
         $this->label = json_decode($this->label, true);
 
         // 如果存在ID说明是可以查询数据的
-        if (!empty($this->dataID)){
+        if (!empty($this->dataID)) {
             $this->value = $this->getData();
         }
         $content = "";
         if ($this->options['showDescription']) {
             $value = "";
-            if (isset($this->value['description'])){
+            if (isset($this->value['description'])) {
                 $value = $this->value['description'];
             }
             $input = Html::textarea(sprintf("%s[description]", $this->name), $value);
@@ -69,11 +85,11 @@ class UEditorField extends Field implements IField
         }
 
         $value = "";
-        if (isset($this->value['content'])){
+        if (isset($this->value['content'])) {
             $value = $this->value['content'];
         }
 
-        $input = Html::textarea(sprintf("%s[content]", $this->name), $value);
+        //$input = Html::textarea(sprintf("%s[content]", $this->name), $value);
         $label = Html::label($this->label['content'], "", ['class' => 'layui-form-label']);
         $input = UEditorInput::widget(['name' => sprintf("%s[content]", $this->name), 'value' => $value]);
         $content .= $this->inputBlock($label, $input);
@@ -81,7 +97,8 @@ class UEditorField extends Field implements IField
         return $content;
     }
 
-    private function inputBlock($labelHTML, $inputHTML) {
+    private function inputBlock($labelHTML, $inputHTML)
+    {
         $content = "";
         $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
 

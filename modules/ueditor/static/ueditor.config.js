@@ -61,7 +61,7 @@
         //,theme:'default'
         //,themePath:URL +"themes/"
 
-        ,zIndex : 600     //编辑器层级的基数,默认是900
+        , zIndex: 600     //编辑器层级的基数,默认是900
 
         //针对getAllHtml方法，会在对应的head标签中增加该编码设置。
         //,charset:"utf-8"
@@ -89,12 +89,12 @@
         //首行缩进距离,默认是2em
         //,indentValue:'2em'
 
-        ,initialFrameWidth:'100%'  //初始化编辑器宽度,默认1000
-        ,initialFrameHeight:300  //初始化编辑器高度,默认320
+        , initialFrameWidth: '100%'  //初始化编辑器宽度,默认1000
+        , initialFrameHeight: 300  //初始化编辑器高度,默认320
 
         //,readonly : false //编辑器初始化结束后,编辑区域是否是只读的，默认是false
 
-        ,autoClearEmptyNode : true //getContent时，是否删除空的inlineElement节点（包括嵌套的情况）
+        , autoClearEmptyNode: true //getContent时，是否删除空的inlineElement节点（包括嵌套的情况）
 
         //启用自动保存
         //,enableAutoSave: true
@@ -109,7 +109,7 @@
         //,emotionLocalization:false //是否开启表情本地化，默认关闭。若要开启请确保emotion文件夹下包含官网提供的images表情文件夹
 
         //粘贴只保留标签，去除标签所有属性
-        //,retainOnlyLabelPasted: false
+        , retainOnlyLabelPasted: true
 
         //,pasteplain:false  //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
         //纯文本粘贴模式下的过滤规则
@@ -197,7 +197,7 @@
 
         //paragraph
         //段落格式 值留空时支持多语言自动识别，若配置，则以配置值为准
-        //,'paragraph':{'p':'', 'h1':'', 'h2':'', 'h3':'', 'h4':'', 'h5':'', 'h6':''}
+        ,'paragraph':{'p':'', 'h1':'', 'h2':'', 'h3':'', 'h4':'', 'h5':'', 'h6':''}
 
         //rowspacingtop
         //段间距 值和显示的名字相同
@@ -277,17 +277,23 @@
 
         //autoHeightEnabled
         // 是否自动长高,默认true
-        ,autoHeightEnabled:false
+        , autoHeightEnabled
+    :
+    false
 
         //scaleEnabled
         //是否可以拉伸长高,默认true(当开启时，自动长高失效)
-        ,scaleEnabled:false
+        , scaleEnabled
+    :
+    false
         //,minFrameWidth:800    //编辑器拖动时最小宽度,默认800
         //,minFrameHeight:220  //编辑器拖动时最小高度,默认220
 
         //autoFloatEnabled
         //是否保持toolbar的位置不动,默认true
-        ,autoFloatEnabled:false
+        , autoFloatEnabled
+    :
+    false
         //浮动时工具栏距离浏览器顶部的高度，用于某些具有固定头部的页面
         //,topOffset:30
         //编辑器底部距离工具栏高度(如果参数大于等于编辑器高度，则设置无效)
@@ -325,7 +331,6 @@
         //,tableDragable: true
 
 
-
         //sourceEditor
         //源码的查看方式,codemirror 是代码高亮，textarea是文本框,默认是codemirror
         //注意默认codemirror只能在ie8+和非ie中使用
@@ -355,79 +360,212 @@
         //,allowDivTransToP:true      //允许进入编辑器的div标签自动变成p标签
         //,rgb2Hex:true               //默认产出的数据中的color自动从rgb格式变成16进制格式
 
-		// xss 过滤是否开启,inserthtml等操作
-		,xssFilterRules: true
-		//input xss过滤
-		,inputXssFilter: true
-		//output xss过滤
-		,outputXssFilter: true
-		// xss过滤白名单 名单来源: https://raw.githubusercontent.com/leizongmin/js-xss/master/lib/default.js
-		,whitList: {
-			a:      ['target', 'href', 'title', 'class', 'style'],
-			abbr:   ['title', 'class', 'style'],
-			address: ['class', 'style'],
-			area:   ['shape', 'coords', 'href', 'alt'],
-			article: [],
-			aside:  [],
-			audio:  ['autoplay', 'controls', 'loop', 'preload', 'src', 'class', 'style'],
-			b:      ['class', 'style'],
-			bdi:    ['dir'],
-			bdo:    ['dir'],
-			big:    [],
-			blockquote: ['cite', 'class', 'style'],
-			br:     [],
-			caption: ['class', 'style'],
-			center: [],
-			cite:   [],
-			code:   ['class', 'style'],
-			col:    ['align', 'valign', 'span', 'width', 'class', 'style'],
-			colgroup: ['align', 'valign', 'span', 'width', 'class', 'style'],
-			dd:     ['class', 'style'],
-			del:    ['datetime'],
-			details: ['open'],
-			div:    ['class', 'style'],
-			dl:     ['class', 'style'],
-			dt:     ['class', 'style'],
-			em:     ['class', 'style'],
-			font:   ['color', 'size', 'face'],
-			footer: [],
-			h1:     ['class', 'style'],
-			h2:     ['class', 'style'],
-			h3:     ['class', 'style'],
-			h4:     ['class', 'style'],
-			h5:     ['class', 'style'],
-			h6:     ['class', 'style'],
-			header: [],
-			hr:     [],
-			i:      ['class', 'style'],
-			img:    ['src', 'alt', 'title', 'width', 'height', 'id', '_src', 'loadingclass', 'class', 'data-latex'],
-			ins:    ['datetime'],
-			li:     ['class', 'style'],
-			mark:   [],
-			nav:    [],
-			ol:     ['class', 'style'],
-			p:      ['class', 'style'],
-			pre:    ['class', 'style'],
-			s:      [],
-			section:[],
-			small:  [],
-			span:   ['class', 'style'],
-			sub:    ['class', 'style'],
-			sup:    ['class', 'style'],
-			strong: ['class', 'style'],
-			table:  ['width', 'border', 'align', 'valign', 'class', 'style'],
-			tbody:  ['align', 'valign', 'class', 'style'],
-			td:     ['width', 'rowspan', 'colspan', 'align', 'valign', 'class', 'style'],
-			tfoot:  ['align', 'valign', 'class', 'style'],
-			th:     ['width', 'rowspan', 'colspan', 'align', 'valign', 'class', 'style'],
-			thead:  ['align', 'valign', 'class', 'style'],
-			tr:     ['rowspan', 'align', 'valign', 'class', 'style'],
-			tt:     [],
-			u:      [],
-			ul:     ['class', 'style'],
-			video:  ['autoplay', 'controls', 'loop', 'preload', 'src', 'height', 'width', 'class', 'style']
-		}
-    };
+        // xss 过滤是否开启,inserthtml等操作
+        , xssFilterRules
+    :
+    true
+        //input xss过滤
+        , inputXssFilter
+    :
+    true
+        //output xss过滤
+        , outputXssFilter
+    :
+    true
+        // xss过滤白名单 名单来源: https://raw.githubusercontent.com/leizongmin/js-xss/master/lib/default.js
+        , whitList
+    :
+    {
+        a:      ['target', 'href', 'title', 'class', 'style'],
+            abbr
+    :
+        ['title', 'class', 'style'],
+            address
+    :
+        ['class', 'style'],
+            area
+    :
+        ['shape', 'coords', 'href', 'alt'],
+            article
+    :
+        [],
+            aside
+    :
+        [],
+            audio
+    :
+        ['autoplay', 'controls', 'loop', 'preload', 'src', 'class', 'style'],
+            b
+    :
+        ['class', 'style'],
+            bdi
+    :
+        ['dir'],
+            bdo
+    :
+        ['dir'],
+            big
+    :
+        [],
+            blockquote
+    :
+        ['cite', 'class', 'style'],
+            br
+    :
+        [],
+            caption
+    :
+        ['class', 'style'],
+            center
+    :
+        [],
+            cite
+    :
+        [],
+            code
+    :
+        ['class', 'style'],
+            col
+    :
+        ['align', 'valign', 'span', 'width', 'class', 'style'],
+            colgroup
+    :
+        ['align', 'valign', 'span', 'width', 'class', 'style'],
+            dd
+    :
+        ['class', 'style'],
+            del
+    :
+        ['datetime'],
+            details
+    :
+        ['open'],
+            div
+    :
+        ['class', 'style'],
+            dl
+    :
+        ['class', 'style'],
+            dt
+    :
+        ['class', 'style'],
+            em
+    :
+        ['class', 'style'],
+            font
+    :
+        ['color', 'size', 'face'],
+            footer
+    :
+        [],
+            h1
+    :
+        ['class', 'style'],
+            h2
+    :
+        ['class', 'style'],
+            h3
+    :
+        ['class', 'style'],
+            h4
+    :
+        ['class', 'style'],
+            h5
+    :
+        ['class', 'style'],
+            h6
+    :
+        ['class', 'style'],
+            header
+    :
+        [],
+            hr
+    :
+        [],
+            i
+    :
+        ['class', 'style'],
+            img
+    :
+        ['src', 'alt', 'title', 'width', 'height', 'id', '_src', 'loadingclass', 'class', 'data-latex'],
+            ins
+    :
+        ['datetime'],
+            li
+    :
+        ['class', 'style'],
+            mark
+    :
+        [],
+            nav
+    :
+        [],
+            ol
+    :
+        ['class', 'style'],
+            p
+    :
+        ['class', 'style'],
+            pre
+    :
+        ['class', 'style'],
+            s
+    :
+        [],
+            section
+    :
+        [],
+            small
+    :
+        [],
+            span
+    :
+        ['class', 'style'],
+            sub
+    :
+        ['class', 'style'],
+            sup
+    :
+        ['class', 'style'],
+            strong
+    :
+        ['class', 'style'],
+            table
+    :
+        ['width', 'border', 'align', 'valign', 'class', 'style'],
+            tbody
+    :
+        ['align', 'valign', 'class', 'style'],
+            td
+    :
+        ['width', 'rowspan', 'colspan', 'align', 'valign', 'class', 'style'],
+            tfoot
+    :
+        ['align', 'valign', 'class', 'style'],
+            th
+    :
+        ['width', 'rowspan', 'colspan', 'align', 'valign', 'class', 'style'],
+            thead
+    :
+        ['align', 'valign', 'class', 'style'],
+            tr
+    :
+        ['rowspan', 'align', 'valign', 'class', 'style'],
+            tt
+    :
+        [],
+            u
+    :
+        [],
+            ul
+    :
+        ['class', 'style'],
+            video
+    :
+        ['autoplay', 'controls', 'loop', 'preload', 'src', 'height', 'width', 'class', 'style']
+    }
+}
+    ;
 
     function getUEBasePath(docUrl, confUrl) {
 
@@ -439,7 +577,7 @@
 
         var configPath = document.getElementsByTagName('script');
 
-        return configPath[ configPath.length - 1 ].src;
+        return configPath[configPath.length - 1].src;
 
     }
 
@@ -466,7 +604,7 @@
 
     function optimizationPath(path) {
 
-        var protocol = /^[a-z]+:\/\//.exec(path)[ 0 ],
+        var protocol = /^[a-z]+:\/\//.exec(path)[0],
             tmp = null,
             res = [];
 
@@ -474,7 +612,7 @@
 
         path = path.replace(/\\/g, '/').split(/\//);
 
-        path[ path.length - 1 ] = "";
+        path[path.length - 1] = "";
 
         while (path.length) {
 
