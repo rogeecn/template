@@ -23,7 +23,7 @@ AppAsset::register($this);
     <?= $content ?>
 </section>
 <?= \widgets\ColumnShow::widget([
-    'title' => '办公技能网 国内优质office、编程等办公技能内容发布网',
+    'title' => '办公技能网 http://officejineng.com 国内优质office、编程等办公技能内容发布网',
     'link'  => [
         'label' => '立即前往',
         'url'   => '/',
