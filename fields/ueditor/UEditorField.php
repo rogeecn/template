@@ -20,7 +20,7 @@ class UEditorField extends Field implements IField
             [
                 'type'   => 'checkbox',
                 'name'   => 'showDescription',
-                'value'  => false,
+                'value'  => FALSE,
                 'config' => [
                     'title'    => '使用概要输入',
                     'lay-skin' => 'primary',
@@ -29,7 +29,7 @@ class UEditorField extends Field implements IField
             [
                 'type'   => 'checkbox',
                 'name'   => 'showLabel',
-                'value'  => false,
+                'value'  => FALSE,
                 'config' => [
                     'title'    => '显示标签',
                     'lay-skin' => 'primary',
@@ -52,11 +52,15 @@ class UEditorField extends Field implements IField
                     ->one();
     }
 
-    protected function beforeSave($insert = false)
+    protected function beforeSave($insert = FALSE)
     {
         parent::beforeSave($insert);
 
         $content = $this->fieldData['content'];
+
+        $content = strtr($content, [
+            '&nbsp;' => "",
+        ]);
 
         $allowTags                  = 'p,b,a[href],pre,code,i,ul,li,ol,dl,dt,span,hr,h2,h3,h4,h5,h6,strong,div,br,img[src]';
         $this->fieldData['content'] = HtmlPurifier::process($content, [
@@ -67,7 +71,7 @@ class UEditorField extends Field implements IField
 
     protected function renderField()
     {
-        $this->label = json_decode($this->label, true);
+        $this->label = json_decode($this->label, TRUE);
 
         // 如果存在ID说明是可以查询数据的
         if (!empty($this->dataID)) {
@@ -102,7 +106,7 @@ class UEditorField extends Field implements IField
         $content = "";
         $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
 
-        if (isset($this->options['showLabel']) && $this->options['showLabel'] === false) {
+        if (isset($this->options['showLabel']) && $this->options['showLabel'] === FALSE) {
             $this->label = "&nbsp";
         }
         $content .= $labelHTML;
