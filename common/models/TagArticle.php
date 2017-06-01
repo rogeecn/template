@@ -98,7 +98,7 @@ class TagArticle extends \common\base\ActiveRecord
         foreach ($tags as $tag) {
             $tagList[] = [
                 'name' => $tag->tag->name,
-                'id'   => $tag->id,
+                'id'   => $tag->tag_id,
             ];
         }
 
