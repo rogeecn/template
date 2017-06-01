@@ -51,6 +51,7 @@ class Content extends Widget
     public function run()
     {
         return $this->render("view", [
+            'articleID'   => $this->articleID,
             'title'       => $this->title,
             'url'         => $this->url,
             'meta'        => $this->meta,

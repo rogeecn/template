@@ -7,6 +7,7 @@ class UserInfo
     {
         return \Yii::$app->getUser();
     }
+
     public static function isGuest()
     {
         return self::Instance()->getIsGuest();
@@ -20,5 +21,14 @@ class UserInfo
     public static function getID()
     {
         return self::Instance()->getId();
+    }
+
+    public static function isAdmin()
+    {
+        if (self::isGuest()) {
+            return false;
+        }
+
+        return self::Instance()->getIdentity()->isAdmin();
     }
 }

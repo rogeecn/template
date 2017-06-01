@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 
+$editLink = \common\extend\Html::a('编辑', ['/admin/article/update', 'id' => $articleID], ['target' => '_blank']);
 ?>
 <div class="article">
     <header><h1><?= $title ?></h1></header>
@@ -13,6 +14,12 @@ use yii\helpers\Html;
             分类：<?= Html::a($meta['category']['label'], $meta['category']['url']) ?>
         </span>
         <span><i class="fa fa-eye">&nbsp;</i>阅读(<?= $meta['viewCount'] ?>)</span>
+        <?php if (\common\extend\UserInfo::isAdmin()): ?>
+            <span>
+                <i class="fa fa-edit">&nbsp;</i>
+                <?= $editLink ?>
+            </span>
+        <?php endif; ?>
     </div>
 
     <article class="content-data"><?= $content ?></article>
