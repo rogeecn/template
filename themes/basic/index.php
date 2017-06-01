@@ -40,7 +40,7 @@
         $indexCategories = array_filter(explode(',', $this->setting("page.index_category")));
         foreach ($indexCategories as $indexCategory) {
             echo \widgets\CategoryBox::widget([
-                'categoryAlias' => $indexCategory,
+                'categoryAlias' => trim($indexCategory),
             ]);
             echo "\n";
         }
