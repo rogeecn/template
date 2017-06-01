@@ -122,4 +122,9 @@ class TagArticle extends \common\base\ActiveRecord
     {
         return self::find()->where(['tag_id' => $tagID])->count();
     }
+
+    public static function removeArticle($articleID)
+    {
+        return self::deleteAll(['article_id' => $articleID]);
+    }
 }
