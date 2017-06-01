@@ -7,12 +7,17 @@ use common\util\Request;
 
 class ControlController extends AuthController
 {
+    public function afterAction($action, $result)
+    {
+        Category::updatePath();
+
+        return parent::afterAction($action, $result);
+    }
+
     public function actionCreate($id)
     {
         $model = new Category();
         if (Request::isPost() && $model->load(Request::post()) && $model->save()) {
-            Category::updatePath();
-
             return $this->redirect("/admin/category/list");
         }
         $model->pid = $id;
@@ -26,8 +31,6 @@ class ControlController extends AuthController
     {
         $model = Category::findOne($id);
         if (Request::isPost() && $model->load(Request::post()) && $model->save()) {
-            Category::updatePath();
-
             return $this->redirect("/admin/category/list");
         }
 
@@ -41,7 +44,6 @@ class ControlController extends AuthController
         $deleteItemTree = Category::getSubTree($id, true);
         if (count($deleteItemTree)) {
             Category::deleteAll(['id' => array_keys($deleteItemTree)]);
-            Category::updatePath();
         }
 
         return $this->redirect("/admin/category/list");
