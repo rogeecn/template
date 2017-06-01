@@ -36,8 +36,15 @@
 
 <div class="clearfix">
     <div class="content">
-        <?= \widgets\CategoryBox::widget(['categoryAlias' => 'html-css']) ?>
-        <?= \widgets\CategoryBox::widget(['categoryAlias' => 'php']) ?>
+        <?php
+        $indexCategories = array_filter(explode(',', $this->setting("page.index_category")));
+        foreach ($indexCategories as $indexCategory) {
+            echo \widgets\CategoryBox::widget([
+                'categoryAlias' => $indexCategory,
+            ]);
+            echo "\n";
+        }
+        ?>
     </div>
 
     <?= $this->render("sider") ?>
