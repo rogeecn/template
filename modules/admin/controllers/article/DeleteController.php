@@ -49,7 +49,7 @@ class DeleteController extends AuthController
             }
 
 
-            return $this->renderSuccess(NULL, [
+            return $this->renderSuccess(null, [
                 Html::linkButton("返回列表", ['/admin/article/manage', 'page' => Request::input("page")]),
             ]);
         }

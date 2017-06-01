@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= \plugins\LayUI\components\Table::widget([
     'dataProvider' => [1],
     'showHeader'   => false,
-    "colGroup"=>["",175],
+    "colGroup"     => ["", 175],
     'columns'      => [
         [
             'value' => function () use ($searchModel) {
@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function () use ($searchModel) {
                 $submitBtn = Html::submitButton();
                 $resetBtn  = Html::resetButton();
+
                 return $submitBtn . $resetBtn;
             },
         ],
@@ -38,10 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'columns'      => [
-        ['class' => 'yii\grid\SerialColumn'],
         'name',
         'reference_count',
-        ['class' => \plugins\LayUI\components\ActionColumn::className()],
     ],
 ]); ?>
 <?php Pjax::end(); ?>

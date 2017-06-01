@@ -49,6 +49,31 @@ class Category extends \common\base\ActiveRecord
         ];
     }
 
+    public static function updatePath()
+    {
+        self::updateAllPath(self::getIndentList());
+    }
+
+    private static function updateAllPath($items = [], $path = [])
+    {
+        foreach ($items as $item) {
+            $tmpPath   = $path;
+            $tmpPath[] = $item['id'];
+            $pathRoute = implode("-", $tmpPath);
+
+            if ($item['pid'] == 0) {
+                self::updateAll(['path' => $pathRoute], ['id' => $item['id']]);
+            }
+
+            if (isset($item['children'])) {
+                self::updateAllPath($item['children'], $tmpPath);
+                continue;
+            }
+
+            self::updateAll(['path' => $pathRoute], ['id' => $item['id']]);
+        }
+    }
+
     private static function generateTree($items)
     {
         foreach ($items as $item)
@@ -91,7 +116,7 @@ class Category extends \common\base\ActiveRecord
         }
     }
 
-    public static function getFlatIndentList($showRoot = FALSE)
+    public static function getFlatIndentList($showRoot = false)
     {
         $list = self::getIndentList();
 
@@ -118,18 +143,19 @@ class Category extends \common\base\ActiveRecord
 
     public static function breadCrumb($catID)
     {
-        $list = self::getList();
+        $list    = self::getList();
+        $catInfo = self::getByID($catID);
+        $path    = explode("-", $catInfo['path']);
 
         $breadcrumbs = [];
-        while ($catID > 0) {
+        foreach ($path as $catID) {
             $breadcrumbs[] = $list[$catID];
-            $catID         = $list[$catID]['pid'];
         }
 
-        return array_reverse($breadcrumbs);
+        return $breadcrumbs;
     }
 
-    public static function getSubTree($id, $showFlat = FALSE)
+    public static function getSubTree($id, $showFlat = false)
     {
         $list = self::getIndentList();
 
@@ -153,7 +179,7 @@ class Category extends \common\base\ActiveRecord
 
             if (isset($item['children']) && is_array($item['children'])) {
                 $ret = self::getSubTreeItems($id, $item['children']);
-                if ($ret == FALSE) {
+                if ($ret == false) {
                     continue;
                 }
 
@@ -161,7 +187,7 @@ class Category extends \common\base\ActiveRecord
             }
         }
 
-        return FALSE;
+        return false;
     }
 
     public static function getByAlias($alias)
@@ -174,10 +200,24 @@ class Category extends \common\base\ActiveRecord
         return self::findOne($id);
     }
 
+    // 只会列出直属的分类
     public static function getCategoryChildren($id)
     {
         $categoryList = self::find()->where(['pid' => $id])->orderBy(['order' => SORT_ASC])->all();
 
         return $categoryList;
+    }
+
+    // 所有下属分类,包括孙子节点
+    public static function getAllCategoryChildren($id)
+    {
+        $catInfo      = self::getByID($id);
+        $condition    = "path like '" . $catInfo['path'] . "%'";
+        $categoryList = self::find()->where($condition)
+                            ->orderBy(['order' => SORT_ASC])
+                            ->all();
+
+        return $categoryList;
+
     }
 }
