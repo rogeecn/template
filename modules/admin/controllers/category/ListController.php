@@ -13,6 +13,7 @@ class ListController extends AuthController
         if (Request::isPost()) {
             $orderList = Request::post("order");
             foreach ($orderList as $id => $newOrder) {
+                Category::updatePath();
                 Category::updateAll(['order' => intval($newOrder)], ['id' => $id]);
             }
         }
