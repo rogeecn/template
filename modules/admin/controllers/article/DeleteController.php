@@ -50,7 +50,7 @@ class DeleteController extends AuthController
 
 
             return $this->renderSuccess(NULL, [
-                Html::linkButton("返回列表", ['/admin/article/manage']),
+                Html::linkButton("返回列表", 'javascript:history.goback(-1);'),
             ]);
         }
 
