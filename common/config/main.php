@@ -17,6 +17,14 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
 
+        'oss' => [
+            'class'           => 'common\util\AliOSS',
+            'accessKeyId'     => "LTAImYoo3TAwB8zv",
+            'accessKeySecret' => "MOajOX1iPOmyj3nGtvP9vctNyqX5Lh",
+            'bucketId'        => "office-jineng",
+            'isInternal'      => !YII_DEBUG,
+        ],
+
         'assetManager' => [
             'bundles' => [
                 'yii\web\JqueryAsset'             => [

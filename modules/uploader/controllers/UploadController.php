@@ -10,7 +10,8 @@ use yii\web\UploadedFile;
 
 class UploadController extends RestController
 {
-    public function actionIndex() {
+    public function actionIndex()
+    {
         if (!Request::isPost()) {
             throw new NotFoundHttpException;
         }
@@ -19,7 +20,9 @@ class UploadController extends RestController
         $saveFileName     = sprintf("%s-%s.%s", date("Y/m/d/His"), mt_rand(10000, 99999), $file->getExtension());
         $saveFullPathName = \Yii::getAlias(sprintf("@upload/%s", $saveFileName));
 
-        $savePath         = dirname($saveFullPathName);
+
+
+        $savePath = dirname($saveFullPathName);
         if (!is_dir($savePath)) {
             FileHelper::createDirectory($savePath);
         }
