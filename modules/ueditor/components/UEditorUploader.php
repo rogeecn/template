@@ -378,6 +378,7 @@ class UEditorUploader
         $ossEnable = $this->setting("oss.enable");
         if ($ossEnable) {
             AliOSS::instance()->uploadContent($this->fullName, $file["tmp_name"]);
+            $this->stateInfo = $this->getStateInfo("ERROR_TYPE_NOT_ALLOWED");
 
             return;
         }
