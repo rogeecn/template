@@ -1,12 +1,31 @@
 <?php
 namespace common\util;
 
+use common\traits\Setting;
 use DateTime;
 use JohnLui\AliyunOSS;
-use yii\base\Component;
 
-class AliOSS extends Component
+class AliOSS
 {
+    use Setting;
+    private $cityList = [
+        "杭州",
+        "上海",
+        "青岛",
+        "北京",
+        "张家口",
+        "深圳",
+        "香港",
+        "硅谷",
+        "弗吉尼亚",
+        "新加坡",
+        "悉尼",
+        "日本",
+        "法兰克福",
+        "迪拜",
+    ];
+
+    private $networkTypeList = ["经典网络", 'VPC'];
 
 
     /* 城市名称：
@@ -14,31 +33,38 @@ class AliOSS extends Component
      *  经典网络下可选：杭州、上海、青岛、北京、张家口、深圳、香港、硅谷、弗吉尼亚、新加坡、悉尼、日本、法兰克福、迪拜
      *  VPC 网络下可选：杭州、上海、青岛、北京、张家口、深圳、硅谷、弗吉尼亚、新加坡、悉尼、日本、法兰克福、迪拜
      */
-    public $city            = '杭州';
-    public $networkType     = '经典网络'; # 经典网络 or VPC
-    public $accessKeyId     = '';
-    public $accessKeySecret = '';
-    public $bucketId        = '';
-    public $isInternal      = FALSE;
 
+//    private $isInternal;
+//    private $accessKeyId;
+//    private $accessKeySecret;
+//    private $city;
+//    private $networkType;
+    private $bucketId;
 
     /** @var \JohnLui\AliyunOSS */
     private $ossClient;
 
-    public function __construct($config = [])
-    {
-        parent::__construct($config);
+    private static $_instance;
 
-        if ($this->networkType == 'VPC' && !$this->isInternal) {
+    public function __construct()
+    {
+        $isInternal      = $this->setting("oss.is_internal");
+        $accessKeyId     = $this->setting("oss.access_key_id");
+        $accessKeySecret = $this->setting("oss.access_key_secret");
+        $city            = $this->cityList[$this->setting("oss.region")];
+        $networkType     = $this->networkTypeList[$this->setting("oss.network_type")];
+        $this->bucketId  = $this->setting("oss.bucket_id");
+
+        if ($networkType == 'VPC' && !$isInternal) {
             throw new \Exception("VPC 网络下不提供外网上传、下载等功能");
         }
 
         $this->ossClient = AliyunOSS::boot(
-            $this->city,
-            $this->networkType,
-            $this->isInternal,
-            $this->accessKeyId,
-            $this->accessKeySecret
+            $city,
+            $networkType,
+            $isInternal,
+            $accessKeyId,
+            $accessKeySecret
         );
         $this->ossClient->setBucket($this->bucketId);
     }
@@ -46,9 +72,13 @@ class AliOSS extends Component
     /**
      * @return null|object|AliOSS
      */
-    public static function instance()
+    public function instance()
     {
-        return \Yii::$app->get("oss");
+        if (is_null(self::$_instance)) {
+            self::$_instance = new self();
+        }
+
+        return self::$_instance;
     }
 
 
@@ -68,14 +98,14 @@ class AliOSS extends Component
         $this->ossClient->deleteObject($this->bucketId, $ossKey);
     }
 
-    public function copyObject($sourceBuckt, $sourceKey, $destBucket, $destKey)
+    public function copyObject($sourceBucket, $sourceKey, $destBucket, $destKey)
     {
-        return $this->ossClient->copyObject($sourceBuckt, $sourceKey, $destBucket, $destKey);
+        return $this->ossClient->copyObject($sourceBucket, $sourceKey, $destBucket, $destKey);
     }
 
-    public function moveObject($sourceBuckt, $sourceKey, $destBucket, $destKey)
+    public function moveObject($sourceBucket, $sourceKey, $destBucket, $destKey)
     {
-        return $this->ossClient->moveObject($sourceBuckt, $sourceKey, $destBucket, $destKey);
+        return $this->ossClient->moveObject($sourceBucket, $sourceKey, $destBucket, $destKey);
     }
 
     // 获取公开文件的 URL
