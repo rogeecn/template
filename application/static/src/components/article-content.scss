@@ -42,6 +42,11 @@
         word-wrap: break-word;
       }
 
+      code, pre {
+        background: url("../images/bluepring.png");
+        padding: 10px;
+      }
+
       ul, ol, dl {
         list-style-position: inside;
       }
