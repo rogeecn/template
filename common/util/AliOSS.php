@@ -72,7 +72,7 @@ class AliOSS
     /**
      * @return null|object|AliOSS
      */
-    public function instance()
+    public static function instance()
     {
         if (is_null(self::$_instance)) {
             self::$_instance = new self();

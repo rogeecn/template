@@ -8,21 +8,24 @@ class Loader extends Component
 {
     private static $_CONFIG = [];
 
-    public static function run($type) {
+    public static function run($type)
+    {
         if (empty(self::$_CONFIG)) {
             $config_data   = file_get_contents(__DIR__ . "/config.json");
-            self::$_CONFIG = json_decode(preg_replace('/\/\*[\s\S]+?\*\//', "", $config_data), true);
+            self::$_CONFIG = json_decode(preg_replace('/\/\*[\s\S]+?\*\//', "", $config_data), TRUE);
         }
 
         return call_user_func_array([Loader::className(), $type], []);
 
     }
 
-    private static function config() {
+    private static function config()
+    {
         return self::$_CONFIG;
     }
 
-    private static function uploadImage() {
+    private static function uploadImage()
+    {
         $config    = array(
             "pathFormat" => self::$_CONFIG['imagePathFormat'],
             "maxSize"    => self::$_CONFIG['imageMaxSize'],
@@ -31,23 +34,27 @@ class Loader extends Component
         $fieldName = self::$_CONFIG['imageFieldName'];
 
         $up = new UEditorUploader($fieldName, $config, 'upload');
+
         return $up->getFileInfo();
     }
 
-    private static function uploadScrawl() {
+    private static function uploadScrawl()
+    {
         $config    = array(
             "pathFormat" => self::$_CONFIG['scrawlPathFormat'],
             "maxSize"    => self::$_CONFIG['scrawlMaxSize'],
-            "allowFiles" => self::$_CONFIG['scrawlAllowFiles'],
+//            "allowFiles" => self::$_CONFIG['scrawlAllowFiles'],
             "oriName"    => "scrawl.png",
         );
         $fieldName = self::$_CONFIG['scrawlFieldName'];
 
         $up = new UEditorUploader($fieldName, $config, 'base64');
+
         return $up->getFileInfo();
     }
 
-    private static function uploadVideo() {
+    private static function uploadVideo()
+    {
         $config    = array(
             "pathFormat" => self::$_CONFIG['videoPathFormat'],
             "maxSize"    => self::$_CONFIG['videoMaxSize'],
@@ -56,10 +63,12 @@ class Loader extends Component
         $fieldName = self::$_CONFIG['videoFieldName'];
 
         $up = new UEditorUploader($fieldName, $config, 'upload');
+
         return $up->getFileInfo();
     }
 
-    private static function uploadFile() {
+    private static function uploadFile()
+    {
         $config    = array(
             "pathFormat" => self::$_CONFIG['filePathFormat'],
             "maxSize"    => self::$_CONFIG['fileMaxSize'],
@@ -67,10 +76,12 @@ class Loader extends Component
         );
         $fieldName = self::$_CONFIG['fileFieldName'];
         $up        = new UEditorUploader($fieldName, $config, 'upload');
+
         return $up->getFileInfo();
     }
 
-    private static function listFile() {
+    private static function listFile()
+    {
         $allowFiles = self::$_CONFIG['fileManagerAllowFiles'];
         $listSize   = self::$_CONFIG['fileManagerListSize'];
         $path       = self::$_CONFIG['fileManagerListPath'];
@@ -78,7 +89,8 @@ class Loader extends Component
         return self::listFiles($allowFiles, $listSize, $path);
     }
 
-    public static function listFiles($allowFiles, $listSize, $path) {
+    public static function listFiles($allowFiles, $listSize, $path)
+    {
         $allowFiles = substr(str_replace(".", "|", join("", $allowFiles)), 1);
 
         /* 获取参数 */
@@ -112,15 +124,16 @@ class Loader extends Component
         ];
     }
 
-    private static function getFiles($path, $allowFiles, &$files = array()) {
+    private static function getFiles($path, $allowFiles, &$files = array())
+    {
         if (!is_dir($path)) {
-            return null;
+            return NULL;
         }
         if (substr($path, strlen($path) - 1) != '/') {
             $path .= '/';
         }
         $handle = opendir($path);
-        while (false !== ($file = readdir($handle))) {
+        while (FALSE !== ($file = readdir($handle))) {
             if ($file != '.' && $file != '..') {
                 $path2 = $path . $file;
                 if (is_dir($path2)) {
@@ -135,10 +148,12 @@ class Loader extends Component
                 }
             }
         }
+
         return $files;
     }
 
-    private static function listImage() {
+    private static function listImage()
+    {
         $allowFiles = self::$_CONFIG['imageManagerAllowFiles'];
         $listSize   = self::$_CONFIG['imageManagerListSize'];
         $path       = self::$_CONFIG['imageManagerListPath'];
@@ -146,7 +161,8 @@ class Loader extends Component
         return self::listFiles($allowFiles, $listSize, $path);
     }
 
-    private function cacheImage() {
+    private function cacheImage()
+    {
         $config    = array(
             "pathFormat" => self::$_CONFIG['catcherPathFormat'],
             "maxSize"    => self::$_CONFIG['catcherMaxSize'],
@@ -176,6 +192,7 @@ class Loader extends Component
         }
 
         /* 返回抓取数据 */
+
         return array(
             'state' => count($list) ? 'SUCCESS' : 'ERROR',
             'list'  => $list,
