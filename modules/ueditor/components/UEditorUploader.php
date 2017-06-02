@@ -149,6 +149,15 @@ class UEditorUploader
             return;
         }
 
+        // use oss storage
+        $ossEnable = $this->setting("oss.enable");
+        if ($ossEnable) {
+            AliOSS::instance()->uploadContent($this->fullName, $img);
+            $this->stateInfo = $this->stateMap[0];
+
+            return;
+        }
+
         //创建目录失败
         if (!file_exists($dirname) && !mkdir($dirname, 0777, TRUE)) {
             $this->stateInfo = $this->getStateInfo("ERROR_CREATE_DIR");
@@ -377,8 +386,8 @@ class UEditorUploader
         // use oss storage
         $ossEnable = $this->setting("oss.enable");
         if ($ossEnable) {
-            AliOSS::instance()->uploadContent($this->fullName, $file["tmp_name"]);
-            $this->stateInfo = $this->getStateInfo("ERROR_TYPE_NOT_ALLOWED");
+            AliOSS::instance()->uploadFile($this->fullName, $file["tmp_name"]);
+            $this->stateInfo = $this->stateMap[0];
 
             return;
         }
