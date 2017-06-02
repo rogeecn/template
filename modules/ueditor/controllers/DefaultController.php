@@ -2,13 +2,14 @@
 
 namespace modules\ueditor\controllers;
 
-use common\util\Request;
 use application\base\RestController;
+use common\util\Request;
 use modules\ueditor\components\Loader;
 
 class DefaultController extends RestController
 {
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $action = Request::input("action");
         switch ($action) {
             case 'config':
@@ -42,6 +43,7 @@ class DefaultController extends RestController
 
             /* 抓取远程文件 */
             case 'catchimage':
+                set_time_limit(0);
                 $result = Loader::run("cacheImage");
                 break;
 
@@ -59,10 +61,12 @@ class DefaultController extends RestController
                 echo $data;
                 exit;
             }
+
             return [
                 'state' => 'callback参数不合法',
             ];
         }
+
         return $result;
     }
 }

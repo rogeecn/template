@@ -1,7 +1,7 @@
 <?php
 namespace modules\admin\controllers\tag;
 
-use base\RestAuthController;
+use application\base\RestAuthController;
 use common\models\Tag;
 use common\util\Request;
 
