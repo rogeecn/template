@@ -47,7 +47,7 @@ class ColumnController extends AuthController
         $model->group_id = $id;
 
         if (Request::isPost() && $model->load(Request::post()) && $model->createColumn()) {
-            $this->redirect(['index', 'group' => $id]);
+            $this->redirect(['index', 'group' => $model->group_id]);
         }
 
         return $this->render('create', [
@@ -62,7 +62,7 @@ class ColumnController extends AuthController
             throw new NotFoundHttpException();
         }
         if (Request::isPost() && $model->load(Request::post()) && $model->save()) {
-            $this->redirect(['index', 'group' => $id]);
+            $this->redirect(['index', 'group' => $model->group_id]);
         }
 
         return $this->render('update', [

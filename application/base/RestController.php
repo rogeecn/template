@@ -3,13 +3,17 @@ namespace application\base;
 
 
 use common\extend\ContentNegotiator;
+use common\traits\Setting;
 use yii\rest\Controller;
 use yii\web\ErrorAction;
 use yii\web\Response;
 
 class RestController extends Controller
 {
-    public function actions() {
+    use Setting;
+
+    public function actions()
+    {
         return [
             'error' => [
                 'class' => ErrorAction::className(),
@@ -17,7 +21,8 @@ class RestController extends Controller
         ];
     }
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'contentNegotiator' => [
                 'class'   => ContentNegotiator::className(),
@@ -28,7 +33,8 @@ class RestController extends Controller
         ];
     }
 
-    public function beforeAction($action) {
+    public function beforeAction($action)
+    {
         return parent::beforeAction($action);
     }
 }

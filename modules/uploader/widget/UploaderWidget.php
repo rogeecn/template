@@ -31,7 +31,7 @@ class UploaderWidget extends InputWidget
 
     public function init()
     {
-        $this->defaultOptions['sourceURL'] = sprintf("//%s/uploads/", $this->getView()->setting("site.url"));
+        $this->defaultOptions['sourceURL'] = $this->getView()->setting("site.static_path");
         $this->options                     = array_merge($this->defaultOptions, $this->options);
         LayUIAssets::register($this->getView());
         $this->getView()->registerJs($this->getJs());
