@@ -23,7 +23,7 @@ $this->setAdminMode();
 <body>
 <?php $this->beginBody() ?>
 <div class="layui-layout layui-layout-admin">
-    <div class="layui-header" style="text-align: right;">
+    <div id="header" class="layui-header" style="text-align: right;">
         <a href="/admin" id="logo">やめて</a>
         <?= \common\extend\Html::ul([
             \common\extend\Html::a("访问首页", $this->setting("site.url"), ['target' => "_blank"]),
@@ -37,12 +37,12 @@ $this->setAdminMode();
             ],
         ]) ?>
     </div>
-    <div class="layui-side layui-bg-black">
+    <div class="layui-side layui-bg-black" id="side">
         <div class="layui-side-scroll">
             <?= $this->render("_sidenav"); ?>
         </div>
     </div>
-    <div class="layui-body" style="bottom: 0px;">
+    <div class="layui-body" style="bottom: 0px;" id="main">
         <div class="layui-tab layui-tab-brief main-tab-container" lay-filter="tab-container" lay-allowclose="true"
              style="margin: 0">
             <ul class="layui-tab-title site-demo-title"></ul>
