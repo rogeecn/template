@@ -42,6 +42,11 @@
         word-wrap: break-word;
       }
 
+      code, pre {
+        background: url("../images/blueprint.png") #F6F6F6;
+        padding: 10px;
+      }
+
       ul, ol, dl {
         list-style-position: inside;
       }

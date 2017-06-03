@@ -2,38 +2,15 @@
 namespace common\extend;
 
 
-use common\models\Setting;
-use yii\helpers\FileHelper;
 use yii\helpers\Url;
 
 class View extends \yii\web\View
 {
-    private static $_SETTING;
-    private        $keywords;
-    private        $description;
+    use \common\traits\Setting;
 
-    // site.name 点连接格式
-    public function setting($configPath)
-    {
-        $settingCacheFile = \Yii::getAlias("@runtime/data/setting.php");
-        if (empty(self::$_SETTING)) {
-            if (!is_file($settingCacheFile)) {
-                if (!is_dir(dirname($settingCacheFile))) {
-                    FileHelper::createDirectory(dirname($settingCacheFile));
-                }
-                self::$_SETTING = Setting::flatSettings();
-                file_put_contents($settingCacheFile, json_encode(self::$_SETTING));
-            } else {
-                self::$_SETTING = json_decode(file_get_contents($settingCacheFile), true);
-            }
-        }
+    private $keywords;
+    private $description;
 
-        if (!isset(self::$_SETTING[$configPath])) {
-            return false;
-        }
-
-        return self::$_SETTING[$configPath];
-    }
 
     public function setTitle($title)
     {

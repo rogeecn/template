@@ -13,10 +13,9 @@ return [
     ],
     'vendorPath'    => dirname(dirname(__DIR__)) . '/vendor',
     'components'    => [
-        'cache' => [
+        'cache'        => [
             'class' => 'yii\caching\FileCache',
         ],
-
         'assetManager' => [
             'bundles' => [
                 'yii\web\JqueryAsset'             => [

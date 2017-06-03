@@ -1,8 +1,13 @@
 <?php
 namespace modules\ueditor\components;
 
+use common\traits\Setting;
+use common\util\AliOSS;
+
 class UEditorUploader
 {
+    use Setting;
+
     private $fileField; //文件域名
     private $file; //文件上传对象
     private $base64; //文件上传对象
@@ -15,36 +20,38 @@ class UEditorUploader
     private $fileType; //文件类型
     private $stateInfo; //上传状态信息,
     private $stateMap = array( //上传状态映射表，国际化用户需考虑此处数据的国际化
-                               "SUCCESS", //上传成功标记，在UEditor中内不可改变，否则flash判断会出错
-                               "文件大小超出 upload_max_filesize 限制",
-                               "文件大小超出 MAX_FILE_SIZE 限制",
-                               "文件未被完整上传",
-                               "没有文件被上传",
-                               "上传文件为空",
-                               "ERROR_TMP_FILE"           => "临时文件错误",
-                               "ERROR_TMP_FILE_NOT_FOUND" => "找不到临时文件",
-                               "ERROR_SIZE_EXCEED"        => "文件大小超出网站限制",
-                               "ERROR_TYPE_NOT_ALLOWED"   => "文件类型不允许",
-                               "ERROR_CREATE_DIR"         => "目录创建失败",
-                               "ERROR_DIR_NOT_WRITEABLE"  => "目录没有写权限",
-                               "ERROR_FILE_MOVE"          => "文件保存时出错",
-                               "ERROR_FILE_NOT_FOUND"     => "找不到上传文件",
-                               "ERROR_WRITE_CONTENT"      => "写入文件内容错误",
-                               "ERROR_UNKNOWN"            => "未知错误",
-                               "ERROR_DEAD_LINK"          => "链接不可用",
-                               "ERROR_HTTP_LINK"          => "链接不是http链接",
-                               "ERROR_HTTP_CONTENTTYPE"   => "链接contentType不正确",
-                               "INVALID_URL"              => "非法 URL",
-                               "INVALID_IP"               => "非法 IP",
+        "SUCCESS", //上传成功标记，在UEditor中内不可改变，否则flash判断会出错
+        "文件大小超出 upload_max_filesize 限制",
+        "文件大小超出 MAX_FILE_SIZE 限制",
+        "文件未被完整上传",
+        "没有文件被上传",
+        "上传文件为空",
+        "ERROR_TMP_FILE"           => "临时文件错误",
+        "ERROR_TMP_FILE_NOT_FOUND" => "找不到临时文件",
+        "ERROR_SIZE_EXCEED"        => "文件大小超出网站限制",
+        "ERROR_TYPE_NOT_ALLOWED"   => "文件类型不允许",
+        "ERROR_CREATE_DIR"         => "目录创建失败",
+        "ERROR_DIR_NOT_WRITEABLE"  => "目录没有写权限",
+        "ERROR_FILE_MOVE"          => "文件保存时出错",
+        "ERROR_FILE_NOT_FOUND"     => "找不到上传文件",
+        "ERROR_WRITE_CONTENT"      => "写入文件内容错误",
+        "ERROR_UNKNOWN"            => "未知错误",
+        "ERROR_DEAD_LINK"          => "链接不可用",
+        "ERROR_HTTP_LINK"          => "链接不是http链接",
+        "ERROR_HTTP_CONTENTTYPE"   => "链接contentType不正确",
+        "INVALID_URL"              => "非法 URL",
+        "INVALID_IP"               => "非法 IP",
     );
 
     /**
      * 构造函数
+     *
      * @param string $fileField 表单名称
-     * @param array  $config 配置项
-     * @param bool   $base64 是否解析base64编码，可省略。若开启，则$fileField代表的是base64编码的字符串表单名
+     * @param array  $config    配置项
+     * @param bool   $base64    是否解析base64编码，可省略。若开启，则$fileField代表的是base64编码的字符串表单名
      */
-    public function __construct($fileField, $config, $type = "upload") {
+    public function __construct($fileField, $config, $type = "upload")
+    {
         $this->fileField = $fileField;
         $this->config    = $config;
         $this->type      = $type;
@@ -58,20 +65,23 @@ class UEditorUploader
             }
         }
 
-        $this->stateMap['ERROR_TYPE_NOT_ALLOWED'] = iconv('unicode', 'utf-8', $this->stateMap['ERROR_TYPE_NOT_ALLOWED']);
+        //$this->stateMap['ERROR_TYPE_NOT_ALLOWED'] = iconv('unicode', 'utf-8', $this->stateMap['ERROR_TYPE_NOT_ALLOWED']);
     }
 
     /**
      * 拉取远程图片
+     *
      * @return mixed
      */
-    private function saveRemote() {
+    private function saveRemote()
+    {
         $imgUrl = htmlspecialchars($this->fileField);
         $imgUrl = str_replace("&amp;", "&", $imgUrl);
 
         //http开头验证
         if (strpos($imgUrl, "http") !== 0) {
             $this->stateInfo = $this->getStateInfo("ERROR_HTTP_LINK");
+
             return;
         }
 
@@ -81,6 +91,7 @@ class UEditorUploader
         // 判断是否是合法 url
         if (!filter_var($host_with_protocol, FILTER_VALIDATE_URL)) {
             $this->stateInfo = $this->getStateInfo("INVALID_URL");
+
             return;
         }
 
@@ -92,6 +103,7 @@ class UEditorUploader
         // 判断是否是私有 ip
         if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
             $this->stateInfo = $this->getStateInfo("INVALID_IP");
+
             return;
         }
 
@@ -99,12 +111,14 @@ class UEditorUploader
         $heads = get_headers($imgUrl, 1);
         if (!(stristr($heads[0], "200") && stristr($heads[0], "OK"))) {
             $this->stateInfo = $this->getStateInfo("ERROR_DEAD_LINK");
+
             return;
         }
         //格式验证(扩展名验证和Content-Type验证)
         $fileType = strtolower(strrchr($imgUrl, '.'));
         if (!in_array($fileType, $this->config['allowFiles']) || !isset($heads['Content-Type']) || !stristr($heads['Content-Type'], "image")) {
             $this->stateInfo = $this->getStateInfo("ERROR_HTTP_CONTENTTYPE");
+
             return;
         }
 
@@ -112,10 +126,10 @@ class UEditorUploader
         ob_start();
         $context = stream_context_create(
             array('http' => array(
-                'follow_location' => false // don't follow redirects
+                'follow_location' => FALSE // don't follow redirects
             ))
         );
-        readfile($imgUrl, false, $context);
+        readfile($imgUrl, FALSE, $context);
         $img = ob_get_contents();
         ob_end_clean();
         preg_match('/[\/]([^\/]*)[\.]?[^\.\/]*$/', $imgUrl, $m);
@@ -131,16 +145,28 @@ class UEditorUploader
         //检查文件大小是否超出限制
         if (!$this->checkSize()) {
             $this->stateInfo = $this->getStateInfo("ERROR_SIZE_EXCEED");
+
+            return;
+        }
+
+        // use oss storage
+        $ossEnable = $this->setting("oss.enable");
+        if ($ossEnable) {
+            AliOSS::instance()->uploadContent($this->fullName, $img);
+            $this->stateInfo = $this->stateMap[0];
+
             return;
         }
 
         //创建目录失败
-        if (!file_exists($dirname) && !mkdir($dirname, 0777, true)) {
+        if (!file_exists($dirname) && !mkdir($dirname, 0777, TRUE)) {
             $this->stateInfo = $this->getStateInfo("ERROR_CREATE_DIR");
+
             return;
         } else {
             if (!is_writeable($dirname)) {
                 $this->stateInfo = $this->getStateInfo("ERROR_DIR_NOT_WRITEABLE");
+
                 return;
             }
         }
@@ -156,26 +182,33 @@ class UEditorUploader
 
     /**
      * 上传错误检查
+     *
      * @param $errCode
+     *
      * @return string
      */
-    private function getStateInfo($errCode) {
+    private function getStateInfo($errCode)
+    {
         return !$this->stateMap[$errCode] ? $this->stateMap["ERROR_UNKNOWN"] : $this->stateMap[$errCode];
     }
 
     /**
      * 获取文件扩展名
+     *
      * @return string
      */
-    private function getFileExt() {
+    private function getFileExt()
+    {
         return strtolower(strrchr($this->oriName, '.'));
     }
 
     /**
      * 重命名文件
+     *
      * @return string
      */
-    private function getFullName() {
+    private function getFullName()
+    {
 
         //替换日期事件
         $t      = time();
@@ -197,14 +230,17 @@ class UEditorUploader
         $format  = str_replace("{filename}", $oriName, $format);
 
         $ext = $this->getFileExt();
+
         return $format . $ext;
     }
 
     /**
      * 获取文件完整路径
+     *
      * @return string
      */
-    private function getFilePath() {
+    private function getFilePath()
+    {
         $fullname = $this->fullName;
         $rootPath = $_SERVER['DOCUMENT_ROOT'];
 
@@ -218,27 +254,34 @@ class UEditorUploader
 
     /**
      * 获取文件名
+     *
      * @return string
      */
-    private function getFileName() {
+    private function getFileName()
+    {
         return substr($this->filePath, strrpos($this->filePath, '/') + 1);
     }
 
     /**
      * 文件大小检测
+     *
      * @return bool
      */
-    private function checkSize() {
+    private function checkSize()
+    {
         return $this->fileSize <= ($this->config["maxSize"]);
     }
 
     /**
      * 处理base64编码的图片上传
+     *
      * @return mixed
      */
-    private function upBase64() {
+    private function upBase64()
+    {
         $base64Data = $_POST[$this->fileField];
         $img        = base64_decode($base64Data);
+
 
         $this->oriName  = $this->config['oriName'];
         $this->fileSize = strlen($img);
@@ -251,16 +294,29 @@ class UEditorUploader
         //检查文件大小是否超出限制
         if (!$this->checkSize()) {
             $this->stateInfo = $this->getStateInfo("ERROR_SIZE_EXCEED");
+
             return;
         }
 
+        // use oss storage
+        $ossEnable = $this->setting("oss.enable");
+        if ($ossEnable) {
+            AliOSS::instance()->uploadContent($this->fullName, $img);
+            $this->stateInfo = $this->stateMap[0];
+
+            return;
+        }
+
+
         //创建目录失败
-        if (!file_exists($dirname) && !mkdir($dirname, 0777, true)) {
+        if (!file_exists($dirname) && !mkdir($dirname, 0777, TRUE)) {
             $this->stateInfo = $this->getStateInfo("ERROR_CREATE_DIR");
+
             return;
         } else {
             if (!is_writeable($dirname)) {
                 $this->stateInfo = $this->getStateInfo("ERROR_DIR_NOT_WRITEABLE");
+
                 return;
             }
         }
@@ -276,24 +332,30 @@ class UEditorUploader
 
     /**
      * 上传文件的主处理方法
+     *
      * @return mixed
      */
-    private function upFile() {
+    private function upFile()
+    {
         $file = $this->file = $_FILES[$this->fileField];
         if (!$file) {
             $this->stateInfo = $this->getStateInfo("ERROR_FILE_NOT_FOUND");
+
             return;
         }
         if ($this->file['error']) {
             $this->stateInfo = $this->getStateInfo($file['error']);
+
             return;
         } else {
             if (!file_exists($file['tmp_name'])) {
                 $this->stateInfo = $this->getStateInfo("ERROR_TMP_FILE_NOT_FOUND");
+
                 return;
             } else {
                 if (!is_uploaded_file($file['tmp_name'])) {
                     $this->stateInfo = $this->getStateInfo("ERROR_TMPFILE");
+
                     return;
                 }
             }
@@ -310,22 +372,35 @@ class UEditorUploader
         //检查文件大小是否超出限制
         if (!$this->checkSize()) {
             $this->stateInfo = $this->getStateInfo("ERROR_SIZE_EXCEED");
+
             return;
         }
 
         //检查是否不允许的文件格式
         if (!$this->checkType()) {
             $this->stateInfo = $this->getStateInfo("ERROR_TYPE_NOT_ALLOWED");
+
+            return;
+        }
+
+        // use oss storage
+        $ossEnable = $this->setting("oss.enable");
+        if ($ossEnable) {
+            AliOSS::instance()->uploadFile($this->fullName, $file["tmp_name"]);
+            $this->stateInfo = $this->stateMap[0];
+
             return;
         }
 
         //创建目录失败
-        if (!file_exists($dirname) && !mkdir($dirname, 0777, true)) {
+        if (!file_exists($dirname) && !mkdir($dirname, 0777, TRUE)) {
             $this->stateInfo = $this->getStateInfo("ERROR_CREATE_DIR");
+
             return;
         } else {
             if (!is_writeable($dirname)) {
                 $this->stateInfo = $this->getStateInfo("ERROR_DIR_NOT_WRITEABLE");
+
                 return;
             }
         }
@@ -340,18 +415,22 @@ class UEditorUploader
 
     /**
      * 文件类型检测
+     *
      * @return bool
      */
-    private function checkType() {
+    private function checkType()
+    {
         return in_array($this->getFileExt(), $this->config["allowFiles"]);
     }
 
     /**
      * 获取当前上传成功文件的各项信息
+     *
      * @return array
      */
-    public function getFileInfo() {
-        return array(
+    public function getFileInfo()
+    {
+        $data      = array(
             "state"    => $this->stateInfo,
             "url"      => $this->fullName,
             "title"    => $this->fileName,
@@ -359,6 +438,13 @@ class UEditorUploader
             "type"     => $this->fileType,
             "size"     => $this->fileSize,
         );
+        $ossEnable = $this->setting("oss.enable");
+        if ($ossEnable) {
+            $static_path = $this->setting("site.static_path");
+            $data['url'] = sprintf("%s/%s", rtrim($static_path), ltrim($data['url']));
+        }
+
+        return $data;
     }
 
 }
