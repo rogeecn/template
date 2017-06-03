@@ -72,6 +72,7 @@ class View extends \yii\web\View
 
         parent::head();
 
+        echo "\n";
         echo $this->setting("site.code_top");
     }
 
@@ -81,6 +82,8 @@ class View extends \yii\web\View
         if ($this->adminMode) {
             return;
         }
+
+        echo "\n";
         echo $this->setting("site.code_bottom");
     }
 
