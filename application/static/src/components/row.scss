@@ -1,62 +1,17 @@
 .row {
   @include clearfix;
 
-  margin-left: -$padding-size;
-  margin-right: -$padding-size;
+  .col {
+    width: 400px;
+  }
 
-  .box {
-    margin: 0px $padding-size;
-    margin-bottom: 2*$margin-size;
-    width: $width-container/3 - $padding-size;
+  .col-left {
+    margin-right: 10px;
     float: left;
-
-    & > .widget {
-      margin-bottom: 0px;
-    }
-
-    .title {
-      font-size: 16px;
-      background: #fbfbfb;
-      border-bottom: 1px solid $color-border;
-      padding: $padding-size 2*$padding-size;
-    }
-
-    ul {
-      list-style: disc;
-      color: #bbb;
-      @include clearfix;
-      padding: $padding-size 2*$padding-size;
-      min-height: 388px - 2*$padding-size;
-
-      li {
-        $height: 26px;
-        $time-width: 70px;
-        line-height: $height;
-        padding-left: 10px;
-        overflow: hidden;
-        background: url(http://i0.sinaimg.cn/home/main/index2013/0403/icon.png) no-repeat 0 -880px;
-
-        a {
-          display: block;
-          margin-right: $time-width + $margin-size;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        time {
-          color: $color-fade;
-          display: block;
-          width: $time-width;
-          font-size: 12px;
-          float: right;
-        }
-      }
-    }
   }
 
-  .box:nth-child(2) {
-    margin: 0 $padding-size/2;
+  .col-right {
+    margin-left: 10px;
+    float: right;
   }
-
 }
