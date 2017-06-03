@@ -10,7 +10,12 @@ class View extends \yii\web\View
 
     private $keywords;
     private $description;
+    private $adminMode = false;
 
+    public function setAdminMode()
+    {
+        $this->adminMode = true;
+    }
 
     public function setTitle($title)
     {
@@ -34,6 +39,12 @@ class View extends \yii\web\View
 
     public function head()
     {
+        if ($this->adminMode) {
+            parent::head();
+
+            return;
+        }
+
         $title = $this->setting("site.name");
         if (!empty($this->title)) {
             $title = sprintf("%s - %s", $this->title, $title);
@@ -67,6 +78,9 @@ class View extends \yii\web\View
     public function endBody()
     {
         parent::endBody();
+        if ($this->adminMode) {
+            return;
+        }
         echo $this->setting("site.code_bottom");
     }
 
@@ -78,12 +92,12 @@ class View extends \yii\web\View
 
     public function articleAliasURL($alias)
     {
-        return Url::toRoute(['/article/alias', 'alias' => $alias]);
+        return Url::to(['/article/alias', 'alias' => $alias]);
     }
 
     public function articleIDURL($id)
     {
-        return Url::toRoute(['/article/id', 'id' => $id]);
+        return Url::to(['/article/id', 'id' => $id]);
     }
 
     public function ICPNumber()

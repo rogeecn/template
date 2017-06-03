@@ -22,7 +22,7 @@ $statusList      = Article::getStatusList();
 ]); ?>
 <?= \plugins\LayUI\components\Table::widget([
     'dataProvider' => [1],
-    'showHeader'   => FALSE,
+    'showHeader'   => false,
     "colGroup"     => [120, 0, 120, 140, 140, 140, 140, 175],
     'columns'      => [
         [
@@ -73,7 +73,7 @@ $statusList      = Article::getStatusList();
         [
             'value' => function () use ($searchModel) {
                 $submitBtn = Html::submitButton();
-                $resetBtn  = Html::resetButtonLink("重置", ['/article/manage']);
+                $resetBtn  = Html::resetButtonLink("重置", ['/admin/article/manage']);
 
                 return $submitBtn . $resetBtn;
             },
@@ -88,7 +88,13 @@ $statusList      = Article::getStatusList();
     'dataProvider' => $dataProvider,
     'columns'      => [
         'id',
-        'title',
+        [
+            'attribute' => 'title',
+            'format'    => 'raw',
+            'value'     => function ($data) {
+                return Html::a($data->title, $this->articleIDURL($data['id']), ['target' => '_blank']);
+            },
+        ],
         [
             'attribute' => 'category_id',
             'value'     => function ($data) {

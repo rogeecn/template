@@ -1,8 +1,9 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this \common\extend\View */
 /* @var $content string */
 
+$this->setAdminMode();
 \modules\admin\assets\AppAssets::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -30,7 +31,7 @@
             \common\extend\Html::a("退出", '/admin/logout'),
         ], [
             'class'       => 'layui-nav',
-            'encode'      => FALSE,
+            'encode'      => false,
             'itemOptions' => [
                 'class' => 'layui-nav-item',
             ],
