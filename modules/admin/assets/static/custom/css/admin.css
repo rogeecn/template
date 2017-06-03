@@ -28,8 +28,8 @@
     width: 130px;
     z-index: 998;
     text-align: left;
-    color: #bdbdbe;
-    background: #2B2E37;
+    color: white;
+    background: #009688;
 }
 
 #logo:hover {
@@ -62,6 +62,6 @@
 }
 
 #main {
-    top: 30px;
+    top: 35px;
     left: 150px;
 }

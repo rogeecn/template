@@ -43,7 +43,7 @@ $this->setAdminMode();
         </div>
     </div>
     <div class="layui-body" style="bottom: 0px;" id="main">
-        <div class="layui-tab layui-tab-brief main-tab-container" lay-filter="tab-container" lay-allowclose="true"
+        <div class="layui-tab main-tab-container" lay-filter="tab-container" lay-allowclose="true"
              style="margin: 0">
             <ul class="layui-tab-title site-demo-title"></ul>
             <div class="layui-body layui-tab-content" style="padding:0px;left: 0px;top:40px;bottom: 0px"></div>
