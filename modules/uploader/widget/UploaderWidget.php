@@ -65,9 +65,10 @@ class UploaderWidget extends InputWidget
             } else {
                 $imageURL = $this->options['sourceURL'] . ltrim($image, "/");
             }
-            $image    = Html::img($imageURL);
-            $input    = Html::hiddenInput($this->name . "[]", $imageURL);
-            $liList[] = Html::tag("li", $image . $input);
+            $removeBtn = Html::tag("span", "删除", ['class' => ['remove']]);
+            $image     = Html::img($imageURL);
+            $input     = Html::hiddenInput($this->name . "[]", $imageURL);
+            $liList[]  = Html::tag("li", $removeBtn . $image . $input);
         }
 
         return strtr($this->template, [
@@ -82,6 +83,7 @@ class UploaderWidget extends InputWidget
             $this->options['handleSuccess'] = <<<_JS_SUCCESS_
 function(res, input){
     var _html_tpl = '<li>';
+    _html_tpl += '<span class="remove">删除</span>';
     _html_tpl += '<img src="{$this->options['sourceURL']}_IMG_PATH_"/>';
     _html_tpl += '<input type=hidden name="{$this->name}[]" value="{$this->options['sourceURL']}_IMG_PATH_"/>';
     _html_tpl += '</li>';
@@ -117,6 +119,14 @@ layui.upload({
   ,before: {$this->options['handleBefore']}
   ,success: {$this->options['handleSuccess']}
 }); 
+
+$("body").on("click","ul.image-upload span.remove",function(data){
+    if (!confirm("确认删除图片么?")){
+         return;
+    }
+    
+    $(this).closest("li").remove();
+});
 _JS_;
 
         return $js;
@@ -125,12 +135,15 @@ _JS_;
     private function getCSS()
     {
         $css = <<<_CSS
+    ul.image-upload{
+        border: 1px solid #e6e6e6;
+    }
     ul.image-upload > li {
         display: inline-block;
+        position: relative;
         padding: 10px;
         width: 100px;
         height: 100px;
-        border: 1px solid #e6e6e6;
     }
 
     ul.image-upload > li img {
@@ -141,6 +154,20 @@ _JS_;
     ul.image-upload > li .layui-upload-button {
         width: 100%;
         height: 100%;
+    }
+    
+    ul.image-upload > li .remove {
+        position: absolute;
+        bottom: 11px;
+        background: #ff5722;
+        display: block;
+        width: 100px;
+        height: 20px;
+        line-height: 20px;
+        font-size: 12px;
+        text-align: center;
+        color: white;
+        cursor: pointer;
     }
 _CSS;
 
