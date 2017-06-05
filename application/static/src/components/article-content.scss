@@ -42,7 +42,10 @@
         word-wrap: break-word;
       }
 
-      code, pre {
+      code {
+        padding: 10px;
+      }
+      pre {
         background: url("../images/blueprint.png") #F6F6F6;
         padding: 10px;
         white-space: pre-wrap;
