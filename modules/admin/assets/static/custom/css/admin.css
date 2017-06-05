@@ -21,17 +21,47 @@
 #logo {
     display: block;
     position: absolute;
-    padding: 10px;
-    height: 40px;
-    width: 180px;
+    padding: 0px 10px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    width: 130px;
     z-index: 998;
     text-align: left;
-    line-height: 40px;
-    font-size: 40px;
-    color: #bdbdbe;
-    background: #2B2E37;
+    color: white;
+    background: #009688;
 }
 
-#logo:hover{
+#logo:hover {
     color: #009688;
+}
+
+#header {
+    height: 30px;
+}
+
+#header .layui-nav .layui-nav-item {
+    line-height: 30px;
+}
+
+#header .layui-nav .layui-nav-item a {
+    line-height: 30px;
+}
+
+#side {
+    top: 30px;
+    width: 150px;
+}
+
+#side .layui-side-scroll {
+    width: 170px;
+}
+
+#side .layui-side-scroll .layui-nav-tree {
+    width: 150px;
+}
+
+#main {
+    top: 35px;
+    left: 150px;
 }

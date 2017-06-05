@@ -1,7 +1,6 @@
 <?php
 namespace common\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -10,7 +9,7 @@ class ArticleSearch extends Article
     public function rules()
     {
         return [
-            [['id', 'user_id', 'type', 'index_show', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'category_id', 'user_id', 'type', 'index_show', 'status', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'safe'],
         ];
     }
@@ -40,13 +39,14 @@ class ArticleSearch extends Article
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'type' => $this->type,
-            'index_show' => $this->index_show,
-            'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'id'          => $this->id,
+            'user_id'     => $this->user_id,
+            'category_id' => $this->category_id,
+            'type'        => $this->type,
+            'index_show'  => $this->index_show,
+            'status'      => $this->status,
+            'created_at'  => $this->created_at,
+            'updated_at'  => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title]);

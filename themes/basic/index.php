@@ -37,14 +37,26 @@
 <div class="clearfix">
     <div class="content">
         <?php
-        $indexCategories = array_filter(explode(',', $this->setting("page.index_category")));
-        foreach ($indexCategories as $indexCategory) {
-            echo \widgets\CategoryBox::widget([
-                'categoryAlias' => trim($indexCategory),
-            ]);
-            echo "\n";
-        }
+        $indexCategories   = array_filter(explode(',', $this->setting("page.index_category")));
+        $indexCategoryList = array_chunk($indexCategories, 2);
         ?>
+        <?php foreach ($indexCategoryList as $indexCategories): ?>
+            <div class="row">
+                <div class="col col-left">
+                    <?= \widgets\CategoryBox::widget([
+                        'categoryAlias' => trim($indexCategories[0]),
+                    ]);
+                    ?>
+                </div>
+
+                <div class="col col-right">
+                    <?= \widgets\CategoryBox::widget([
+                        'categoryAlias' => trim($indexCategories[1]),
+                    ]);
+                    ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 
     <?= $this->render("sider") ?>

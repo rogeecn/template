@@ -1,8 +1,9 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this \common\extend\View */
 /* @var $content string */
 
+$this->setAdminMode();
 \modules\admin\assets\AppAssets::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -22,7 +23,7 @@
 <body>
 <?php $this->beginBody() ?>
 <div class="layui-layout layui-layout-admin">
-    <div class="layui-header" style="text-align: right;">
+    <div id="header" class="layui-header" style="text-align: right;">
         <a href="/admin" id="logo">やめて</a>
         <?= \common\extend\Html::ul([
             \common\extend\Html::a("访问首页", $this->setting("site.url"), ['target' => "_blank"]),
@@ -30,19 +31,19 @@
             \common\extend\Html::a("退出", '/admin/logout'),
         ], [
             'class'       => 'layui-nav',
-            'encode'      => FALSE,
+            'encode'      => false,
             'itemOptions' => [
                 'class' => 'layui-nav-item',
             ],
         ]) ?>
     </div>
-    <div class="layui-side layui-bg-black">
+    <div class="layui-side layui-bg-black" id="side">
         <div class="layui-side-scroll">
             <?= $this->render("_sidenav"); ?>
         </div>
     </div>
-    <div class="layui-body" style="bottom: 0px;">
-        <div class="layui-tab layui-tab-brief main-tab-container" lay-filter="tab-container" lay-allowclose="true"
+    <div class="layui-body" style="bottom: 0px;" id="main">
+        <div class="layui-tab main-tab-container" lay-filter="tab-container" lay-allowclose="true"
              style="margin: 0">
             <ul class="layui-tab-title site-demo-title"></ul>
             <div class="layui-body layui-tab-content" style="padding:0px;left: 0px;top:40px;bottom: 0px"></div>
