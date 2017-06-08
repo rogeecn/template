@@ -58,15 +58,14 @@ class UEditorField extends Field implements IField
 
         $content = $this->fieldData['content'];
 
-        $content = strtr($content, [
-            '&nbsp;' => " ",
-        ]);
-
-        $this->fieldData['description'] = strtr(trim($this->fieldData['description']), [
-            '&nbsp;' => ' ',
-        ]);
+        $replacements                   = [
+            '&nbsp;'    => " ",
+            'bitCN.com' => "",
+        ];
+        $this->fieldData['description'] = strtr(trim($this->fieldData['description']), $replacements);
 
         $allowTags                  = 'p,b,a[href],pre,code,i,ul,li,ol,dl,dt,span,hr,h2,h3,h4,h5,h6,strong,div,br,img[src]';
+        $content                    = strtr($content, $replacements);
         $this->fieldData['content'] = HtmlPurifier::process($content, [
             'HTML.Allowed'           => $allowTags,
             'AutoFormat.RemoveEmpty' => TRUE,
