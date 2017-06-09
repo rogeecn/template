@@ -4,8 +4,7 @@ namespace fields\SourceUrl;
 
 use common\base\Field;
 use common\base\IField;
-use modules\uploader\widget\UploaderWidget;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
 
 class SourceUrlField extends Field implements IField
 {
@@ -26,15 +25,12 @@ class SourceUrlField extends Field implements IField
         if (!empty($this->dataID)) {
             $this->value = $this->getData();
         }
-
+        $inputName = sprintf("%s[source_url]", $this->name);
 
         $content = "";
-        $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
-        $content .= Html::label($this->label, "", ['class' => 'layui-form-label']);
-        $input = Html::textInput(sprintf("%s[source_url]", $this->name), $this->value['source_url']);
-        $content .= Html::tag("div", $input, ['class' => "layui-input-block"]);
-        $content .= Html::endTag("div");
+        $content .= BSHtml::label($this->label);
+        $content .= BSHtml::textInput($inputName, $this->value['source_url']);
 
-        return $content;
+        return BSHtml::formItem($content);
     }
 }

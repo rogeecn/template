@@ -4,8 +4,8 @@ namespace fields\ueditor;
 
 use common\base\Field;
 use common\base\IField;
+use common\extend\BSHtml;
 use modules\ueditor\widget\UEditorInput;
-use plugins\LayUI\components\Html;
 use yii\helpers\HtmlPurifier;
 
 class UEditorField extends Field implements IField
@@ -87,8 +87,10 @@ class UEditorField extends Field implements IField
             if (isset($this->value['description'])) {
                 $value = $this->value['description'];
             }
-            $input = Html::textarea(sprintf("%s[description]", $this->name), $value);
-            $label = Html::label($this->label['description'], "", ['class' => 'layui-form-label']);
+
+            $inputName = sprintf("%s[description]", $this->name);
+            $input     = BSHtml::textarea($inputName, $value, ['class' => 'form-control', 'rows' => 3]);
+            $label     = BSHtml::label($this->label['description']);
             $content .= $this->inputBlock($label, $input);
         }
 
@@ -97,9 +99,10 @@ class UEditorField extends Field implements IField
             $value = $this->value['content'];
         }
 
-        //$input = Html::textarea(sprintf("%s[content]", $this->name), $value);
-        $label = Html::label($this->label['content'], "", ['class' => 'layui-form-label']);
-        $input = UEditorInput::widget(['name' => sprintf("%s[content]", $this->name), 'value' => $value]);
+
+        $label     = BSHtml::label($this->label['content']);
+        $inputName = sprintf("%s[content]", $this->name);
+        $input     = UEditorInput::widget(['name' => $inputName, 'value' => $value]);
         $content .= $this->inputBlock($label, $input);
 
         return $content;
@@ -108,19 +111,12 @@ class UEditorField extends Field implements IField
     private function inputBlock($labelHTML, $inputHTML)
     {
         $content = "";
-        $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
-
         if (isset($this->options['showLabel']) && $this->options['showLabel'] === FALSE) {
             $this->label = "&nbsp";
         }
         $content .= $labelHTML;
-
-        $itemClass = "layui-input-block";
-        $content .= Html::beginTag("div", ['class' => $itemClass]);
         $content .= $inputHTML;
-        $content .= Html::endTag("div");
-        $content .= Html::endTag("div");
 
-        return $content;
+        return BSHtml::formItem($content);
     }
 }

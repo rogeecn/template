@@ -4,7 +4,7 @@ namespace fields\Announcement;
 
 use common\base\Field;
 use common\base\IField;
-use plugins\LayUI\components\Html;
+use yii\bootstrap\Html;
 
 class AnnouncementField extends Field implements IField
 {
@@ -34,14 +34,11 @@ class AnnouncementField extends Field implements IField
             $checked = $this->value['checked'] == 1;
         }
 
-        $content = "";
+        $inputName = sprintf("%s[checked]", $this->name);
 
-        $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
-        $content .= Html::label($this->label, "", ['class' => 'layui-form-label']);
-        $input = Html::checkbox(sprintf("%s[checked]", $this->name), $checked, ['lay-skin' => 'primary']);
-        $content .= Html::tag("div", $input, ['class' => "layui-input-block"]);
-        $content .= Html::endTag("div");
+        $checkBox = Html::checkbox($inputName, $checked);
+        $checkBox = Html::label($checkBox . $this->label);
 
-        return $content;
+        return Html::tag("div", $checkBox, ['class' => 'form-group checkbox']);
     }
 }

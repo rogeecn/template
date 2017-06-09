@@ -4,7 +4,7 @@ namespace fields\Carousel;
 
 use common\base\Field;
 use common\base\IField;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
 
 class CarouselField extends Field implements IField
 {
@@ -15,7 +15,7 @@ class CarouselField extends Field implements IField
     public function init()
     {
         parent::init();
-        $this->label = json_decode($this->label, true);
+        $this->label = json_decode($this->label, TRUE);
     }
 
     protected function renderField()
@@ -29,18 +29,15 @@ class CarouselField extends Field implements IField
 
         $content = "";
 
+        $inputName = sprintf("%s[link]", $this->name);
+        $content .= BSHtml::label($this->label['link']);
+        $content .= BSHtml::textInput($inputName, $this->value['link']);
+        $content .= BSHtml::formItem($content);
 
-        $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
-        $content .= Html::label($this->label['link'], "", ['class' => 'layui-form-label']);
-        $input = Html::textInput(sprintf("%s[link]", $this->name), $this->value['link']);
-        $content .= Html::tag("div", $input, ['class' => "layui-input-block"]);
-        $content .= Html::endTag("div");
-
-        $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
-        $content .= Html::label($this->label['description'], "", ['class' => 'layui-form-label']);
-        $input = Html::textarea(sprintf("%s[description]", $this->name), $this->value['description']);
-        $content .= Html::tag("div", $input, ['class' => "layui-input-block"]);
-        $content .= Html::endTag("div");
+        $inputName = sprintf("%s[description]", $this->name);
+        $content .= BSHtml::label($this->label['description']);
+        $content .= BSHtml::textarea($inputName, $this->value['description']);
+        $content .= BSHtml::formItem($content);
 
         return $content;
     }

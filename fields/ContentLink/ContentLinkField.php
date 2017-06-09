@@ -4,7 +4,7 @@ namespace fields\ContentLink;
 
 use common\base\Field;
 use common\base\IField;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
 
 class ContentLinkField extends Field implements IField
 {
@@ -34,29 +34,25 @@ class ContentLinkField extends Field implements IField
 
         $content = "";
 
-        $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
-        $content .= Html::label($this->label['style'], "", ['class' => 'layui-form-label']);
-        $input = Html::dropDownList(sprintf("%s[style]", $this->name), $this->value['style'], $this->styleList);
-        $content .= Html::tag("div", $input, ['class' => "layui-input-block"]);
-        $content .= Html::endTag("div");
+        $inputName = sprintf("%s[style]", $this->name);
+        $content .= BSHtml::label($this->label['style']);
+        $content .= BSHtml::dropDownList($inputName, $this->value['style'], $this->styleList);
+        $content .= BSHtml::formItem($content);
 
-        $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
-        $content .= Html::label($this->label['tag'], "", ['class' => 'layui-form-label']);
-        $input = Html::textInput(sprintf("%s[tag]", $this->name), $this->value['tag']);
-        $content .= Html::tag("div", $input, ['class' => "layui-input-block"]);
-        $content .= Html::endTag("div");
+        $inputName = sprintf("%s[tag]", $this->name);
+        $content .= BSHtml::label($this->label['tag']);
+        $content .= BSHtml::textInput($inputName, $this->value['tag']);
+        $content .= BSHtml::formItem($content);
 
-        $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
-        $content .= Html::label($this->label['link'], "", ['class' => 'layui-form-label']);
-        $input = Html::textInput(sprintf("%s[link]", $this->name), $this->value['link']);
-        $content .= Html::tag("div", $input, ['class' => "layui-input-block"]);
-        $content .= Html::endTag("div");
+        $inputName = sprintf("%s[link]", $this->name);
+        $content .= BSHtml::label($this->label['link']);
+        $content .= BSHtml::textInput($inputName, $this->value['link']);
+        $content .= BSHtml::formItem($content);
 
-        $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
-        $content .= Html::label($this->label['content'], "", ['class' => 'layui-form-label']);
-        $input = Html::textarea(sprintf("%s[content]", $this->name), $this->value['content']);
-        $content .= Html::tag("div", $input, ['class' => "layui-input-block"]);
-        $content .= Html::endTag("div");
+        $inputName = sprintf("%s[content]", $this->name);
+        $content .= BSHtml::label($this->label['content']);
+        $content .= BSHtml::textarea($inputName, $this->value['content']);
+        $content .= BSHtml::formItem($content);
 
         return $content;
     }

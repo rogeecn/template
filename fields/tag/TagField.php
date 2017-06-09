@@ -4,9 +4,9 @@ namespace fields\tag;
 
 use common\base\Field;
 use common\base\IField;
+use common\extend\BSHtml;
 use common\models\TagArticle;
 use modules\admin\widget\TagInput;
-use plugins\LayUI\components\Html;
 use yii\helpers\ArrayHelper;
 
 class TagField extends Field implements IField
@@ -61,17 +61,13 @@ class TagField extends Field implements IField
 
 
         $content = "";
-        $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
-        $content .= Html::label($this->label, "", ['class' => 'layui-form-label']);
-
-        $itemClass = "layui-input-block";
-        $input     = TagInput::widget([
+        $content .= BSHtml::label($this->label);
+        $content .= TagInput::widget([
             'name'    => sprintf("%s[%s]", $this->name, $this->name),
             'value'   => implode(",", $this->value['tag']),
             'options' => $this->options,
         ]);
-        $content .= Html::tag("div", $input, ['class' => $itemClass]);
-        $content .= Html::endTag("div");
+        $content = BSHtml::formItem($content);
 
         return $content;
     }

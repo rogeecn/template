@@ -2,8 +2,7 @@
 
 use common\models\Article;
 use common\models\Category;
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\Html;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model Article */
@@ -12,9 +11,9 @@ use plugins\LayUI\components\Html;
 ?>
 <?php $form = ActiveForm::begin(); ?>
 <?= $form->errorSummary($model) ?>
-<?= $form->field($model, "type")->label(false)->hiddenInput() ?>
+<?= $form->field($model, "type")->label(FALSE)->hiddenInput() ?>
 <?= $form->field($model, "title")->textInput() ?>
-<?= $form->field($model, "category_id")->dropDownList(Category::getFlatIndentList(true)) ?>
+<?= $form->field($model, "category_id")->dropDownList(Category::getFlatIndentList(TRUE)) ?>
 <?php
 //= $form->field($model, "index_show")->label("&nbsp")->checkbox(['title'=>'首页展示'])
 ?>
@@ -24,5 +23,5 @@ use plugins\LayUI\components\Html;
         'config' => $typeField,
     ]) ?>
 <?php endforeach; ?>
-<?= Html::submitWrapper(Html::submitButton()) ?>
+<?= \common\extend\BSHtml::submitButton() ?>
 <?php ActiveForm::end() ?>

@@ -4,8 +4,8 @@ namespace fields\image;
 
 use common\base\Field;
 use common\base\IField;
-use plugins\LayUI\components\Html;
-use modules\uploader\widget\UploaderWidget;
+use common\extend\BSHtml;
+use plugins\Uploader\Plugin;
 
 class AjaxUploadField extends Field implements IField
 {
@@ -13,7 +13,8 @@ class AjaxUploadField extends Field implements IField
     public $description = "ajax 图片上传";
     public $table       = "field_upload_image";
 
-    public function getOptions() {
+    public function getOptions()
+    {
         return [
             [
                 'type'   => 'textInput',
@@ -27,7 +28,8 @@ class AjaxUploadField extends Field implements IField
         ];
     }
 
-    public function init() {
+    public function init()
+    {
         parent::init();
         switch ($this->action) {
             case self::ACTION_CREATE:
@@ -40,26 +42,24 @@ class AjaxUploadField extends Field implements IField
         }
     }
 
-    protected function renderField() {
+    protected function renderField()
+    {
         // 如果存在ID说明是可以查询数据的
-        $this->value=['image'=>''];
+        $this->value = ['image' => ''];
         if (!empty($this->dataID)) {
             $this->value = $this->getData();
         }
 
 
         $content = "";
-        $content .= Html::beginTag("div", ['class' => "layui-form-item layui-form-text"]);
-        $content .= Html::label($this->label, "", ['class' => 'layui-form-label']);
+        $content .= BSHtml::label($this->label);
 
-        $itemClass = "layui-input-block";
-        $input     = UploaderWidget::widget([
+        $content .= Plugin::widget([
             'name'    => sprintf("%s[%s]", $this->name, $this->name),
             'value'   => array_filter(explode(",", $this->value['image'])),
             'options' => $this->options,
         ]);
-        $content .= Html::tag("div", $input, ['class' => $itemClass]);
-        $content .= Html::endTag("div");
+        $content = BSHtml::formItem($content);
 
         return $content;
     }
