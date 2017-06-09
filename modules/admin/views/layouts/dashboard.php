@@ -4,7 +4,7 @@
 /* @var $content string */
 
 $this->setAdminMode();
-\modules\admin\assets\AppAssets::register($this);
+\modules\admin\assets\UIAssets::register($this)
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ $this->setAdminMode();
             \common\extend\Html::a("退出", '/admin/logout'),
         ], [
             'class'       => 'layui-nav',
-            'encode'      => false,
+            'encode'      => FALSE,
             'itemOptions' => [
                 'class' => 'layui-nav-item',
             ],
