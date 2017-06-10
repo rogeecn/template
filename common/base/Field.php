@@ -80,10 +80,10 @@ class Field extends Widget
             if (!property_exists($this, $itemKey)) {
                 continue;
             }
-            if ($itemKey == "options") {
-                $this->$itemKey = json_decode($itemValue, true) ?: [];
-                continue;
-            }
+            //if ($itemKey == "options") {
+            //    $this->$itemKey = json_decode($itemValue, true) ?: [];
+            //    continue;
+            //}
             $this->$itemKey = $itemValue;
         }
     }
