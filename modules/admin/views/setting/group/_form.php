@@ -1,6 +1,7 @@
 <?php
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use yii\bootstrap\ActiveForm;
+
 /** @var \yii\web\View $this */
 /** @var \common\models\Setting $model */
 ?>
@@ -10,5 +11,5 @@ use plugins\LayUI\components\Html;
 <?= $form->field($model, "title")->textInput() ?>
 <?= $form->field($model, "alias")->textInput() ?>
 
-<?= Html::submitWrapper(Html::submitButton())?>
+<?= BSHtml::submitButton() ?>
 <?php ActiveForm::end() ?>

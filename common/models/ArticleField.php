@@ -3,7 +3,6 @@
 namespace common\models;
 
 use common\base\Field;
-use fields\ueditor\UEditorField;
 use yii\helpers\StringHelper;
 
 /**
@@ -24,14 +23,16 @@ class ArticleField extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'article_field';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['type_id', 'table', 'label', 'name', 'description', 'class'], 'required'],
             [['type_id', 'order'], 'integer'],
@@ -45,7 +46,8 @@ class ArticleField extends \common\base\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id'          => 'ID',
             'type_id'     => 'Type ID',
@@ -59,7 +61,8 @@ class ArticleField extends \common\base\ActiveRecord
         ];
     }
 
-    public static function fieldClasses() {
+    public static function fieldClasses()
+    {
         $fieldPath = \Yii::getAlias("@fields");
         if (!is_dir($fieldPath)) {
             return [];
@@ -102,28 +105,46 @@ class ArticleField extends \common\base\ActiveRecord
         return $list;
     }
 
-    public static function fieldList() {
+    public static function fieldList()
+    {
         $fieldClasses = self::fieldClasses();
 
         $fields = [];
         foreach ($fieldClasses as $classPath) {
             $fields[] = self::getFieldClassInfo($classPath);
         }
+
         return $fields;
     }
 
-    public static function getFieldClassInfo($fieldClass) {
+    public static function getFieldClassInfo($fieldClass)
+    {
         return $fieldClass::field([
             'action' => Field::ACTION_INFO,
         ]);
     }
 
-    public static function getTypeFieldList($type) {
-        return self::find()->where(['type_id' => $type])->orderBy(['order' => SORT_ASC])->asArray()->all();
+    public static function getTypeFieldList($type)
+    {
+        $list = self::find()->where(['type_id' => $type])->orderBy(['order' => SORT_ASC])->asArray()->all();
+        foreach ($list as &$item) {
+            $item['label']   = json_decode($item['label'], true) ?: [];
+            $item['options'] = json_decode($item['options'], true) ?: [];
+        }
+
+        return $list;
     }
 
-    public static function getTableList() {
+    public static function getTableList()
+    {
         $tables = \Yii::$app->getDb()->getSchema()->getTableNames();
+
         return array_combine($tables, $tables);
+    }
+
+    public function afterFind()
+    {
+        $this->label   = json_decode($this->label, true) ?: [];
+        $this->options = json_decode($this->options, true) ?: [];
     }
 }

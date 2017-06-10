@@ -3,9 +3,9 @@
 namespace modules\admin\controllers\article\field;
 
 use application\base\AuthController;
+use common\extend\BSHtml;
 use common\models\ArticleField;
 use common\util\Request;
-use plugins\LayUI\components\Html;
 
 class ManageController extends AuthController
 {
@@ -52,13 +52,13 @@ class ManageController extends AuthController
             'class'       => $info['class'],
             'description' => $info['description'],
             'type_id'     => $info['type'],
-            'label'       => $info['label'],
+            'label'       => json_encode($info['label']),
             'options'     => json_encode($info['options']),
         ]);
 
         if ($model->save()) {
             return $this->renderSuccess(sprintf("字段 [%s] 添加成功", $model->name), [
-                Html::linkButton("继续添加", ['/admin/article/field/manage', 'type' => $info['type']]),
+                BSHtml::buttonLink("继续添加", ['/admin/article/field/manage', 'type' => $info['type']]),
             ]);
         }
 
@@ -79,13 +79,13 @@ class ManageController extends AuthController
                 'name'        => $info['name'],
                 'table'       => $info['table'],
                 'description' => $info['description'],
-                'label'       => $info['label'],
+                'label'       => json_encode($info['label']),
                 'options'     => json_encode($info['options']),
             ]);
 
             if ($model->save()) {
                 return $this->renderSuccess(sprintf("字段 [%s] 编辑成功", $info['name']), [
-                    Html::linkButton("继续修改", ['/admin/article/field/manage/update', 'id' => $id]),
+                    BSHtml::buttonLink("继续修改", ['/admin/article/field/manage/update', 'id' => $id]),
                 ]);
             }
         }
@@ -104,7 +104,7 @@ class ManageController extends AuthController
         $model->delete();
 
         return $this->renderSuccess(null, [
-            Html::linkButton("继续操作", ['index', 'type' => $type_id]),
+            BSHtml::buttonLink("继续操作", ['index', 'type' => $type_id]),
         ]);
     }
 }

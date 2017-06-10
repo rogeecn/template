@@ -3,6 +3,7 @@
 namespace modules\admin\controllers\member;
 
 use application\base\AuthController;
+use common\extend\BSHtml;
 use common\User;
 use Yii;
 use yii\web\NotFoundHttpException;
@@ -15,8 +16,8 @@ class UpdateController extends AuthController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->renderSuccess("编辑成功", [
-                \plugins\LayUI\components\Html::linkButton("继续编辑", ['/admin/member/update', 'id' => $id]),
-                \plugins\LayUI\components\Html::linkButton("返回列表", ['/admin/member/list']),
+                BSHtml::buttonLink("继续编辑", ['/admin/member/update', 'id' => $id]),
+                BSHtml::buttonLink("返回列表", ['/admin/member/list']),
             ]);
         }
 

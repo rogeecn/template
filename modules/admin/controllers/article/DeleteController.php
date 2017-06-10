@@ -4,12 +4,12 @@ namespace modules\admin\controllers\article;
 
 use application\base\AuthController;
 use common\base\Field;
+use common\extend\BSHtml;
 use common\models\Article;
 use common\models\ArticleField;
 use common\models\Tag;
 use common\models\TagArticle;
 use common\util\Request;
-use plugins\LayUI\components\Html;
 use yii\base\Exception;
 
 class DeleteController extends AuthController
@@ -50,7 +50,7 @@ class DeleteController extends AuthController
 
 
             return $this->renderSuccess(null, [
-                Html::linkButton("返回列表", ['/admin/article/manage', 'page' => Request::input("page")]),
+                BSHtml::buttonLink("返回列表", ['/admin/article/manage', 'page' => Request::input("page")]),
             ]);
         }
 

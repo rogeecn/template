@@ -1,13 +1,14 @@
 <?php
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use yii\bootstrap\ActiveForm;
+
 /** @var \yii\web\View $this */
 /** @var \common\models\Setting $model */
 $typeList  = \common\models\Setting::getTypeList();
 $groupList = \common\models\Setting::getGroupList(true);
 ?>
 
-<?php $form =ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(); ?>
 <?= $form->errorSummary($model) ?>
 
 <?= $form->field($model, "type")->dropDownList($typeList) ?>
@@ -16,5 +17,5 @@ $groupList = \common\models\Setting::getGroupList(true);
 <?= $form->field($model, "hint")->textInput() ?>
 <?= $form->field($model, "pre_configure")->textarea() ?>
 
-<?= Html::submitWrapper(Html::submitButton() )?>
+<?= BSHtml::submitButton() ?>
 <?php ActiveForm::end() ?>

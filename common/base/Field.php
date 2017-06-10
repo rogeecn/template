@@ -66,6 +66,7 @@ class Field extends Widget
             'table'       => $this->table,
             'description' => $this->description,
             'options'     => $this->getOptions(),
+            'labels'      => $this->getLabels(),
         ];
     }
 
@@ -88,6 +89,11 @@ class Field extends Widget
     }
 
     protected function getOptions()
+    {
+        return [];
+    }
+
+    protected function getLabels()
     {
         return [];
     }
@@ -146,4 +152,5 @@ class Field extends Widget
     protected function beforeSave($insert = false)
     {
     }
+
 }

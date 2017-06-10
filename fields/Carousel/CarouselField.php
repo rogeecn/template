@@ -12,12 +12,6 @@ class CarouselField extends Field implements IField
     public $description = "轮播图";
     public $table       = "field_carousel";
 
-    public function init()
-    {
-        parent::init();
-        $this->label = json_decode($this->label, TRUE);
-    }
-
     protected function renderField()
     {
         // 如果存在ID说明是可以查询数据的

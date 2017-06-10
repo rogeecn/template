@@ -14,13 +14,29 @@ class UEditorField extends Field implements IField
     public $description = "UEditor 富文本编辑器";
     public $table       = "field_content_data";
 
+    protected function getLabels()
+    {
+        return [
+            [
+                'name'    => 'description',
+                'title'   => '描述',
+                'default' => '描述',
+            ],
+            [
+                'name'    => 'content',
+                'title'   => '内容',
+                'default' => '内容',
+            ],
+        ];
+    }
+
     protected function getOptions()
     {
         return [
             [
                 'type'   => 'checkbox',
                 'name'   => 'showDescription',
-                'value'  => FALSE,
+                'value'  => false,
                 'config' => [
                     'title'    => '使用概要输入',
                     'lay-skin' => 'primary',
@@ -29,7 +45,7 @@ class UEditorField extends Field implements IField
             [
                 'type'   => 'checkbox',
                 'name'   => 'showLabel',
-                'value'  => FALSE,
+                'value'  => false,
                 'config' => [
                     'title'    => '显示标签',
                     'lay-skin' => 'primary',
@@ -52,7 +68,7 @@ class UEditorField extends Field implements IField
                     ->one();
     }
 
-    protected function beforeSave($insert = FALSE)
+    protected function beforeSave($insert = false)
     {
         parent::beforeSave($insert);
 
@@ -68,15 +84,13 @@ class UEditorField extends Field implements IField
         $content                    = strtr($content, $replacements);
         $this->fieldData['content'] = HtmlPurifier::process($content, [
             'HTML.Allowed'           => $allowTags,
-            'AutoFormat.RemoveEmpty' => TRUE,
+            'AutoFormat.RemoveEmpty' => true,
         ]);
     }
 
 
     protected function renderField()
     {
-        $this->label = json_decode($this->label, TRUE);
-
         // 如果存在ID说明是可以查询数据的
         if (!empty($this->dataID)) {
             $this->value = $this->getData();
@@ -111,7 +125,7 @@ class UEditorField extends Field implements IField
     private function inputBlock($labelHTML, $inputHTML)
     {
         $content = "";
-        if (isset($this->options['showLabel']) && $this->options['showLabel'] === FALSE) {
+        if (isset($this->options['showLabel']) && $this->options['showLabel'] === false) {
             $this->label = "&nbsp";
         }
         $content .= $labelHTML;

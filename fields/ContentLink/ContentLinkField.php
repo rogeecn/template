@@ -17,10 +17,30 @@ class ContentLinkField extends Field implements IField
         'style02' => '橙色',
     ];
 
-    public function init()
+    protected function getLabels()
     {
-        parent::init();
-        $this->label = json_decode($this->label, TRUE);
+        return [
+            [
+                'name'    => 'style',
+                'title'   => '风格',
+                'default' => '风格',
+            ],
+            [
+                'name'    => 'link',
+                'title'   => '链接',
+                'default' => '链接',
+            ],
+            [
+                'name'    => 'tag',
+                'title'   => '标签',
+                'default' => '标签',
+            ],
+            [
+                'name'    => 'content',
+                'title'   => '内容',
+                'default' => '内容',
+            ],
+        ];
     }
 
     protected function renderField()

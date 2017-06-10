@@ -1,12 +1,13 @@
 <?php
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use common\extend\Table;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 
 ?>
 <?php $form = ActiveForm::begin(['action' => Url::to(['/admin/backup/config/export'])]); ?>
 
-<?= \plugins\LayUI\components\Table::widget([
+<?= Table::widget([
     'dataProvider' => $dataList,
     'colGroup'     => [60, 100, 0],
     'columns'      => [
@@ -14,7 +15,7 @@ use yii\helpers\Url;
             'value' => function ($data) {
                 $name = sprintf("type[%s]", $data['name']);
 
-                return Html::checkbox($name, TRUE, ['lay-skin' => 'layui-primary']);
+                return BSHtml::checkbox($name, true);
             },
         ],
         "label",
@@ -22,7 +23,7 @@ use yii\helpers\Url;
     ],
 ]) ?>
 <div>
-    <?= Html::submitButton("提交") ?>
+    <?= BSHtml::submitButton() ?>
 </div>
 <?php ActiveForm::end(); ?>
 

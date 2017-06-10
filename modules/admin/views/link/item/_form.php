@@ -1,12 +1,14 @@
 <?php
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use yii\bootstrap\ActiveForm;
+
 /** @var \yii\web\View $this */
 /** @var \common\models\LinkGroup $model */
-$typeList  = \common\models\LinkGroup::getTypeList();
+
+$typeList = \common\models\LinkGroup::getTypeList();
 ?>
 
-<?php $form =ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(); ?>
 <?= $form->errorSummary($model) ?>
 
 <?= $form->field($model, "type")->dropDownList($typeList) ?>
@@ -15,5 +17,5 @@ $typeList  = \common\models\LinkGroup::getTypeList();
 <?= $form->field($model, "image")->textInput() ?>
 <?= $form->field($model, "value")->textInput() ?>
 
-<?= Html::submitWrapper(Html::submitButton() )?>
+<?= BSHtml::submitButton() ?>
 <?php ActiveForm::end() ?>

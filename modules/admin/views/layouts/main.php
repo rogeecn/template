@@ -16,14 +16,16 @@ use yii\helpers\Html;
     <?= Html::csrfMetaTags() ?>
     <?php $this->head() ?>
 </head>
-<body style="padding: 10px;">
+<body style="padding: 10px 0">
 <?php $this->beginBody() ?>
-<?= $content ?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <?= $content ?>
+        </div>
+    </div>
+</div>
 <?php $this->endBody() ?>
-<script>
-    var element = layui.element();
-    var form = layui.form();
-</script>
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -1,11 +1,19 @@
 <?php
+use common\extend\BSHtml;
+use yii\bootstrap\ActiveForm;
+
 /** @var \yii\web\View $this */
 ?>
+    <style>
+        .tab-content {
+            padding: 20px 0;
+        }
+    </style>
 <?php
-$form = \plugins\LayUI\components\ActiveForm::begin();
+$form = ActiveForm::begin();
 
 $items = [];
-foreach ($groupList as $groupID=>$groupData) {
+foreach ($groupList as $groupID => $groupData) {
     $items[] = [
         'label'   => $groupData['name'],
         'content' => $this->render("_tab", [
@@ -17,11 +25,10 @@ foreach ($groupList as $groupID=>$groupData) {
 $items[0]['active'] = true;
 
 
-
 if (!empty($items)) {
-    echo \plugins\LayUI\components\Tabs::widget([
+    echo \yii\bootstrap\Tabs::widget([
         'items' => $items,
     ]);
-    echo \plugins\LayUI\components\Html::submitWrapper(\plugins\LayUI\components\Html::submitButton());
+    echo BSHtml::submitButton();
 }
-\plugins\LayUI\components\ActiveForm::end();
+ActiveForm::end();

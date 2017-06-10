@@ -1,7 +1,8 @@
 <?php
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\GridView;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use common\extend\Table;
+use yii\bootstrap\ActiveForm;
+use yii\grid\GridView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -13,22 +14,22 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
-<?= \plugins\LayUI\components\Table::widget([
+<?= Table::widget([
     'dataProvider' => [1],
     'showHeader'   => false,
     "colGroup"     => ["", 175],
     'columns'      => [
         [
             'value' => function () use ($searchModel) {
-                return Html::activeTextInput($searchModel, "name", ['placeholder' => '关键字']);
+                return BSHtml::activeTextInput($searchModel, "name", ['placeholder' => '关键字']);
             },
         ],
         [
             'value' => function () use ($searchModel) {
-                $submitBtn = Html::submitButton();
-                $resetBtn  = Html::resetButton();
+                $submitBtn = BSHtml::submitButton();
+                $resetBtn  = BSHtml::resetButton();
 
-                return $submitBtn . $resetBtn;
+                return $submitBtn . "&nbsp;" . $resetBtn;
             },
         ],
     ],

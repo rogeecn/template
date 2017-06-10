@@ -1,15 +1,17 @@
-<?php
-\plugins\LayUI\LayUIAssets::register($this);
-?>
-<div style="width: 600px;margin: 10% auto;">
-        <blockquote class="layui-elem-quote">
-            <h1 style="color: #5FB878;font-size: 22px;margin-bottom: 1em;">成功</h1>
-            <p style="padding: 1em 0;"><?=$msg?></p>
-            <hr>
-            <div class="tip-buttons" style="text-align: right;">
-                <?php foreach ($buttons as $button){
-                    echo $button;
-                }?>
+<div class="row" style="margin-top: 40px;">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3>成功</h3>
             </div>
-        </blockquote>
+            <div class="panel-body">
+                <?= $msg ?>
+            </div>
+            <div class="panel-footer" style="text-align: right;">
+                <?php foreach ($buttons as $button) {
+                    echo $button;
+                } ?>
+            </div>
+        </div>
+    </div>
 </div>

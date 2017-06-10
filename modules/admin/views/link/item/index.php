@@ -1,16 +1,19 @@
 <?php
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use common\extend\Table;
+use common\models\LinkGroup;
+use yii\bootstrap\ActiveForm;
 
 /** @var \yii\web\View $this */
 /** @var \common\models\LinkGroup[] $columnList */
 
 ?>
     <div class="text-right">
-        <?= Html::linkButton("创建", ['/admin/link/item/create', 'id' => $groupId]) ?>
+        <?= BSHtml::buttonLink("创建", ['/admin/link/item/create', 'id' => $groupId]) ?>
     </div>
 <?php
-$form = \plugins\LayUI\components\ActiveForm::begin();
-echo \plugins\LayUI\components\Table::widget([
+$form = ActiveForm::begin();
+echo Table::widget([
     'dataProvider' => $linkList,
     'sortable'     => true,
     'orderInput'   => 'input',
@@ -21,13 +24,13 @@ echo \plugins\LayUI\components\Table::widget([
                 'style' => 'width: 10px;',
             ],
             'value'   => function ($data) {
-                return Html::icon("arrows", ['drag-handle']);
+                return BSHtml::icon("arrows", ['drag-handle']);
             },
         ],
         [
             'key'   => 'type',
             'value' => function ($data) {
-                $typeList = \common\models\LinkGroup::getTypeList();
+                $typeList = LinkGroup::getTypeList();
 
                 return $typeList[$data->type];
             },
@@ -49,23 +52,22 @@ echo \plugins\LayUI\components\Table::widget([
                     'autocomplete' => 'off',
                 ];
 
-                return Html::activeTextInput($data, "order", $orderAttr);
+                return BSHtml::activeTextInput($data, "order", $orderAttr);
             },
         ],
         [
             'label' => 'OPT',
             'value' => function ($data) {
-                $class  = ['class' => 'layui-btn layui-btn-small layui-btn-primary'];
-                $edit   = Html::a("EDIT", ['/admin/link/item/update', 'id' => $data->primaryKey], $class);
-                $delete = Html::a("DELETE", ['/admin/link/item/delete', 'id' => $data->primaryKey], $class);
+                $edit   = BSHtml::buttonLink("EDIT", ['/admin/link/item/update', 'id' => $data->primaryKey]);
+                $delete = BSHtml::buttonLink("DELETE", ['/admin/link/item/delete', 'id' => $data->primaryKey]);
 
-                return Html::buttonGroup([$edit, $delete]);
+                return BSHtml::buttonGroup([$edit, $delete]);
             },
         ],
     ],
 ]);
 
-echo Html::submitButton();
+echo BSHtml::submitButton();
 
-\plugins\LayUI\components\ActiveForm::end();
+ActiveForm::end();
 

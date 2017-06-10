@@ -4,11 +4,11 @@ namespace modules\admin\controllers\article;
 
 use application\base\AuthController;
 use common\base\Field;
+use common\extend\BSHtml;
 use common\extend\UserInfo;
 use common\models\Article;
 use common\models\ArticleField;
 use common\util\Request;
-use plugins\LayUI\components\Html;
 use yii\base\Exception;
 
 class UpdateController extends AuthController
@@ -49,12 +49,12 @@ class UpdateController extends AuthController
 
 
             return $this->renderSuccess(null, [
-                Html::linkButton("继续编辑", ['/admin/article/update', 'id' => $articleModel->id]),
-                Html::linkButton("返回列表", ['/admin/article/manage']),
+                BSHtml::buttonLink("继续编辑", ['/admin/article/update', 'id' => $articleModel->id]),
+                BSHtml::buttonLink("返回列表", ['/admin/article/manage']),
             ]);
         }
 
-        return $this->render('index', [
+        return $this->render('/article/form', [
             'model'      => $articleModel,
             'typeFields' => $typeFields,
         ]);

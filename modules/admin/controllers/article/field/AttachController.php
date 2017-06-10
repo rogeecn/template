@@ -14,14 +14,10 @@ class AttachController extends AuthController
         if (empty($type)) {
             return $this->renderFailed(['type' => '参数为空']);
         }
-
         $allFields = ArticleField::fieldList();
-
-//        $typeFields = ArticleField::getTypeFieldList($type);
 
         return $this->render("index", [
             "allFields" => $allFields,
-            //            "typeFields" => $typeFields,
             "type"      => $type,
         ]);
     }

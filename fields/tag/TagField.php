@@ -61,7 +61,7 @@ class TagField extends Field implements IField
 
 
         $content = "";
-        $content .= BSHtml::label($this->label);
+        $content .= BSHtml::label($this->label[$this->name]);
         $content .= TagInput::widget([
             'name'    => sprintf("%s[%s]", $this->name, $this->name),
             'value'   => implode(",", $this->value['tag']),

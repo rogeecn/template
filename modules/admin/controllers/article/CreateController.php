@@ -4,11 +4,11 @@ namespace modules\admin\controllers\article;
 
 use application\base\AuthController;
 use common\base\Field;
+use common\extend\BSHtml;
 use common\extend\UserInfo;
 use common\models\Article;
 use common\models\ArticleField;
 use common\util\Request;
-use plugins\LayUI\components\Html;
 use yii\base\Exception;
 use yii\base\InvalidParamException;
 
@@ -56,11 +56,11 @@ class CreateController extends AuthController
 
 
             return $this->renderSuccess(null, [
-                Html::linkButton("继续添加", ['/admin/article/create', 'type' => $articleModel->type]),
+                BSHtml::buttonLink("继续添加", ['/admin/article/create', 'type' => $articleModel->type]),
             ]);
         }
 
-        return $this->render('index', [
+        return $this->render('/article/form', [
             'model'      => $articleModel,
             'typeFields' => $typeFields,
         ]);

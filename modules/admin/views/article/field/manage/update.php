@@ -1,7 +1,7 @@
 <?php
 
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $allFields array */
@@ -10,7 +10,7 @@ use plugins\LayUI\components\Html;
 $tableList = \common\models\ArticleField::getTableList();
 ?>
 <?php $form = ActiveForm::begin() ?>
-<table class="layui-table">
+<table class="table table-bordered table-stripped">
     <colgroup>
         <col width="10%">
         <col>
@@ -22,19 +22,35 @@ $tableList = \common\models\ArticleField::getTableList();
     </tr>
     <tr>
         <th class="text-right">Label</th>
-        <td><?= Html::textInput("info[label]", $fieldData['label']) ?></td>
+        <td>
+            <?php
+            if (empty($fieldConfig['labels'])) {
+                $value     = isset($fieldData['label'][$fieldConfig['name']]) ? $fieldData['label'][$fieldConfig['name']] : "";
+                $labelName = sprintf("info[label][%s]", $fieldConfig['name']);
+                $input     = BSHtml::textInput($labelName, $value);
+                echo BSHtml::formItem(BSHtml::label($fieldConfig['description']) . $input);
+            }
+
+            foreach ($fieldConfig['labels'] as $label) {
+                $value     = isset($labelData[$label['name']]) ? $labelData[$label['name']] : $label['default'];
+                $labelName = sprintf("info[label][%s]", $label['name']);
+                $input     = BSHtml::textInput($labelName, $value);
+                echo BSHtml::formItem(BSHtml::label($label['title']) . $input);
+            }
+            ?>
+        </td>
     </tr>
     <tr>
         <th class="text-right">Name</th>
-        <td><?= Html::textInput("info[name]", $fieldData['name']) ?></td>
+        <td><?= BSHtml::textInput("info[name]", $fieldData['name']) ?></td>
     </tr>
     <tr>
         <th class="text-right">Description</th>
-        <td><?= Html::textarea('info[description]', $fieldData['description']) ?></td>
+        <td><?= BSHtml::textarea('info[description]', $fieldData['description']) ?></td>
     </tr>
     <tr>
         <th class="text-right">Table</th>
-        <td><?= Html::dropDownList("info[table]", $fieldData['table'], $tableList, ['prompt' => '请选择绑定表']) ?></td>
+        <td><?= BSHtml::dropDownList("info[table]", $fieldData['table'], $tableList, ['prompt' => '请选择绑定表']) ?></td>
     </tr>
     <tr>
         <th class="text-right">Options</th>
@@ -51,18 +67,19 @@ $tableList = \common\models\ArticleField::getTableList();
                 }
 
                 $label = "";
-                if (isset($option['label'])){
+                if (isset($option['label'])) {
                     $label = $option['label'];
                 }
-                $fieldName = sprintf("info[options][%s]", $option['name']);
-                echo Html::inlineFormItem($inputType, $label, $fieldName, $fieldValue, $option['config']);
+                $fieldName   = sprintf("info[options][%s]", $option['name']);
+                $formElement = BSHtml::createFormElement($inputType, $label, $fieldName, $fieldValue, $option['config']);
+                echo BSHtml::formItem($formElement);
             }
             ?>
         </td>
     </tr>
     <tr>
         <th class="text-right">&nbsp;</th>
-        <td><?= Html::submitButton() ?></td>
+        <td><?= BSHtml::submitButton() ?></td>
     </tr>
     </tbody>
 </table>

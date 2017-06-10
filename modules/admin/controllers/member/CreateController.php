@@ -3,6 +3,7 @@
 namespace modules\admin\controllers\member;
 
 use application\base\AuthController;
+use common\extend\BSHtml;
 use common\User;
 use Yii;
 
@@ -14,7 +15,7 @@ class CreateController extends AuthController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->renderSuccess("添加成功", [
-                \plugins\LayUI\components\Html::linkButton("继续添加", ['/admin/member/create']),
+                BSHtml::buttonLink("继续添加", ['/admin/member/create']),
             ]);
         }
 

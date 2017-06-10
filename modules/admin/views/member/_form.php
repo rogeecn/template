@@ -1,7 +1,7 @@
 <?php
 
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\User */
@@ -18,7 +18,7 @@ $statusList = \common\User::getStatusList();
 <?= $form->field($model, 'password')->textInput() ?>
 <?= $form->field($model, 'role')->dropDownList($roleList) ?>
 <?= $form->field($model, 'status')->dropDownList($statusList) ?>
-<?= Html::submitWrapper(Html::submitButton()); ?>
+<?= BSHtml::submitButton(); ?>
 
 <?php ActiveForm::end(); ?>
 

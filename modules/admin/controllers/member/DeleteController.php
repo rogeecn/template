@@ -3,6 +3,7 @@
 namespace modules\admin\controllers\member;
 
 use application\base\AuthController;
+use common\extend\BSHtml;
 use common\User;
 use yii\web\NotFoundHttpException;
 
@@ -15,7 +16,7 @@ class DeleteController extends AuthController
         $model->save(false);
 
         return $this->renderSuccess("删除成功", [
-            \plugins\LayUI\components\Html::linkButton("返回列表", ['/admin/member/list']),
+            BSHtml::buttonLink("返回列表", ['/admin/member/list']),
         ]);
     }
 

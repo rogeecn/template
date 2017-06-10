@@ -52,7 +52,7 @@ class AjaxUploadField extends Field implements IField
 
 
         $content = "";
-        $content .= BSHtml::label($this->label);
+        $content .= BSHtml::label($this->label[$this->name]);
 
         $content .= Plugin::widget([
             'name'    => sprintf("%s[%s]", $this->name, $this->name),

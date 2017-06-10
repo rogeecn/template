@@ -1,8 +1,8 @@
 <?php
 
+use common\extend\BSHtml;
 use common\models\ArticleField;
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\Html;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $allFields array */
@@ -11,9 +11,9 @@ use plugins\LayUI\components\Html;
 $tableList = ArticleField::getTableList();
 ?>
 <?php $form = ActiveForm::begin(['action' => ["/admin/article/field/manage/create"]]) ?>
-<?= Html::hiddenInput("info[class]", $class) ?>
-<?= Html::hiddenInput("info[type]", \common\util\Request::input("type")) ?>
-<table class="layui-table">
+<?= BSHtml::hiddenInput("info[class]", $class) ?>
+<?= BSHtml::hiddenInput("info[type]", \common\util\Request::input("type")) ?>
+<table class="table table-stripped table-bordered">
     <colgroup>
         <col width="10%">
         <col>
@@ -25,53 +25,55 @@ $tableList = ArticleField::getTableList();
     </tr>
     <tr>
         <th class="text-right">Label</th>
-        <td><?= Html::textInput("info[label]", "") ?></td>
+        <td>
+            <?php
+            if (empty($labels)) {
+                $labelName = sprintf("info[label][%s]", $name);
+                $input     = BSHtml::textInput($labelName, "");
+                echo BSHtml::formItem(BSHtml::label($description) . $input);
+            }
+
+            foreach ($labels as $label) {
+                $labelName = sprintf("info[label][%s]", $label['name']);
+                $input     = BSHtml::textInput($labelName, $label['default']);
+                echo BSHtml::formItem(BSHtml::label($label['title']) . $input);
+            }
+            ?>
+        </td>
     </tr>
     <tr>
         <th class="text-right">Name</th>
-        <td><?= Html::textInput("info[name]", $name) ?></td>
+        <td><?= BSHtml::textInput("info[name]", $name) ?></td>
     </tr>
     <tr>
         <th class="text-right">Description</th>
-        <td><?= Html::textarea('info[description]', $description) ?></td>
+        <td><?= BSHtml::textarea('info[description]', $description) ?></td>
     </tr>
     <tr>
         <th class="text-right">Table</th>
-        <td><?= Html::dropDownList("info[table]", $table, $tableList, ['prompt' => '请选择绑定表']) ?></td>
+        <td><?= BSHtml::dropDownList("info[table]", $table, $tableList, ['prompt' => '请选择绑定表']) ?></td>
     </tr>
     <tr>
         <th class="text-right">Options</th>
         <td>
             <?php
             foreach ($options as $option) {
-//                echo Html::beginTag("div", ['style' => 'margin-bottom: 20px;']);
-//
-//                switch ($inputType) {
-//                    case "checkbox":
-//                        echo Html::checkbox($fieldName, $fieldValue, $option['config']);
-//                        break;
-//                    case "textInput":
-//                        echo Html::checkbox($fieldName, $fieldValue, $option['config']);
-//                        break;
-//                }
-//                echo Html::endTag("div");
-
-                $inputType = $option['type'];
+                $inputType  = $option['type'];
                 $fieldValue = $option['value'];
                 $fieldName  = sprintf("info[options][%s]", $option['name']);
-                $label = "";
-                if (isset($option['label'])){
+                $label      = "";
+                if (isset($option['label'])) {
                     $label = $option['label'];
                 }
                 $fieldName = sprintf("info[options][%s]", $option['name']);
-                echo Html::inlineFormItem($inputType, $label, $fieldName, $fieldValue, $option['config']);
+                echo BSHtml::createFormElement($inputType, $label, $fieldName, $fieldValue, $option['config']);
             }
             ?>
         </td>
     </tr>
     <tr>
         <th class="text-right">&nbsp;</th>
-        <td><?= Html::submitButton() ?></td>
+        <td><?= BSHtml::submitButton() ?></td>
     </tr>
     </tbody>
 </table>

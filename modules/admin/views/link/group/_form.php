@@ -1,14 +1,13 @@
 <?php
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use yii\bootstrap\ActiveForm;
+
 /** @var \yii\web\View $this */
 /** @var \common\models\LinkGroup $model */
-?>
-<?php $form = ActiveForm::begin(); ?>
-<?= $form->errorSummary($model) ?>
 
-<?= $form->field($model, "title")->textInput() ?>
-<?= $form->field($model, "alias")->textInput() ?>
-
-<?= Html::submitWrapper(Html::submitButton())?>
-<?php ActiveForm::end() ?>
+$form = ActiveForm::begin();
+echo $form->errorSummary($model);
+echo $form->field($model, "title")->textInput();
+echo $form->field($model, "alias")->textInput();
+echo BSHtml::submitButton();
+ActiveForm::end();

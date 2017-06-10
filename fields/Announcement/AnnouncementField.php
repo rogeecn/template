@@ -29,7 +29,7 @@ class AnnouncementField extends Field implements IField
         }
 
 
-        $checked = FALSE;
+        $checked = false;
         if ($this->dataID) {
             $checked = $this->value['checked'] == 1;
         }
@@ -37,7 +37,7 @@ class AnnouncementField extends Field implements IField
         $inputName = sprintf("%s[checked]", $this->name);
 
         $checkBox = Html::checkbox($inputName, $checked);
-        $checkBox = Html::label($checkBox . $this->label);
+        $checkBox = Html::label($checkBox . $this->label[$this->name]);
 
         return Html::tag("div", $checkBox, ['class' => 'form-group checkbox']);
     }

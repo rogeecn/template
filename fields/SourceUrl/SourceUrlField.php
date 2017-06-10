@@ -12,12 +12,6 @@ class SourceUrlField extends Field implements IField
     public $description = "文章来源链接";
     public $table       = "field_article_source";
 
-    public function getOptions()
-    {
-        return [
-        ];
-    }
-
     protected function renderField()
     {
         // 如果存在ID说明是可以查询数据的
@@ -28,7 +22,7 @@ class SourceUrlField extends Field implements IField
         $inputName = sprintf("%s[source_url]", $this->name);
 
         $content = "";
-        $content .= BSHtml::label($this->label);
+        $content .= BSHtml::label($this->label[$this->name]);
         $content .= BSHtml::textInput($inputName, $this->value['source_url']);
 
         return BSHtml::formItem($content);

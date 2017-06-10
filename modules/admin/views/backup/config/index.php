@@ -1,8 +1,16 @@
 <?php
 
+use yii\bootstrap\Tabs;
+
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
 ?>
+<style>
+    .tab-content {
+        padding: 20px 0;
+    }
+</style>
 <?php
 $export = [
     'label'   => '导出',
@@ -11,11 +19,11 @@ $export = [
 
 $import = [
     'label'   => '导入',
-    'active'  => TRUE,
+    'active'  => true,
     'content' => $this->render("_import"),
 ];
 
-echo \plugins\LayUI\components\Tabs::widget([
+echo Tabs::widget([
     'items' => [$import, $export],
 ]);
 ?>

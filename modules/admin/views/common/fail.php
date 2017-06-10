@@ -1,17 +1,24 @@
 <?php
-\plugins\LayUI\LayUIAssets::register($this);
+use common\extend\BSHtml;
+
 ?>
-<div style="width: 600px;margin: 10% auto;">
-    <blockquote class="layui-elem-quote" style="border-left-color: #FF5722;">
-        <h1 style="color: #FF5722;font-size: 22px;margin-bottom: 1em;">失败</h1>
-        <ul style="padding: 1em 0;">
-            <?php foreach ($reasons as $key=>$reason):?>
-            <li><?=sprintf("%s: %s",$key,$reason)?></li>
-            <?php endforeach;?>
-        </ul>
-        <hr>
-        <div class="tip-buttons" style="text-align: right;">
-            <?=\plugins\LayUI\components\Html::linkButton("返回修改",'#',['color'=>'primary','onClick'=>'javascript:history.go(-1)'])?>
+<div class="row" style="margin-top: 40px;">
+    <div class="col-md-4 col-md-offset-4">
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3>失败</h3>
+            </div>
+            <ul style="padding: 1em 0;">
+                <?php foreach ($reasons as $key => $reason): ?>
+                    <li><?= sprintf("%s: %s", $key, $reason) ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <hr>
+            <div class="panel-footer" style="text-align: right;">
+                <?= BSHtml::linkButton("返回修改", '#', ['color' => 'primary', 'onClick' => 'javascript:history.go(-1)']) ?>
+            </div>
         </div>
-    </blockquote>
+
+    </div>
 </div>

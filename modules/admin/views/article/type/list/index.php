@@ -1,23 +1,23 @@
 <?php
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
 
 /** @var array $types */
 /** @var \yii\web\View $this */
 
-\plugins\LayUI\LayUIAssets::register($this);
-
-$titleStyle = ['style' => 'font-size: 18px;color: #01aaed;display:block'];
 ?>
-<?php if (empty($typeList)):?>
-    <blockquote class="layui-elem-quote" style="margin-top: 20px;">
+<?php if (empty($typeList)): ?>
+    <div class="alert alert-danger">
         <p>还没有设置文章类型</p>
-    </blockquote>
-<?php endif;?>
+    </div>
+<?php endif; ?>
 
 <?php foreach ($typeList as $typeInfo): ?>
-    <blockquote class="layui-elem-quote" style="margin-top: 20px;">
-        <h1><?= Html::a($typeInfo['name'], ['/admin/article/create', 'type' => $typeInfo['id']], $titleStyle) ?></h1>
-        <hr>
-        <p><?= $typeInfo['description'] ?></p>
-    </blockquote>
+    <div class="panel panel-default" style="margin-top: 20px;">
+        <div class="panel-heading">
+            <h3><?= BSHtml::a($typeInfo['name'], ['/admin/article/create', 'type' => $typeInfo['id']]) ?></h3>
+        </div>
+        <div class="panel-body">
+            <?= $typeInfo['description'] ?>
+        </div>
+    </div>
 <?php endforeach; ?>

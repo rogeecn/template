@@ -1,7 +1,8 @@
 <?php
 
-use plugins\LayUI\components\GridView;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use yii\bootstrap\ActiveForm;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\ArticleTypeSearch */
@@ -10,28 +11,27 @@ use plugins\LayUI\components\Html;
 
 
 <?php
-\plugins\LayUI\components\ActiveForm::begin();
-echo \plugins\LayUI\components\Html::beginTag("div", ['style' => 'text-align:right']);
-$btnSave   = \plugins\LayUI\components\Html::submitButton("保存");
-$btnCreate = \plugins\LayUI\components\Html::a("创建", ['/admin/article/type/manage/create'], ['class' => 'layui-btn']);
-echo \plugins\LayUI\components\Html::buttonGroup([$btnCreate, $btnSave]);
-echo \plugins\LayUI\components\Html::endTag("div");
+ActiveForm::begin();
+$btnSave   = BSHtml::submitButton("保存");
+$btnCreate = BSHtml::a("创建", ['/admin/article/type/manage/create'], ['class' => 'btn btn-default']);
+echo BSHtml::div($btnSave . "&nbsp;" . $btnCreate, ['style' => 'text-align:right'])
 ?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider, 'columns' => [
         [
-            'class'         => \plugins\LayUI\components\DndColumn::className(),
+            'class'         => \common\extend\DndColumn::className(),
             'headerOptions' => ['width' => 20],
             'content'       => function ($model) {
-                $dndIcon = Html::icon("arrows", ['drag-handle']);
+                $dndIcon = BSHtml::icon("arrows", "", ['class' => 'drag-handle']);
 
                 $orderAttr   = [
                     'data-old' => $model->order,
                     'data-id'  => $model->primaryKey,
                 ];
                 $name        = sprintf("order[%d]", $model->primaryKey);
-                $hiddenInput = Html::hiddenInput($name, $model->order, $orderAttr);
+                $hiddenInput = BSHtml::hiddenInput($name, $model->order, $orderAttr);
+
                 return $dndIcon . $hiddenInput;
 
             },
@@ -42,14 +42,14 @@ echo \plugins\LayUI\components\Html::endTag("div");
         'description',
         'order',
         [
-            'class'    => \plugins\LayUI\components\ActionColumn::className(),
+            'class'    => \common\extend\ActionColumn::className(),
             'template' => '{column} {update} {delete}',
             'buttons'  => [
                 'column' => function ($url, $model, $key) {
-                    return Html::a('[字段编辑]', ['/admin/article/field/manage','type'=>$model->id]);
+                    return BSHtml::a('[字段编辑]', ['/admin/article/field/manage', 'type' => $model->id]);
                 },
             ],
         ],
     ],
 ]); ?>
-<?php \plugins\LayUI\components\ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>

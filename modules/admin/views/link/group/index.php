@@ -1,16 +1,26 @@
 <?php
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use common\extend\Table;
+use yii\bootstrap\ActiveForm;
 
 /** @var \yii\web\View $this */
 /** @var \common\models\LinkGroup[] $groupList */
 ?>
 
-    <div class="text-right">
-        <?= Html::linkButton("创建", ['/admin/link/group/create']) ?>
+
+    <div class="text-right" style="margin-bottom: 20px;">
+        <?php
+        $createButton = BSHtml::buttonLink("创建", ['/admin/link/group/create']);
+        $submitButton = BSHtml::submitButton();
+
+        echo BSHtml::buttonGroup([$createButton, $submitButton]);
+        ?>
     </div>
+
+
 <?php
-$form = \plugins\LayUI\components\ActiveForm::begin();
-echo \plugins\LayUI\components\Table::widget([
+$form = ActiveForm::begin();
+echo Table::widget([
     'dataProvider' => $groupList,
     'sortable'     => true,
     'orderInput'   => 'input',
@@ -19,7 +29,7 @@ echo \plugins\LayUI\components\Table::widget([
         [
             'label' => '',
             'value' => function ($data) {
-                return Html::icon("arrows", ['drag-handle']);
+                return BSHtml::dragIcon();
             },
         ],
         'title',
@@ -41,14 +51,13 @@ echo \plugins\LayUI\components\Table::widget([
                     'name'         => sprintf("order[%d]", $data->primaryKey),
                 ];
 
-                return Html::activeTextInput($data, "order", $orderAttr);
+                return BSHtml::activeTextInput($data, "order", $orderAttr);
             },
         ],
         [
             'label' => 'Column',
             'value' => function ($data) {
-                $class  = ['class' => 'layui-btn layui-btn-small layui-btn-primary'];
-                $column = Html::a("链接管理", ['/admin/link/item', 'group' => $data->primaryKey], $class);
+                $column = BSHtml::buttonLink("链接管理", ['/admin/link/item', 'group' => $data->primaryKey]);
 
                 return $column;
             },
@@ -56,16 +65,12 @@ echo \plugins\LayUI\components\Table::widget([
         [
             'label' => 'OPT',
             'value' => function ($data) {
-                $class  = ['class' => 'layui-btn layui-btn-small layui-btn-primary'];
-                $edit   = Html::a("EDIT", ['/admin/link/group/update', 'id' => $data->primaryKey], $class);
-                $delete = Html::a("DELETE", ['/admin/link/group/delete', 'id' => $data->primaryKey], $class);
+                $edit   = BSHtml::buttonLink("EDIT", ['/admin/link/group/update', 'id' => $data->primaryKey]);
+                $delete = BSHtml::buttonLink("DELETE", ['/admin/link/group/delete', 'id' => $data->primaryKey]);
 
-                return Html::buttonGroup([$edit, $delete]);
+                return BSHtml::buttonGroup([$edit, $delete]);
             },
         ],
     ],
 ]);
-
-echo Html::submitButton();
-
-\plugins\LayUI\components\ActiveForm::end();
+ActiveForm::end();

@@ -1,7 +1,7 @@
 <?php
 
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ArticleType */
@@ -11,7 +11,7 @@ use plugins\LayUI\components\Html;
 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 <?= $form->field($model, 'description')->textarea() ?>
-<?= Html::submitWrapper(Html::submitButton()) ?>
+<?= BSHtml::submitButton() ?>
 
 <?php ActiveForm::end(); ?>
 

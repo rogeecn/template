@@ -1,16 +1,18 @@
 <?php
-use plugins\LayUI\components\ActiveForm;
-use plugins\LayUI\components\Html;
+use common\extend\BSHtml;
+use common\extend\Table;
+use yii\bootstrap\ActiveForm;
 
 ActiveForm::begin();
-$submitBtn = Html::submitButton();
-$createBtn = Html::a(Html::icon("plus") . '&nbsp;创建根分类', ['/admin/category/control/create', 'id' => 0], ['class' => 'layui-btn']);
+$submitBtn = BSHtml::submitButton();
+$createBtn = BSHtml::buttonLink('创建根分类', ['/admin/category/control/create', 'id' => 0], ['icon' => 'plus']);
 
+$btnGroup = BSHtml::buttonGroup([$submitBtn, $createBtn]);
+echo BSHtml::div($btnGroup, ['class' => 'text-right', 'style' => 'margin-bottom: 20px;']);
 
-echo Html::tag("div", $submitBtn . $createBtn, ['style' => 'text-align:right;margin-bottom: 20px;']);
-echo \plugins\LayUI\components\Table::widget([
+echo Table::widget([
     'dataProvider' => $dataList,
-    'sortable'     => TRUE,
+    'sortable'     => true,
     'orderInput'   => 'input',
     'columns'      => [
         [
@@ -19,7 +21,7 @@ echo \plugins\LayUI\components\Table::widget([
                 'style' => 'width: 10px;',
             ],
             'value'   => function ($data) {
-                return Html::icon("arrows", ['drag-handle']);
+                return BSHtml::icon("arrows", "", ['class' => 'drag-handle']);
             },
         ],
         'id',
@@ -40,33 +42,32 @@ echo \plugins\LayUI\components\Table::widget([
                     'name'         => sprintf("order[%d]", $data['id']),
                 ];
 
-                return Html::textInput($name, $data['order'], $orderAttr);
+                return BSHtml::textInput($name, $data['order'], $orderAttr);
             },
         ],
         [
             'label'   => '',
             'options' => [
-                'style' => 'width: 45px;',
+                'style' => 'width:130px',
             ],
             'value'   => function ($data) {
-                $edit   = Html::a(Html::icon("edit", [], ['style' => 'margin-right: 10px;']), ['/admin/category/control/update', 'id' => $data['id']]);
-                $create = Html::a(Html::icon("plus", [], ['style' => 'margin-right: 10px;']), ['/admin/category/control/create', 'id' => $data['id']]);
-
-                return $edit . $create;
-            },
-        ],
-        [
-            'label'   => '',
-            'options' => [
-                'style' => 'width: 10px;',
-            ],
-            'value'   => function ($data) {
-                $delete = Html::a(Html::icon("close"), ['/admin/category/control/delete', 'id' => $data['id']], [
-                    'onclick' => 'return confirm("确认删除么,分类及子分类都会被同时删除？")',
-                    'style'   => 'color: red;',
+                $edit = BSHtml::buttonLink("", ['/admin/category/control/update', 'id' => $data['id']], [
+                    'icon'  => 'edit',
+                    'class' => 'btn-sm',
                 ]);
 
-                return $delete;
+                $create = BSHtml::buttonLink("", ['/admin/category/control/create', 'id' => $data['id']], [
+                    'icon'  => 'plus',
+                    'class' => 'btn-sm',
+                ]);
+
+                $delete = BSHtml::buttonLink("", ['/admin/category/control/delete', 'id' => $data['id']], [
+                    'onclick' => 'return confirm("确认删除么,分类及子分类都会被同时删除？")',
+                    'icon'    => 'close',
+                    'class'   => 'btn-danger btn-sm',
+                ]);
+
+                return BSHtml::buttonGroup([$edit, $create, $delete]);
             },
         ],
     ],

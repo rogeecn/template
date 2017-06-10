@@ -11,9 +11,9 @@ use yii\bootstrap\ActiveForm;
 ?>
 <?php $form = ActiveForm::begin(); ?>
 <?= $form->errorSummary($model) ?>
-<?= $form->field($model, "type")->label(FALSE)->hiddenInput() ?>
+<?= $form->field($model, "type")->label(false)->hiddenInput() ?>
 <?= $form->field($model, "title")->textInput() ?>
-<?= $form->field($model, "category_id")->dropDownList(Category::getFlatIndentList(TRUE)) ?>
+<?= $form->field($model, "category_id")->dropDownList(Category::getFlatIndentList(true)) ?>
 <?php
 //= $form->field($model, "index_show")->label("&nbsp")->checkbox(['title'=>'首页展示'])
 ?>
@@ -21,6 +21,7 @@ use yii\bootstrap\ActiveForm;
     <?= $typeField['class']::field([
         'action' => \common\base\Field::ACTION_RENDER,
         'config' => $typeField,
+        'dataID' => $model->id,
     ]) ?>
 <?php endforeach; ?>
 <?= \common\extend\BSHtml::submitButton() ?>
