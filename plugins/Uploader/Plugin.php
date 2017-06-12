@@ -152,6 +152,8 @@ _JS_;
         width: 100px;
         height: 100px;
         border: 1px solid #e6e6e6;
+        vertical-align: top;
+        padding: 1px;
     }
 
     ul.image-upload > li img {
@@ -169,13 +171,18 @@ _JS_;
         bottom: 1px;
         background: #ff5722;
         display: block;
-        width: 100px;
+        width: 96px;
+        opacity: 0.6;
         height: 20px;
         line-height: 20px;
         font-size: 12px;
         text-align: center;
         color: white;
         cursor: pointer;
+    }
+
+    ul.image-upload > li .remove:hover {
+        opacity: 0.8;
     }
 _CSS;
 
