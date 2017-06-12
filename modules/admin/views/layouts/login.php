@@ -6,7 +6,7 @@
 use common\widgets\Alert;
 use yii\helpers\Html;
 
-\modules\admin\assets\UIAssets::register($this)
+\modules\admin\assets\AppAssets::register($this)
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
