@@ -29,18 +29,7 @@ class CreateController extends AuthController
             $trans = \Yii::$app->getDb()->beginTransaction();
             try {
                 # save article main data
-                $articleModel->title = Request::input("title");
-                $articleModel->title = strtr($articleModel->title, [
-                    '_Javascript教程' => '',
-                    '&nbsp;'        => ' ',
-                    ''              => '',
-                ]);
-                $articleModel->title = trim($articleModel->title);
-                if (empty($articleModel->title)) {
-                    throw new Exception("title is empty");
-                }
-
-
+                $articleModel->title       = Request::input("title");
                 $articleModel->user_id     = UserInfo::getID();
                 $articleModel->category_id = Request::input("category_id");
                 $articleModel->index_show  = Request::input("index_show");
