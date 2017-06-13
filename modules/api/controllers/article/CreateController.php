@@ -11,7 +11,7 @@ use yii\base\Exception;
 
 class CreateController extends WebController
 {
-    public $enableCsrfValidation = FALSE;
+    public $enableCsrfValidation = false;
 
     public function actionIndex()
     {
@@ -23,8 +23,8 @@ class CreateController extends WebController
         $articleModel       = new Article();
         $articleModel->type = $type;
 
-        $typeFields         = ArticleField::getTypeFieldList($type);
-        $trans              = \Yii::$app->getDb()->beginTransaction();
+        $typeFields = ArticleField::getTypeFieldList($type);
+        $trans      = \Yii::$app->getDb()->beginTransaction();
         try {
             # save article main data
             $articleModel->title = Request::input("title");
@@ -34,7 +34,10 @@ class CreateController extends WebController
                 '_javascript技巧' => '',
                 '-js教程'         => '',
                 '_jquery'       => '',
-                '-php教程'       => '',
+                '-php教程'        => '',
+                '_html/css'     => '',
+                '_WEB'          => '',
+                '-ITnose'       => '',
             ]);
             $articleModel->title = trim($articleModel->title);
             if (empty($articleModel->title)) {
