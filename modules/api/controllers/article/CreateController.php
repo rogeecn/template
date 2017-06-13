@@ -22,7 +22,7 @@ class CreateController extends WebController
 
         $articleModel       = new Article();
         $articleModel->type = $type;
-
+        r
         $typeFields = ArticleField::getTypeFieldList($type);
         $trans      = \Yii::$app->getDb()->beginTransaction();
         try {
@@ -31,6 +31,9 @@ class CreateController extends WebController
             $articleModel->title = strtr($articleModel->title, [
                 '_Javascript教程' => '',
                 '&nbsp;'        => ' ',
+                '_javascript技巧' => '',
+                '-js教程'         => '',
+                '_jquery'       => '',
             ]);
             $articleModel->title = trim($articleModel->title);
             if (empty($articleModel->title)) {
