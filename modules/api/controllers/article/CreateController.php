@@ -22,9 +22,9 @@ class CreateController extends WebController
 
         $articleModel       = new Article();
         $articleModel->type = $type;
-        r
-        $typeFields = ArticleField::getTypeFieldList($type);
-        $trans      = \Yii::$app->getDb()->beginTransaction();
+
+        $typeFields         = ArticleField::getTypeFieldList($type);
+        $trans              = \Yii::$app->getDb()->beginTransaction();
         try {
             # save article main data
             $articleModel->title = Request::input("title");
