@@ -34,6 +34,7 @@ class CreateController extends WebController
                 '_javascript技巧' => '',
                 '-js教程'         => '',
                 '_jquery'       => '',
+                '-php教程'       => '',
             ]);
             $articleModel->title = trim($articleModel->title);
             if (empty($articleModel->title)) {
