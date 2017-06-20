@@ -83,11 +83,11 @@ class Article extends \common\base\ActiveRecord
         return parent::beforeSave($insert);
     }
 
-    public static function getDataByID($articleID, $mode = null, $excludeFields = [])
+    public static function getDataByID($articleID, $mode = NULL, $excludeFields = [])
     {
         $articleModel = self::findOne($articleID);
         if (!$articleModel) {
-            return false;
+            return FALSE;
         }
 
         $articleData = $articleModel->toArray();
@@ -133,17 +133,17 @@ class Article extends \common\base\ActiveRecord
         return self::getListByCategoryID($categoryModel->primaryKey, $offset, $limitCnt);
     }
 
-    public static function getListByCategoryID($categoryID, $offset = 0, $limitCnt = 10)
+    public static function getListByCategoryID($categoryID, $offset = 0, $limitCnt = 10, $withFields = TRUE)
     {
         $condition = [
             'category_id' => $categoryID,
             'status'      => self::ST_ENABLE,
         ];
 
-        return self::getList($condition, $offset, $limitCnt);
+        return self::getList($condition, $offset, $limitCnt, $withFields);
     }
 
-    private static function getList($condition = [], $offset = 0, $limitCount = 10)
+    private static function getList($condition = [], $offset = 0, $limitCount = 10, $withFields = TRUE)
     {
         $list = self::find()
                     ->where($condition)
@@ -152,6 +152,9 @@ class Article extends \common\base\ActiveRecord
                     ->orderBy(['id' => SORT_DESC])
                     ->asArray()
                     ->all();
+        if (!$withFields) {
+            return $list;
+        }
 
         foreach ($list as &$item) {
             $articleTypeFields = ArticleField::getTypeFieldList($item['type']);

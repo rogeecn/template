@@ -29,7 +29,7 @@ class CategoryBox extends Widget
         $title = Html::tag("h2", $link, ['class' => 'title']);
 
 
-        $categoryArticle = Article::getListByCategoryID($this->categoryInfo['id'], 0, 10);
+        $categoryArticle = Article::getListByCategoryID($this->categoryInfo['id'], 0, 10, FALSE);
 
         $itemList = [];
         foreach ($categoryArticle as $item) {
