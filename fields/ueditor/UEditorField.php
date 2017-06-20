@@ -39,7 +39,6 @@ class UEditorField extends Field implements IField
                 'value'  => FALSE,
                 'config' => [
                     'title'    => '使用概要输入',
-                    'lay-skin' => 'primary',
                 ],
             ],
             [
@@ -48,7 +47,6 @@ class UEditorField extends Field implements IField
                 'value'  => FALSE,
                 'config' => [
                     'title'    => '显示标签',
-                    'lay-skin' => 'primary',
                 ],
             ],
         ];
@@ -77,7 +75,6 @@ class UEditorField extends Field implements IField
         $replacements                   = [
             '&nbsp;'    => " ",
             'bitCN.com' => "",
-            'zzarea'    => 'officejineng',
         ];
         $this->fieldData['description'] = strtr(trim($this->fieldData['description']), $replacements);
 

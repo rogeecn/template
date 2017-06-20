@@ -11,7 +11,7 @@ use yii\base\Exception;
 
 class CreateController extends WebController
 {
-    public $enableCsrfValidation = false;
+    public $enableCsrfValidation = FALSE;
 
     public function actionIndex()
     {
