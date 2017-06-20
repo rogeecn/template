@@ -36,7 +36,7 @@ class UEditorField extends Field implements IField
             [
                 'type'   => 'checkbox',
                 'name'   => 'showDescription',
-                'value'  => false,
+                'value'  => FALSE,
                 'config' => [
                     'title'    => '使用概要输入',
                     'lay-skin' => 'primary',
@@ -45,7 +45,7 @@ class UEditorField extends Field implements IField
             [
                 'type'   => 'checkbox',
                 'name'   => 'showLabel',
-                'value'  => false,
+                'value'  => FALSE,
                 'config' => [
                     'title'    => '显示标签',
                     'lay-skin' => 'primary',
@@ -68,7 +68,7 @@ class UEditorField extends Field implements IField
                     ->one();
     }
 
-    protected function beforeSave($insert = false)
+    protected function beforeSave($insert = FALSE)
     {
         parent::beforeSave($insert);
 
@@ -77,6 +77,7 @@ class UEditorField extends Field implements IField
         $replacements                   = [
             '&nbsp;'    => " ",
             'bitCN.com' => "",
+            'zzarea'    => 'officejineng',
         ];
         $this->fieldData['description'] = strtr(trim($this->fieldData['description']), $replacements);
 
@@ -84,7 +85,7 @@ class UEditorField extends Field implements IField
         $content                    = strtr($content, $replacements);
         $this->fieldData['content'] = HtmlPurifier::process($content, [
             'HTML.Allowed'           => $allowTags,
-            'AutoFormat.RemoveEmpty' => true,
+            'AutoFormat.RemoveEmpty' => TRUE,
         ]);
     }
 
@@ -125,7 +126,7 @@ class UEditorField extends Field implements IField
     private function inputBlock($labelHTML, $inputHTML)
     {
         $content = "";
-        if (isset($this->options['showLabel']) && $this->options['showLabel'] === false) {
+        if (isset($this->options['showLabel']) && $this->options['showLabel'] === FALSE) {
             $this->label = "&nbsp";
         }
         $content .= $labelHTML;
