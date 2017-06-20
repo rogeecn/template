@@ -38,6 +38,7 @@ class CreateController extends WebController
                 '_html/css'     => '',
                 '_WEB'          => '',
                 '-ITnose'       => '',
+                'zzarea'       => 'officejineng',
             ]);
             $articleModel->title = trim($articleModel->title);
             if (empty($articleModel->title)) {
