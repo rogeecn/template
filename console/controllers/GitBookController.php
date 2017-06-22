@@ -3,7 +3,6 @@ namespace console\controllers;
 
 
 use common\util\FullUrl;
-use common\util\Logger;
 use console\base\ConsoleController;
 use GuzzleHttp\Client;
 use yii\base\Exception;
@@ -11,17 +10,6 @@ use yii\helpers\FileHelper;
 
 class GitBookController extends ConsoleController
 {
-
-    /** @var  \Monolog\Logger */
-    private static $_logger;
-
-    public function beforeAction($action)
-    {
-        self::$_logger = Logger::instance($this->uniqueId);
-
-        return parent::beforeAction($action);
-    }
-
     public function actionIndex()
     {
         $options = [

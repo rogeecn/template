@@ -7,23 +7,12 @@ use common\models\Article;
 use common\models\ArticleField;
 use common\models\Tag;
 use common\models\TagArticle;
-use common\util\Logger;
 use console\base\ConsoleController;
 use yii\base\Exception;
 use yii\helpers\ArrayHelper;
 
 class ClearEmptyContentController extends ConsoleController
 {
-    /** @var  \Monolog\Logger */
-    private static $_logger;
-
-    public function beforeAction($action)
-    {
-        self::$_logger = Logger::instance($this->uniqueId);
-
-        return parent::beforeAction($action);
-    }
-
     public function actionIndex()
     {
         $data   = \Yii::$app->getDb()->createCommand("select id from field_content_data where content = ''")->queryAll();
