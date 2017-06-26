@@ -23,5 +23,9 @@ $editLink = \common\extend\Html::a('编辑', ['/admin/article/update', 'id' => $
     </div>
 
     <article class="content-data"><?= $content ?></article>
+
+    <div class="content-recommend-tag">
+        <div id="bdcs-rec"></div>
+    </div>
 </div>
 
