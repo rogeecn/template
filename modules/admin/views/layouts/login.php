@@ -6,6 +6,7 @@
 use common\widgets\Alert;
 use yii\helpers\Html;
 
+$this->setAdminMode();
 \modules\admin\assets\AppAssets::register($this)
 ?>
 <?php $this->beginPage() ?>
