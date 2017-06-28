@@ -6,6 +6,7 @@ use common\base\Field;
 use common\base\IField;
 use common\extend\BSHtml;
 use plugins\UEditor\Editor;
+use yii\base\Exception;
 use yii\helpers\HtmlPurifier;
 
 class UEditorField extends Field implements IField
@@ -84,6 +85,10 @@ class UEditorField extends Field implements IField
             'HTML.Allowed'           => $allowTags,
             'AutoFormat.RemoveEmpty' => TRUE,
         ]);
+
+        if (empty($this->fieldData['content'])) {
+            throw new Exception("content is empty");
+        }
     }
 
 
