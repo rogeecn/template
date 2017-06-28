@@ -56,7 +56,7 @@ $tableList = \common\models\ArticleField::getTableList();
         <th class="text-right">Options</th>
         <td>
             <?php
-            $fieldData['options'] = json_decode($fieldData['options'], true);
+//            $fieldData['options'] = json_decode($fieldData['options'], true);
             foreach ($fieldConfig['options'] as $option) {
                 $inputType = $option['type'];
 

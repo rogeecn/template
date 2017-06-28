@@ -13,11 +13,6 @@ return [
     'basePath'            => dirname(__DIR__),
     'controllerNamespace' => 'application\controllers',
     'bootstrap'           => ['log'],
-    'modules'             => [
-        'api' => [
-            'class' => 'modules\api\Module',
-        ],
-    ],
     'components'          => [
         'user'         => [
             'identityClass'   => 'common\User',
@@ -28,7 +23,6 @@ return [
             ],
         ],
         'session'      => [
-            // this is the name of the session cookie used for login on the application
             'name' => 'SESS_APPLICATION',
         ],
         'log'          => [
@@ -51,17 +45,6 @@ return [
             'parsers'   => [
                 'application/json' => 'yii\web\JsonParser',
                 'text/json'        => 'yii\web\JsonParser',
-            ],
-        ],
-        'view'         => [
-            'class' => 'common\extend\View',
-            'theme' => [
-                'basePath' => '@themes/basic',
-                'baseUrl'  => '@themes/basic',
-                'pathMap'  => [
-                    '@application/views'   => '@themes/basic',
-                    '@application/modules' => '@themes/basic/modules',
-                ],
             ],
         ],
     ],

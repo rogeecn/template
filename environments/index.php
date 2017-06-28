@@ -29,14 +29,14 @@
  * ```
  */
 return [
-    'dev' => [
-        'path' => 'dev',
-        'setWritable' => [
+    'dev'  => [
+        'path'                   => 'dev',
+        'setWritable'            => [
             'runtime',
-            'application/runtime',
-            'application/web/assets',
+            'assets',
+            'uploads',
         ],
-        'setExecutable' => [
+        'setExecutable'          => [
             'yii',
         ],
         'setCookieValidationKey' => [
@@ -44,13 +44,13 @@ return [
         ],
     ],
     'prod' => [
-        'path' => 'prod',
-        'setWritable' => [
+        'path'                   => 'prod',
+        'setWritable'            => [
             'runtime',
-            'application/runtime',
-            'application/web/assets',
+            'assets',
+            'uploads',
         ],
-        'setExecutable' => [
+        'setExecutable'          => [
             'yii',
         ],
         'setCookieValidationKey' => [

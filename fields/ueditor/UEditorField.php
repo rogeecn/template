@@ -5,7 +5,7 @@ namespace fields\ueditor;
 use common\base\Field;
 use common\base\IField;
 use common\extend\BSHtml;
-use modules\ueditor\widget\UEditorInput;
+use plugins\UEditor\Editor;
 use yii\helpers\HtmlPurifier;
 
 class UEditorField extends Field implements IField
@@ -38,7 +38,7 @@ class UEditorField extends Field implements IField
                 'name'   => 'showDescription',
                 'value'  => FALSE,
                 'config' => [
-                    'title'    => '使用概要输入',
+                    'title' => '使用概要输入',
                 ],
             ],
             [
@@ -46,7 +46,7 @@ class UEditorField extends Field implements IField
                 'name'   => 'showLabel',
                 'value'  => FALSE,
                 'config' => [
-                    'title'    => '显示标签',
+                    'title' => '显示标签',
                 ],
             ],
         ];
@@ -114,7 +114,10 @@ class UEditorField extends Field implements IField
 
         $label     = BSHtml::label($this->label['content']);
         $inputName = sprintf("%s[content]", $this->name);
-        $input     = UEditorInput::widget(['name' => $inputName, 'value' => $value]);
+        $input     = Editor::widget([
+            'name'  => $inputName,
+            'value' => $value,
+        ]);
         $content .= $this->inputBlock($label, $input);
 
         return $content;

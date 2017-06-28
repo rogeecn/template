@@ -1,17 +1,15 @@
 <?php
 return [
+    'runtimePath'   => dirname(dirname(__DIR__)) . '/runtime',
+    'vendorPath'    => dirname(dirname(__DIR__)) . '/vendor',
     'modules'       => [
-        'admin'    => [
+        'api'   => [
+            'class' => 'modules\api\Module',
+        ],
+        'admin' => [
             'class' => 'modules\admin\Module',
         ],
-        'ueditor'  => [
-            'class' => 'modules\ueditor\Module',
-        ],
-        'uploader' => [
-            'class' => 'modules\uploader\Module',
-        ],
     ],
-    'vendorPath'    => dirname(dirname(__DIR__)) . '/vendor',
     'components'    => [
         'cache'        => [
             'class' => 'yii\caching\FileCache',
@@ -51,6 +49,17 @@ return [
             'dateFormat'     => 'php:y/m/d',
             'datetimeFormat' => 'php:y/m/d H:i',
             'timeFormat'     => 'php:H:i:s',
+        ],
+        'view'         => [
+            'class' => 'common\extend\View',
+            'theme' => [
+                'basePath' => '@themes/basic',
+                'baseUrl'  => '@themes/basic',
+                'pathMap'  => [
+                    '@application/views'   => '@themes/basic',
+                    '@application/modules' => '@themes/basic/modules',
+                ],
+            ],
         ],
     ],
     'controllerMap' => [

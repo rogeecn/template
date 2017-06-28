@@ -18,8 +18,8 @@ trait TraitThemeSet
         $theme = \Yii::$app->getView()->theme;
         $theme->setBasePath("@themes/" . $themeName);
         $theme->pathMap = [
-            '@application/views'   => '@themes/' . $themeName,
-            '@application/modules' => '@themes/' . $themeName . '/modules',
+            '@application/views'   => sprintf('@themes/%s/views', $themeName),
+            '@application/modules' => sprintf('@themes/%s/views/modules', $themeName),
         ];
     }
 }

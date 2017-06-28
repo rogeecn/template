@@ -2,6 +2,7 @@
 namespace application\controllers;
 
 use application\base\WebController;
+use plugins\UEditor\UploadAction;
 use plugins\Uploader\UploaderAction;
 
 class PluginController extends WebController
@@ -13,6 +14,9 @@ class PluginController extends WebController
         return [
             'uploader' => [
                 'class' => UploaderAction::className(),
+            ],
+            'ueditor'  => [
+                'class' => UploadAction::className(),
             ],
         ];
     }

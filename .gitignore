@@ -2,6 +2,8 @@
 /yii
 /yii_test
 /yii_test.bat
+/index.php
+/index-test.php
 
 # phpstorm project files
 .idea
@@ -34,3 +36,5 @@ phpunit.phar
 # vagrant runtime
 /.vagrant
 composer.lock
+
+
