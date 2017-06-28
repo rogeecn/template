@@ -22,14 +22,14 @@ use yii\bootstrap\ActiveForm;
 $form = ActiveForm::begin();
 echo Table::widget([
     'dataProvider' => $groupList,
-    'sortable'     => true,
+    'sortable'     => TRUE,
     'orderInput'   => 'input',
     'colGroup'     => [20, 0, 0, 60, 80, 80, 160],
     'columns'      => [
         [
             'label' => '',
             'value' => function ($data) {
-                return BSHtml::dragIcon();
+                return BSHtml::icon("arrows", "", ['class' => 'drag-handle']);
             },
         ],
         'title',
