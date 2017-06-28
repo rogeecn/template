@@ -21,4 +21,16 @@
         </script>
     </div>
 </div>
-<?= $this->render("sider") ?>
+
+<!--side-->
+<aside class="sidebar">
+    <?= \themes\basic\widgets\TagCloud\TagCloud::widget([
+        'items' => \common\models\Tag::getList(18, TRUE),
+    ]) ?>
+
+    <?= \themes\basic\widgets\CategoryBox::widget([
+        'categoryID' => $articleInfo['category_id'],
+    ]);
+    ?>
+</aside>
+

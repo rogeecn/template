@@ -6,17 +6,27 @@ use common\base\Widget;
 use common\extend\Html;
 use common\models\Article;
 use common\models\Category;
+use yii\base\Exception;
 
 class CategoryBox extends Widget
 {
     public $options       = ['class' => 'widget border widget-box'];
     public $categoryAlias = "";
+    public $categoryID    = "";
 
     private $categoryInfo = "";
 
     public function init()
     {
-        $this->categoryInfo = Category::getByAlias($this->categoryAlias);
+        if (!empty($this->categoryID)) {
+            $this->categoryInfo = Category::getByID($this->categoryID);
+        }
+
+        if (!empty($this->categoryAlias)) {
+            $this->categoryInfo = Category::getByAlias($this->categoryAlias);
+        }
+
+        throw new Exception("categoryAlias or categoryID required!");
     }
 
     public function run()
