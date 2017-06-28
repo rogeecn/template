@@ -1,5 +1,5 @@
 <?php
-namespace widgets\Carousel;
+namespace themes\basic\widgets\Carousel;
 
 use common\models\Article;
 use plugins\Carousel\CarouselAssets;

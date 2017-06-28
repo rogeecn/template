@@ -4,7 +4,7 @@ use common\extend\Html;
 ?>
 <header class="nav">
     <div class="container">
-        <?= \widgets\NavItem::widget([
+        <?= \themes\basic\widgets\NavItem::widget([
             'items'            => \common\models\LinkGroup::getLinkByGroupAlias("nav-top"),
             'containerOptions' => ['class' => 'menu nav-sub text-right'],
         ]) ?>
@@ -17,7 +17,7 @@ use common\extend\Html;
                 echo Html::a($logoImg . $siteName, $siteUrl);
                 ?>
             </h1>
-            <?= \widgets\NavItem::widget([
+            <?= \themes\basic\widgets\NavItem::widget([
                 'items'   => \common\models\LinkGroup::getLinkByGroupAlias("nav-main"),
                 'options' => ['class' => 'menu nav-menu'],
             ]) ?>

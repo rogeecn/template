@@ -1,7 +1,7 @@
-<?= \widgets\Breadcrumbs::widget(['categoryID' => $categoryID]) ?>
+<?= \themes\basic\widgets\Breadcrumbs::widget(['categoryID' => $categoryID]) ?>
 <div class="content">
     <div class="page-article">
-        <?= \widgets\Content\Content::widget([
+        <?= \themes\basic\widgets\Content\Content::widget([
             'articleID' => $articleInfo['id'],
         ]); ?>
     </div>

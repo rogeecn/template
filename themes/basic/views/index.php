@@ -4,15 +4,15 @@
 ?>
 <div class="clearfix">
     <div class="content">
-        <?= \widgets\Carousel\Carousel::widget(['articleType' => 'carousel']) ?>
+        <?= \themes\basic\widgets\Carousel\Carousel::widget(['articleType' => 'carousel']) ?>
     </div>
     <div class="sidebar">
-        <?= \widgets\Tab\Tab::widget([
+        <?= \themes\basic\widgets\Tab\Tab::widget([
             'options' => ['style' => 'height: 200px'],
             'items'   => [
                 [
                     'title'   => '网站公告',
-                    'content' => \widgets\ListItem::widget([
+                    'content' => \themes\basic\widgets\ListItem::widget([
                         'items' => function () {
                             $dataList = \common\models\Article::getListByCategoryAlias("announcement");
 
@@ -43,14 +43,14 @@
         <?php foreach ($indexCategoryList as $indexCategories): ?>
             <div class="row">
                 <div class="col col-left">
-                    <?= \widgets\CategoryBox::widget([
+                    <?= \themes\basic\widgets\CategoryBox::widget([
                         'categoryAlias' => trim($indexCategories[0]),
                     ]);
                     ?>
                 </div>
 
                 <div class="col col-right">
-                    <?= \widgets\CategoryBox::widget([
+                    <?= \themes\basic\widgets\CategoryBox::widget([
                         'categoryAlias' => trim($indexCategories[1]),
                     ]);
                     ?>
@@ -63,7 +63,7 @@
 </div>
 
 
-<?= \widgets\Tab\Tab::widget([
+<?= \themes\basic\widgets\Tab\Tab::widget([
     'options' => ['style' => "margin-top: 20px;"],
     'items'   => [
         [

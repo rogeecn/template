@@ -5,14 +5,14 @@
 
 $categoryList = array_chunk($categoryChildren, 2);
 ?>
-<?= \widgets\Breadcrumbs::widget(['categoryID' => $categoryID]) ?>
+<?= \themes\basic\widgets\Breadcrumbs::widget(['categoryID' => $categoryID]) ?>
 
     <div class="content">
         <?php foreach ($categoryList as $categoryChildren): ?>
             <div class="row">
                 <?php if (isset($categoryChildren[0])): ?>
                     <div class="col col-left">
-                        <?= \widgets\CategoryBox::widget([
+                        <?= \themes\basic\widgets\CategoryBox::widget([
                             'categoryAlias' => $categoryChildren[0]->alias,
                         ]) ?>
                     </div>
@@ -20,7 +20,7 @@ $categoryList = array_chunk($categoryChildren, 2);
 
                 <?php if (isset($categoryChildren[1])): ?>
                     <div class="col col-right">
-                        <?= \widgets\CategoryBox::widget([
+                        <?= \themes\basic\widgets\CategoryBox::widget([
                             'categoryAlias' => $categoryChildren[1]->alias,
                         ]) ?>
                     </div>

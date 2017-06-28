@@ -1,5 +1,5 @@
 <?php
-namespace widgets\TagCloud;
+namespace themes\basic\widgets\TagCloud;
 
 
 use common\base\Widget;

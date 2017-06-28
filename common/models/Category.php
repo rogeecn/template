@@ -143,6 +143,10 @@ class Category extends \common\base\ActiveRecord
 
     public static function breadCrumb($catID)
     {
+        if ($catID == 0) {
+            return [];
+        }
+
         $list    = self::getList();
         $catInfo = self::getByID($catID);
         $path    = explode("-", $catInfo['path']);

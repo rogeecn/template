@@ -1,5 +1,5 @@
 <?php
-namespace widgets;
+namespace themes\basic\widgets;
 
 
 use common\base\Widget;

@@ -1,5 +1,5 @@
 <?php
-namespace widgets\Announcement;
+namespace themes\basic\widgets\Announcement;
 
 
 use common\base\Field;

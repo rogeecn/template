@@ -3,10 +3,10 @@
 /** @var $this \common\extend\View */
 /** @var $categoryChildren \common\models\Category[] */
 ?>
-<?= \widgets\Breadcrumbs::widget(['categoryID' => $categoryID]) ?>
+<?= \themes\basic\widgets\Breadcrumbs::widget(['categoryID' => $categoryID]) ?>
 
 <div class="content">
-    <?= \widgets\ArticleList\ArticleList::widget([
+    <?= \themes\basic\widgets\ArticleList\ArticleList::widget([
         'condition' => ['type' => 2, 'category_id' => $categoryID],
         'title'     => [
             'title' => $categoryInfo['name'],

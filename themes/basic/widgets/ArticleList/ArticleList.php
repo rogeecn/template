@@ -1,12 +1,12 @@
 <?php
-namespace widgets\ArticleList;
+namespace themes\basic\widgets\ArticleList;
 
 
 use common\base\Widget;
 use common\extend\Html;
 use common\extend\LinkPager;
 use common\util\Request;
-use widgets\ListHeader;
+use themes\basic\widgets\ListHeader;
 use yii\data\Pagination;
 use yii\db\Query;
 

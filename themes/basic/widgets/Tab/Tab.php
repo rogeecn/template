@@ -1,5 +1,5 @@
 <?php
-namespace widgets\Tab;
+namespace themes\basic\widgets\Tab;
 
 
 use common\base\Widget;

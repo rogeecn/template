@@ -22,7 +22,7 @@ AppAsset::register($this);
 <section class="container">
     <?= $content ?>
 </section>
-<?= \widgets\ColumnShow::widget([
+<?= \themes\basic\widgets\ColumnShow::widget([
     'title' => $this->setting("site.slogan"),
     'link'  => [
         'label' => '立即前往',

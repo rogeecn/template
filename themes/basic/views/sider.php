@@ -1,9 +1,9 @@
 <aside class="sidebar">
-    <?php /*= \widgets\Tab\Tab::widget([
+    <?php /*= \themes\basic\widgets\Tab\Tab::widget([
         'items' => [
             [
                 'title'   => '网站公告',
-                'content' => \widgets\ListItem::widget([
+                'content' => \themes\basic\widgets\ListItem::widget([
                     'items' => function () {
                         $dataList = \common\models\Article::getListByCategoryAlias("announcement");
 
@@ -23,10 +23,10 @@
         ],
     ]); */ ?>
 
-    <?php /*= \widgets\BlockShow\BlockShow::widget(['id' => 23]); */ ?>
-    <?php /*= \widgets\BlockShow\BlockShow::widget(['id' => 24]); */ ?>
+    <?php /*= \themes\basic\widgets\BlockShow\BlockShow::widget(['id' => 23]); */ ?>
+    <?php /*= \themes\basic\widgets\BlockShow\BlockShow::widget(['id' => 24]); */ ?>
 
-    <?= \widgets\TagCloud\TagCloud::widget([
+    <?= \themes\basic\widgets\TagCloud\TagCloud::widget([
         'items' => \common\models\Tag::getList(18, TRUE),
     ]) ?>
 </aside>

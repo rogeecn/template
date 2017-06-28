@@ -1,5 +1,5 @@
 <?php
-namespace widgets\Header;
+namespace themes\basic\widgets\Header;
 
 
 use common\base\Widget;

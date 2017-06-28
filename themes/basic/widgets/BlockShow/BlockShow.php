@@ -1,5 +1,5 @@
 <?php
-namespace widgets\BlockShow;
+namespace themes\basic\widgets\BlockShow;
 
 
 use common\base\Widget;

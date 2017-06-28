@@ -43,6 +43,12 @@ return [
                         '//cdn.staticfile.org/jquery-sortable/0.9.13/jquery-sortable-min.js',
                     ],
                 ],
+                'plugins\UEditor\Assets'          => [
+                    'js' => [
+                        'ueditor.config.js?v=1.0.1',
+                        "//cdn.staticfile.org/ueditor/1.4.3/ueditor.all.min.js",
+                    ],
+                ],
             ],
         ],
         'formatter'    => [
