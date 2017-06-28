@@ -13,6 +13,7 @@ class CategoryBox extends Widget
     public $options       = ['class' => 'widget border widget-box'];
     public $categoryAlias = "";
     public $categoryID    = "";
+    public $title         = "";
 
     private $categoryInfo = "";
 
@@ -20,10 +21,14 @@ class CategoryBox extends Widget
     {
         if (!empty($this->categoryID)) {
             $this->categoryInfo = Category::getByID($this->categoryID);
+
+            return;
         }
 
         if (!empty($this->categoryAlias)) {
             $this->categoryInfo = Category::getByAlias($this->categoryAlias);
+
+            return;
         }
 
         throw new Exception("categoryAlias or categoryID required!");
@@ -35,7 +40,11 @@ class CategoryBox extends Widget
             return "";
         }
 
-        $link  = Html::a($this->categoryInfo['name'], $this->getView()->categoryUrl($this->categoryAlias));
+        $titleName = $this->title;
+        if (empty($this->title)) {
+            $titleName = $this->categoryInfo['name'];
+        }
+        $link  = Html::a($titleName, $this->getView()->categoryUrl($this->categoryAlias));
         $title = Html::tag("h2", $link, ['class' => 'title']);
 
 

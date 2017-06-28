@@ -29,6 +29,7 @@
     ]) ?>
 
     <?= \themes\basic\widgets\CategoryBox::widget([
+        'title'      => '分类文章',
         'categoryID' => $articleInfo['category_id'],
     ]);
     ?>
