@@ -21,18 +21,18 @@ class CarouselField extends Field implements IField
         }
 
 
-        $content = "";
+        $linkContent = "";
+        $inputName   = sprintf("%s[link]", $this->name);
+        $linkContent .= BSHtml::label($this->label['link']);
+        $linkContent .= BSHtml::textInput($inputName, $this->value['link']);
+        $linkContent = BSHtml::formItem($linkContent);
 
-        $inputName = sprintf("%s[link]", $this->name);
-        $content .= BSHtml::label($this->label['link']);
-        $content .= BSHtml::textInput($inputName, $this->value['link']);
-        $content .= BSHtml::formItem($content);
+        $descriptionContent = "";
+        $inputName          = sprintf("%s[description]", $this->name);
+        $descriptionContent .= BSHtml::label($this->label['description']);
+        $descriptionContent .= BSHtml::textarea($inputName, $this->value['description']);
+        $descriptionContent = BSHtml::formItem($descriptionContent);
 
-        $inputName = sprintf("%s[description]", $this->name);
-        $content .= BSHtml::label($this->label['description']);
-        $content .= BSHtml::textarea($inputName, $this->value['description']);
-        $content .= BSHtml::formItem($content);
-
-        return $content;
+        return $linkContent . "\n" . $descriptionContent;
     }
 }

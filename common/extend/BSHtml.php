@@ -15,7 +15,7 @@ class BSHtml extends \common\extend\Html
 
     public static function formItem($content, $options = [])
     {
-        if (!isset($options['clasa'])) {
+        if (!isset($options['class'])) {
             $options['class'] = '';
         }
 
