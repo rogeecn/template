@@ -4,6 +4,7 @@ namespace application\widgets;
 use plugins\Carousel\CarouselAssets;
 use yii\base\Widget;
 use yii\helpers\Html;
+use yii\helpers\Json;
 
 class Carousel extends Widget
 {
@@ -33,7 +34,12 @@ class Carousel extends Widget
         if (!isset($this->options['id'])) {
             $this->options['id'] = self::getId();
         }
-        $this->getView()->registerJs($this->getJS());
+
+        $config = Json::htmlEncode($this->config);
+        $js     = <<<_JS_
+$('#{$this->options['id']}').slick($config);
+_JS_;
+        $this->getView()->registerJs($js);
         CarouselAssets::register($this->getView());
     }
 
@@ -60,16 +66,5 @@ class Carousel extends Widget
         }
 
         return Html::tag("div", implode("\n", $items), $this->options);
-    }
-
-    private function getJS()
-    {
-        $config = json_encode($this->config);
-        $js     = <<<_JS_
-var slickConfig = JSON.parse("$config");
-$('#{$this->options['id']}').slick(slickConfig);
-_JS_;
-
-        return $js;
     }
 }
