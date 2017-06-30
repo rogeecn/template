@@ -13,9 +13,7 @@ class ChangYan extends Widget
 
     public function init()
     {
-
         if ($this->mode == "pc") {
-
             $pcJS     = "https://changyan.sohu.com/upload/changyan.js";
             $pcScript = <<<_JS_
         window.changyan.api.config({

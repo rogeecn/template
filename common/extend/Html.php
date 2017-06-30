@@ -28,4 +28,18 @@ class Html extends \yii\helpers\Html
     {
         return self::icon("arrows", "", ['class' => 'drag-handle']);
     }
+
+
+    public static function prependCssClass(&$options, $class)
+    {
+        if (!isset($options['class'])) {
+            $options['class'] = $class;
+
+            return;
+        }
+
+        $optionsClass     = $options['class'];
+        $options['class'] = $class;
+        Html::addCssClass($options, $optionsClass);
+    }
 }
