@@ -8,7 +8,8 @@ use common\models\Category;
 
 class Breadcrumbs extends Widget
 {
-    public $showIndex = TRUE;
+    public $showIndex    = TRUE;
+    public $indexContent = "";
     /**
      * [
      *      ['label'=>'xxx','url'=>xxx],
@@ -29,7 +30,11 @@ class Breadcrumbs extends Widget
     public function init()
     {
         if ($this->showIndex) {
-            $this->linkData[] = Html::a(Html::icon("home", "&nbsp") . "首页", ['/']);
+            $indexContent = Html::icon("home", "&nbsp") . "首页";
+            if (!empty($this->indexContent)) {
+                $indexContent = $this->indexContent;
+            }
+            $this->linkData[] = Html::a($indexContent, ['/']);
         }
 
         if ($this->categoryID > 0) {
