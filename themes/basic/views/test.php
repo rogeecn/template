@@ -1,6 +1,22 @@
-<?php
+<p>-----------------------------------------------</p>
 
-?>
+<?php echo \application\widgets\ContentSummaryItem::widget([
+    'dataProvider' => \themes\basic\data\ContentSummary::widget(),
+]) ?>
+
+<p>-----------------------------------------------</p>
+
+<?php echo \application\widgets\ContentSummaryItem::widget([
+    'dataProvider' => [
+        'title'       => "Hello  world!",
+        'description' => "description Hello  world!",
+        'image'       => "http://officejineng.com/themes/basic/assets/images/logo.png",
+        'author'      => "Rogee",
+        'publish_at'  => date("Ymd"),
+        'view_cnt'    => 100,
+        'comment_cnt' => 10,
+    ],
+]) ?>
 <p>-----------------------------------------------</p>
 
 
@@ -74,16 +90,3 @@
     ],
 ]); ?>
 
-<ul class="nav-pills nav">
-    <li><a href="/site/index">Home</a></li>
-    <li class="dropdown">
-        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-        <ul class="nav-pills nav">
-            <li><a href="#">Level 1 - Dropdown A</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Dropdown Header</li>
-            <li><a href="#">Level 1 - Dropdown B</a></li>
-        </ul>
-    </li>
-    <li><a href="/site/login">Login</a></li>
-</ul>
