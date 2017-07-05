@@ -1,22 +1,29 @@
 <p>-----------------------------------------------</p>
 
-<?php echo \application\widgets\ContentSummaryItem::widget([
-    'dataProvider' => \themes\basic\data\ContentSummary::widget(),
-]) ?>
 
-<p>-----------------------------------------------</p>
-
-<?php echo \application\widgets\ContentSummaryItem::widget([
-    'dataProvider' => [
-        'title'       => "Hello  world!",
-        'description' => "description Hello  world!",
-        'image'       => "http://officejineng.com/themes/basic/assets/images/logo.png",
-        'author'      => "Rogee",
-        'publish_at'  => date("Ymd"),
-        'view_cnt'    => 100,
-        'comment_cnt' => 10,
+<?= \application\widgets\ContentSummaryList::widget([
+    'pagination' => [
+        'totalCount' => 1000,
+    ],
+    'items'      => [
+        \application\widgets\ContentSummaryItem::widget([
+            'dataProvider' => \themes\basic\data\ContentSummary::widget(),
+        ]),
+        \application\widgets\ContentSummaryItem::widget([
+            'dataProvider' => [
+                'title'       => "Hello  world!",
+                'description' => "description Hello  world!",
+                'image'       => "http://officejineng.com/themes/basic/assets/images/logo.png",
+                'author'      => "Rogee",
+                'publish_at'  => date("Ymd"),
+                'view_cnt'    => 100,
+                'comment_cnt' => 10,
+            ],
+        ]),
     ],
 ]) ?>
+
+
 <p>-----------------------------------------------</p>
 
 
