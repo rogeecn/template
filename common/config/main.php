@@ -59,6 +59,7 @@ return [
         'view'         => [
             'class' => 'common\extend\View',
             'theme' => [
+                'class'    => 'common\extend\Theme',
                 'basePath' => '@themes/basic',
                 'baseUrl'  => '@themes/basic',
                 'pathMap'  => [

@@ -2,6 +2,7 @@
 namespace common\extend;
 
 
+use common\util\Util;
 use yii\helpers\Url;
 
 class View extends \yii\web\View
@@ -10,11 +11,18 @@ class View extends \yii\web\View
 
     private $keywords;
     private $description;
-    private $adminMode = false;
+    private $adminMode = FALSE;
+
+    public function renderFile($viewFile, $params = [], $context = NULL)
+    {
+        $viewFile = Util::convertToThemeFile($viewFile);
+
+        return parent::renderFile($viewFile, $params, $context);
+    }
 
     public function setAdminMode()
     {
-        $this->adminMode = true;
+        $this->adminMode = TRUE;
     }
 
     public function setTitle($title)
@@ -121,5 +129,56 @@ class View extends \yii\web\View
         }
 
         return "";
+    }
+
+    public function commonMetaTags($tags = ['viewport', 'format-detection', 'X-UA-Compatible', 'renderer', 'Cache-Control'], $options = [])
+    {
+        $defaultOptions = [];
+        foreach ($tags as $tag) {
+            $tagOptions = [];
+            if (isset($options[$tag])) {
+                $tagOptions = $options[$tag];
+            }
+
+            switch ($tag) {
+                case 'viewport':
+                    $defaultOptions = [
+                        'name'    => $tag,
+                        'content' => 'width=device-width,height=device-height,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1,target-densitydpi=device-dpi',
+                    ];
+                    break;
+
+                case 'format-detection':
+                    //忽略电话号码和邮箱
+                    $defaultOptions = [
+                        'name'    => $tag,
+                        'content' => 'telphone=no, email=no',
+                    ];
+                    break;
+                case 'X-UA-Compatible': //优先使用 IE 最新版本和 Chrome
+                    $defaultOptions = [
+                        'name'    => $tag,
+                        'content' => 'IE=edge,chrome=1',
+                    ];
+                    break;
+                case 'renderer':
+                    $defaultOptions = [
+                        'name'    => $tag,
+                        'content' => 'webkit',
+                    ];
+                    break;
+                case 'Cache-Control': //不让百度转码
+                    $defaultOptions = [
+                        'name'    => $tag,
+                        'content' => 'no-siteapp',
+                    ];
+                    break;
+                default:
+                    continue;
+            }
+
+            $tagOptions = array_merge($defaultOptions, $tagOptions);
+            $this->registerMetaTag($tagOptions);
+        }
     }
 }

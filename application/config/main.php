@@ -12,7 +12,7 @@ return [
     'defaultRoute'        => 'index',
     'basePath'            => dirname(__DIR__),
     'controllerNamespace' => 'application\controllers',
-    'bootstrap'           => ['log'],
+    'bootstrap'           => ['log', 'device'],
     'components'          => [
         'user'         => [
             'identityClass'   => 'common\User',
@@ -24,6 +24,9 @@ return [
         ],
         'session'      => [
             'name' => 'SESS_APPLICATION',
+        ],
+        'device'       => [
+            'class' => 'alexandernst\devicedetect\DeviceDetect',
         ],
         'log'          => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
