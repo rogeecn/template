@@ -1,6 +1,18 @@
 <p>-----------------------------------------------</p>
 
 
+<?= \application\widgets\ContentData::widget([
+    'dataProvider' => [
+        'title'       => "Hello  world!",
+        'description' => "description Hello  world!",
+        'content'     => 'hello world! content detail',
+    ],
+]) ?>
+
+
+<p>-----------------------------------------------</p>
+
+
 <?= \application\widgets\ContentSummaryList::widget([
     'pagination' => [
         'totalCount' => 1000,
