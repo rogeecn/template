@@ -3,7 +3,7 @@ namespace themes\basic\widgets;
 
 
 use common\base\Widget;
-use plugins\LayUI\components\Html;
+use common\extend\Html;
 
 class RecommendList extends Widget
 {

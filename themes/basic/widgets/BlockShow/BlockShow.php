@@ -4,7 +4,7 @@ namespace themes\basic\widgets\BlockShow;
 
 use common\base\Widget;
 use common\models\Article;
-use plugins\LayUI\components\Html;
+use common\extend\Html;
 use yii\base\InvalidParamException;
 
 class BlockShow extends Widget

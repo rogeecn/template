@@ -3,7 +3,7 @@ namespace themes\basic\widgets\Tab;
 
 
 use common\base\Widget;
-use plugins\LayUI\components\Html;
+use common\extend\Html;
 use yii\web\JqueryAsset;
 
 class Tab extends Widget

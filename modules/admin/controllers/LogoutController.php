@@ -11,6 +11,6 @@ class LogoutController extends AuthController
     {
         UserInfo::logout();
 
-        return $this->goHome();
+        return $this->redirect("/admin");
     }
 }

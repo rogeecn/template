@@ -9,7 +9,7 @@ use common\util\Request;
 
 class LoginController extends WebController
 {
-    public $layout = "login";
+    public $layout = 'main';
 
     public function actionIndex()
     {
