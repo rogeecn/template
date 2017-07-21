@@ -7,16 +7,19 @@ use plugins\Uploader\UploaderAction;
 
 class PluginController extends WebController
 {
-    public $enableCsrfValidation = FALSE;
+    public $enableCsrfValidation = false;
 
     public function actions()
     {
         return [
-            'uploader' => [
+            'uploader'       => [
                 'class' => UploaderAction::className(),
             ],
-            'ueditor'  => [
+            'ueditor'        => [
                 'class' => UploadAction::className(),
+            ],
+            'tinymce_upload' => [
+                'class' => \plugins\TinyMCE\UploaderAction::className(),
             ],
         ];
     }

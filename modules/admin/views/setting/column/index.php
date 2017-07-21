@@ -29,7 +29,7 @@ echo Table::widget([
                 'style' => 'width: 10px;',
             ],
             'value'   => function ($data) {
-                return BSHtml::icon("arrows", ['drag-handle']);
+                return BSHtml::dragIcon();
             },
         ],
         [
