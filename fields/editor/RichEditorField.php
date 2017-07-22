@@ -1,18 +1,18 @@
 <?php
-namespace fields\ueditor;
+namespace fields\editor;
 
 
 use common\base\Field;
 use common\base\IField;
 use common\extend\BSHtml;
-use plugins\UEditor\Editor;
+use plugins\TinyMCE\Editor;
 use yii\base\Exception;
 use yii\helpers\HtmlPurifier;
 
-class UEditorField extends Field implements IField
+class RichEditorField extends Field implements IField
 {
-    public $name        = "ueditor";
-    public $description = "UEditor 富文本编辑器";
+    public $name        = "editor";
+    public $description = "TinyMCE 富文本编辑器";
     public $table       = "field_content_data";
 
     protected function getLabels()
@@ -37,7 +37,7 @@ class UEditorField extends Field implements IField
             [
                 'type'   => 'checkbox',
                 'name'   => 'showDescription',
-                'value'  => FALSE,
+                'value'  => false,
                 'config' => [
                     'title' => '使用概要输入',
                 ],
@@ -45,7 +45,7 @@ class UEditorField extends Field implements IField
             [
                 'type'   => 'checkbox',
                 'name'   => 'showLabel',
-                'value'  => FALSE,
+                'value'  => false,
                 'config' => [
                     'title' => '显示标签',
                 ],
@@ -67,7 +67,7 @@ class UEditorField extends Field implements IField
                     ->one();
     }
 
-    protected function beforeSave($insert = FALSE)
+    protected function beforeSave($insert = false)
     {
         parent::beforeSave($insert);
 
@@ -83,7 +83,7 @@ class UEditorField extends Field implements IField
         $content                    = strtr($content, $replacements);
         $this->fieldData['content'] = HtmlPurifier::process($content, [
             'HTML.Allowed'           => $allowTags,
-            'AutoFormat.RemoveEmpty' => TRUE,
+            'AutoFormat.RemoveEmpty' => true,
         ]);
 
         if (empty($this->fieldData['content'])) {
@@ -131,7 +131,7 @@ class UEditorField extends Field implements IField
     private function inputBlock($labelHTML, $inputHTML)
     {
         $content = "";
-        if (isset($this->options['showLabel']) && $this->options['showLabel'] === FALSE) {
+        if (isset($this->options['showLabel']) && $this->options['showLabel'] === false) {
             $this->label = "&nbsp";
         }
         $content .= $labelHTML;

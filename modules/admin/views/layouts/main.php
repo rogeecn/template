@@ -16,14 +16,14 @@ $this->setAdminMode();
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title>Login</title>
+    <title>后台管理</title>
     <?php $this->head() ?>
     <style>
         body {
             padding-top: 60px;
         }
 
-        .footer{
+        .footer {
             padding: 50px;
         }
 

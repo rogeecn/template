@@ -31,8 +31,8 @@ class Content extends Widget
         self::setCache("article_" . $this->articleID, $articleData);
 
         $this->title       = $articleData['title'];
-        $this->content     = $articleData['fields']['data']['content'];
-        $this->description = $articleData['fields']['data']['description'];
+        $this->content     = $articleData['fields']['editor']['content'];
+        $this->description = $articleData['fields']['editor']['description'];
         $this->url         = Url::to(['article/id', 'id' => $this->articleID]);
 
         $categoryData = Category::getByID($articleData['category_id']);

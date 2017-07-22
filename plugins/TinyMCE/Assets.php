@@ -11,6 +11,7 @@ class Assets extends AssetBundle
         'tinymce.min.js',
     ];
     public $css        = [
+        'tinymce.custom.css',
     ];
     public $depends    = [
     ];
