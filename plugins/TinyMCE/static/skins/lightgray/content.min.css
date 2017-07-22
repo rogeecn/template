@@ -215,7 +215,7 @@ td[data-mce-selected], th[data-mce-selected] {
     cursor: default
 }
 
-.mce-content-body pre, .mce-content-body code {
+.mce-content-body pre {
     border-left: 2px solid darkgreen;
     padding: 20px;
     background: #F5F5F5;
