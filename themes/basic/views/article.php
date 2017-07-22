@@ -26,5 +26,7 @@
         'categoryID' => $articleInfo['category_id'],
     ]);
     ?>
+
+    <?= \themes\basic\widgets\LatestArticles::widget() ?>
 </aside>
 
