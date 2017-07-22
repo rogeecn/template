@@ -48,7 +48,10 @@ class CategoryBox extends Widget
         $title = Html::tag("h2", $link, ['class' => 'title']);
 
 
-        $categoryArticle = Article::getListByCategoryID($this->categoryInfo['id'], 0, 10, FALSE);
+        $categoryID      = $this->categoryInfo['id'];
+        $subCategoryList = Category::getSubTree($categoryID);
+        $subCategoryId   = $this->getSubCategoryID($subCategoryList);
+        $categoryArticle = Article::getListByCategoryID($subCategoryId, 0, 10, false);
 
         $itemList = [];
         foreach ($categoryArticle as $item) {
@@ -57,8 +60,25 @@ class CategoryBox extends Widget
 
             $itemList[] = $time . $articleTitle;
         }
-        $body = Html::ul($itemList, ['class' => 'body item-list', 'encode' => FALSE]);
+        $body = Html::ul($itemList, ['class' => 'body item-list', 'encode' => false]);
 
         return Html::div($title . $body, $this->options);
+    }
+
+    private function getSubCategoryID($categoryList)
+    {
+        $idList = [$categoryList['id']];
+        if (isset($categoryList['children'])) {
+            foreach ($categoryList['children'] as $item) {
+                if (isset($item['children'])) {
+                    $idList = array_merge($idList, $this->getSubCategoryID($item['children']));
+                    continue;
+                }
+
+                $idList[] = $item['id'];
+            }
+        }
+
+        return $idList;
     }
 }

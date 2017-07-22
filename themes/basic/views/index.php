@@ -2,6 +2,11 @@
 
 /** @var $this \common\extend\View */
 ?>
+
+<?= \themes\basic\widgets\CategoryBox::widget([
+    'categoryID' => 26,
+]);
+?>
 <div class="clearfix">
     <div class="content">
         <?= \themes\basic\widgets\Carousel\Carousel::widget(['articleType' => 'carousel']) ?>
@@ -49,12 +54,14 @@
                     ?>
                 </div>
 
-                <div class="col col-right">
-                    <?= \themes\basic\widgets\CategoryBox::widget([
-                        'categoryAlias' => trim($indexCategories[1]),
-                    ]);
-                    ?>
-                </div>
+                <?php if (!empty($indexCategories[1])): ?>
+                    <div class="col col-right">
+                        <?= \themes\basic\widgets\CategoryBox::widget([
+                            'categoryAlias' => trim($indexCategories[1]),
+                        ]);
+                        ?>
+                    </div>
+                <?php endif; ?>
             </div>
         <?php endforeach; ?>
     </div>
