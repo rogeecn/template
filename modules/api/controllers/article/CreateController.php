@@ -64,7 +64,7 @@ class CreateController extends WebController
             $trans->commit();
         } catch (\Exception $e) {
             $trans->rollBack();
-            \Yii::error("API PUBLISH FAILED: " . $e->getMessage());
+            \Yii::error("API PUBLISH FAILED: " . $e->getMessage(), "api_publish");
 
             return "fail: " . $e->getMessage();
         }
