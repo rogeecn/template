@@ -9,11 +9,7 @@ tinymce.init({
     ],
 
     toolbar: [
-        "bold italic underline strikethrough  bullist numlist | blockquote link unlink anchor image media | insertdatetime | table hr  charmap | visualchars visualblocks template pagebreak | searchreplace removeformat | codesample restoredraft code fullscreen"
-    ],
-    content_css: [
-        '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-        '//www.tinymce.com/css/codepen.min.css'
+        "styleselect bold italic underline strikethrough  bullist numlist | blockquote link unlink anchor image media | insertdatetime | table hr  charmap | visualchars visualblocks template pagebreak | searchreplace removeformat | codesample restoredraft code fullscreen"
     ],
     menubar: false,
     toolbar_items_size: 'small',
