@@ -13,7 +13,7 @@ class GitBookController extends ConsoleController
     public function actionIndex()
     {
         $options = [
-            'verify' => FALSE,
+            'verify' => false,
         ];
         $client  = new Client($options);
 
@@ -38,7 +38,7 @@ class GitBookController extends ConsoleController
                 'tag' => '',
             ],
             'category_id' => '90',
-            'data'        => [
+            'editor'      => [
                 'content'     => '',
                 'description' => '',
             ],
