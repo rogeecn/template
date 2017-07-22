@@ -11,7 +11,7 @@ use yii\base\Exception;
 
 class CreateController extends WebController
 {
-    public $enableCsrfValidation = FALSE;
+    public $enableCsrfValidation = false;
 
     public function actionIndex()
     {
@@ -64,6 +64,7 @@ class CreateController extends WebController
             $trans->commit();
         } catch (\Exception $e) {
             $trans->rollBack();
+            \Yii::error("API PUBLISH FAILED: " . $e->getMessage());
 
             return "fail: " . $e->getMessage();
         }
