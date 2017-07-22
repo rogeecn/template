@@ -83,11 +83,11 @@ class Article extends \common\base\ActiveRecord
         return parent::beforeSave($insert);
     }
 
-    public static function getDataByID($articleID, $mode = NULL, $excludeFields = [])
+    public static function getDataByID($articleID, $mode = null, $excludeFields = [])
     {
         $articleModel = self::findOne($articleID);
         if (!$articleModel) {
-            return FALSE;
+            return false;
         }
 
         $articleData = $articleModel->toArray();
@@ -133,17 +133,20 @@ class Article extends \common\base\ActiveRecord
         return self::getListByCategoryID($categoryModel->primaryKey, $offset, $limitCnt);
     }
 
-    public static function getListByCategoryID($categoryID, $offset = 0, $limitCnt = 10, $withFields = TRUE)
+    public static function getListByCategoryID($categoryID, $offset = 0, $limitCnt = 10, $withFields = true)
     {
         $condition = [
-            'category_id' => $categoryID,
-            'status'      => self::ST_ENABLE,
+            'status' => self::ST_ENABLE,
         ];
+
+        if ($categoryID !== null) {
+            $condition['category_id'] = $categoryID;
+        }
 
         return self::getList($condition, $offset, $limitCnt, $withFields);
     }
 
-    private static function getList($condition = [], $offset = 0, $limitCount = 10, $withFields = TRUE)
+    private static function getList($condition = [], $offset = 0, $limitCount = 10, $withFields = true)
     {
         $list = self::find()
                     ->where($condition)
