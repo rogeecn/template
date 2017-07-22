@@ -9,10 +9,9 @@ tinymce.init({
     ],
 
     toolbar: [
-        "styleselect bold italic underline strikethrough  bullist numlist | blockquote link unlink anchor image media | insertdatetime | table hr  charmap | visualchars visualblocks template pagebreak | searchreplace removeformat | codesample restoredraft code fullscreen"
+        "formatselect bold italic underline strikethrough  bullist numlist | blockquote link unlink anchor image media | insertdatetime | table hr  charmap | visualchars visualblocks template pagebreak | searchreplace removeformat | codesample restoredraft code fullscreen"
     ],
     menubar: false,
-    toolbar_items_size: 'small',
     automatic_uploads: true,
     images_upload_url: '/plugin/tinymce_upload',
     file_picker_types: 'image',
