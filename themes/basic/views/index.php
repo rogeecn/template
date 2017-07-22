@@ -3,10 +3,6 @@
 /** @var $this \common\extend\View */
 ?>
 
-<?= \themes\basic\widgets\CategoryBox::widget([
-    'categoryID' => 26,
-]);
-?>
 <div class="clearfix">
     <div class="content">
         <?= \themes\basic\widgets\Carousel\Carousel::widget(['articleType' => 'carousel']) ?>
